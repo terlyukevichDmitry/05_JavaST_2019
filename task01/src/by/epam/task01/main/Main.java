@@ -1,12 +1,45 @@
+/**
+ * Domain classes used to produce .....
+ * <p>
+ * These classes contain the ......
+ * </p>
+ *
+ * @since 1.0
+ * @author Dmitry Terlyukevish
+ * @version 1.0
+ */
+
 package by.epam.task01.main;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
-public class Main {
+/**
+ *An abstract class that represents an algorithm.
+ *
+ * @author Dmitry Terlyukevish
+ *
+ * @version 1.0
+ */
 
-    private final static Logger LOGGER = Logger.getLogger(Main.class.getName());
+final class Main {
 
-    public static void main(String[] args) {
+    /**
+     * Logger for recording a program state.
+     */
+    private static final Logger LOGGER = LogManager.getLogger(Main.class);
+
+    /**
+     * It's a main constructor in this application.
+     */
+    private Main() {
+    }
+
+    /**
+     * This main method.
+     * @param args program arguments
+     */
+    public static void main(final String[] args) {
         LOGGER.info("Hello World!!!");
     }
 }

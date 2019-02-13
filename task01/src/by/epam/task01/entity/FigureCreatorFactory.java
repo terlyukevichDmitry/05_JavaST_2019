@@ -11,16 +11,19 @@
 package by.epam.task01.entity;
 
 /**
- *An public interface for creatingFigure.
+ *An public class for creatingFigureFactory.
  *
  * @author Dmitry Terlyukevish
  *
  * @version 1.0
  */
-public interface FigureCreator {
+
+public interface FigureCreatorFactory {
 
     /**
-     * This readArrayOfString we use for read information of file.
+     * This class we use for read information of file.
+     * @return FigureCreator
      */
-    void createFigure();
+    FigureCreator createFigure();
+
 }

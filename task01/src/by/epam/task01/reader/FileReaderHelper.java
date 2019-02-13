@@ -22,7 +22,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 /**
- *An abstract class that represents an algorithm.
+ *An public class for reading different information.
  *
  * @author Dmitry Terlyukevish
  *
@@ -31,7 +31,7 @@ import java.util.stream.Stream;
 public class FileReaderHelper {
 
     /**
-     * It's a main constructor in this application.
+     * It's a first constructor in this class.
      */
     public FileReaderHelper() {
     }

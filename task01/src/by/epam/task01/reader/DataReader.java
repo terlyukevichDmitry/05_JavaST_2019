@@ -17,6 +17,10 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  *An public class for reading different information.
@@ -25,33 +29,40 @@ import java.nio.file.Paths;
  *
  * @version 1.0
  */
-public class FileReaderHelper {
+public class DataReader {
 
     /**
      * Logger for recording a program state.
      */
     private static final Logger LOGGER = LogManager.getLogger(
-            FileReaderHelper.class);
+            DataReader.class);
 
     /**
      * It's a first constructor in this class.
      */
-    public FileReaderHelper() {
+    public DataReader() {
+
     }
 
     /**
      * This readArrayOfString we use for read information of file.
      * @return string with component for solutions this task.
      */
-    public String readArrayOfString() {
-        String content = null;
-        try {
-            content = new String(Files.readAllBytes(Paths.get("data"
-                    + File.separator + "file.txt")));
+    public List<String> readArrayOfString() {
+        List<String> list = new ArrayList<>();
+
+        try (Stream<String> stream = Files.lines(Paths.get("data"
+                      + File.separator + "file.txt"))) {
+
+            list = stream
+                    .map(String::toLowerCase)
+                    .collect(Collectors.toList());
+
         } catch (IOException e) {
             LOGGER.warn("We have problem with this method. Please,"
-                    + " correct this mistake.", e);
+                           + " correct this mistake.", e);
         }
-        return content;
+
+        return list;
     }
 }

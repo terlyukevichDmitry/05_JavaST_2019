@@ -1,14 +1,41 @@
+
+/**
+ * These classes contain the ......
+ *
+ * @author Dmitry Terlyukevich
+ * @version 1.0
+ * @since 1.0
+ */
 package by.epam.task01.action;
 
-
+/**
+ * An public class for do different tasks.
+ *
+ * @author Dmitry Terlyukevish
+ * @version 1.0
+ */
 public class PyramidCalculator {
-    public double calculateVolume(double height, double square){
-        double volume = height * square / 3;
-        return volume;
+
+    /**
+     * This readArrayOfString we use for read information of file.
+     * @param height for calculating volume
+     * @param square for calculating volume
+     * @return volume.
+     */
+    public double calculateVolume(final double height, final double square) {
+        double squarePyramid = height * square / 3;
+        return squarePyramid;
     }
 
-    public double calculatSquare(double height){
-        double square = 100;
-        return 100;
+    /**
+     * This readArrayOfString we use for read information of file.
+     * @param height for calculating volume
+     * @param side for calculating volume
+     * @return volume.
+     */
+    public double calculateSquare(final double height, final double side) {
+        final double coeff = 1 / 3;
+        double volume = height * side * side * coeff;
+        return volume;
     }
 }

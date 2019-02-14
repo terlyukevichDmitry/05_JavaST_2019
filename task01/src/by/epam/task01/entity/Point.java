@@ -148,8 +148,6 @@ public class Point implements FigureCreator {
      *
      * @Override method
      */
-
-
     @Override
     public void createFigure() {
         System.out.println();

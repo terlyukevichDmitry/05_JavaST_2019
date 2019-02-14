@@ -22,7 +22,6 @@ public class PyramidCalculatorTest {
                 };
     }
 
-
     @BeforeTest
     public void initPyramidCalculator(){
         pyramidCalculator = new PyramidCalculator();
@@ -30,8 +29,8 @@ public class PyramidCalculatorTest {
 
     @Test(description = "Positive script of the volume calculation",
             dataProvider = "input_x_y_z")
-    public void calculateVolumeTest(final double[] heights, final double square){
-        double actual = pyramidCalculator.calculateVolume(heights[0], heights[1]);
+    public void calculateSquareTest(final double[] heights, final double square){
+        double actual = pyramidCalculator.calculateSquare(heights[0], heights[1]);
         double expected = square;
         Assert.assertEquals(expected, actual);
     }

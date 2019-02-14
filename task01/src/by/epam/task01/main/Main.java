@@ -12,9 +12,12 @@
 
 package by.epam.task01.main;
 
-import by.epam.task01.reader.FileReaderHelper;
+import by.epam.task01.reader.DataReader;
+import by.epam.task01.validator.ListFilter;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
+import java.util.List;
 
 /**
  *An abstract class that represents an algorithm.
@@ -43,9 +46,12 @@ final class Main {
      */
     public static void main(final String[] args) {
         LOGGER.info("Hello World!!!");
-        FileReaderHelper fileReaderHelper = new FileReaderHelper();
-        System.out.println(fileReaderHelper.readArrayOfString());
-
+        DataReader fileReaderHelper = new DataReader();
+        List<String> list = fileReaderHelper.readArrayOfString();
+        list.forEach(System.out::println);
+        ListFilter listFilter = new ListFilter();
+        List<String> filteredList = listFilter.filterList(list);
+        filteredList.forEach(System.out::println);
 
     }
 }

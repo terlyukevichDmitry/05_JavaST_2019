@@ -45,7 +45,7 @@ final class Main {
      * @param args program arguments
      */
     public static void main(final String[] args) {
-        LOGGER.info("Hello World!!!");
+        LOGGER.info("Hello World!");
         DataReader fileReaderHelper = new DataReader();
         List<String> list = fileReaderHelper.readArrayOfString();
         list.forEach(System.out::println);

@@ -17,7 +17,7 @@ package by.epam.task01.action;
 public class PyramidCalculator {
 
     /**
-     * This readArrayOfString we use for read information of file.
+     * This readListOfString we use for read information of file.
      * @param height for calculating volume
      * @param square for calculating volume
      * @return volume.
@@ -28,7 +28,7 @@ public class PyramidCalculator {
     }
 
     /**
-     * This readArrayOfString we use for read information of file.
+     * This readListOfString we use for read information of file.
      * @param height for calculating volume
      * @param side for calculating volume
      * @return volume.

@@ -26,16 +26,7 @@ public class Pyramid {
     private List<Point> pointList;
 
     /**
-     * It's a first constructor in this class.
-     *
-     * @param list for pointList
-     */
-    public Pyramid(final List<Point> list) {
-        this.pointList = list;
-    }
-
-    /**
-     * This readArrayOfString we use for read information of file.
+     * This readListOfString we use for read information of file.
      *
      * @return pointList.
      */
@@ -44,7 +35,7 @@ public class Pyramid {
     }
 
     /**
-     * This readArrayOfString we use for read information of file.
+     * This readListOfString we use for read information of file.
      *
      * @param list for pointList
      */

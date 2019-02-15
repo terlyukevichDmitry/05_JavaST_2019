@@ -18,13 +18,13 @@ package by.epam.task01.entity;
  * @version 1.0
  */
 
-//public class PointFactory implements  FigureCreatorFactory {
-//
-//    /**
-//     * @Override method for createFigure
-//     */
-//    @Override
-//    public FigureCreator createFigure() {
-//       // return new Point();
-//    }
-//}
+public class PointFactory implements  FigureCreatorFactory {
+
+    /**
+     * @Override method for createFigure
+     */
+    @Override
+    public FigureCreator createFigure() {
+        return new Point(1,3,4);
+    }
+}

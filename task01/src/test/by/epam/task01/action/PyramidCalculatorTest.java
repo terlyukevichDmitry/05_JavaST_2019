@@ -2,6 +2,7 @@ package test.by.epam.task01.action;
 
 import by.epam.task01.action.PyramidCalculator;
 import org.testng.Assert;
+import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
@@ -33,6 +34,11 @@ public class PyramidCalculatorTest {
         double actual = pyramidCalculator.calculateSquare(heights[0], heights[1]);
         double expected = square;
         Assert.assertEquals(expected, actual);
+    }
+
+    @AfterTest
+    private void initPyramidCalculatorA(){
+        pyramidCalculator= null;
     }
 
 }

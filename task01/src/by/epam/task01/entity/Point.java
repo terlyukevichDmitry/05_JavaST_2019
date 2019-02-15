@@ -47,7 +47,7 @@ public class Point implements FigureCreator {
     }
 
     /**
-     * This readArrayOfString we use for read information of file.
+     * This readListOfString we use for read information of file.
      *
      * @return x cordinat.
      */
@@ -56,7 +56,7 @@ public class Point implements FigureCreator {
     }
 
     /**
-     * This readArrayOfString we use for read information of file.
+     * This readListOfString we use for read information of file.
      *
      * @param cordiantX for x
      */
@@ -65,7 +65,7 @@ public class Point implements FigureCreator {
     }
 
     /**
-     * This readArrayOfString we use for read information of file.
+     * This readListOfString we use for read information of file.
      *
      * @return y cordinat.
      */
@@ -74,7 +74,7 @@ public class Point implements FigureCreator {
     }
 
     /**
-     * This readArrayOfString we use for read information of file.
+     * This readListOfString we use for read information of file.
      *
      * @param cordiantY for x
      */
@@ -83,7 +83,7 @@ public class Point implements FigureCreator {
     }
 
     /**
-     * This readArrayOfString we use for read information of file.
+     * This readListOfString we use for read information of file.
      *
      * @return z cordinat.
      */
@@ -92,7 +92,7 @@ public class Point implements FigureCreator {
     }
 
     /**
-     * This readArrayOfString we use for read information of file.
+     * This readListOfString we use for read information of file.
      *
      * @param cordiantZ for x
      */
@@ -144,7 +144,7 @@ public class Point implements FigureCreator {
     }
 
     /**
-     * This readArrayOfString we use for read information of file.
+     * This readListOfString we use for read information of file.
      *
      * @Override method
      */

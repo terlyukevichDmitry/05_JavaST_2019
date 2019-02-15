@@ -20,7 +20,7 @@ package by.epam.task01.entity;
 public interface FigureCreator {
 
     /**
-     * This readArrayOfString we use for read information of file.
+     * This readListOfString we use for read information of file.
      */
     void createFigure();
 }

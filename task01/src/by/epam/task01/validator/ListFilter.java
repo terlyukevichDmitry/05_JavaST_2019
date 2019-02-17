@@ -9,10 +9,8 @@
  */
 package by.epam.task01.validator;
 
-import by.epam.task01.reader.DataReader;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,7 +35,10 @@ public class ListFilter {
      *DIGIT_PATTEN_FOR_SPLIT for splitting array.
      */
     private static final Logger LOGGER = LogManager.getLogger(ListFilter.class);
-
+    /**
+     *checkNumber for checking true string.
+     */
+    private final int checkNumber = 8;
 
     /**
      * This readListOfString we use for read information of file.
@@ -46,17 +47,27 @@ public class ListFilter {
      */
     public List<String> filterList(final List<String> list) {
         List<String> listNew = new ArrayList<>();
-        for (String el: list) {
+        for (String string: list) {
+            int counter = 0;
             boolean isSolution = true;
-            for (String elementList: el.split(DIGIT_PATTEN_FOR_SPLIT)) {
-                if (!(elementList.matches(DIGIT_PATTEN))) {
-                    LOGGER.info("Validation error: incorrect string"
-                            + elementList + ".");
-                    isSolution = false;
+            if (string.trim().length() == 0) {
+                LOGGER.info("Validation error: empty string" + string + ".");
+            } else {
+                for (String elementList
+                        : string.split(DIGIT_PATTEN_FOR_SPLIT)) {
+                    if (!(elementList.matches(DIGIT_PATTEN))) {
+                        LOGGER.info("Validation error: incorrect string: "
+                                + elementList + ".");
+                        isSolution = false;
+                    }
+                    counter++;
                 }
-            }
-            if (isSolution) {
-                listNew.add(el);
+                if (isSolution && counter == checkNumber) {
+                    listNew.add(string);
+                } else {
+                    LOGGER.info("Validation error: insufficient data : "
+                    + string + ".");
+                }
             }
         }
         return listNew;

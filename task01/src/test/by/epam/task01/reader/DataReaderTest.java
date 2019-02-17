@@ -26,9 +26,12 @@ import java.util.List;
  */
 public class DataReaderTest {
 
+    /**
+     * @throws MissingWayFileException for check file path
+     */
     @Test(expectedExceptions = MissingWayFileException.class)
     public void checkFile() throws MissingWayFileException {
-        List<String> expectedList = Arrays.asList("1 1 4.123 1 2 6 6 7 8");
+        List<String> expectedList = Arrays.asList("1");
         List<String> actualList = new DataReader().readListOfString(null);
         Assert.assertEquals("For check, \n" + "do we have a file path: ",
                 expectedList, String.valueOf(actualList));

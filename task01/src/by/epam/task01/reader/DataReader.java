@@ -9,7 +9,7 @@
  */
 package by.epam.task01.reader;
 
-import by.epam.task01.exception.FileEmptyExeption;
+import by.epam.task01.exception.FileEmptyException;
 import by.epam.task01.exception.MissingWayFileException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -55,15 +55,15 @@ public class DataReader {
         try (Stream<String> stream = Files.lines(Paths.get(file))) {
             list = stream.map(String::toLowerCase).collect(Collectors.toList());
             if (list.isEmpty()) {
-                throw new FileEmptyExeption("We have empty file.");
+                throw new FileEmptyException("We have empty file.");
             }
         } catch (IOException ex) {
             LOGGER.warn("We have problem with this method. Please,"
                            + " correct this mistake.", ex);
-        } catch (FileEmptyExeption ex) {
+        } catch (FileEmptyException ex) {
             LOGGER.warn("File is empty", ex);
         } catch (UncheckedIOException ex) {
-            LOGGER.warn("Incorrect input", ex);
+            LOGGER.warn("False file path is a directory", ex);
         }
         return list;
     }

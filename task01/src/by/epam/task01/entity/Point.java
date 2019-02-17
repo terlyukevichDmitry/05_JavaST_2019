@@ -18,7 +18,7 @@ import java.util.Objects;
  * @version 1.0
  */
 
-public class Point implements FigureCreator {
+public class Point {
     /**
      * radius in this project.
      */
@@ -28,24 +28,15 @@ public class Point implements FigureCreator {
      */
     private double y;
     /**
-     * radius in this project.
-     */
-    private double z;
-
-    /**
      * It's a first constructor in this class.
      *
      * @param cordiantX for x
      * @param cordiantY for y
-     * @param cordiantZ for z
      */
-    public Point(final double cordiantX, final double cordiantY,
-                 final double cordiantZ) {
+    public Point(final double cordiantX, final double cordiantY) {
         this.x = cordiantX;
         this.y = cordiantY;
-        this.z = cordiantZ;
     }
-
     /**
      * This readListOfString we use for read information of file.
      *
@@ -54,7 +45,6 @@ public class Point implements FigureCreator {
     public double getX() {
         return x;
     }
-
     /**
      * This readListOfString we use for read information of file.
      *
@@ -63,7 +53,6 @@ public class Point implements FigureCreator {
     public void setX(final double cordiantX) {
         this.x = cordiantX;
     }
-
     /**
      * This readListOfString we use for read information of file.
      *
@@ -72,7 +61,6 @@ public class Point implements FigureCreator {
     public double getY() {
         return y;
     }
-
     /**
      * This readListOfString we use for read information of file.
      *
@@ -81,25 +69,6 @@ public class Point implements FigureCreator {
     public void setY(final double cordiantY) {
         this.y = cordiantY;
     }
-
-    /**
-     * This readListOfString we use for read information of file.
-     *
-     * @return z cordinat.
-     */
-    public double getZ() {
-        return z;
-    }
-
-    /**
-     * This readListOfString we use for read information of file.
-     *
-     * @param cordiantZ for x
-     */
-    public void setZ(final double cordiantZ) {
-        this.z = cordiantZ;
-    }
-
     /**
      * {@inheritDoc}
      * @return true or false
@@ -114,42 +83,23 @@ public class Point implements FigureCreator {
         }
         Point point = (Point) o;
         return Double.compare(point.x, x) == 0
-                && Double.compare(point.y, y) == 0
-                && Double.compare(point.z, z) == 0;
-    }
+                && Double.compare(point.y, y) == 0;
 
+    }
     /**
      * {@inheritDoc}
      * @return hashcode
      */
     @Override
     public int hashCode() {
-        return Objects.hash(x, y, z);
+        return Objects.hash(x, y);
     }
-
     /**
      * {@inheritDoc}
      * @return string with this information
      */
     @Override
     public String toString() {
-        return "Point{"
-                + "x="
-                + x
-                + ", y="
-                + y
-                + ", z="
-                + z
-                + '}';
-    }
-
-    /**
-     * This readListOfString we use for read information of file.
-     *
-     * @Override method
-     */
-    @Override
-    public void createFigure() {
-        System.out.println();
+        return "Point{" + "x=" + x + ", y=" + y + '}';
     }
 }

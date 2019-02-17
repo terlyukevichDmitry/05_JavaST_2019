@@ -16,13 +16,13 @@ package by.epam.task01.exception;
  *
  * @version 1.0
  */
-public class FileEmptyExeption extends Exception {
+public class FileEmptyException extends Exception {
 
     /**
      * It's a main constructor in this class.
      * @param information for show info
      */
-    public FileEmptyExeption(final String information) {
+    public FileEmptyException(final String information) {
         super(information);
     }
 

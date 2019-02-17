@@ -9,7 +9,6 @@ import org.testng.annotations.BeforeTest;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,16 +18,11 @@ public class PyramidCalculatorTest {
     private PyramidCalculator pyramidCalculator;
     private Pyramid pyramid;
 
-    /**
-     * Logger for recording a program state.
-     */
-    private static final String FILE = "data" + File.separator + "file.txt";
-
     @DataProvider(name = "data_square")
     public Object[][] createCorrectData() {
         return
                 new Object[][]{
-                        {24.0, 1392.0, 4.0, 17, new ArrayList<Point>(){
+                        {1392.0, 4.0, 17, new ArrayList<Point>(){
                             {
                                 add(new Point(3 ,1));
                                 add(new Point(3 ,25));
@@ -49,13 +43,26 @@ public class PyramidCalculatorTest {
     @DataProvider(name = "data_VolumeTruncatedPyramid")
     public Object[][] createCorrectDataVolumeTruncatedPyramid() {
         return
-                new Object[][]{
-                        {24.0, 4.0, 5.0, 4.0, 2.0,new ArrayList<Point>(){
+                new Object[][] {
+                        {4.0, 17.0, 10.0, 6.0, new ArrayList<Point>() {
                             {
-                                add(new Point(1 ,1));
-                                add(new Point(4 ,1));
+                                add(new Point(3 ,1));
+                                add(new Point(3 ,25));
                             }
-                        }, 10.500000000000002}
+                        }, 1505.2800000000002}
+                };
+    }
+
+    @DataProvider(name = "data_side")
+    public Object[][] createCorrectSide() {
+        return
+                new Object[][]{
+                        {new ArrayList<Point>(){
+                            {
+                                add(new Point(3 ,1));
+                                add(new Point(3 ,25));
+                            }
+                        }}
                 };
     }
 
@@ -68,15 +75,14 @@ public class PyramidCalculatorTest {
 
     @Test(description = "Positive script of the square calculation",
             dataProvider = "data_square")
-    public void calculateSquareTest(final double side,
-                                    final double trueSquare,
+    public void calculateSquareTest(final double trueSquare,
                                     final double angles,
                                     final double apothem,
                                     final List<Point> pointList) {
         pyramid.setPointList(pointList);
         pyramid.setNumberOfAngles(angles);
         pyramid.setApothem(apothem);
-        double actual = pyramidCalculator.calculateSquare(side, pyramid);
+        double actual = pyramidCalculator.calculateSquare(pyramid);
         double expected = trueSquare;
         Assert.assertEquals(expected, actual);
     }
@@ -91,8 +97,7 @@ public class PyramidCalculatorTest {
 
     @Test(description = "Positive script of the square calculation",
             dataProvider = "data_VolumeTruncatedPyramid")
-    public void calcVolumeTruncatedPyramidTest(final double side,
-                                               final double angles,
+    public void calcVolumeTruncatedPyramidTest(final double angles,
                                                final double apothem,
                                                final double height,
                                                final double heightForNewPyr,
@@ -104,8 +109,16 @@ public class PyramidCalculatorTest {
         pyramid.setHeight(height);
 
         double actual = pyramidCalculator.calculateVolumeTruncatedPyramid(
-                pyramid, heightForNewPyr, side);
+                pyramid, heightForNewPyr);
         double expected = volume;
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test(description = "Positive script for the finding size",
+            dataProvider = "data_side")
+    public void calculateSideTest(final List<Point> pointList) {
+        double actual = pyramidCalculator.calculateSide(pointList);
+        final double expected = 24;
         Assert.assertEquals(expected, actual);
     }
 
@@ -114,9 +127,5 @@ public class PyramidCalculatorTest {
         pyramidCalculator = null;
         pyramid = null;
     }
-
-
-
-
 
 }

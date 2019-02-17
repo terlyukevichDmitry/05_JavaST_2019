@@ -23,11 +23,11 @@ public class PyramidCalculator {
 
     /**
      * This readListOfString we use for read information of file.
-     * @param side for calculating volume
      * @param pyramid new
      * @return volume.
      */
-    public double calculateSquare(final double side, final Pyramid pyramid) {
+    public double calculateSquare(final Pyramid pyramid) {
+        double side = calculateSide(pyramid.getPointList());
         double baseArea = calculateBaseArea(side, pyramid);
         double surfArea = calculateSideSurfaceArea(side, pyramid);
         double square = baseArea + surfArea;
@@ -89,32 +89,14 @@ public class PyramidCalculator {
 
     /**
      * This readListOfString we use for read information of file.
-     * @param side for.
-     * @param pyramid for.
-     * @param heightNewPyramid for.
-     * @return volume.
-     */
-    private double calculateBaseNewPyramid(final Pyramid pyramid,
-                                     final double heightNewPyramid,
-                                     final double side) {
-        double heightPyramid = pyramid.getHeight();
-        double baseSquare = calculateBaseArea(side, pyramid);
-        double squareBaseNewPyramid = baseSquare * heightNewPyramid
-                * heightNewPyramid / (heightPyramid * heightPyramid);
-        return squareBaseNewPyramid;
-    }
-
-    /**
-     * This readListOfString we use for read information of file.
-     * @param side for.
      * @param pyramid for.
      * @param height for.
      * @return volume.
      */
     public double calculateVolumeTruncatedPyramid(final Pyramid pyramid,
-                                                  final double height,
-                                                  final double side) {
+                                                  final double height) {
         final double coefficient = 1.0 / 3.0;
+        double side = calculateSide(pyramid.getPointList());
         double baseArea = calculateBaseArea(side, pyramid);
         double squareBaseNewPyramid = calculateBaseNewPyramid(pyramid,
                 height, side);
@@ -124,6 +106,37 @@ public class PyramidCalculator {
                 * squareBaseNewPyramid) + squareBaseNewPyramid);
         return volumeTruncatedPyramid;
     }
+    /**
+     * This readListOfString we use for read information of file.
+     * @param side for.
+     * @param pyramid for.
+     * @param heightNewPyramid for.
+     * @return volume.
+     */
+    private double calculateBaseNewPyramid(final Pyramid pyramid,
+                                           final double heightNewPyramid,
+                                           final double side) {
+        double heightPyramid = pyramid.getHeight();
+        double baseSquare = calculateBaseArea(side, pyramid);
+        double squareBaseNewPyramid = baseSquare * heightNewPyramid
+                * heightNewPyramid / (heightPyramid * heightPyramid);
+        return squareBaseNewPyramid;
+    }
+
+//    /**
+//     * This readListOfString we use for read information of file.
+//     * @param pyramid for.
+//     * @param height for.
+//     * @return volume.
+//     */
+//    public double calculateVolumeComparison(final Pyramid pyramid,
+//                                            final double height) {
+//        double volumeTruncatePyramid = calculateVolumeTruncatedPyramid(
+//                height);
+//
+//
+//        return 1.1;
+//    }
 
 
 }

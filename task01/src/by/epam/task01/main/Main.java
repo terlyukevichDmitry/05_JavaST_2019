@@ -94,8 +94,6 @@ final class Main {
         System.out.println("volumeRatio = " + volumeRatio);
 
 
-        DataValidator dataValidator = new DataValidator(createdLst);
-        dataValidator.checkingPointMatch();
 
 
 

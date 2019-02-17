@@ -28,10 +28,10 @@ public class PyramidCalculatorTest {
     public Object[][] createCorrectData() {
         return
                 new Object[][]{
-                        {3.0, 39.0, 4.0, 5, new ArrayList<Point>(){
+                        {24.0, 1392.0, 4.0, 17, new ArrayList<Point>(){
                             {
-                                add(new Point(1 ,1));
-                                add(new Point(4 ,1));
+                                add(new Point(3 ,1));
+                                add(new Point(3 ,25));
                             }
                         }}
                 };
@@ -50,7 +50,7 @@ public class PyramidCalculatorTest {
     public Object[][] createCorrectDataVolumeTruncatedPyramid() {
         return
                 new Object[][]{
-                        {3.0, 4.0, 5.0, 4.0, 2.0,new ArrayList<Point>(){
+                        {24.0, 4.0, 5.0, 4.0, 2.0,new ArrayList<Point>(){
                             {
                                 add(new Point(1 ,1));
                                 add(new Point(4 ,1));

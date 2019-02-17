@@ -14,7 +14,7 @@ import java.util.List;
 @SuppressWarnings("CheckStyle")
 public class ListFilterTest {
 
-    public List<String> stringList;
+    private List<String> stringList;
 
     private ListFilter listFilter;
 

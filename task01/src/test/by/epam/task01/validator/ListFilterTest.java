@@ -1,6 +1,5 @@
 package test.by.epam.task01.validator;
 
-import by.epam.task01.entity.Point;
 import by.epam.task01.validator.ListFilter;
 import org.testng.Assert;
 import org.testng.annotations.AfterTest;
@@ -8,7 +7,6 @@ import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 @SuppressWarnings("CheckStyle")

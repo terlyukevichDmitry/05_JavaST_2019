@@ -1,3 +1,12 @@
+
+/**
+ * These classes contain the ......
+ * </p>
+ *
+ * @since 1.0
+ * @author Dmitry Terlyukevich
+ * @version 1.0
+ */
 package test.by.epam.task01.action;
 
 import by.epam.task01.action.PyramidCalculator;
@@ -15,14 +24,23 @@ import java.util.List;
 @SuppressWarnings("CheckStyle")
 public class PyramidCalculatorTest {
 
+    /**
+     * pyramidCalculator.
+     */
     private PyramidCalculator pyramidCalculator;
+    /**
+     * pyramid.
+     */
     private Pyramid pyramid;
 
+    /**
+     * @return data.
+     */
     @DataProvider(name = "data_square")
     public Object[][] createCorrectData() {
         return
                 new Object[][]{
-                        {1392.0, 4.0, 17, new ArrayList<Point>(){
+                        {1392.0, 4.0, 17, new ArrayList<Point>() {
                             {
                                 add(new Point(3 ,1));
                                 add(new Point(3 ,25));

@@ -57,7 +57,7 @@ public class ListCreator {
      * @param stringList for create list.
      * @return filteredList.
      */
-    public List<String> filterListCreator(final List<String> stringList) {
+    private List<String> filterListCreator(final List<String> stringList) {
         ListFilter listFilter = new ListFilter();
         List<String> filteredList = listFilter.filterList(stringList);
         LOGGER.info("FilteredList: ");

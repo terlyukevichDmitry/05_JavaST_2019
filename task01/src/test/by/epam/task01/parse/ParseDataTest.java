@@ -16,7 +16,7 @@ public class ParseDataTest {
 
     @BeforeTest
     public void initParseData(){
-        List<Double> doubleList = new ArrayList<>(Arrays.asList(3.0, 2.0));
+        List<Double> doubleList = new ArrayList<>(Arrays.asList(3.0, 2.0, 2.0));
         parseData = new ParseData();
         expectedMap = new HashMap<>();
         expectedMap.put(0, doubleList);
@@ -25,7 +25,7 @@ public class ParseDataTest {
     @Test
     public void createMapTest() {
         Map<Integer, List<Double>> actual =
-                parseData.createMap(Arrays.asList("3 2"));
+                parseData.createMap(Arrays.asList("3 2 2"));
         Map<Integer, List<Double>> expected = expectedMap;
         Assert.assertEquals(expected, actual);
     }

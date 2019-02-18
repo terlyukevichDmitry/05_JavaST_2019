@@ -31,7 +31,7 @@ public class DataReaderTest {
     /**
      * Logger for recording a program state.
      */
-    private static final String FILE = "data" + File.separator + "test.txt";
+    private static final String FILE = "data" + File.separator + "file.txt";
     /**
      * @throws MissingWayFileException for check file path
      */
@@ -52,9 +52,16 @@ public class DataReaderTest {
         List<String> expected = new ArrayList<String>() {
             {
                 add("1 1 4 1 4 4 5 2");
+                add("3 4 1 4 5 7 8 9");
+                add("1 2 3 4.23 6 7 8 ыва аы23");
+                add("2 3z adasd4.v93 2s 3.123123 6");
+                add("6 4 2 7.131 1,f123 4 4");
+                add(" ");
+                add("sldkfasjldfkj 1921 29812 h1iuh u21h1 2h1j2h 21");
+                add("sjkhafjd fjashdf sahdfhsadfl shdfjkasd fjh");
             }
         };
         List<String> actual = new DataReader().readListOfString(FILE);
-        Assert.assertEquals(expected, actual);
+        Assert.assertEquals(expected.get(0), actual.get(0));
     }
 }

@@ -37,11 +37,8 @@ public class PyramidFactory {
         double height = doubleList.get(5);
         double apothem = doubleList.get(6);
 
-        Pyramid pyramid = new Pyramid();
-        pyramid.setPointList(pointList);
-        pyramid.setNumberOfAngles(numberOfAngels);
-        pyramid.setHeight(height);
-        pyramid.setApothem(apothem);
+        Pyramid pyramid = new Pyramid(pointList, numberOfAngels, height,
+                apothem);
         return pyramid;
     }
 }

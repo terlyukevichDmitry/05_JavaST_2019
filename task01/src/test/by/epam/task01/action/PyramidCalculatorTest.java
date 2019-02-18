@@ -53,13 +53,17 @@ public class PyramidCalculatorTest {
     public Object[][] createCorrectDataForVolume() {
         return
                 new Object[][]{
-                        {new double[]{39.0, 4.0},
-                                52.0}
+                        {4.0, 10.0, new ArrayList<Point>() {
+                            {
+                                add(new Point(3 ,1));
+                                add(new Point(3 ,25));
+                            }
+                        }, 1920}
                 };
     }
 
-    @DataProvider(name = "data_VolumeTruncatedPyramid")
-    public Object[][] createCorrectDataVolumeTruncatedPyramid() {
+    @DataProvider(name = "data_dataRatioData")
+    public Object[][] createCorrectDataRatioVolume() {
         return
                 new Object[][] {
                         {4.0, 17.0, 10.0, 6.0, new ArrayList<Point>() {
@@ -67,7 +71,7 @@ public class PyramidCalculatorTest {
                                 add(new Point(3 ,1));
                                 add(new Point(3 ,25));
                             }
-                        }, 1505.2800000000002}
+                        }, 14.625}
                 };
     }
 
@@ -88,7 +92,6 @@ public class PyramidCalculatorTest {
     @BeforeTest
     public void initPyramidCalculator(){
         pyramidCalculator = new PyramidCalculator();
-        pyramid = new Pyramid();
     }
 
     @Test(description = "Positive script of the square calculation",
@@ -97,9 +100,7 @@ public class PyramidCalculatorTest {
                                     final double angles,
                                     final double apothem,
                                     final List<Point> pointList) {
-        pyramid.setPointList(pointList);
-        pyramid.setNumberOfAngles(angles);
-        pyramid.setApothem(apothem);
+        pyramid = new Pyramid(pointList, angles, 0, apothem);
         double actual = pyramidCalculator.calculateSquare(pyramid);
         double expected = trueSquare;
         Assert.assertEquals(expected, actual);
@@ -107,29 +108,32 @@ public class PyramidCalculatorTest {
 
     @Test(description = "Positive script of the square calculation",
             dataProvider = "data_square_height_for_volume")
-    public void calculateVolumeTest(final double[] data, final double volume){
-        double actual = pyramidCalculator.calculateVolume(data[0], data[1]);
+    public void calculateVolumeTest(final double angles,
+                                    final double height,
+                                    final List<Point> pointList,
+                                    final double volume){
+        pyramid.setHeight(height);
+        pyramid.setNumberOfAngles(angles);
+        pyramid.setPointList(pointList);
+
+        double actual = pyramidCalculator.calculateVolume(pyramid);
         double expected = volume;
-        Assert.assertEquals(expected, actual);
+        Assert.assertEquals(expected, actual, 0.01);
     }
 
     @Test(description = "Positive script of the square calculation",
-            dataProvider = "data_VolumeTruncatedPyramid")
-    public void calcVolumeTruncatedPyramidTest(final double angles,
+            dataProvider = "data_dataRatioData")
+    public void calculateRatioVolumeTest(final double angles,
                                                final double apothem,
                                                final double height,
-                                               final double heightForNewPyr,
+                                               final double heightPlane,
                                                final List<Point> pointList,
-                                               final double volume) {
-        pyramid.setPointList(pointList);
-        pyramid.setNumberOfAngles(angles);
-        pyramid.setApothem(apothem);
-        pyramid.setHeight(height);
-
-        double actual = pyramidCalculator.calculateVolumeTruncatedPyramid(
-                pyramid, heightForNewPyr);
-        double expected = volume;
-        Assert.assertEquals(expected, actual);
+                                               final double volumeRatio) {
+        pyramid = new Pyramid(pointList, angles, height, apothem);
+        double actual = pyramidCalculator.calculateRatioVolume(
+                pyramid, heightPlane);
+        double expected = volumeRatio;
+        Assert.assertEquals(expected, actual, 0.01);
     }
 
     @Test(description = "Positive script for the finding size",

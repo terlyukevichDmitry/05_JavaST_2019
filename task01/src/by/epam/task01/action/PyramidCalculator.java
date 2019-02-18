@@ -66,13 +66,17 @@ public class PyramidCalculator {
 
     /**
      * This readListOfString we use for read information of file.
-     * @param square for calculating volume
-     * @param height for calculating volume
+     * @param pyramid for calculating volume
      * @return volume.
      */
-    public double calculateVolume(final double square, final double height) {
-        final double coefficient = 1.0 / 3.0;
-        return coefficient * square * height;
+    public double calculateVolume(final Pyramid pyramid) {
+        final double coefficient = 1.0 / 12.0;
+        final double pi = 180;
+        return coefficient * pyramid.getNumberOfAngles()
+                * pyramid.getHeight()
+                * calculateSide(pyramid.getPointList())
+                * calculateSide(pyramid.getPointList())
+                / (Math.tan(Math.toRadians(pi) / pyramid.getNumberOfAngles()));
     }
 
     /**
@@ -90,53 +94,51 @@ public class PyramidCalculator {
     /**
      * This readListOfString we use for read information of file.
      * @param pyramid for.
-     * @param height for.
+     * @param heightPlane for.
      * @return volume.
      */
-    public double calculateVolumeTruncatedPyramid(final Pyramid pyramid,
-                                                  final double height) {
+    private double calculateVolumeTruncatedPyramid(final Pyramid pyramid,
+                                                  final double heightPlane) {
         final double coefficient = 1.0 / 3.0;
         double side = calculateSide(pyramid.getPointList());
         double baseArea = calculateBaseArea(side, pyramid);
         double squareBaseNewPyramid = calculateBaseNewPyramid(pyramid,
-                height, side);
-        double volumeTruncatedPyramid = coefficient
-                * (pyramid.getHeight() - height)
-                * (baseArea + Math.sqrt(baseArea
-                * squareBaseNewPyramid) + squareBaseNewPyramid);
-        return volumeTruncatedPyramid;
+                heightPlane, side);
+        return  coefficient * heightPlane
+                * (baseArea + Math.sqrt(baseArea)
+                * Math.sqrt(squareBaseNewPyramid) + squareBaseNewPyramid);
     }
     /**
      * This readListOfString we use for read information of file.
      * @param side for.
      * @param pyramid for.
-     * @param heightNewPyramid for.
+     * @param heightPlane for.
      * @return volume.
      */
     private double calculateBaseNewPyramid(final Pyramid pyramid,
-                                           final double heightNewPyramid,
+                                           final double heightPlane,
                                            final double side) {
         double heightPyramid = pyramid.getHeight();
         double baseSquare = calculateBaseArea(side, pyramid);
-        double squareBaseNewPyramid = baseSquare * heightNewPyramid
-                * heightNewPyramid / (heightPyramid * heightPyramid);
-        return squareBaseNewPyramid;
+        return baseSquare * (heightPyramid - heightPlane)
+                * (heightPyramid - heightPlane)
+                / (heightPyramid * heightPyramid);
     }
 
-//    /**
-//     * This readListOfString we use for read information of file.
-//     * @param pyramid for.
-//     * @param height for.
-//     * @return volume.
-//     */
-//    public double calculateVolumeComparison(final Pyramid pyramid,
-//                                            final double height) {
-//        double volumeTruncatePyramid = calculateVolumeTruncatedPyramid(
-//                height);
-//
-//
-//        return 1.1;
-//    }
+    /**
+     * This readListOfString we use for read information of file.
+     * @param pyramid for.
+     * @param heightPlane for.
+     * @return volume.
+     */
+    public double calculateRatioVolume(final Pyramid pyramid,
+                                       final double heightPlane) {
+        double volumeAllPyramid = calculateVolume(pyramid);
+        double volumeTruncatedPyramid = calculateVolumeTruncatedPyramid(
+                pyramid, heightPlane);
+        double volumeSmallPyramid = volumeAllPyramid - volumeTruncatedPyramid;
+        return volumeTruncatedPyramid / volumeSmallPyramid;
+    }
 
 
 }

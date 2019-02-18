@@ -32,6 +32,13 @@ public class Pyramid {
 
     private double height;
 
+    public Pyramid(List<Point> pointList, double numberOfAngles, double height, double apothem) {
+        this.pointList = pointList;
+        this.numberOfAngles = numberOfAngles;
+        this.height = height;
+        this.apothem = apothem;
+    }
+
     private double apothem;
 
     public double getApothem() {

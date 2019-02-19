@@ -1,3 +1,12 @@
+
+/**
+ * These classes contain the ......
+ * </p>
+ *
+ * @since 1.0
+ * @author Dmitry Terlyukevich
+ * @version 1.0
+ */
 package test.by.epam.task01.factory;
 
 import by.epam.task01.entity.Point;
@@ -14,8 +23,6 @@ import java.util.List;
 
 @SuppressWarnings("CheckStyle")
 public class PyramidCreatorTest {
-
-    private Factory<PyramidFactory> pyramidFactory;
 
     @DataProvider(name = "data_for_create_pyramid")
     public Object[][] createCorrectDataPoint() {
@@ -38,13 +45,13 @@ public class PyramidCreatorTest {
                         }};
     }
 
-    @Test(description = "Positive script",
+    @Test(description = "Positive script for create pyramid.",
             dataProvider = "data_for_create_pyramid")
     public void createPointTest(final double angles,
                                 final double height,
                                 final List<Point> pointList,
                                 final Pyramid expectedPyramid) {
-        pyramidFactory = new PyramidCreator();
+        Factory<PyramidFactory> pyramidFactory = new PyramidCreator();
         Pyramid actual = ((PyramidCreator) pyramidFactory).createPyramid(
                 pointList, angles, height);
         Pyramid expected = expectedPyramid;

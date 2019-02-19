@@ -1,3 +1,12 @@
+
+/**
+ * These classes contain the ......
+ * </p>
+ *
+ * @since 1.0
+ * @author Dmitry Terlyukevich
+ * @version 1.0
+ */
 package test.by.epam.task01.validator;
 
 import by.epam.task01.validator.ListFilter;
@@ -23,7 +32,7 @@ public class ListFilterTest {
         listFilter = new ListFilter();
         stringList = new ArrayList<>(new ArrayList<String>() {
             {
-                add("1 2 0 0 3 4 6 7 8");
+                add("3 1 0 3 25 0 4 10 6");
                 add("2 3 0 0 4 5 1 5 9");
                 add("1 2 3sd 4g 56rhf 56yhg h56hh");
                 add("1 2d 42sd 34f 3");
@@ -32,7 +41,7 @@ public class ListFilterTest {
         });
         trueList = new ArrayList<>(new ArrayList<String>() {
             {
-                add("1 2 0 0 3 4 6 7 8");
+                add("3 1 0 3 25 0 4 10 6");
                 add("2 3 0 0 4 5 1 5 9");
             }
         });
@@ -49,5 +58,7 @@ public class ListFilterTest {
     @AfterTest
     public void deleteListFilter(){
         listFilter = null;
+        stringList = null;
+        trueList = null;
     }
 }

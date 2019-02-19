@@ -19,22 +19,11 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-/**
- *An public class for reading different information.
- *
- * @author Dmitry Terlyukevish
- *
- * @version 1.0
- */
+@SuppressWarnings("CheckStyle")
 public class DataReaderTest {
 
-    /**
-     * Logger for recording a program state.
-     */
     private static final String FILE = "data" + File.separator + "file.txt";
-    /**
-     * @throws MissingWayFileException for check file path
-     */
+
     @Test(expectedExceptions = MissingWayFileException.class,
     description = "Negative script for show my exception.")
     public void checkFileTest() throws MissingWayFileException {
@@ -44,14 +33,11 @@ public class DataReaderTest {
                 expected, String.valueOf(actual));
     }
 
-    /**
-     * @throws MissingWayFileException for check file path
-     */
     @Test(description = "Positive script for reading file.")
     public void checkFileTestA() throws MissingWayFileException {
         List<String> expected = new ArrayList<String>() {
             {
-                add("1 1 0 4 1 0 4 5 2");
+                add("3 1 0 3 25 0 4 10 6");
                 add("3 4 3 4 1 4 7 8 9");
                 add("1 2 3 4.23 6 7 8 ыва аы23");
                 add("2 3z adasd4.v93 2s 3.123123 6");

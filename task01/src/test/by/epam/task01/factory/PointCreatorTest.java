@@ -1,3 +1,12 @@
+
+/**
+ * These classes contain the ......
+ * </p>
+ *
+ * @since 1.0
+ * @author Dmitry Terlyukevich
+ * @version 1.0
+ */
 package test.by.epam.task01.factory;
 
 import by.epam.task01.entity.Point;
@@ -11,8 +20,6 @@ import org.testng.annotations.Test;
 @SuppressWarnings("CheckStyle")
 public class PointCreatorTest {
 
-    private Factory<PointFactory> pointFactory;
-
     @DataProvider(name = "data_for_create_point")
     public Object[][] createCorrectDataPoint() {
         return
@@ -22,19 +29,17 @@ public class PointCreatorTest {
                         }};
     }
 
-    @Test(description = "Positive script",
+    @Test(description = "Positive script for create point.",
             dataProvider = "data_for_create_point")
     public void createPointTest(final double coordinateX,
                                 final double coordinateY,
                                 final double coordinateZ,
                                 final Point expectedPoint) {
-        pointFactory = new PointCreator();
+        Factory<PointFactory> pointFactory = new PointCreator();
         Point actual = ((PointCreator) pointFactory).createPoint(coordinateX,
                 coordinateY,
                 coordinateZ);
         Point expected = expectedPoint;
         Assert.assertEquals(expected, actual);
     }
-
-
 }

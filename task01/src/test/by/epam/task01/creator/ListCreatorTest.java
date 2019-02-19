@@ -1,3 +1,12 @@
+
+/**
+ * These classes contain the ......
+ * </p>
+ *
+ * @since 1.0
+ * @author Dmitry Terlyukevich
+ * @version 1.0
+ */
 package test.by.epam.task01.creator;
 
 import by.epam.task01.creator.ListCreator;
@@ -7,7 +16,11 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 import java.io.File;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
+import java.util.HashMap;
 
 @SuppressWarnings("CheckStyle")
 public class ListCreatorTest {
@@ -20,8 +33,8 @@ public class ListCreatorTest {
 
     @BeforeTest
     public void initData() {
-        List<Double> doubleList = new ArrayList<>(Arrays.asList(1.0, 1.0, 0.0,
-                4.0 , 1.0, 0.0, 4.0, 5.0, 2.0));
+        List<Double> doubleList = new ArrayList<>(Arrays.asList(3.0, 1.0, 0.0,
+                3.0, 25.0, 0.0, 4.0, 10.0, 6.0));
         listCreator = new ListCreator();
         expectedMap = new HashMap<>();
         expectedMap.put(0, doubleList);
@@ -39,7 +52,4 @@ public class ListCreatorTest {
         listCreator = null;
         expectedMap = null;
     }
-
-
-
 }

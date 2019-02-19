@@ -24,13 +24,8 @@ import java.util.List;
 @SuppressWarnings("CheckStyle")
 public class PyramidCalculatorTest {
 
-    /**
-     * pyramidCalculator.
-     */
     private PyramidCalculator pyramidCalculator;
-    /**
-     * pyramid.
-     */
+
     private Pyramid pyramid;
 
     @DataProvider(name = "data_square_height_for_volume")
@@ -48,7 +43,7 @@ public class PyramidCalculatorTest {
                 };
     }
 
-    @DataProvider(name = "data_dataRatioData")
+    @DataProvider(name = "data_for_ratio_data")
     public Object[][] createCorrectDataRatioVolume() {
         return
                 new Object[][] {
@@ -78,15 +73,6 @@ public class PyramidCalculatorTest {
                 };
     }
 
-
-    @BeforeTest
-    public void initPyramidCalculator(){
-        pyramidCalculator = new PyramidCalculator();
-    }
-
-    /**
-     * @return data.
-     */
     @DataProvider(name = "data_square")
     public Object[][] createCorrectData() {
         return
@@ -102,6 +88,11 @@ public class PyramidCalculatorTest {
                 };
     }
 
+    @BeforeTest
+    public void initPyramidCalculator(){
+        pyramidCalculator = new PyramidCalculator();
+    }
+
     @Test(description = "Positive script of the square calculation",
             dataProvider = "data_square")
     public void calculateSquareTest(final double trueSquare,
@@ -113,7 +104,7 @@ public class PyramidCalculatorTest {
         Assert.assertEquals(expected, actual, 0.01);
     }
 
-    @Test(description = "Positive script of the square calculation",
+    @Test(description = "Positive script of the volume calculation",
             dataProvider = "data_square_height_for_volume")
     public void calculateVolumeTest(final double angles,
                                     final double height,
@@ -126,8 +117,8 @@ public class PyramidCalculatorTest {
         Assert.assertEquals(expected, actual, 0.01);
     }
 
-    @Test(description = "Positive script of the square calculation",
-            dataProvider = "data_dataRatioData")
+    @Test(description = "Positive script of the data ratio calculation",
+            dataProvider = "data_for_ratio_data")
     public void calculateRatioVolumeTest(final double angles,
                                                final double height,
                                                final double heightPlane,
@@ -140,7 +131,7 @@ public class PyramidCalculatorTest {
         Assert.assertEquals(expected, actual, 0.01);
     }
 
-    @Test(description = "Positive script for the finding size",
+    @Test(description = "Positive script of the side calculation",
             dataProvider = "data_side")
     public void calculateSideTest(final List<Point> pointList) {
         pyramid = new Pyramid(pointList, 0,0);

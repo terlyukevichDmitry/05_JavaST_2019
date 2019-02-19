@@ -33,30 +33,16 @@ public class PyramidCalculatorTest {
      */
     private Pyramid pyramid;
 
-    /**
-     * @return data.
-     */
-    @DataProvider(name = "data_square")
-    public Object[][] createCorrectData() {
-        return
-                new Object[][]{
-                        {1392.0, 4.0, 17, new ArrayList<Point>() {
-                            {
-                                add(new Point(3 ,1));
-                                add(new Point(3 ,25));
-                            }
-                        }}
-                };
-    }
-
     @DataProvider(name = "data_square_height_for_volume")
     public Object[][] createCorrectDataForVolume() {
         return
                 new Object[][]{
                         {4.0, 10.0, new ArrayList<Point>() {
                             {
-                                add(new Point(3 ,1));
-                                add(new Point(3 ,25));
+                                add(new Point(3 ,1,
+                                        0));
+                                add(new Point(3 ,25,
+                                        0));
                             }
                         }, 1920}
                 };
@@ -66,10 +52,12 @@ public class PyramidCalculatorTest {
     public Object[][] createCorrectDataRatioVolume() {
         return
                 new Object[][] {
-                        {4.0, 17.0, 10.0, 6.0, new ArrayList<Point>() {
+                        {4.0, 10.0, 6.0, new ArrayList<Point>() {
                             {
-                                add(new Point(3 ,1));
-                                add(new Point(3 ,25));
+                                add(new Point(3 ,1,
+                                        0));
+                                add(new Point(3 ,25,
+                                        0));
                             }
                         }, 14.625}
                 };
@@ -81,8 +69,10 @@ public class PyramidCalculatorTest {
                 new Object[][]{
                         {new ArrayList<Point>(){
                             {
-                                add(new Point(3 ,1));
-                                add(new Point(3 ,25));
+                                add(new Point(3 ,1,
+                                        0));
+                                add(new Point(3 ,25,
+                                        0));
                             }
                         }}
                 };
@@ -94,16 +84,33 @@ public class PyramidCalculatorTest {
         pyramidCalculator = new PyramidCalculator();
     }
 
+    /**
+     * @return data.
+     */
+    @DataProvider(name = "data_square")
+    public Object[][] createCorrectData() {
+        return
+                new Object[][]{
+                        {1325.78, 4.0, new ArrayList<Point>() {
+                            {
+                                add(new Point(3 ,1,
+                                        0));
+                                add(new Point(3 ,25,
+                                        0));
+                            }
+                        }}
+                };
+    }
+
     @Test(description = "Positive script of the square calculation",
             dataProvider = "data_square")
     public void calculateSquareTest(final double trueSquare,
                                     final double angles,
-                                    final double apothem,
                                     final List<Point> pointList) {
-        pyramid = new Pyramid(pointList, angles, 0, apothem);
+        pyramid = new Pyramid(pointList, angles, 10);
         double actual = pyramidCalculator.calculateSquare(pyramid);
         double expected = trueSquare;
-        Assert.assertEquals(expected, actual);
+        Assert.assertEquals(expected, actual, 0.01);
     }
 
     @Test(description = "Positive script of the square calculation",
@@ -112,9 +119,7 @@ public class PyramidCalculatorTest {
                                     final double height,
                                     final List<Point> pointList,
                                     final double volume){
-        pyramid.setHeight(height);
-        pyramid.setNumberOfAngles(angles);
-        pyramid.setPointList(pointList);
+        pyramid = new Pyramid(pointList, angles, height);
 
         double actual = pyramidCalculator.calculateVolume(pyramid);
         double expected = volume;
@@ -124,12 +129,11 @@ public class PyramidCalculatorTest {
     @Test(description = "Positive script of the square calculation",
             dataProvider = "data_dataRatioData")
     public void calculateRatioVolumeTest(final double angles,
-                                               final double apothem,
                                                final double height,
                                                final double heightPlane,
                                                final List<Point> pointList,
                                                final double volumeRatio) {
-        pyramid = new Pyramid(pointList, angles, height, apothem);
+        pyramid = new Pyramid(pointList, angles, height);
         double actual = pyramidCalculator.calculateRatioVolume(
                 pyramid, heightPlane);
         double expected = volumeRatio;
@@ -139,7 +143,9 @@ public class PyramidCalculatorTest {
     @Test(description = "Positive script for the finding size",
             dataProvider = "data_side")
     public void calculateSideTest(final List<Point> pointList) {
-        double actual = pyramidCalculator.calculateSide(pointList);
+        pyramid = new Pyramid(pointList, 0,0);
+        pyramid.setPointList(pointList);
+        double actual = pyramidCalculator.calculateSide(pyramid);
         final double expected = 24;
         Assert.assertEquals(expected, actual);
     }

@@ -38,7 +38,7 @@ public class ListFilter {
     /**
      *checkNumber for checking true string.
      */
-    private final int checkNumber = 8;
+    private final int checkNumber = 9;
 
     /**
      * This readListOfString we use for read information of file.

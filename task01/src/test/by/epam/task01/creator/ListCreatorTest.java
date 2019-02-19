@@ -20,8 +20,8 @@ public class ListCreatorTest {
 
     @BeforeTest
     public void initData() {
-        List<Double> doubleList = new ArrayList<>(Arrays.asList(1.0, 1.0,
-                4.0 , 1.0, 4.0, 4.0, 5.0, 2.0));
+        List<Double> doubleList = new ArrayList<>(Arrays.asList(1.0, 1.0, 0.0,
+                4.0 , 1.0, 0.0, 4.0, 5.0, 2.0));
         listCreator = new ListCreator();
         expectedMap = new HashMap<>();
         expectedMap.put(0, doubleList);

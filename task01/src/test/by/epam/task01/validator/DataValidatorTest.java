@@ -28,15 +28,9 @@ public class DataValidatorTest {
 
     @BeforeTest
     public void initData() {
-        doubleList = new ArrayList<Double>(Arrays.asList(1.0, 1.0, 4.0, 1.0, 4.0, 4.0, 5.0, 2.0));
+        doubleList = new ArrayList<>(Arrays.asList(1.0, 1.0, 0.0, 4.0, 1.0, 0.0,
+                4.0, 5.0, 2.0));
         dataValidator = new DataValidator(doubleList);
-    }
-
-    @Test(description = "Positive script for checking apothem")
-    public void checkingApothemTest() {
-        boolean actual = dataValidator.checkingApothem();
-        boolean expected = true;
-        Assert.assertEquals(expected, actual);
     }
 
     @Test(description = "Positive script for checking height")
@@ -70,17 +64,6 @@ public class DataValidatorTest {
     @Test(description = "Positive script for checking number of angels.")
     public void checkingAnglesTest() {
         boolean actual = dataValidator.checkingAngles();
-        boolean expected = true;
-        Assert.assertEquals(expected, actual);
-    }
-
-    @Test(description = "Positive script for this method",
-            dataProvider = "data_for_apothem_height")
-    public void checkingApothemDoesMatchHeightTest(final double[] numbers) {
-        boolean actual =
-                dataValidator.checkingApothemDoesMatchHeight(numbers[0],
-                        numbers[1], numbers[2], numbers[3]);
-        System.out.println(actual);
         boolean expected = true;
         Assert.assertEquals(expected, actual);
     }

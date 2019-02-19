@@ -6,7 +6,6 @@
  * @version 1.0
  * @since 1.0
  */
-
 package by.epam.task01.entity;
 
 import java.util.List;
@@ -18,8 +17,6 @@ import java.util.Objects;
  * @author Dmitry Terlyukevish
  * @version 1.0
  */
-
-@SuppressWarnings("CheckStyle")
 public class Pyramid {
     /**
      * pointList in this class.
@@ -29,83 +26,99 @@ public class Pyramid {
      * numberOfAngles in this class.
      */
     private double numberOfAngles;
-
+    /**
+     * height in this class.
+     */
     private double height;
 
-    public Pyramid(List<Point> pointList, double numberOfAngles, double height, double apothem) {
-        this.pointList = pointList;
-        this.numberOfAngles = numberOfAngles;
-        this.height = height;
-        this.apothem = apothem;
-    }
-
-    private double apothem;
-
-    public double getApothem() {
-        return apothem;
-    }
-
-    public void setApothem(double apothem) {
-        this.apothem = apothem;
+    /**
+     * constructor for inicialize data.
+     * @param points for this class.
+     * @param angles for this class.
+     * @param heightP for this class.
+     */
+    public Pyramid(final List<Point> points, final double angles,
+                   final  double heightP) {
+        this.pointList = points;
+        this.numberOfAngles = angles;
+        this.height = heightP;
     }
 
     /**
      * This readListOfString we use for read information of file.
-     *
+     * @param index for
      * @return pointList.
      */
-    public List<Point> getPointList() {
-        return pointList;
+    public Point getPointList(final int index) {
+        return pointList.get(index);
     }
     /**
-     * This readListOfString we use for read information of file.
-     *
      * @param list for pointList
      */
     public void setPointList(final List<Point> list) {
         this.pointList = list;
     }
-
+    /**
+     *@return number of angles in this pyramid.
+     */
     public double getNumberOfAngles() {
         return numberOfAngles;
     }
-
-    public void setNumberOfAngles(double numberOfAngles) {
-        this.numberOfAngles = numberOfAngles;
+    /**
+     * @param angles for pointList
+     */
+    public void setNumberOfAngles(final double angles) {
+        this.numberOfAngles = angles;
     }
-
+    /**
+     *@return height in this pyramid.
+     */
     public double getHeight() {
         return height;
     }
-
-    public void setHeight(double height) {
-        this.height = height;
+    /**
+     * @param heightP for this data.
+     */
+    public void setHeight(final double heightP) {
+        this.height = heightP;
     }
 
+    /**
+     * {@inheritDoc}
+     * @return string.
+     */
     @Override
     public String toString() {
-        return "Pyramid{" +
-                "pointList=" + pointList +
-                ", numberOfAngles=" + numberOfAngles +
-                ", height=" + height +
-                ", apothem=" + apothem +
-                '}';
+        return "Pyramid{" + "pointList=" + pointList
+                + ", numberOfAngles=" + numberOfAngles
+                + ", height=" + height
+                + ", apothem=" + '}';
     }
-
+    /**
+     * {@inheritDoc}
+     * @param o Object.
+     * @return true or false
+     */
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+    public boolean equals(final Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         Pyramid pyramid = (Pyramid) o;
-        return Double.compare(pyramid.numberOfAngles, numberOfAngles) == 0 &&
-                Double.compare(pyramid.height, height) == 0 &&
-                Double.compare(pyramid.apothem, apothem) == 0 &&
-                Objects.equals(pointList, pyramid.pointList);
+        return Double.compare(pyramid.numberOfAngles, numberOfAngles) == 0
+                && Double.compare(pyramid.height, height) == 0
+                && Objects.equals(pointList, pyramid.pointList);
     }
-
+    /**
+     * {@inheritDoc}
+     * @return hashcode.
+     */
     @Override
     public int hashCode() {
-        return Objects.hash(pointList, numberOfAngles, height, apothem);
+        return Objects.hash(pointList, numberOfAngles, height);
     }
 
 }

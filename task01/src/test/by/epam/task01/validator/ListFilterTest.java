@@ -23,8 +23,8 @@ public class ListFilterTest {
         listFilter = new ListFilter();
         stringList = new ArrayList<>(new ArrayList<String>() {
             {
-                add("1 2 3 4 5 6 7 8");
-                add("2 3 4 5 7 1 5 9");
+                add("1 2 0 0 3 4 6 7 8");
+                add("2 3 0 0 4 5 1 5 9");
                 add("1 2 3sd 4g 56rhf 56yhg h56hh");
                 add("1 2d 42sd 34f 3");
                 add("1 23 4 6 7 8");
@@ -32,8 +32,8 @@ public class ListFilterTest {
         });
         trueList = new ArrayList<>(new ArrayList<String>() {
             {
-                add("1 2 3 4 5 6 7 8");
-                add("2 3 4 5 7 1 5 9");
+                add("1 2 0 0 3 4 6 7 8");
+                add("2 3 0 0 4 5 1 5 9");
             }
         });
     }

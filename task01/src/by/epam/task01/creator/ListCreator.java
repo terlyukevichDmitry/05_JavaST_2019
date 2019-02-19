@@ -1,3 +1,11 @@
+
+/**
+ * These classes contain the ......
+ *
+ * @author Dmitry Terlyukevich
+ * @version 1.0
+ * @since 1.0
+ */
 package by.epam.task01.creator;
 
 import by.epam.task01.exception.MissingWayFileException;

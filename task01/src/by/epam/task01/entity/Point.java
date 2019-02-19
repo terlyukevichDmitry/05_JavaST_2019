@@ -20,22 +20,29 @@ import java.util.Objects;
 
 public class Point {
     /**
-     * radius in this project.
+     * x in this project.
      */
     private double x;
     /**
-     * radius in this project.
+     * y in this project.
      */
     private double y;
     /**
+     * z in this project.
+     */
+    private double z;
+    /**
      * It's a first constructor in this class.
      *
-     * @param cordiantX for x
-     * @param cordiantY for y
+     * @param coordinateX for x
+     * @param coordinateY for y
+     * @param coordinateZ for z
      */
-    public Point(final double cordiantX, final double cordiantY) {
-        this.x = cordiantX;
-        this.y = cordiantY;
+    public Point(final double coordinateX,
+                 final double coordinateY, final double coordinateZ) {
+        this.x = coordinateX;
+        this.y = coordinateY;
+        this.z = coordinateZ;
     }
     /**
      * This readListOfString we use for read information of file.
@@ -48,10 +55,10 @@ public class Point {
     /**
      * This readListOfString we use for read information of file.
      *
-     * @param cordiantX for x
+     * @param coordinateX for x
      */
-    public void setX(final double cordiantX) {
-        this.x = cordiantX;
+    public void setX(final double coordinateX) {
+        this.x = coordinateX;
     }
     /**
      * This readListOfString we use for read information of file.
@@ -64,14 +71,32 @@ public class Point {
     /**
      * This readListOfString we use for read information of file.
      *
-     * @param cordiantY for x
+     * @param coordinateY for x
      */
-    public void setY(final double cordiantY) {
-        this.y = cordiantY;
+    public void setY(final double coordinateY) {
+        this.y = coordinateY;
+    }
+
+    /**
+     * This readListOfString we use for read information of file.
+     *
+     * @return z cordinat.
+     */
+    public double getZ() {
+        return z;
     }
     /**
+     * This readListOfString we use for read information of file.
+     *
+     * @param coordinateZ for z
+     */
+    public void setZ(final double coordinateZ) {
+        this.z = coordinateZ;
+    }
+
+    /**
      * {@inheritDoc}
-     * @return true or false
+     * @return equals result
      */
     @Override
     public boolean equals(final Object o) {
@@ -83,23 +108,26 @@ public class Point {
         }
         Point point = (Point) o;
         return Double.compare(point.x, x) == 0
-                && Double.compare(point.y, y) == 0;
-
+                && Double.compare(point.y, y) == 0
+                && Double.compare(point.z, z) == 0;
     }
+
     /**
      * {@inheritDoc}
      * @return hashcode
      */
     @Override
     public int hashCode() {
-        return Objects.hash(x, y);
+        return Objects.hash(x, y, z);
     }
+
     /**
      * {@inheritDoc}
+     *
      * @return string with this information
      */
     @Override
     public String toString() {
-        return "Point{" + "x=" + x + ", y=" + y + '}';
+        return "Point{" + "x=" + x + ", y=" + y + ", z=" + z + '}';
     }
 }

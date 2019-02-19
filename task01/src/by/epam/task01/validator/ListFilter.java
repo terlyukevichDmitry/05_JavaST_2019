@@ -35,10 +35,6 @@ public class ListFilter {
      *DIGIT_PATTEN_FOR_SPLIT for splitting array.
      */
     private static final Logger LOGGER = LogManager.getLogger(ListFilter.class);
-    /**
-     *checkNumber for checking true string.
-     */
-    private final int checkNumber = 9;
 
     /**
      * This readListOfString we use for read information of file.
@@ -50,24 +46,26 @@ public class ListFilter {
         for (String string: list) {
             int counter = 0;
             boolean isSolution = true;
-            if (string.trim().length() == 0) {
-                LOGGER.info("Validation error: empty string" + string + ".");
-            } else {
+            if (string.trim().length() != 0) {
                 for (String elementList
                         : string.split(DIGIT_PATTEN_FOR_SPLIT)) {
-                    if (!(elementList.matches(DIGIT_PATTEN))) {
-                        LOGGER.info("Validation error: incorrect string: "
-                                + elementList + ".");
-                        isSolution = false;
+                            if (!(elementList.matches(DIGIT_PATTEN))) {
+                                LOGGER.info(
+                                        "Validation error: incorrect string:"
+                                        + " " + elementList + ".");
+                                isSolution = false;
                     }
                     counter++;
                 }
-                if (isSolution && counter == checkNumber) {
-                    listNew.add(string);
-                } else {
+                final int checkNumber = 9;
+                if (!isSolution || counter != checkNumber) {
                     LOGGER.info("Validation error: insufficient data : "
                     + string + ".");
+                } else {
+                    listNew.add(string);
                 }
+            } else {
+                LOGGER.info("Validation error: empty string" + string + ".");
             }
         }
         return listNew;

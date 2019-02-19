@@ -50,22 +50,25 @@ public class DataValidatorTest {
     @Test(description = "Positive script for checking heightNewPyramid")
     public void checkingHeightComparisonTest() {
         boolean actual = dataValidator.checkingHeightComparison();
-        boolean expected = true;
-        Assert.assertEquals(expected, actual);
+        Assert.assertEquals(true, actual);
     }
 
     @Test(description = "Positive script for checking this method.")
     public void checkingPointMatchTest() {
         boolean actual = dataValidator.checkingPointMatch();
-        boolean expected = true;
-        Assert.assertEquals(expected, actual);
+        Assert.assertEquals(true, actual);
     }
 
     @Test(description = "Positive script for checking number of angels.")
     public void checkingAnglesTest() {
         boolean actual = dataValidator.checkingAngles();
-        boolean expected = true;
-        Assert.assertEquals(expected, actual);
+        Assert.assertEquals(true, actual);
+    }
+
+    @Test(description = "Positive script for checking equals parameter of z.")
+    public void checkingEqualsZParameter() {
+        boolean actual = dataValidator.checkingEqualsZParameter();
+        Assert.assertEquals(true, actual);
     }
 
     @AfterTest

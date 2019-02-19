@@ -30,7 +30,6 @@ public class Pyramid {
      * height in this class.
      */
     private double height;
-
     /**
      * constructor for inicialize data.
      * @param points for this class.
@@ -43,7 +42,6 @@ public class Pyramid {
         this.numberOfAngles = angles;
         this.height = heightP;
     }
-
     /**
      * This readListOfString we use for read information of file.
      * @param index for
@@ -82,7 +80,6 @@ public class Pyramid {
     public void setHeight(final double heightP) {
         this.height = heightP;
     }
-
     /**
      * {@inheritDoc}
      * @return string.
@@ -120,5 +117,4 @@ public class Pyramid {
     public int hashCode() {
         return Objects.hash(pointList, numberOfAngles, height);
     }
-
 }

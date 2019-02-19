@@ -26,7 +26,32 @@ public class DataValidator {
     /**
      * Logger for show problems or info.
      */
-    private static final Logger LOGGER = LogManager.getLogger(DataValidator.class);
+    private static final Logger LOGGER =
+            LogManager.getLogger(DataValidator.class);
+    /**
+     *constant.
+     */
+    private final int constantThree = 3;
+    /**
+     *constant.
+     */
+    private final int constantFour = 4;
+    /**
+     *constant.
+     */
+    private final int constantFive = 5;
+    /**
+     *constant.
+     */
+    private final int constantSix = 6;
+    /**
+     *constant.
+     */
+    private final int constantSeven = 7;
+    /**
+     *constant.
+     */
+    private final int constantEight = 8;
     /**
      * It's a first constructor in this class.
      *
@@ -40,7 +65,7 @@ public class DataValidator {
      * @return true or false
      */
     public boolean checkingHeight() {
-        if (doubleList.get(7) <= 0) {
+        if (doubleList.get(constantSeven) <= 0) {
             LOGGER.warn("We have not correct data!(height)");
             return false;
         }
@@ -51,7 +76,7 @@ public class DataValidator {
      * @return true or false
      */
     public boolean checkingHeightNewPyramid() {
-        if (doubleList.get(8) < 0) {
+        if (doubleList.get(constantEight) < 0) {
             LOGGER.warn("We have not correct data!(heightNewPyramid)");
             return false;
         }
@@ -62,7 +87,7 @@ public class DataValidator {
      * @return true or false
      */
     public boolean checkingHeightComparison() {
-        if (doubleList.get(8) > doubleList.get(7)) {
+        if (doubleList.get(constantEight) > doubleList.get(constantSeven)) {
             LOGGER.warn("We have not correct data!(heightNewPyr > height");
             return false;
         }
@@ -73,9 +98,12 @@ public class DataValidator {
      * @return true or false
      */
     public boolean checkingPointMatch() {
-        if ((doubleList.get(0).equals(doubleList.get(3)))
-                && doubleList.get(1).equals(doubleList.get(4))
-                && doubleList.get(2).equals(doubleList.get(5))) {
+        if ((doubleList.get(0).equals(doubleList.get(constantThree)))
+                &&
+                doubleList.get(1).equals(doubleList.get(constantFour))
+                &&
+                doubleList.get(2).equals(
+                        doubleList.get(constantFive))) {
             LOGGER.warn("We have the same points!");
         }
         return true;
@@ -85,11 +113,24 @@ public class DataValidator {
      * @return true or false
      */
     public boolean checkingAngles() {
-        if (doubleList.get(6) <= 2) {
+        if (doubleList.get(constantSix) <= 2) {
             LOGGER.warn("We can't build pyramid!");
             return false;
         }
         return true;
+    }
+    /**
+     * check true angles.
+     * @return true or false
+     */
+    public boolean checkingEqualsZParameter() {
+        if (doubleList.get(2).equals(doubleList.get(constantFive))) {
+            LOGGER.info("The pyramid is located in Oxy plane.");
+            return true;
+        } else {
+            LOGGER.info("l");
+            return false;
+        }
     }
 
 }

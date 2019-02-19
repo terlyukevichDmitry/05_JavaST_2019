@@ -6,7 +6,6 @@
  * @version 1.0
  * @since 1.0
  */
-
 package by.epam.task01.entity;
 
 import java.util.Objects;
@@ -76,7 +75,6 @@ public class Point {
     public void setY(final double coordinateY) {
         this.y = coordinateY;
     }
-
     /**
      * This readListOfString we use for read information of file.
      *
@@ -93,7 +91,6 @@ public class Point {
     public void setZ(final double coordinateZ) {
         this.z = coordinateZ;
     }
-
     /**
      * {@inheritDoc}
      * @return equals result
@@ -111,7 +108,6 @@ public class Point {
                 && Double.compare(point.y, y) == 0
                 && Double.compare(point.z, z) == 0;
     }
-
     /**
      * {@inheritDoc}
      * @return hashcode
@@ -120,7 +116,6 @@ public class Point {
     public int hashCode() {
         return Objects.hash(x, y, z);
     }
-
     /**
      * {@inheritDoc}
      *

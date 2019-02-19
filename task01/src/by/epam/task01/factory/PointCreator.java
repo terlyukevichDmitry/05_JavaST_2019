@@ -18,8 +18,11 @@ import by.epam.task01.entity.Point;
  *
  * @version 1.0
  */
-@SuppressWarnings("CheckStyle")
-public class PointCreator implements PointFactory{
+public class PointCreator implements PointFactory {
+    /**
+     * {@inheritDoc}
+     * @return Point object.
+     */
     @Override
     public Point createPoint(final double coordinateX,
                                        final double coordinateY,

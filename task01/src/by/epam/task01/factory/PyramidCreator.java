@@ -21,8 +21,11 @@ import java.util.List;
  *
  * @version 1.0
  */
-@SuppressWarnings("CheckStyle")
 public class PyramidCreator implements PyramidFactory {
+    /**
+     * {@inheritDoc}
+     * @return Point object.
+     */
     @Override
     public Pyramid createPyramid(final List<Point> pointList,
                                          final double angles,

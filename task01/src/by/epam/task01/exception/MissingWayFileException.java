@@ -17,7 +17,6 @@ package by.epam.task01.exception;
  * @version 1.0
  */
 public class MissingWayFileException extends Exception {
-
     /**
      * It's a main constructor in this class.
      * @param information for show info

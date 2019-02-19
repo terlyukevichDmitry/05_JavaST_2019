@@ -15,29 +15,27 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- *An public class for filtering data.
+ * An public class for filtering data.
  *
  * @author Dmitry Terlyukevish
  *
  * @version 1.0
  */
 public class ListFilter {
-
     /**
      * DIGIT_PATTEN for filtering data.
      */
     private static final String DIGIT_PATTEN = "^[0-9]*[.]?[0-9]+$";
     /**
-     *DIGIT_PATTEN_FOR_SPLIT for splitting array.
+     *DIGIT_PATTEN_FOR_SPLIT for split array.
      */
     private static final String DIGIT_PATTEN_FOR_SPLIT = "\\s+";
     /**
-     *DIGIT_PATTEN_FOR_SPLIT for splitting array.
+     *DIGIT_PATTEN_FOR_SPLIT for split array.
      */
     private static final Logger LOGGER = LogManager.getLogger(ListFilter.class);
-
     /**
-     * This readListOfString we use for read information of file.
+     * This filterList we use for filtering not incorrect data.
      * @param list for filtering data.
      * @return List<String> with component for solutions this task.
      */
@@ -70,5 +68,4 @@ public class ListFilter {
         }
         return listNew;
     }
-
 }

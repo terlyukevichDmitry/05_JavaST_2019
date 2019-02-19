@@ -12,7 +12,7 @@ package by.epam.task01.factory;
 import by.epam.task01.entity.Point;
 
 /**
- *An public class for create points for decide this task.
+ * Public interface for create Point.
  *
  * @author Dmitry Terlyukevish
  *
@@ -20,7 +20,7 @@ import by.epam.task01.entity.Point;
  */
 public interface PointFactory extends Factory<PointFactory> {
     /**
-     * It's a main constructor in this class.
+     * Method for create Point.
      * @param coordinateX for createPoint
      * @param coordinateY for createPoint
      * @param coordinateZ for createPoint

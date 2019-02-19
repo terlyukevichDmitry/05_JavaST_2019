@@ -10,7 +10,7 @@
 package by.epam.task01.factory;
 
 /**
- *An public class for reading different information.
+ *An public interface for creating Factory Method.
  *
  * @author Dmitry Terlyukevish
  * @param <T> for create different geometric figure.

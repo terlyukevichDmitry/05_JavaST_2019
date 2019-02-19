@@ -11,6 +11,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.util.List;
+
 /**
  * An public class for validate data.
  *
@@ -20,14 +21,9 @@ import java.util.List;
 public class DataValidator {
 
     /**
-     *we use this for checking data.
+     * We use this list for checking data of file.
      */
     private List<Double> doubleList;
-    /**
-     * Logger for show problems or info.
-     */
-    private static final Logger LOGGER =
-            LogManager.getLogger(DataValidator.class);
     /**
      *constant.
      */
@@ -53,7 +49,12 @@ public class DataValidator {
      */
     private final int constantEight = 8;
     /**
-     * It's a first constructor in this class.
+     * Logger for show problems or info.
+     */
+    private static final Logger LOGGER =
+            LogManager.getLogger(DataValidator.class);
+    /**
+     * Constructor for take list with double data for validate data.
      *
      * @param list for doubleList
      */

@@ -1,7 +1,5 @@
 
 /**
- * These classes contain the ......
- *
  * @author Dmitry Terlyukevich
  * @version 1.0
  * @since 1.0
@@ -11,7 +9,7 @@ package by.epam.task01.action;
 import by.epam.task01.entity.Pyramid;
 
 /**
- * An public class for do different tasks.
+ * It's public class for calculate different tasks.
  *
  * @author Dmitry Terlyukevish
  * @version 1.0
@@ -19,9 +17,9 @@ import by.epam.task01.entity.Pyramid;
 public class PyramidCalculator {
 
     /**
-     * This readListOfString we use for read information of file.
-     * @param pyramid new
-     * @return volume.
+     * This calculateSquare we use for calculate pyramid square.
+     * @param pyramid object
+     * @return square.
      */
     public double calculateSquare(final Pyramid pyramid) {
         double side = calculateSide(pyramid);
@@ -29,10 +27,10 @@ public class PyramidCalculator {
                 + calculateSideSurfaceArea(side, pyramid);
     }
     /**
-     * This readListOfString we use for read information of file.
-     * @param side for calculating volume
-     * @param pyramid new
-     * @return volume.
+     * This calculateBaseArea we use for help calculate pyramid square.
+     * @param side the base of the pyramid.
+     * @param pyramid object.
+     * @return baseArea.
      */
     private double calculateBaseArea(final double side,
                                      final Pyramid pyramid) {
@@ -42,8 +40,9 @@ public class PyramidCalculator {
                 / (coefficient * tan);
     }
     /**
-     * @param pyramid for
-     * @return radius
+     * This calculateRadius we use for calculate radius in pyramid.
+     * @param pyramid object.
+     * @return radius.
      */
     private double calculateRadius(final Pyramid pyramid) {
         final double pi = 180;
@@ -51,8 +50,8 @@ public class PyramidCalculator {
                 / pyramid.getNumberOfAngles())));
     }
     /**
-     * This readListOfString we use for read information of file.
-     * @param pyramid for calculating volume
+     * This calculateVolume we use calculate volume our pyramid.
+     * @param pyramid object.
      * @return volume.
      */
     public double calculateVolume(final Pyramid pyramid) {
@@ -65,9 +64,9 @@ public class PyramidCalculator {
                 / (Math.tan(Math.toRadians(pi) / pyramid.getNumberOfAngles()));
     }
     /**
-     * This readListOfString we use for read information of file.
-     * @param pyramid for calculating volume
-     * @return volume.
+     * This calculateSide we use for calculate side the base of the pyramid.
+     * @param pyramid object.
+     * @return side.
      */
     public double calculateSide(final Pyramid pyramid) {
         return Math.sqrt(Math.pow((pyramid.getPointList(1).getX()
@@ -76,10 +75,11 @@ public class PyramidCalculator {
                 - pyramid.getPointList(0).getY()), 2));
     }
     /**
-     * This readListOfString we use for read information of file.
-     * @param side for calculating volume
-     * @param pyramid new
-     * @return volume.
+     * This calculateSideSurfaceArea we use for calculate side of surface area
+     * for square our pyramid.
+     * @param side the base of the pyramid.
+     * @param pyramid object.
+     * @return side of surface area.
      */
     private double calculateSideSurfaceArea(final double side,
                                             final Pyramid pyramid) {
@@ -89,10 +89,10 @@ public class PyramidCalculator {
         return side * apothem * pyramid.getNumberOfAngles() * coefficient;
     }
     /**
-     * This readListOfString we use for read information of file.
-     * @param pyramid for.
-     * @param heightPlane for.
-     * @return volume.
+     * This calculateRatioVolume we use for calculate ratio between two volume.
+     * @param pyramid object.
+     * @param heightPlane it's height plane -> truncated pyramid.
+     * @return volume ratio.
      */
     public double calculateRatioVolume(final Pyramid pyramid,
                                        final double heightPlane) {
@@ -103,10 +103,11 @@ public class PyramidCalculator {
         return volumeTruncatedPyramid / volumeSmallPyramid;
     }
     /**
-     * This readListOfString we use for read information of file.
-     * @param pyramid for.
-     * @param heightPlane for.
-     * @return volume.
+     * This calculateVolumeTruncatedPyramid we use for help calculate volume
+     * ratio.
+     * @param pyramid object.
+     * @param heightPlane it's height plane -> truncated pyramid.
+     * @return volume of truncated pyramid.
      */
     private double calculateVolumeTruncatedPyramid(final Pyramid pyramid,
                                                    final double heightPlane) {
@@ -119,11 +120,11 @@ public class PyramidCalculator {
                 * Math.sqrt(baseAreaNewPyramid) + baseAreaNewPyramid);
     }
     /**
-     * This readListOfString we use for read information of file.
-     * @param baseArea for.
-     * @param pyramid for.
-     * @param heightPlane for.
-     * @return volume.
+     * This calculateBaseAreaNewPyramid we use for help calculate volume ratio.
+     * @param baseArea our pyramid.
+     * @param pyramid object.
+     * @param heightPlane it's height plane -> truncated pyramid..
+     * @return base area of new pyramid.
      */
     private double calculateBaseAreaNewPyramid(final Pyramid pyramid,
                                            final double heightPlane,

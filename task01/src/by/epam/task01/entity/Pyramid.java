@@ -19,22 +19,22 @@ import java.util.Objects;
  */
 public class Pyramid {
     /**
-     * pointList in this class.
+     * list with point data in this class.
      */
     private List<Point> pointList;
     /**
-     * numberOfAngles in this class.
+     * numberOfAngles in this class for our pyramid.
      */
     private double numberOfAngles;
     /**
-     * height in this class.
+     * height in this class for our pyramid.
      */
     private double height;
     /**
-     * constructor for inicialize data.
-     * @param points for this class.
-     * @param angles for this class.
-     * @param heightP for this class.
+     * constructor for initialization data.
+     * @param points for this object.
+     * @param angles for this object.
+     * @param heightP for this object.
      */
     public Pyramid(final List<Point> points, final double angles,
                    final  double heightP) {
@@ -43,39 +43,47 @@ public class Pyramid {
         this.height = heightP;
     }
     /**
-     * This readListOfString we use for read information of file.
-     * @param index for
-     * @return pointList.
+     * We use this method for get necessary point beyond class.
+     * @param index to choose necessary point.
+     * @return necessary point.
      */
     public Point getPointList(final int index) {
         return pointList.get(index);
     }
     /**
-     * @param list for pointList
+     * We use -//- for take data.
+     *
+     * @param list for take pointList.
      */
     public void setPointList(final List<Point> list) {
         this.pointList = list;
     }
     /**
-     *@return number of angles in this pyramid.
+     * We use this method for get number of angles beyond class.
+     * @return angles.
      */
     public double getNumberOfAngles() {
         return numberOfAngles;
     }
     /**
-     * @param angles for pointList
+     * We use -//- for take data.
+     *
+     * @param angles for take number of point.
      */
     public void setNumberOfAngles(final double angles) {
         this.numberOfAngles = angles;
     }
     /**
-     *@return height in this pyramid.
+     * We use this method for get height this pyramid beyond class.
+     * @return height.
      */
     public double getHeight() {
         return height;
     }
     /**
-     * @param heightP for this data.
+     * We use -//- for take data.
+     *
+     * @param heightP for take height for this object.
      */
     public void setHeight(final double heightP) {
         this.height = heightP;

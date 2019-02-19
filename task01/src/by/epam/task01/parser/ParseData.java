@@ -15,7 +15,8 @@ import java.util.List;
 import java.util.Map;
 
 /**
- *An public class for parse data.
+ *An public class for parse data for next different moments in this
+ * application.
  *
  * @author Dmitry Terlyukevish
  *
@@ -24,12 +25,11 @@ import java.util.Map;
 public class ParseData {
 
     /**
-     * DIGIT_PATTEN_FOR_SPLIT for parse data.
+     * DIGIT_PATTEN_FOR_SPLIT for split data.
      */
     private static final String DIGIT_PATTEN_FOR_SPLIT = "\\s+";
-
     /**
-     * This readListOfString we use for read information of file.
+     * This createMap we use for create map with data of filtered list.
      * @param filteredList for parse data.
      * @return List<String> with component for solutions this task.
      */

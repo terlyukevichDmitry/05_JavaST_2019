@@ -24,7 +24,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 /**
- *An public class for reading different information.
+ * In this class we use for reading data of different files.
  *
  * @author Dmitry Terlyukevish
  *
@@ -36,7 +36,6 @@ public class DataReader {
      * Logger for recording a program state.
      */
     private static final Logger LOGGER = LogManager.getLogger(DataReader.class);
-
     /**
      * This readListOfString we use for read information of file.
      * @param file for.
@@ -47,24 +46,25 @@ public class DataReader {
             throws MissingWayFileException {
         List<String> list = new ArrayList<>();
 
-        if (file == null) {
-                throw new MissingWayFileException(
-                        "We don't have text in file");
-        }
-
-        try (Stream<String> stream = Files.lines(Paths.get(file))) {
-            list = stream.map(String::toLowerCase).collect(Collectors.toList());
-            if (list.isEmpty()) {
-                throw new FileEmptyException("We have empty file.");
+        if (file != null) {
+            try (Stream<String> stream = Files.lines(Paths.get(file))) {
+                list = stream.map(String::toLowerCase).collect(
+                        Collectors.toList());
+                if (list.isEmpty()) {
+                    throw new FileEmptyException("We have empty file.");
+                }
+            } catch (IOException ex) {
+                LOGGER.warn("We have problem with this method. Please,"
+                        + " correct this mistake.", ex);
+            } catch (FileEmptyException ex) {
+                LOGGER.warn("File is empty", ex);
+            } catch (UncheckedIOException ex) {
+                LOGGER.warn("False file path is a directory", ex);
             }
-        } catch (IOException ex) {
-            LOGGER.warn("We have problem with this method. Please,"
-                           + " correct this mistake.", ex);
-        } catch (FileEmptyException ex) {
-            LOGGER.warn("File is empty", ex);
-        } catch (UncheckedIOException ex) {
-            LOGGER.warn("False file path is a directory", ex);
+            return list;
+        } else {
+            throw new MissingWayFileException(
+                    "We don't have text in file");
         }
-        return list;
     }
 }

@@ -15,7 +15,7 @@ import by.epam.task01.entity.Pyramid;
 import java.util.List;
 
 /**
- *An public class for create points for decide this task.
+ * Public interface for create Pyramid.
  *
  * @author Dmitry Terlyukevish
  *
@@ -23,7 +23,7 @@ import java.util.List;
  */
 public interface PyramidFactory extends Factory<PyramidFactory> {
     /**
-     * It's a main constructor in this class.
+     * Method for create Pyramid.
      * @param pointList for create pyramid.
      * @param angles for create pyramid.
      * @param height for create pyramid.

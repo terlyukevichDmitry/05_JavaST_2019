@@ -12,7 +12,7 @@ package by.epam.task01.factory;
 import by.epam.task01.entity.Point;
 
 /**
- *An public class for create points for decide this task.
+ * Public class for create Point.
  *
  * @author Dmitry Terlyukevish
  *
@@ -20,6 +20,7 @@ import by.epam.task01.entity.Point;
  */
 public class PointCreator implements PointFactory {
     /**
+     * Create Point.
      * {@inheritDoc}
      * @return Point object.
      */

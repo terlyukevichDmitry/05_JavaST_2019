@@ -33,7 +33,7 @@ public class ListCreator {
     private static final Logger LOGGER =
             LogManager.getLogger(ListCreator.class);
     /**
-     * This method we use for create final list.
+     * This method we use for create final list with data.
      * @param file for create list.
      * @return createdList.
      * @throws MissingWayFileException for checking data path.
@@ -42,13 +42,10 @@ public class ListCreator {
             throws MissingWayFileException {
         List<String> stringList = stringListCreator(file);
         List<String> filteredList = filterListCreator(stringList);
-        Map<Integer, List<Double>> createdListOfDoubles =
-                parseDoubleCreator(filteredList);
-        return createdListOfDoubles;
+        return parseDoubleCreator(filteredList);
     }
-
     /**
-     * This method we use for create final list.
+     * This method we use for help to create final list.
      * @param file for create list.
      * @return stringList.
      * @throws MissingWayFileException for checking data path.
@@ -56,33 +53,28 @@ public class ListCreator {
     private List<String> stringListCreator(final String file)
             throws MissingWayFileException {
         DataReader fileReaderHelper = new DataReader();
-        List<String> stringList = fileReaderHelper.readListOfString(file);
-        return stringList;
+        return fileReaderHelper.readListOfString(file);
     }
-
     /**
-     * This method we use for create final list.
+     * This method we use for help to create final list.
+     * In this method we are filtering data.
      * @param stringList for create list.
      * @return filteredList.
      */
     private List<String> filterListCreator(final List<String> stringList) {
         ListFilter listFilter = new ListFilter();
-        List<String> filteredList = listFilter.filterList(stringList);
         LOGGER.info("FilteredList: ");
-        return filteredList;
+        return listFilter.filterList(stringList);
     }
-
     /**
-     * This method we use for create final list.
+     * This method we use for help to create final list.
+     * In this method we are parsing data.
      * @param filteredList for create list.
-     * @return createdListOfDoubles.
+     * @return map with data.
      */
     private Map<Integer, List<Double>> parseDoubleCreator(
             final List<String> filteredList) {
         ParseData parseData = new ParseData();
-        Map<Integer, List<Double>> createdListOfDoubles =
-                parseData.createMap(filteredList);
-        return createdListOfDoubles;
+        return parseData.createMap(filteredList);
     }
-
 }

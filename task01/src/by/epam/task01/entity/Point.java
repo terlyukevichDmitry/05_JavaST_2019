@@ -16,22 +16,21 @@ import java.util.Objects;
  * @author Dmitry Terlyukevish
  * @version 1.0
  */
-
 public class Point {
     /**
-     * x in this project.
+     * X coordinate in this project.
      */
     private double x;
     /**
-     * y in this project.
+     * Y coordinate in this project.
      */
     private double y;
     /**
-     * z in this project.
+     * Z coordinate in this project.
      */
     private double z;
     /**
-     * It's a first constructor in this class.
+     * It's constructor in this class with parameters.
      *
      * @param coordinateX for x
      * @param coordinateY for y
@@ -44,15 +43,15 @@ public class Point {
         this.z = coordinateZ;
     }
     /**
-     * This readListOfString we use for read information of file.
+     * We use this for get X coordinate beyond class.
      *
-     * @return x cordinat.
+     * @return x coordinate.
      */
     public double getX() {
         return x;
     }
     /**
-     * This readListOfString we use for read information of file.
+     * We use -//- for take data.
      *
      * @param coordinateX for x
      */
@@ -60,15 +59,15 @@ public class Point {
         this.x = coordinateX;
     }
     /**
-     * This readListOfString we use for read information of file.
+     * We use this for get Y coordinate beyond class.
      *
-     * @return y cordinat.
+     * @return y coordinate.
      */
     public double getY() {
         return y;
     }
     /**
-     * This readListOfString we use for read information of file.
+     * We use -//- for take data.
      *
      * @param coordinateY for x
      */
@@ -76,15 +75,15 @@ public class Point {
         this.y = coordinateY;
     }
     /**
-     * This readListOfString we use for read information of file.
+     * We use this for get Z coordinate beyond class.
      *
-     * @return z cordinat.
+     * @return z coordinate.
      */
     public double getZ() {
         return z;
     }
     /**
-     * This readListOfString we use for read information of file.
+     * We use -//- for take data.
      *
      * @param coordinateZ for z
      */

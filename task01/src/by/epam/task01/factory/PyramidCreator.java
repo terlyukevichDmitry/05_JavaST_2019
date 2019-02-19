@@ -15,7 +15,7 @@ import by.epam.task01.entity.Pyramid;
 import java.util.List;
 
 /**
- *An public class for create pyramid for decide this task.
+ * Public class for create Pyramid.
  *
  * @author Dmitry Terlyukevish
  *
@@ -23,6 +23,7 @@ import java.util.List;
  */
 public class PyramidCreator implements PyramidFactory {
     /**
+     * Create pyramid.
      * {@inheritDoc}
      * @return Point object.
      */

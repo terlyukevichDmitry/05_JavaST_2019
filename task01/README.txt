@@ -13,6 +13,3 @@ Code written in Java Code Convention with plugins "CheckStyle" and "SonarLint".
 
 For calculate different moments in this application i used different
 mathematical formulas witch found in the internet and mathematical books.
-
-Data: 2 point for side, number of angels, height for pyramid,
-height for create new coordinate plane.

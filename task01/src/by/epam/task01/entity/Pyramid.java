@@ -96,8 +96,7 @@ public class Pyramid {
     public String toString() {
         return "Pyramid{" + "pointList=" + pointList
                 + ", numberOfAngles=" + numberOfAngles
-                + ", height=" + height
-                + ", apothem=" + '}';
+                + ", height=" + height + '}';
     }
     /**
      * {@inheritDoc}

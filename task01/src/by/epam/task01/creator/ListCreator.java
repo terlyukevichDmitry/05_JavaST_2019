@@ -12,8 +12,6 @@ import by.epam.task01.exception.MissingWayFileException;
 import by.epam.task01.parser.ParseData;
 import by.epam.task01.reader.DataReader;
 import by.epam.task01.validator.ListFilter;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 import java.util.List;
 import java.util.Map;
@@ -26,12 +24,6 @@ import java.util.Map;
  * @version 1.0
  */
 public class ListCreator {
-
-    /**
-     * Logger for recording a program state.
-     */
-    private static final Logger LOGGER =
-            LogManager.getLogger(ListCreator.class);
     /**
      * This method we use for create final list with data.
      * @param file for create list.
@@ -63,7 +55,6 @@ public class ListCreator {
      */
     private List<String> filterListCreator(final List<String> stringList) {
         ListFilter listFilter = new ListFilter();
-        LOGGER.info("FilteredList: ");
         return listFilter.filterList(stringList);
     }
     /**

@@ -51,7 +51,7 @@ public class PyramidCreatorTest {
                                 final double height,
                                 final List<Point> pointList,
                                 final Pyramid expectedPyramid) {
-        Factory<PyramidFactory> pyramidFactory = new PyramidCreator();
+        Factory<Pyramid> pyramidFactory = new PyramidCreator();
         Pyramid actual = ((PyramidCreator) pyramidFactory).createPyramid(
                 pointList, angles, height);
         Pyramid expected = expectedPyramid;

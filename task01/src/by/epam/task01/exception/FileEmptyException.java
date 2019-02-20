@@ -19,6 +19,12 @@ package by.epam.task01.exception;
 public class FileEmptyException extends Exception {
     /**
      * Constructor for this class.
+     */
+    public FileEmptyException() {
+        super();
+    }
+    /**
+     * Constructor for this class.
      * @param information for show info about mistakes.
      */
     public FileEmptyException(final String information) {

@@ -21,7 +21,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.HashMap;
 
-@SuppressWarnings("CheckStyle")
 public class ParseDataTest {
 
     private ParseData parseData;

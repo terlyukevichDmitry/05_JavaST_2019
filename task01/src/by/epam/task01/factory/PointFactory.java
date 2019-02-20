@@ -18,7 +18,7 @@ import by.epam.task01.entity.Point;
  *
  * @version 1.0
  */
-public interface PointFactory extends Factory<PointFactory> {
+public interface PointFactory extends Factory<Point> {
     /**
      * Method for create Point.
      * @param coordinateX for createPoint

@@ -17,7 +17,7 @@ import java.util.Objects;
  * @author Dmitry Terlyukevish
  * @version 1.0
  */
-public class Pyramid {
+public class Pyramid implements GeometricFigure{
     /**
      * list with point data in this class.
      */

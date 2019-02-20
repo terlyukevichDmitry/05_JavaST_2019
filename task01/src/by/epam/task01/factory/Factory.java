@@ -9,6 +9,8 @@
  */
 package by.epam.task01.factory;
 
+import by.epam.task01.entity.GeometricFigure;
+
 /**
  *An public interface for creating Factory Method.
  *
@@ -16,5 +18,5 @@ package by.epam.task01.factory;
  * @param <T> for create different geometric figure.
  * @version 1.0
  */
-public interface Factory<T> {
+public interface Factory<T extends GeometricFigure> {
 }

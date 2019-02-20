@@ -12,7 +12,6 @@ package test.by.epam.task01.factory;
 import by.epam.task01.entity.Point;
 import by.epam.task01.factory.Factory;
 import by.epam.task01.factory.PointCreator;
-import by.epam.task01.factory.PointFactory;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
@@ -35,7 +34,7 @@ public class PointCreatorTest {
                                 final double coordinateY,
                                 final double coordinateZ,
                                 final Point expectedPoint) {
-        Factory<PointFactory> pointFactory = new PointCreator();
+        Factory<Point> pointFactory = new PointCreator();
         Point actual = ((PointCreator) pointFactory).createPoint(coordinateX,
                 coordinateY,
                 coordinateZ);

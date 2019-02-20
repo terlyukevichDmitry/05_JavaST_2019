@@ -21,7 +21,7 @@ import java.util.List;
  *
  * @version 1.0
  */
-public interface PyramidFactory extends Factory<PyramidFactory> {
+public interface PyramidFactory extends Factory<Pyramid> {
     /**
      * Method for create Pyramid.
      * @param pointList for create pyramid.

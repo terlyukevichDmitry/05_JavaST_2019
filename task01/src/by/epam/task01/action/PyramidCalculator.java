@@ -1,9 +1,4 @@
 
-/**
- * @author Dmitry Terlyukevich
- * @version 1.0
- * @since 1.0
- */
 package by.epam.task01.action;
 
 import by.epam.task01.entity.Pyramid;

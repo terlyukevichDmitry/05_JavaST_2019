@@ -19,7 +19,7 @@ import org.testng.annotations.Test;
 @SuppressWarnings("CheckStyle")
 public class PointCreatorTest {
 
-    @DataProvider(name = "data_for_create_point")
+    @DataProvider(name = "dat_for_create_point")
     public Object[][] createCorrectDataPoint() {
         return
                 new Object[][]{

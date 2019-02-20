@@ -12,4 +12,4 @@ polygon.
 Code written in Java Code Convention with plugins "CheckStyle" and "SonarLint".
 
 For calculate different moments in this application i used different
-mathematical formulas witch found in the internet and mathematical books.
+mathematical formulas which found in the internet and mathematical books.

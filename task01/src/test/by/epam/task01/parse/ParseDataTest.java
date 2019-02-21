@@ -1,12 +1,3 @@
-
-/**
- * These classes contain the ......
- * </p>
- *
- * @since 1.0
- * @author Dmitry Terlyukevich
- * @version 1.0
- */
 package test.by.epam.task01.parse;
 
 import by.epam.task01.parser.ParseData;
@@ -21,20 +12,43 @@ import java.util.List;
 import java.util.Map;
 import java.util.HashMap;
 
+/**
+ *An public class for testing many different methods of ParseData class.
+ *
+ * @author Dmitry Terlyukevish
+ * @version 1.0
+ */
 public class ParseDataTest {
-
+    /**
+     * Parsedata for create object.
+     */
     private ParseData parseData;
-
+    /**
+     * expectedMap for create Map.
+     */
     private Map<Integer, List<Double>> expectedMap;
-
+    /**
+     * constant.
+     */
+    private final double two = 2.0;
+    /**
+     * constant.
+     */
+    private final double three = 3.0;
+    /**
+     * {@inheritDoc}.
+     */
     @BeforeTest
-    public void initParseData(){
-        List<Double> doubleList = new ArrayList<>(Arrays.asList(3.0, 2.0, 2.0));
+    public void initParseData() {
+        List<Double> doubleList = new ArrayList<>(Arrays.asList(three,
+                two, two));
         parseData = new ParseData();
         expectedMap = new HashMap<>();
         expectedMap.put(0, doubleList);
     }
-
+    /**
+     * {@inheritDoc}.
+     */
     @Test
     public void createMapTest() {
         Map<Integer, List<Double>> actual =
@@ -42,9 +56,11 @@ public class ParseDataTest {
         Map<Integer, List<Double>> expected = expectedMap;
         Assert.assertEquals(expected, actual);
     }
-
+    /**
+     * @ for remove objects.
+     */
     @AfterTest
-    public void deleteParseData(){
+    public void deleteParseData() {
         parseData = null;
         expectedMap = null;
     }

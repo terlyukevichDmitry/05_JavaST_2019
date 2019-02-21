@@ -11,6 +11,8 @@ package by.epam.task01.factory;
 
 import by.epam.task01.entity.Point;
 import by.epam.task01.entity.Pyramid;
+import by.epam.task01.exception.LengthCollectionPointException;
+import by.epam.task01.exception.PyramidException;
 
 import java.util.List;
 
@@ -25,12 +27,15 @@ public class PyramidCreator implements PyramidFactory {
     /**
      * Create pyramid.
      * {@inheritDoc}
+     * @throws LengthCollectionPointException for check not correct length.
+     * @throws PyramidException for check not correct data.
      * @return Point object.
      */
     @Override
     public Pyramid createPyramid(final List<Point> pointList,
                                          final double angles,
-                                         final double height) {
+                                         final double height) throws
+            LengthCollectionPointException, PyramidException {
         return new Pyramid(pointList, angles, height);
     }
 }

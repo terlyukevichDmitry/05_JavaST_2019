@@ -16,7 +16,7 @@ import java.util.Objects;
  * @author Dmitry Terlyukevish
  * @version 1.0
  */
-public class Point implements GeometricFigure{
+public class Point implements GeometricFigure {
     /**
      * X coordinate in this project.
      */

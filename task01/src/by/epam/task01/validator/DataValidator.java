@@ -129,7 +129,7 @@ public class DataValidator {
             LOGGER.info("The pyramid is located in Oxy plane.");
             return true;
         } else {
-            LOGGER.info("l");
+            LOGGER.info("Not parallel to the coordinate plane");
             return false;
         }
     }

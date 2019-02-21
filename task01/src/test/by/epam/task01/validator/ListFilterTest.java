@@ -1,12 +1,3 @@
-
-/**
- * These classes contain the ......
- * </p>
- *
- * @since 1.0
- * @author Dmitry Terlyukevich
- * @version 1.0
- */
 package test.by.epam.task01.validator;
 
 import by.epam.task01.validator.ListFilter;
@@ -18,17 +9,30 @@ import org.testng.annotations.Test;
 import java.util.ArrayList;
 import java.util.List;
 
-@SuppressWarnings("CheckStyle")
+/**
+ *An public class for testing many different methods of ListFilter Test class.
+ *
+ * @author Dmitry Terlyukevish
+ * @version 1.0
+ */
 public class ListFilterTest {
-
+    /**
+     * stringList for filter data.
+     */
     private List<String> stringList;
-
+    /**
+     * filter data for next things.
+     */
     private ListFilter listFilter;
-
+    /**
+     * for check list.
+     */
     private List<String> trueList;
-
+    /**
+     * {@inheritDoc}.
+     */
     @BeforeTest
-    public void initListFilter(){
+    public void initListFilter() {
         listFilter = new ListFilter();
         stringList = new ArrayList<>(new ArrayList<String>() {
             {
@@ -46,17 +50,20 @@ public class ListFilterTest {
             }
         });
     }
-
+    /**
+     * {@inheritDoc}.
+     */
     @Test
-    public void filterListTest(){
-
+    public void filterListTest() {
         List<String> actual = listFilter.filterList(stringList);
         List<String> expected = trueList;
         Assert.assertEquals(expected, actual);
     }
-
+    /**
+     * @ for remove objects.
+     */
     @AfterTest
-    public void deleteListFilter(){
+    public void deleteListFilter() {
         listFilter = null;
         stringList = null;
         trueList = null;

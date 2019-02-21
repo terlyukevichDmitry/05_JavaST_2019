@@ -1,4 +1,3 @@
-
 package by.epam.task01.action;
 
 import by.epam.task01.entity.Pyramid;

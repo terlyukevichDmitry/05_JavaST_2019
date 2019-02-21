@@ -1,12 +1,3 @@
-
-/**
- * These classes contain the ......
- * </p>
- *
- * @since 1.0
- * @author Dmitry Terlyukevich
- * @version 1.0
- */
 package test.by.epam.task01.reader;
 
 import by.epam.task01.exception.MissingWayFileException;
@@ -19,11 +10,20 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-@SuppressWarnings("CheckStyle")
+/**
+ *An public class for testing many different methods of DataReader test class.
+ *
+ * @author Dmitry Terlyukevish
+ * @version 1.0
+ */
 public class DataReaderTest {
-
+    /**
+     * file direction.
+     */
     private static final String FILE = "data" + File.separator + "file.txt";
-
+    /**
+     * {@inheritDoc}.
+     */
     @Test(expectedExceptions = MissingWayFileException.class,
     description = "Negative script for show my exception.")
     public void checkFileTest() throws MissingWayFileException {
@@ -32,7 +32,9 @@ public class DataReaderTest {
         Assert.assertEquals("For check, \n" + "do we have a file path: ",
                 expected, String.valueOf(actual));
     }
-
+    /**
+     * {@inheritDoc}.
+     */
     @Test(description = "Positive script for reading file.")
     public void checkFileTestA() throws MissingWayFileException {
         List<String> expected = new ArrayList<String>() {

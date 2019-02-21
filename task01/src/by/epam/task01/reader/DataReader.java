@@ -63,6 +63,7 @@ public class DataReader {
             }
             return list;
         } else {
+            LOGGER.error("We don't have text in file");
             throw new MissingWayFileException(
                     "We don't have text in file");
         }

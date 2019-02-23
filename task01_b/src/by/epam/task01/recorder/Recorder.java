@@ -3,47 +3,122 @@ package by.epam.task01.recorder;
 import by.epam.task01.action.PyramidCalculator;
 import by.epam.task01.entity.Pyramid;
 
-@SuppressWarnings("CheckStyle")
-public class Recorder implements Observer{
+import java.util.Objects;
 
+/**
+ * In this class we use for different methods.
+ *
+ * @author Dmitry Terlyukevish
+ *
+ * @version 1.0
+ */
+public class Recorder implements Observer {
+    /**
+     * Number of square different pyramids.
+     */
     private double square;
+    /**
+     * Number of volume different pyramids.
+     */
     private double volume;
+    /**
+     * Id for different pyramids.
+     */
     private int id;
+    /**
+     * idCounter for id.
+     */
     private static int idCounter = -1;
-
-    public void register(final Pyramid pyramid) {
-        id = ++idCounter;
+    /**
+     * @param pyramid object.
+     */
+    public void createSlotForNewPyramid(final Pyramid pyramid) {
         update(pyramid);
+        id = ++idCounter;
     }
-
+    /**
+     * get id different objects.
+     * @return id.
+     */
     public int getId() {
         return id;
     }
-
+    /**
+     * get square different objects.
+     * @return square
+     */
     public double getSquare() {
         return square;
     }
-
-    public void setSquare(double square) {
-        this.square = square;
+    /**
+     * set square.
+     * @param squareP for set new data.
+     */
+    public void setSquare(final double squareP) {
+        this.square = squareP;
     }
-
+    /**
+     * get volume different objects.
+     * @return volume
+     */
     public double getVolume() {
         return volume;
     }
-
-    public void setVolume(double volume) {
-        this.volume = volume;
+    /**
+     * set volume.
+     * @param volumeP for set new data.
+     */
+    public void setVolume(final double volumeP) {
+        this.volume = volumeP;
     }
-
+    /**
+     * For calculate new square and volume with new data.
+     * @param pyramid object.
+     */
     private void calculateWithNewData(final Pyramid pyramid) {
         PyramidCalculator pyramidCalculator = new PyramidCalculator();
         square = pyramidCalculator.calculateSquare(pyramid);
         volume = pyramidCalculator.calculateVolume(pyramid);
     }
-
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public void update(Object object) {
+    public void update(final Object object) {
         calculateWithNewData((Pyramid)object);
+    }
+    /**
+     * {@inheritDoc}
+     * @return string.
+     */
+    @Override
+    public String toString() {
+        return "Recorder{" + "square=" + square + ", volume=" + volume
+                + ", id=" + id + '}';
+    }
+    /**
+     * {@inheritDoc}
+     * @return equals result.
+     */
+    @Override
+    public boolean equals(final Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Recorder recorder = (Recorder) o;
+        return Double.compare(recorder.square, square) == 0
+                && Double.compare(recorder.volume, volume) == 0
+                && id == recorder.id;
+    }
+    /**
+     * {@inheritDoc}
+     * @return hashcode.
+     */
+    @Override
+    public int hashCode() {
+        return Objects.hash(square, volume, id);
     }
 }

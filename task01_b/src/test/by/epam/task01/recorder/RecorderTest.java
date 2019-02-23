@@ -84,7 +84,7 @@ public class RecorderTest {
     public void calculateWithNewPyramid(final double trueSquare,
                                         final double trueVolume,
                                         final Pyramid pyramid)
-            throws NullDataException {
+            throws NullDataException, PyramidException {
 
         Recorder expected = new Recorder();
         expected.setVolume(trueSquare);
@@ -92,6 +92,7 @@ public class RecorderTest {
         expected.createSlotForNewPyramid(pyramid);
         double volumeNewPyramid = expected.getVolume();
         double squareNewPyramid = expected.getSquare();
+        pyramid.notifyObservers();
         Recorder actual = new Recorder();
         actual.setSquare(squareNewPyramid);
         actual.setVolume(volumeNewPyramid);

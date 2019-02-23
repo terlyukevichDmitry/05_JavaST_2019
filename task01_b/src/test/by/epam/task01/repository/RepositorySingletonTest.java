@@ -102,7 +102,8 @@ public class RepositorySingletonTest {
     @Test(description = "Positive script for check addObject method.",
             dataProvider = "data_add_object")
     public void removeObjectTest(final Pyramid pyramidOne,
-                              final Pyramid pyramid) throws NullDataException {
+                              final Pyramid pyramid)
+            throws NullDataException {
         RepositorySingleton repositorySingleton = new RepositorySingleton();
         repositorySingleton.addObject(pyramid);
         repositorySingleton.addObject(pyramidOne);

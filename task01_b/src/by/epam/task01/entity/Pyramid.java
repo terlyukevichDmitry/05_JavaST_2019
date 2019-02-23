@@ -87,6 +87,20 @@ public class Pyramid implements GeometricFigure, Observable {
         }
     }
     /**
+     * get data.
+     * @return observers.
+     */
+    public List<Observer> getObservers() {
+        return observers;
+    }
+    /**
+     * set data.
+     * @param observersP for list with Observer object.
+     */
+    public void setObservers(final List<Observer> observersP) {
+        this.observers = observersP;
+    }
+    /**
      * We use this method for get necessary point beyond class.
      * @param index to choose necessary point.
      * @return necessary point.

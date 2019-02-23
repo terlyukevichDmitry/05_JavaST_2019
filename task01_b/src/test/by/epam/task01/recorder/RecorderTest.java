@@ -3,6 +3,7 @@ package test.by.epam.task01.recorder;
 import by.epam.task01.entity.Point;
 import by.epam.task01.entity.Pyramid;
 import by.epam.task01.exception.LengthCollectionPointException;
+import by.epam.task01.exception.NullDataException;
 import by.epam.task01.exception.PyramidException;
 import by.epam.task01.recorder.Recorder;
 import org.testng.Assert;
@@ -82,7 +83,8 @@ public class RecorderTest {
             dataProvider = "data_calculate_square_volume")
     public void calculateWithNewPyramid(final double trueSquare,
                                         final double trueVolume,
-                                        final Pyramid pyramid) {
+                                        final Pyramid pyramid)
+            throws NullDataException {
 
         Recorder expected = new Recorder();
         expected.setVolume(trueSquare);

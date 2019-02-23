@@ -2,6 +2,10 @@ package by.epam.task01.recorder;
 
 import by.epam.task01.action.PyramidCalculator;
 import by.epam.task01.entity.Pyramid;
+import by.epam.task01.exception.NullDataException;
+import by.epam.task01.validator.ListFilter;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.util.Objects;
 
@@ -26,13 +30,23 @@ public class Recorder implements Observer {
      */
     private int id;
     /**
+     *Logger for show information.
+     */
+    private static final Logger LOGGER = LogManager.getLogger(ListFilter.class);
+    /**
      * idCounter for id.
      */
     private static int idCounter = -1;
     /**
+     * @throws NullDataException for check mistake.
      * @param pyramid object.
      */
-    public void createSlotForNewPyramid(final Pyramid pyramid) {
+    public void createSlotForNewPyramid(final Pyramid pyramid)
+            throws NullDataException {
+        if (pyramid == null) {
+            LOGGER.error("We have null in object!");
+            throw new NullDataException("We have null in object!");
+        }
         update(pyramid);
         id = ++idCounter;
     }
@@ -84,8 +98,8 @@ public class Recorder implements Observer {
      * {@inheritDoc}
      */
     @Override
-    public void update(final Object object) {
-        calculateWithNewData((Pyramid)object);
+    public void update(final Pyramid pyramid) {
+        calculateWithNewData(pyramid);
     }
     /**
      * {@inheritDoc}

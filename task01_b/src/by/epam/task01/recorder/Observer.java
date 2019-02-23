@@ -1,5 +1,6 @@
 package by.epam.task01.recorder;
 
+import by.epam.task01.entity.Pyramid;
 import by.epam.task01.exception.PyramidException;
 
 /**
@@ -10,8 +11,8 @@ import by.epam.task01.exception.PyramidException;
  */
 public interface Observer {
     /**
-     * @param object object.
+     * @param pyramid object.
      * @throws PyramidException for check exception.
      */
-    void update(Object object) throws PyramidException;
+    void update(Pyramid pyramid) throws PyramidException;
 }

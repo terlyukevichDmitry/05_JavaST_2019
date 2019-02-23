@@ -107,18 +107,25 @@ public class RepositorySingleton implements Observer {
         pyramidList.add(pyramid);
         Recorder recorder = new Recorder();
         recorder.createSlotForNewPyramid(pyramid);
+        pyramid.addObserver(recorder);
         recorderList.add(recorder);
     }
 
     /**
      * This method we use for remove object in Collection.
+     * @throws NullDataException for check mistake.
      * @param pyramid for remove.
      */
-    public void removeObject(final Pyramid pyramid) {
+    public void removeObject(final Pyramid pyramid) throws NullDataException {
+        if (pyramid == null) {
+            LOGGER.error("We have null in object!");
+            throw new NullDataException("We have null in object!");
+        }
         int counter = 0;
         for (Pyramid element : pyramidList) {
             if (element == pyramid) {
                 pyramidList.remove(pyramid);
+                pyramid.removeObserver(recorderList.get(counter));
                 recorderList.remove(counter);
             }
             counter++;
@@ -136,13 +143,13 @@ public class RepositorySingleton implements Observer {
      * {@inheritDoc}
      */
     @Override
-    public void update(final Object object) {
-        Pyramid pyramid = (Pyramid)object;
+    public void update(final Pyramid truePyramid) {
+        Pyramid pyramid = truePyramid;
         int counter = 0;
         for (Pyramid element: pyramidList) {
             if (pyramid.equals(element)) {
-               pyramidList.set(counter, pyramid);
-               recorderList.get(counter).update(object);
+               pyramidList.set(counter, truePyramid);
+               recorderList.get(counter).update(truePyramid);
             }
             counter++;
         }

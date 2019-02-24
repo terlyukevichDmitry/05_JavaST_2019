@@ -19,6 +19,7 @@ import org.apache.logging.log4j.Logger;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * An public class for Pyramid.
@@ -40,6 +41,15 @@ public class Pyramid implements GeometricFigure, Observable {
      */
     private double height;
     /**
+     * COUNTER for id.
+     */
+    private static final AtomicInteger COUNTER =
+            new AtomicInteger(0);
+    /**
+     * Id pyramid for finding and sorting process.
+     */
+    private int id;
+    /**
      *Logger for show information.
      */
     private static final Logger LOGGER = LogManager.getLogger(ListFilter.class);
@@ -57,7 +67,7 @@ public class Pyramid implements GeometricFigure, Observable {
      * @throws LengthCollectionPointException for check point problem.
      */
     public Pyramid(final List<Point> points, final double angles,
-                   final  double heightP) throws
+                   final double heightP) throws
             LengthCollectionPointException, PyramidException {
         this.pointList = points;
         if (pointList.size() != 2) {
@@ -85,6 +95,7 @@ public class Pyramid implements GeometricFigure, Observable {
             LOGGER.error("We have what height == 0.");
             throw new PyramidException("We have what height == 0.");
         }
+        id = COUNTER.getAndIncrement();
     }
     /**
      * get data.
@@ -92,13 +103,6 @@ public class Pyramid implements GeometricFigure, Observable {
      */
     public List<Observer> getObservers() {
         return observers;
-    }
-    /**
-     * set data.
-     * @param observersP for list with Observer object.
-     */
-    public void setObservers(final List<Observer> observersP) {
-        this.observers = observersP;
     }
     /**
      * We use this method for get necessary point beyond class.
@@ -179,6 +183,23 @@ public class Pyramid implements GeometricFigure, Observable {
             throw new PyramidException("We have what height == 0");
         }
     }
+
+    /**
+     * for set data.
+     * @param idP .
+     */
+    public void setId(final int idP) {
+        this.id = idP;
+    }
+
+    /**
+     * for get data.
+     * @return id pyramid.
+     */
+    public int getId() {
+        return id;
+    }
+
     /**
      * {@inheritDoc}
      * @return string.
@@ -189,32 +210,7 @@ public class Pyramid implements GeometricFigure, Observable {
                 + ", numberOfAngles=" + numberOfAngles
                 + ", height=" + height + '}';
     }
-    /**
-     * {@inheritDoc}
-     * @param o Object.
-     * @return true or false
-     */
-    @Override
-    public boolean equals(final Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-        Pyramid pyramid = (Pyramid) o;
-        return Double.compare(pyramid.numberOfAngles, numberOfAngles) == 0
-                && Double.compare(pyramid.height, height) == 0
-                && Objects.equals(pointList, pyramid.pointList);
-    }
-    /**
-     * {@inheritDoc}
-     * @return hashcode.
-     */
-    @Override
-    public int hashCode() {
-        return Objects.hash(pointList, numberOfAngles, height);
-    }
+
     /**
      * {@inheritDoc}
      */
@@ -237,5 +233,28 @@ public class Pyramid implements GeometricFigure, Observable {
         for (Observer el: observers) {
             el.update(this);
         }
+    }
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean equals(final Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Pyramid pyramid = (Pyramid) o;
+        return Double.compare(pyramid.numberOfAngles, numberOfAngles) == 0
+                && Double.compare(pyramid.height, height) == 0
+                && Objects.equals(pointList, pyramid.pointList);
+    }
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public int hashCode() {
+        return Objects.hash(pointList, numberOfAngles, height);
     }
 }

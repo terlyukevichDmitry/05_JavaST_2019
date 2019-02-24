@@ -23,6 +23,10 @@ public class RecorderTest {
     /**
      * constant.
      */
+    private final double twoHundred = 200.0;
+    /**
+     * constant.
+     */
     private final double one = 1.0;
     /**
      * constant.
@@ -57,6 +61,14 @@ public class RecorderTest {
      */
     private final double volumeNew = 1805.0000000000002;
     /**
+     * constant.
+     */
+    private final double expectedSquare = 7969.56891931722;
+    /**
+     * constant.
+     */
+    private final double expectedVolume = 24066.666666666668;
+    /**
      * {@inheritDoc}
      * @return object with data for data_side.
      */
@@ -65,7 +77,7 @@ public class RecorderTest {
             throws LengthCollectionPointException, PyramidException {
         return
                 new Object[][]{
-                        {squareNew, volumeNew,
+                        {expectedSquare, expectedVolume, squareNew, volumeNew,
                                 new Pyramid(new ArrayList<Point>() {
                             {
                                 add(new Point(three, six,
@@ -83,19 +95,21 @@ public class RecorderTest {
             dataProvider = "data_calculate_square_volume")
     public void calculateWithNewPyramid(final double trueSquare,
                                         final double trueVolume,
+                                        final double square,
+                                        final double volume,
                                         final Pyramid pyramid)
             throws NullDataException, PyramidException {
 
-        Recorder expected = new Recorder();
-        expected.setVolume(trueSquare);
-        expected.setSquare(trueVolume);
-        expected.createSlotForNewPyramid(pyramid);
-        double volumeNewPyramid = expected.getVolume();
-        double squareNewPyramid = expected.getSquare();
-        pyramid.notifyObservers();
         Recorder actual = new Recorder();
-        actual.setSquare(squareNewPyramid);
-        actual.setVolume(volumeNewPyramid);
+        actual.setVolume(square);
+        actual.setSquare(volume);
+        actual.createSlotForNewPyramid(pyramid);
+        pyramid.addObserver(actual);
+        pyramid.setHeight(twoHundred);
+        pyramid.notifyObservers();
+        Recorder expected = new Recorder();
+        expected.setVolume(trueVolume);
+        expected.setSquare(trueSquare);
         Assert.assertEquals(expected, actual);
     }
 }

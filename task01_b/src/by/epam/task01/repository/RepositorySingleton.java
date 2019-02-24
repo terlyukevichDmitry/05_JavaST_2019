@@ -4,6 +4,7 @@ import by.epam.task01.entity.Pyramid;
 import by.epam.task01.exception.NullDataException;
 import by.epam.task01.recorder.Observer;
 import by.epam.task01.recorder.Recorder;
+import by.epam.task01.repository.specification.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -110,13 +111,13 @@ public class RepositorySingleton implements Observer {
         pyramid.addObserver(recorder);
         recorderList.add(recorder);
     }
-
     /**
      * This method we use for remove object in Collection.
      * @throws NullDataException for check mistake.
      * @param pyramid for remove.
      */
     public void removeObject(final Pyramid pyramid) throws NullDataException {
+
         if (pyramid == null) {
             LOGGER.error("We have null in object!");
             throw new NullDataException("We have null in object!");
@@ -127,6 +128,7 @@ public class RepositorySingleton implements Observer {
                 pyramidList.remove(pyramid);
                 pyramid.removeObserver(recorderList.get(counter));
                 recorderList.remove(counter);
+
             }
             counter++;
         }
@@ -153,5 +155,52 @@ public class RepositorySingleton implements Observer {
             }
             counter++;
         }
+    }
+
+    /**
+     * For create query for decide different methods.
+     * @param specification for check class.
+     * @param index .
+     * @return list with true pyramid objects.
+     */
+    public List<Pyramid> query(final PyramidSpecification specification,
+                               final int index) {
+        List<Pyramid> pyramids = null;
+        if (specification instanceof FindPyramidSpecification) {
+                pyramids = new ArrayList<>();
+                for (Pyramid pyramid : getPyramidList()) {
+                    if (((FindPyramidSpecification) specification).specified(
+                            pyramid, index)) {
+                        pyramids.add((pyramid));
+                    }
+                }
+        } else if (specification instanceof FindRecorderSpecification) {
+            pyramids = new ArrayList<>();
+            int counter = 0;
+            for (Recorder recorder : getRecorderList()) {
+                if (((FindRecorderSpecification) specification).specified(
+                        recorder)) {
+                    pyramids.add(getPyramidList().get(counter));
+                }
+                counter++;
+            }
+        } else if (specification instanceof SortPyramidSpecification) {
+            ((SortPyramidSpecification) specification).sort(pyramidList);
+            pyramids = pyramidList;
+        } else if (specification instanceof SortRecorderSpecification) {
+            ((SortRecorderSpecification) specification).sort(recorderList);
+            List<Pyramid> pyramids1 = new ArrayList<>();
+            for (Recorder r : recorderList) {
+                for (Pyramid p : pyramidList) {
+                    if (r.getId() == (p.getId())) {
+                        pyramids1.add(p);
+                    }
+                }
+            }
+            pyramids = pyramids1;
+        } else {
+            LOGGER.info("We don't have the right specification");
+        }
+        return pyramids;
     }
 }

@@ -3,11 +3,11 @@ package by.epam.task01.recorder;
 import by.epam.task01.action.PyramidCalculator;
 import by.epam.task01.entity.Pyramid;
 import by.epam.task01.exception.NullDataException;
-import by.epam.task01.validator.ListFilter;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.util.Objects;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * In this class we use for different methods.
@@ -26,17 +26,18 @@ public class Recorder implements Observer {
      */
     private double volume;
     /**
-     * Id for different pyramids.
-     */
-    private int id;
-    /**
      *Logger for show information.
      */
-    private static final Logger LOGGER = LogManager.getLogger(ListFilter.class);
+    private static final Logger LOGGER = LogManager.getLogger(Recorder.class);
     /**
-     * idCounter for id.
+     * COUNTER for id.
      */
-    private static int idCounter = -1;
+    private static final AtomicInteger COUNTER =
+            new AtomicInteger(0);
+    /**
+     * id.
+     */
+    private int id;
     /**
      * @throws NullDataException for check mistake.
      * @param pyramid object.
@@ -48,10 +49,10 @@ public class Recorder implements Observer {
             throw new NullDataException("We have null in object!");
         }
         update(pyramid);
-        id = ++idCounter;
+        id = COUNTER.getAndIncrement();
     }
     /**
-     * get id different objects.
+     * get id.
      * @return id.
      */
     public int getId() {
@@ -61,6 +62,7 @@ public class Recorder implements Observer {
      * get square different objects.
      * @return square
      */
+
     public double getSquare() {
         return square;
     }
@@ -108,7 +110,7 @@ public class Recorder implements Observer {
     @Override
     public String toString() {
         return "Recorder{" + "square=" + square + ", volume=" + volume
-                + ", id=" + id + '}';
+                + ", id=" + '}';
     }
     /**
      * {@inheritDoc}
@@ -124,8 +126,7 @@ public class Recorder implements Observer {
         }
         Recorder recorder = (Recorder) o;
         return Double.compare(recorder.square, square) == 0
-                && Double.compare(recorder.volume, volume) == 0
-                && id == recorder.id;
+                && Double.compare(recorder.volume, volume) == 0;
     }
     /**
      * {@inheritDoc}
@@ -133,6 +134,6 @@ public class Recorder implements Observer {
      */
     @Override
     public int hashCode() {
-        return Objects.hash(square, volume, id);
+        return Objects.hash(square, volume);
     }
 }

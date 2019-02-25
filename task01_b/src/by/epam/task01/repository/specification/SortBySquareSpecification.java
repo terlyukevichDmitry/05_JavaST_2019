@@ -6,12 +6,11 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-@SuppressWarnings("CheckStyle")
-public class SortByVolumeSpecification implements SortRecorderSpecification {
+public class SortBySquareSpecification implements SortRecorderSpecification {
     @Override
     public List<Recorder> sort(final List<Recorder> recorders) {
         Collections.sort(recorders,
-                Comparator.comparing(Recorder::getVolume));
+                Comparator.comparing(Recorder::getSquare));
         return recorders;
     }
 }

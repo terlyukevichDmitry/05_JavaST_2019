@@ -38,6 +38,10 @@ public class ObjectCreatorTest {
     /**
      * constant.
      */
+    private final double six = 6.0;
+    /**
+     * constant.
+     */
     private final double ten = 10.0;
     /**
      * constant.
@@ -67,7 +71,7 @@ public class ObjectCreatorTest {
                             }}, four, ten),
                                 new ArrayList<>(Arrays.asList(
                                 three, one, zero, three, twentyFive,
-                                zero, four, ten)),
+                                zero, four, ten, six)),
                                 new ArrayList<Point>() {
                             {
                                 add(new Point(three, one, zero));

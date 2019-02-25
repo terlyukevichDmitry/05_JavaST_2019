@@ -7,7 +7,6 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.util.Objects;
-import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * In this class we use for different methods.
@@ -30,26 +29,23 @@ public class Recorder implements Observer {
      */
     private static final Logger LOGGER = LogManager.getLogger(Recorder.class);
     /**
-     * COUNTER for id.
-     */
-    private static final AtomicInteger COUNTER =
-            new AtomicInteger(0);
-    /**
      * id.
      */
     private int id;
     /**
      * @throws NullDataException for check mistake.
      * @param pyramid object.
+     * @param idCounter .
      */
-    public void createSlotForNewPyramid(final Pyramid pyramid)
+    public void createSlotForNewPyramid(final Pyramid pyramid,
+                                        final int idCounter)
             throws NullDataException {
         if (pyramid == null) {
             LOGGER.error("We have null in object!");
             throw new NullDataException("We have null in object!");
         }
         update(pyramid);
-        id = COUNTER.getAndIncrement();
+        id = idCounter;
     }
     /**
      * get id.

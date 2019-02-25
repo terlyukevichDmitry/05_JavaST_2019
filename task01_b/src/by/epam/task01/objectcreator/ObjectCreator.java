@@ -7,6 +7,9 @@ import by.epam.task01.exception.PyramidException;
 import by.epam.task01.factory.Factory;
 import by.epam.task01.factory.PointCreator;
 import by.epam.task01.factory.PyramidCreator;
+import by.epam.task01.validator.DataValidator;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,6 +34,12 @@ public class ObjectCreator {
      * constant.
      */
     private final int seven = 7;
+
+    /**
+     *DIGIT_PATTEN_FOR_SPLIT for split array.
+     */
+    private static final Logger LOGGER =
+            LogManager.getLogger(ObjectCreator.class);
     /**
      * Method for create pyramid objects.
      * @param pointList for create pyramid.
@@ -43,8 +52,18 @@ public class ObjectCreator {
                                   final List<Double> doubleList)
             throws LengthCollectionPointException, PyramidException {
         Factory<Pyramid> pyramidFactory = new PyramidCreator();
-        Pyramid pyramid = ((PyramidCreator) pyramidFactory).createPyramid(
-                pointList, doubleList.get(six), doubleList.get(seven));
+        Pyramid pyramid = null;
+        DataValidator dataValidator = new DataValidator(doubleList);
+        if (dataValidator.checkingHeight()
+                && dataValidator.checkingHeightComparison()
+                && dataValidator.checkingAngles()
+                && dataValidator.checkingPointMatch()) {
+            pyramid = ((PyramidCreator) pyramidFactory).createPyramid(
+                    pointList, doubleList.get(six), doubleList.get(seven));
+        } else {
+            LOGGER.warn("We have not correct data for create pyramid.");
+            throw new PyramidException();
+        }
         return pyramid;
     }
     /**

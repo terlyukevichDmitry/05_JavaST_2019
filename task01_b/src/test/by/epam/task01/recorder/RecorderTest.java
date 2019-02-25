@@ -103,7 +103,7 @@ public class RecorderTest {
         Recorder actual = new Recorder();
         actual.setVolume(square);
         actual.setSquare(volume);
-        actual.createSlotForNewPyramid(pyramid);
+        actual.createSlotForNewPyramid(pyramid, pyramid.getId());
         pyramid.addObserver(actual);
         pyramid.setHeight(twoHundred);
         pyramid.notifyObservers();

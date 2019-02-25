@@ -6,7 +6,7 @@ import by.epam.task01.exception.LengthCollectionPointException;
 import by.epam.task01.exception.NullDataException;
 import by.epam.task01.exception.PyramidException;
 import by.epam.task01.repository.RepositorySingleton;
-import by.epam.task01.repository.specification.SortByVolumeSpecification;
+import by.epam.task01.repository.specification.SortBySquareSpecification;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
@@ -14,7 +14,7 @@ import org.testng.annotations.Test;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SortByVolumeSpecificationTest {
+public class SortBySquareSpecificationTest  {
     /**
      * constant.
      */
@@ -61,13 +61,13 @@ public class SortByVolumeSpecificationTest {
         return
                 new Object[][]{
                         {new Pyramid(new ArrayList<Point>() {
-                                    {
-                                        add(new Point(one, one,
-                                                zero));
-                                        add(new Point(three, twentyFive,
-                                                zero));
-                                    }
-                                }, four, three),
+                            {
+                                add(new Point(one, one,
+                                        zero));
+                                add(new Point(three, twentyFive,
+                                        zero));
+                            }
+                        }, four, three),
                                 new Pyramid(new ArrayList<Point>() {
                                     {
                                         add(new Point(one, two,
@@ -88,7 +88,7 @@ public class SortByVolumeSpecificationTest {
                 };
     }
 
-    @Test(priority = 10, dataProvider = "data_sort_object_by_height_and_angles")
+    @Test(priority = 11, dataProvider = "data_sort_object_by_height_and_angles")
     public void specifiedTest(final Pyramid firstPyramid,
                               final Pyramid secondPyramid,
                               final Pyramid thirdPyramid)
@@ -97,8 +97,8 @@ public class SortByVolumeSpecificationTest {
         repositorySingleton.addObject(firstPyramid);
         repositorySingleton.addObject(secondPyramid);
         repositorySingleton.addObject(thirdPyramid);
-        SortByVolumeSpecification specification =
-                new SortByVolumeSpecification();
+        SortBySquareSpecification specification =
+                new SortBySquareSpecification();
         List<Pyramid> actual = repositorySingleton.query(
                 specification, 0);
         List<Pyramid> expected = new ArrayList<>();

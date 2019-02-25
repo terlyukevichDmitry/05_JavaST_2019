@@ -107,7 +107,7 @@ public class RepositorySingleton implements Observer {
         }
         pyramidList.add(pyramid);
         Recorder recorder = new Recorder();
-        recorder.createSlotForNewPyramid(pyramid);
+        recorder.createSlotForNewPyramid(pyramid, pyramid.getId());
         pyramid.addObserver(recorder);
         recorderList.add(recorder);
     }

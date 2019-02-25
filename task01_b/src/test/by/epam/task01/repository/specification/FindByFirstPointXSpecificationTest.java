@@ -14,7 +14,13 @@ import org.testng.annotations.Test;
 import java.util.ArrayList;
 import java.util.List;
 
-@SuppressWarnings("CheckStyle")
+/**
+ * In this class we use for check true works methods in this class.
+ *
+ * @author Dmitry Terlyukevish
+ *
+ * @version 1.0
+ */
 public class FindByFirstPointXSpecificationTest {
     /**
      * constant.
@@ -87,7 +93,9 @@ public class FindByFirstPointXSpecificationTest {
                         }
                 };
     }
-
+    /**
+     * {@inheritDoc}
+     */
     @Test(priority = 2, dataProvider = "data_find_object_by_first_point_x")
     public void specifiedTest(final double lowerBorder,
                               final double upperBorder,
@@ -98,7 +106,7 @@ public class FindByFirstPointXSpecificationTest {
         repositorySingleton.addObject(firstPyramid);
         repositorySingleton.addObject(secondPyramid);
         FindByFirstPointXSpecification findPointX =
-                new FindByFirstPointXSpecification(lowerBorder,upperBorder);
+                new FindByFirstPointXSpecification(lowerBorder, upperBorder);
 
         List<Pyramid> actual = repositorySingleton.query(findPointX, 0);
 

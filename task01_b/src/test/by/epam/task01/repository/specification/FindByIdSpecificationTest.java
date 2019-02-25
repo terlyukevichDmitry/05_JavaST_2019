@@ -13,12 +13,23 @@ import org.testng.annotations.Test;
 
 import java.util.ArrayList;
 import java.util.List;
-@SuppressWarnings("CheckStyle")
+
+/**
+ * In this class we use for check true works methods in this class.
+ *
+ * @author Dmitry Terlyukevish
+ *
+ * @version 1.0
+ */
 public class FindByIdSpecificationTest {
     /**
      * constant.
      */
     private final double one = 1.0;
+    /**
+     * constant.
+     */
+    private final int onePriority = 1;
     /**
      * constant.
      */
@@ -93,8 +104,10 @@ public class FindByIdSpecificationTest {
                         }
                 };
     }
-
-    @Test(priority = 1,dataProvider = "data_find_object_by_id")
+    /**
+     * {@inheritDoc}
+     */
+    @Test(priority = onePriority, dataProvider = "data_find_object_by_id")
     public void specifiedTest(final double lowerBorder,
                               final double upperBorder,
                               final Pyramid firstPyramid,

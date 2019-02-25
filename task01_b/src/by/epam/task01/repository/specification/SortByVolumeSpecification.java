@@ -6,8 +6,17 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-@SuppressWarnings("CheckStyle")
+/**
+ * In this class we use for sorting data.
+ *
+ * @author Dmitry Terlyukevish
+ *
+ * @version 1.0
+ */
 public class SortByVolumeSpecification implements SortRecorderSpecification {
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public List<Recorder> sort(final List<Recorder> recorders) {
         Collections.sort(recorders,

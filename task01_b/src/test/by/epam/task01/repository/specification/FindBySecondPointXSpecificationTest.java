@@ -6,7 +6,6 @@ import by.epam.task01.exception.LengthCollectionPointException;
 import by.epam.task01.exception.NullDataException;
 import by.epam.task01.exception.PyramidException;
 import by.epam.task01.repository.RepositorySingleton;
-import by.epam.task01.repository.specification.FindByFirstPointXSpecification;
 import by.epam.task01.repository.specification.FindBySecondPointXSpecification;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
@@ -15,7 +14,13 @@ import org.testng.annotations.Test;
 import java.util.ArrayList;
 import java.util.List;
 
-@SuppressWarnings("CheckStyle")
+/**
+ * In this class we use for check true works methods in this class.
+ *
+ * @author Dmitry Terlyukevish
+ *
+ * @version 1.0
+ */
 public class FindBySecondPointXSpecificationTest {
     /**
      * constant.
@@ -24,7 +29,7 @@ public class FindBySecondPointXSpecificationTest {
     /**
      * constant.
      */
-    private final int two = 2;
+    private final int fivePriority = 5;
     /**
      * constant.
      */
@@ -88,8 +93,11 @@ public class FindBySecondPointXSpecificationTest {
                         }
                 };
     }
-
-    @Test(priority = 5, dataProvider = "data_find_object_by_second_point_x")
+    /**
+     * {@inheritDoc}
+     */
+    @Test(priority = fivePriority, dataProvider =
+            "data_find_object_by_second_point_x")
     public void specifiedTest(final double lowerBorder,
                               final double upperBorder,
                               final Pyramid firstPyramid,
@@ -99,7 +107,7 @@ public class FindBySecondPointXSpecificationTest {
         repositorySingleton.addObject(firstPyramid);
         repositorySingleton.addObject(secondPyramid);
         FindBySecondPointXSpecification findPointX =
-                new FindBySecondPointXSpecification(lowerBorder,upperBorder);
+                new FindBySecondPointXSpecification(lowerBorder, upperBorder);
 
         List<Pyramid> actual = repositorySingleton.query(findPointX, 1);
 

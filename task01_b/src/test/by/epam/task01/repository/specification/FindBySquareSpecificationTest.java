@@ -27,6 +27,10 @@ public class FindBySquareSpecificationTest {
     /**
      * constant.
      */
+    private final int sevenPriority = 7;
+    /**
+     * constant.
+     */
     private final double four = 4.0;
     /**
      * constant.
@@ -94,8 +98,10 @@ public class FindBySquareSpecificationTest {
                         }
                 };
     }
-
-    @Test(priority = 7, dataProvider = "data_find_object_by_square")
+    /**
+     * {@inheritDoc}
+     */
+    @Test(priority = sevenPriority, dataProvider = "data_find_object_by_square")
     public void specifiedTest(final double lowerBorder,
                               final double upperBorder,
                               final Pyramid firstPyramid,

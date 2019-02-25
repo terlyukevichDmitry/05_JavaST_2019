@@ -4,7 +4,11 @@ import by.epam.task01.entity.Pyramid;
 import by.epam.task01.exception.NullDataException;
 import by.epam.task01.recorder.Observer;
 import by.epam.task01.recorder.Recorder;
-import by.epam.task01.repository.specification.*;
+import by.epam.task01.repository.specification.FindPyramidSpecification;
+import by.epam.task01.repository.specification.PyramidSpecification;
+import by.epam.task01.repository.specification.SortPyramidSpecification;
+import by.epam.task01.repository.specification.SortRecorderSpecification;
+import by.epam.task01.repository.specification.FindRecorderSpecification;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -189,18 +193,25 @@ public class RepositorySingleton implements Observer {
             pyramids = pyramidList;
         } else if (specification instanceof SortRecorderSpecification) {
             ((SortRecorderSpecification) specification).sort(recorderList);
-            List<Pyramid> pyramids1 = new ArrayList<>();
-            for (Recorder r : recorderList) {
-                for (Pyramid p : pyramidList) {
-                    if (r.getId() == (p.getId())) {
-                        pyramids1.add(p);
-                    }
-                }
-            }
-            pyramids = pyramids1;
+            pyramids = sort();
         } else {
             LOGGER.info("We don't have the right specification");
         }
         return pyramids;
+    }
+    /**
+     * use for sort pyramid of the recorder.
+     * @return List<Pyramid>.
+     */
+    private List<Pyramid> sort() {
+        List<Pyramid> pyramidArrayList = new ArrayList<>();
+        for (Recorder r : recorderList) {
+            for (Pyramid p : pyramidList) {
+                if (r.getId() == (p.getId())) {
+                    pyramidArrayList.add(p);
+                }
+            }
+        }
+        return pyramidArrayList;
     }
 }

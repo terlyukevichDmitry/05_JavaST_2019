@@ -6,7 +6,6 @@ import by.epam.task01.exception.LengthCollectionPointException;
 import by.epam.task01.exception.NullDataException;
 import by.epam.task01.exception.PyramidException;
 import by.epam.task01.repository.RepositorySingleton;
-import by.epam.task01.repository.specification.FindByIdSpecification;
 import by.epam.task01.repository.specification.FindByNumberOfAngles;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
@@ -15,6 +14,13 @@ import org.testng.annotations.Test;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * In this class we use for check true works methods in this class.
+ *
+ * @author Dmitry Terlyukevish
+ *
+ * @version 1.0
+ */
 public class FindByNumberOfAnglesTest {
     /**
      * constant.
@@ -28,6 +34,10 @@ public class FindByNumberOfAnglesTest {
      * constant.
      */
     private final double four = 4.0;
+    /**
+     * constant.
+     */
+    private final int fourPriority = 4;
     /**
      * constant.
      */
@@ -94,8 +104,11 @@ public class FindByNumberOfAnglesTest {
                         }
                 };
     }
-
-    @Test(priority = 4, dataProvider = "data_find_object_by_number_of_angles")
+    /**
+     * {@inheritDoc}
+     */
+    @Test(priority = fourPriority, dataProvider =
+            "data_find_object_by_number_of_angles")
     public void specifiedTest(final double lowerBorder,
                               final double upperBorder,
                               final Pyramid firstPyramid,

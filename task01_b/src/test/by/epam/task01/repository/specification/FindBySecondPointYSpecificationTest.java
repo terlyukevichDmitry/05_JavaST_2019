@@ -6,7 +6,6 @@ import by.epam.task01.exception.LengthCollectionPointException;
 import by.epam.task01.exception.NullDataException;
 import by.epam.task01.exception.PyramidException;
 import by.epam.task01.repository.RepositorySingleton;
-import by.epam.task01.repository.specification.FindBySecondPointXSpecification;
 import by.epam.task01.repository.specification.FindBySecondPointYSpecification;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
@@ -14,7 +13,14 @@ import org.testng.annotations.Test;
 
 import java.util.ArrayList;
 import java.util.List;
-@SuppressWarnings("CheckStyle")
+
+/**
+ * In this class we use for check true works methods in this class.
+ *
+ * @author Dmitry Terlyukevish
+ *
+ * @version 1.0
+ */
 public class FindBySecondPointYSpecificationTest {
     /**
      * constant.
@@ -48,6 +54,10 @@ public class FindBySecondPointYSpecificationTest {
      * constant.
      */
     private final double six = 6.0;
+    /**
+     * constant.
+     */
+    private final int sixPriority = 6;
     /**
      * constant.
      */
@@ -87,8 +97,11 @@ public class FindBySecondPointYSpecificationTest {
                         }
                 };
     }
-
-    @Test(priority = 6, dataProvider = "data_find_object_by_second_point_x")
+    /**
+     * {@inheritDoc}
+     */
+    @Test(priority = sixPriority, dataProvider =
+            "data_find_object_by_second_point_x")
     public void specifiedTest(final double lowerBorder,
                               final double upperBorder,
                               final Pyramid firstPyramid,
@@ -98,7 +111,7 @@ public class FindBySecondPointYSpecificationTest {
         repositorySingleton.addObject(firstPyramid);
         repositorySingleton.addObject(secondPyramid);
         FindBySecondPointYSpecification findPointY =
-                new FindBySecondPointYSpecification(lowerBorder,upperBorder);
+                new FindBySecondPointYSpecification(lowerBorder, upperBorder);
 
         List<Pyramid> actual = repositorySingleton.query(findPointY, 1);
 

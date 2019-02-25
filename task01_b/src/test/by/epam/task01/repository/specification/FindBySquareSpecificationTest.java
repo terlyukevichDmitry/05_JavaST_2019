@@ -101,7 +101,7 @@ public class FindBySquareSpecificationTest {
     /**
      * {@inheritDoc}
      */
-    @Test(priority = sevenPriority, dataProvider = "data_find_objct_by_square")
+    @Test(priority = sevenPriority, dataProvider = "data_find_object_by_square")
     public void specifiedTest(final double lowerBorder,
                               final double upperBorder,
                               final Pyramid firstPyramid,

@@ -14,7 +14,14 @@ import org.testng.annotations.Test;
 import java.util.ArrayList;
 import java.util.List;
 
-@SuppressWarnings("CheckStyle")
+/**
+ * In this class we use for check true works methods in this class.
+ *
+ * @author Dmitry Terlyukevish
+ *
+ * @version 1.0
+ */
+
 public class FindBySquareSpecificationTest {
     /**
      * constant.

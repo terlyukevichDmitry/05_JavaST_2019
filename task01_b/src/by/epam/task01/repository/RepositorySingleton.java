@@ -4,11 +4,13 @@ import by.epam.task01.entity.Pyramid;
 import by.epam.task01.exception.NullDataException;
 import by.epam.task01.recorder.Observer;
 import by.epam.task01.recorder.Recorder;
-import by.epam.task01.repository.specification.FindPyramidSpecification;
-import by.epam.task01.repository.specification.PyramidSpecification;
+import by.epam.task01.repository.specification.FindRecorderSpecification;
+import by.epam.task01.repository.specification.SortPointSpecification;
 import by.epam.task01.repository.specification.SortPyramidSpecification;
 import by.epam.task01.repository.specification.SortRecorderSpecification;
-import by.epam.task01.repository.specification.FindRecorderSpecification;
+import by.epam.task01.repository.specification.PyramidSpecification;
+import by.epam.task01.repository.specification.FindPyramidSpecification;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -194,6 +196,10 @@ public class RepositorySingleton implements Observer {
         } else if (specification instanceof SortRecorderSpecification) {
             ((SortRecorderSpecification) specification).sort(recorderList);
             pyramids = sort();
+        } else if (specification instanceof SortPointSpecification) {
+            pyramidList.sort(((SortPointSpecification)
+                    specification).sortSpecification());
+            pyramids = pyramidList;
         } else {
             LOGGER.info("We don't have the right specification");
         }

@@ -6,7 +6,7 @@ import by.epam.task01.exception.LengthCollectionPointException;
 import by.epam.task01.exception.NullDataException;
 import by.epam.task01.exception.PyramidException;
 import by.epam.task01.repository.RepositorySingleton;
-import by.epam.task01.repository.specification.SortByHeightAndAnglesSpecification;
+import by.epam.task01.repository.specification.SortByFirstPointYSpecification;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
@@ -15,13 +15,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * In this class we use for check true works methods(sort) in this class.
+ * In this class we use for check true works methods(sort) for first point y.
  *
  * @author Dmitry Terlyukevish
  *
  * @version 1.0
  */
-public class SortByHeightAndAnglesSpecificationTest {
+public class SortByFirstPointYSpecificationTest {
     /**
      * constant.
      */
@@ -53,20 +53,20 @@ public class SortByHeightAndAnglesSpecificationTest {
     /**
      * constant.
      */
+    private final int fourteenPriority = 14;
+    /**
+     * constant.
+     */
     private final double six = 6.0;
     /**
      * constant.
      */
     private final double zero = 0.0;
     /**
-     * constant.
-     */
-    private final int twelvePriority = 12;
-    /**
      * {@inheritDoc}
      * @return object with data for data_side.
      */
-    @DataProvider(name = "data_sort_object_by_height_and_angles")
+    @DataProvider(name = "data_sort_object_by_first_point_y")
     public Object[][] createCorrectData() throws
             LengthCollectionPointException, PyramidException {
         return
@@ -74,7 +74,15 @@ public class SortByHeightAndAnglesSpecificationTest {
                         {
                                 new Pyramid(new ArrayList<>() {
                                     {
-                                        add(new Point(one, one,
+                                        add(new Point(three, twentyFive,
+                                                zero));
+                                        add(new Point(one, six,
+                                                zero));
+                                    }
+                                }, four, three),
+                            new Pyramid(new ArrayList<>() {
+                                    {
+                                        add(new Point(three, one,
                                                 zero));
                                         add(new Point(three, twentyFive,
                                                 zero));
@@ -82,15 +90,7 @@ public class SortByHeightAndAnglesSpecificationTest {
                                 }, four, three),
                                 new Pyramid(new ArrayList<>() {
                                     {
-                                        add(new Point(one, two,
-                                                zero));
-                                        add(new Point(three, twentyFive,
-                                                zero));
-                                    }
-                                }, ten, one),
-                                new Pyramid(new ArrayList<>() {
-                                    {
-                                        add(new Point(one, two,
+                                        add(new Point(twentyFive, two,
                                                 zero));
                                         add(new Point(three, twentyFive,
                                                 zero));
@@ -98,23 +98,7 @@ public class SortByHeightAndAnglesSpecificationTest {
                                 }, fifteen, six),
                                 new Pyramid(new ArrayList<>() {
                                     {
-                                        add(new Point(one, one,
-                                                zero));
-                                        add(new Point(three, twentyFive,
-                                                zero));
-                                    }
-                                }, four, three),
-                                new Pyramid(new ArrayList<>() {
-                                    {
-                                        add(new Point(one, two,
-                                                zero));
-                                        add(new Point(three, twentyFive,
-                                                zero));
-                                    }
-                                }, fifteen, six),
-                                new Pyramid(new ArrayList<>() {
-                                    {
-                                        add(new Point(one, two,
+                                        add(new Point(two, two,
                                                 zero));
                                         add(new Point(three, twentyFive,
                                                 zero));
@@ -123,32 +107,32 @@ public class SortByHeightAndAnglesSpecificationTest {
                         }
                 };
     }
-    /** For testing sort method.
+    /**
      * {@inheritDoc}
      */
-    @Test(priority = twelvePriority, dataProvider =
-            "data_sort_object_by_height_and_angles")
-    public void specifiedTest(final Pyramid trueFirstPyramid,
-                              final Pyramid trueSecondPyramid,
-                              final Pyramid trueThirdPyramid,
-                              final Pyramid firstPyramid,
+    @Test(priority = fourteenPriority, dataProvider =
+            "data_sort_object_by_first_point_y")
+    public void specifiedTest(final Pyramid firstPyramid,
                               final Pyramid secondPyramid,
-                              final Pyramid thirdPyramid)
+                              final Pyramid thirdPyramid,
+                              final Pyramid fourthPyramid)
             throws NullDataException {
         RepositorySingleton repositorySingleton = new RepositorySingleton();
         repositorySingleton.addObject(firstPyramid);
         repositorySingleton.addObject(secondPyramid);
         repositorySingleton.addObject(thirdPyramid);
-        SortByHeightAndAnglesSpecification specification =
-                new SortByHeightAndAnglesSpecification();
+        repositorySingleton.addObject(fourthPyramid);
+        SortByFirstPointYSpecification specification =
+                new SortByFirstPointYSpecification();
 
         List<Pyramid> actual = repositorySingleton.query(
                 specification, 0);
 
         List<Pyramid> expected = new ArrayList<>();
-        expected.add(trueFirstPyramid);
-        expected.add(trueSecondPyramid);
-        expected.add(trueThirdPyramid);
+        expected.add(secondPyramid);
+        expected.add(thirdPyramid);
+        expected.add(fourthPyramid);
+        expected.add(firstPyramid);
 
         Assert.assertEquals(expected, actual);
     }

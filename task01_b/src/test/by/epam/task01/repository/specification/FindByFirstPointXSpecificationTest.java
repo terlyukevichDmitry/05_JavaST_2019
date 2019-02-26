@@ -76,14 +76,14 @@ public class FindByFirstPointXSpecificationTest {
         return
                 new Object[][]{
                         {checkLowerBorder, checkUpperBorder,
-                                new Pyramid(new ArrayList<Point>() {
+                                new Pyramid(new ArrayList<>() {
                             {
                                 add(new Point(three, one,
                                         zero));
                                 add(new Point(three, twentyFive,
                                         zero));
                             }}, six, fifteen),
-                                new Pyramid(new ArrayList<Point>() {
+                                new Pyramid(new ArrayList<>() {
                                     {
                                         add(new Point(one, one,
                                                 zero));

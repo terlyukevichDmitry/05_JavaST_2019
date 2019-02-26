@@ -14,6 +14,13 @@ import org.testng.annotations.Test;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * In this class we use for check true works methods(sort) in this class.
+ *
+ * @author Dmitry Terlyukevish
+ *
+ * @version 1.0
+ */
 public class SortBySquareSpecificationTest  {
     /**
      * constant.
@@ -35,6 +42,10 @@ public class SortBySquareSpecificationTest  {
      * constant.
      */
     private final double three = 3.0;
+    /**
+     * constant.
+     */
+    private final int eleventhPriority = 11;
     /**
      * constant.
      */
@@ -87,8 +98,11 @@ public class SortBySquareSpecificationTest  {
                         }
                 };
     }
-
-    @Test(priority = 11, dataProvider = "data_sort_object_by_height_and_angles")
+    /**
+     * Use for check true work sort method.
+     * {@inheritDoc}
+     */
+    @Test(priority = eleventhPriority, dataProvider = "data_sort_object_by_height_and_angles")
     public void specifiedTest(final Pyramid firstPyramid,
                               final Pyramid secondPyramid,
                               final Pyramid thirdPyramid)

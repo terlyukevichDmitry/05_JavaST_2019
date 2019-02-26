@@ -14,7 +14,13 @@ import org.testng.annotations.Test;
 import java.util.ArrayList;
 import java.util.List;
 
-@SuppressWarnings("CheckStyle")
+/**
+ * In this class we use for check true works methods in this class.
+ *
+ * @author Dmitry Terlyukevish
+ *
+ * @version 1.0
+ */
 public class FindByVolumeSpecificationTest {
     /**
      * constant.
@@ -52,6 +58,10 @@ public class FindByVolumeSpecificationTest {
      * constant.
      */
     private final double zero = 0.0;
+    /**
+     * constant.
+     */
+    private final int eighthPriority = 8;
     /**
      * constant.
      */
@@ -94,8 +104,11 @@ public class FindByVolumeSpecificationTest {
                         }
                 };
     }
-
-    @Test(priority = 8, dataProvider = "data_find_object_by_volume")
+    /**
+     * {@inheritDoc}
+     */
+    @Test(priority = eighthPriority, dataProvider =
+            "data_find_object_by_volume")
     public void specifiedTest(final double lowerBorder,
                               final double upperBorder,
                               final Pyramid firstPyramid,

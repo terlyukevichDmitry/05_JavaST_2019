@@ -13,3 +13,7 @@ Code written in Java Code Convention with plugins "CheckStyle" and "SonarLint".
 
 For calculate different moments in this application i used different
 mathematical formulas which found in the internet and mathematical books.
+
+When are you running all the tests, only the first 27 tests is starting up
+first, because these tests don't have priority. The next you should run test
+in signature package.

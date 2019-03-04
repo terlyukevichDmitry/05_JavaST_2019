@@ -1,4 +1,0 @@
-/**
- * sdfs.
- */
-package first;

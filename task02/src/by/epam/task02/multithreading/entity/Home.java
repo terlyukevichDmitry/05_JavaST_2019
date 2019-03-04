@@ -1,4 +1,4 @@
-package by.epam.task02.multithreading.home;
+package by.epam.task02.multithreading.entity;
 
 public class Home {
     private double x;

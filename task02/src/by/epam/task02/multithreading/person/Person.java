@@ -2,8 +2,8 @@ package by.epam.task02.multithreading.person;
 
 import by.epam.task02.multithreading.action.Calculator;
 import by.epam.task02.multithreading.entity.Taxi;
-import by.epam.task02.multithreading.entity.Uber;
-import by.epam.task02.multithreading.home.Home;
+import by.epam.task02.multithreading.singleton.Uber;
+import by.epam.task02.multithreading.entity.Home;
 import by.epam.task02.multithreading.state.Expectation;
 
 import java.util.List;
@@ -96,7 +96,9 @@ public class Person implements Callable<Person> {
             if (calculator.checkPosition(taxi, radius)) {
                 if (calculator.calculateSide(taxi, this)
                         == calculator.checkComparison(list, this)) {
-                    System.out.println(taxi.getName() + " : I can meet you!");
+                    System.out.println(taxi.getName() +
+                            " : I can meet you! number taxi = "
+                            + taxi.getTaxiNumber());
                     taxi.setStateTaxi(new Expectation());
                     for (int i = 0; i < 3; i++) {
                         if(i == 2) {

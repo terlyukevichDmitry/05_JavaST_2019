@@ -4,9 +4,9 @@ import by.epam.task02.multithreading.controller.ControllerThread;
 import by.epam.task02.multithreading.creator.ListCreator;
 import by.epam.task02.multithreading.entity.Taxi;
 import by.epam.task02.multithreading.exception.MissingWayFileException;
-import by.epam.task02.multithreading.home.Home;
+import by.epam.task02.multithreading.entity.Home;
 import by.epam.task02.multithreading.person.Person;
-import by.epam.task02.multithreading.entity.Uber;
+import by.epam.task02.multithreading.singleton.Uber;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -47,7 +47,10 @@ public class Main {
         ControllerThread controllerThread = new ControllerThread(es);
         controllerThread.start(people);
         List<Future<Person>> futureList = controllerThread.getFutureList();
+        show(futureList);
+    }
 
+    private static void show(final List<Future<Person>> futureList) {
         for (Future<Person> f : futureList) {
             try {
                 TimeUnit.MILLISECONDS.sleep(500);

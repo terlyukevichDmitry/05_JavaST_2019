@@ -1,4 +1,6 @@
-package by.epam.task02.multithreading.entity;
+package by.epam.task02.multithreading.singleton;
+
+import by.epam.task02.multithreading.entity.Taxi;
 
 import java.util.List;
 

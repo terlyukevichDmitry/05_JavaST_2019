@@ -1,0 +1,41 @@
+package by.epam.task02.multithreading.parser;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+/**
+ *An public class for parse data for next different moments in this
+ * application.
+ *
+ * @author Dmitry Terlyukevish
+ *
+ * @version 1.0
+ */
+public class ParseData {
+
+    /**
+     * DIGIT_PATTEN_FOR_SPLIT for split data.
+     */
+    private static final String DIGIT_PATTEN_FOR_SPLIT = "\\s+";
+    /**
+     * This createMap we use for create map with data of filtered list.
+     * @param filteredList for parse data.
+     * @return List<String> with component for solutions this task.
+     */
+    public Map<Integer, List<Double>> createMap(
+            final List<String> filteredList) {
+        ArrayList<Double> listOfDoubles;
+        Map<Integer, List<Double>> myMap = new HashMap<>();
+        int i = 0;
+        for (String el : filteredList) {
+            listOfDoubles = new ArrayList<>();
+            for (String elementArray : el.split(DIGIT_PATTEN_FOR_SPLIT)) {
+                listOfDoubles.add(Double.parseDouble(elementArray));
+            }
+            myMap.put(i++, listOfDoubles);
+        }
+        return myMap;
+    }
+}

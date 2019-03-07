@@ -23,16 +23,15 @@ public class ControllerThread {
     }
 
     public void start(final List<Person> people) {
-        List<Callable<Person>> callableList = new ArrayList<>();
 
-        for (Person person : people) {
-            callableList.add(person);
+        List<Callable<Person>> callableList = new ArrayList<>(people);
+
+        for (Callable<Person> personCallable: callableList) {
+            futureList.add(es.submit(personCallable));
         }
-        try {
-            futureList = es.invokeAll(callableList);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+    }
+
+    public void stopThread() {
         es.shutdown();
     }
 }

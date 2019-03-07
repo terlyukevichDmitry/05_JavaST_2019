@@ -6,7 +6,6 @@ import by.epam.task02.multithreading.singleton.Uber;
 import by.epam.task02.multithreading.entity.Home;
 import by.epam.task02.multithreading.state.Expectation;
 
-import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.Callable;
 import java.util.concurrent.TimeUnit;
@@ -17,16 +16,15 @@ public class Person implements Callable<Person> {
     private double x;
     private double y;
     private double radius;
-    private ReentrantLock locker;
     private Home home;
+    private Calculator calculator;
 
-    public Person(double x, double y, double radius, Home home,
-                  ReentrantLock locker) {
+    public Person(double x, double y, double radius, Home home) {
         this.x = x;
         this.y = y;
         this.radius = radius;
         this.home = home;
-        this.locker = locker;
+        calculator = new Calculator();
     }
 
     public Home getHome() {
@@ -88,39 +86,33 @@ public class Person implements Callable<Person> {
     }
 
     @Override
-    public Person call() throws Exception {
-        List<Taxi> list = Uber.INSTANCE.getTaxiList();
-        Calculator calculator = new Calculator();
-        locker.lock();
-        for (Taxi taxi : list) {
-            if (calculator.checkPosition(taxi, radius)) {
-                if (calculator.calculateSide(taxi, this)
-                        == calculator.checkComparison(list, this)) {
-                    System.out.println(taxi.getName() +
-                            " : I can meet you! number taxi = "
-                            + taxi.getTaxiNumber());
-                    taxi.setStateTaxi(new Expectation());
-                    for (int i = 0; i < 3; i++) {
-                        if(i == 2) {
-                            System.out.println(this + " : delivered!");
-                        }
-                        taxi.nextStation();
-                        taxi.motion();
-                        TimeUnit.MILLISECONDS.sleep(500);
-                    }
-                    taxi.setX(home.getX());
-                    taxi.setY(home.getY());
-                    locker.unlock();
-                    return this;
-                } else {
-                    System.out.println(taxi.getName() + " : I think other taxi driver can meet you!");
-                }
-            } else {
-                System.out.println(taxi.getName() + " : I can't meet you! Plz, die.");
-                TimeUnit.MILLISECONDS.sleep(500);
+    public Person call() {
+        System.out.println(this + ": READY!!!!");
+
+        Taxi taxi = Uber.INSTANCE.getTaxi(this);
+        long time = calculator.calculateTime(taxi, this);
+        taxi.setCheckTaxi(true);
+
+        System.out.println(taxi + " : I can meet you! number taxi = "
+                + taxi.getTaxiNumber() + " = " + this);
+        taxi.setStateTaxi(new Expectation());
+        System.out.println("taxi = " + taxi);
+        for (int i = 0; i < 3; i++) {
+            if (i == 2) {
+                System.out.println(this + " : delivered!");
+                taxi.setY(home.getY());
+                taxi.setX(home.getX());
+                taxi.setCheckTaxi(false);
+            }
+            taxi.nextStation();
+            taxi.motion();
+            try {
+                TimeUnit.MILLISECONDS.sleep(time);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
             }
         }
-        locker.unlock();
         return this;
     }
+
 }

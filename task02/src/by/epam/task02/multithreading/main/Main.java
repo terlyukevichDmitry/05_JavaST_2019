@@ -21,25 +21,25 @@ public class Main {
 
     public static void main(String[] args) throws MissingWayFileException {
 
-        ExecutorService es = Executors.newFixedThreadPool(3);
+        ExecutorService es = Executors.newCachedThreadPool();
         ListCreator listCreator = new ListCreator();
         Map<Integer, List<Double>> listMap = listCreator.createList(FILE);
         ReentrantLock lock = new ReentrantLock();
         List<Person> people = new ArrayList<Person>() {
             {
-                add(new Person(1,1, 4, new Home(5, 5), lock));
-                add(new Person(2,4, 4, new Home(3, 3), lock));
-                add(new Person(1,0, 4, new Home(2,3), lock));
-                add(new Person(3,1, 4, new Home(4,3), lock));
+                add(new Person(2,7, 4, new Home(100, 5)));
+                add(new Person(4,2, 4, new Home(3, 3123)));
+                add(new Person(5,-6, 4, new Home(1013,-713)));
+                add(new Person(-1,-4, 4, new Home(-101,-150)));
             }
         };
 
         List<Taxi> taxiList = new ArrayList<Taxi>(){
             {
-                add(new Taxi(2,3, "Aristarchus", "number1"));
-                add(new Taxi(1,1, "Dmitriy", "number2"));
-                add(new Taxi(0 , 0, "Artem", "number3"));
-                add(new Taxi(4 , 5, "Ilya", "number4"));
+                add(new Taxi(4 , 7, "Ilya", "FIRST"));
+                add(new Taxi(1,1, "Aristarchus", "SECOND"));
+                add(new Taxi(2,-4, "Dmitriy", "THIRD"));
+                add(new Taxi(-2 , -3, "Artem", "FOURTH"));
             }
         };
         Uber.INSTANCE.setTaxiList(taxiList);
@@ -47,19 +47,16 @@ public class Main {
         ControllerThread controllerThread = new ControllerThread(es);
         controllerThread.start(people);
         List<Future<Person>> futureList = controllerThread.getFutureList();
-        show(futureList);
-    }
-
-    private static void show(final List<Future<Person>> futureList) {
-        for (Future<Person> f : futureList) {
+        controllerThread.stopThread();
+        for (Future<Person> p : futureList) {
             try {
-                TimeUnit.MILLISECONDS.sleep(500);
-                System.out.println(f.get());
+                System.out.println(p.get());
             } catch (InterruptedException e) {
                 e.printStackTrace();
             } catch (ExecutionException e) {
                 e.printStackTrace();
             }
         }
+
     }
 }

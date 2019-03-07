@@ -2,21 +2,31 @@ package by.epam.task02.multithreading.action;
 
 import by.epam.task02.multithreading.entity.Taxi;
 import by.epam.task02.multithreading.person.Person;
+import by.epam.task02.multithreading.singleton.Uber;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.concurrent.locks.ReentrantLock;
 
 public class Calculator {
+
+    private ReentrantLock locker = new ReentrantLock();
+
     public double calculateSide(final Taxi taxi,
                                 final Person person) {
-        return Math.sqrt(Math.pow(person.getX() - taxi.getX(), 2)+
-                Math.pow(person.getY() - taxi.getY(), 2));
+        return Math.sqrt(Math.pow(Math.abs(person.getX()) - Math.abs(taxi.getX()), 2)+
+                Math.pow(Math.abs(person.getY()) - Math.abs(taxi.getY()), 2));
     }
+
     public boolean checkPosition(final Taxi taxi,
-                                 final double radius) {
-        return radius >= taxi.getX() && radius >= taxi.getY();
+                                 final Person person) {
+
+        return ((Math.pow((taxi.getX() - person.getX()), 2)
+                + Math.pow((taxi.getY() - person.getY()), 2)))
+                <= (person.getRadius() * person.getRadius());
     }
+
     public double checkComparison(final List<Taxi> taxiList,
                                    final Person person) {
         List<Double> doubleList = new ArrayList<>();
@@ -25,5 +35,41 @@ public class Calculator {
         }
         Collections.sort(doubleList);
         return doubleList.get(0);
+    }
+
+    public List<Taxi> taxiListCreator(final Person person) {
+
+        List<Taxi> list = Uber.INSTANCE.getTaxiList();
+        List<Taxi> trueList = new ArrayList<>();
+        for (Taxi taxi : list) {
+            if (!taxi.isCheckTaxi()) {
+                if (checkPosition(taxi, person)) {
+                    trueList.add(taxi);
+                }
+            }
+        }
+        return trueList;
+    }
+
+    public Taxi taxiSelection(final List<Taxi> taxiList, final Person person) {
+        //locker
+        double trueTaxi = checkComparison(taxiList, person);
+        locker.lock();
+        for (Taxi taxi : taxiList) {
+            if (calculateSide(taxi, person)
+                    == trueTaxi) {
+                return taxi;
+            }
+        }
+        locker.unlock();
+        //locker
+        return new Taxi(1,1,"sdf", "3");
+    }
+
+    public long calculateTime(final Taxi taxi,
+                              final Person person) {
+        final long speed = 60;
+        long time = (long)calculateSide(taxi, person) * speed * 10;
+        return time;
     }
 }

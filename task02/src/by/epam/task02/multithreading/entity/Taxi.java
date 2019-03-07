@@ -11,6 +11,7 @@ public class Taxi {
     private double y;
     private String name;
     private String taxiNumber;
+    private boolean checkTaxi = false;
 
     private StateTaxi stateTaxi;
 
@@ -19,6 +20,18 @@ public class Taxi {
         this.y = y;
         this.name = name;
         this.taxiNumber = taxiNumber;
+    }
+
+    public boolean isCheckTaxi() {
+        return checkTaxi;
+    }
+
+    public void setCheckTaxi(boolean checkTaxi) {
+        this.checkTaxi = checkTaxi;
+    }
+
+    public StateTaxi getStateTaxi() {
+        return stateTaxi;
     }
 
     public void setStateTaxi(StateTaxi stateTaxi) {
@@ -70,4 +83,12 @@ public class Taxi {
         stateTaxi.motion();
     }
 
+    @Override
+    public String toString() {
+        return "Taxi{" +
+                "x=" + x +
+                ", y=" + y +
+                ", name='" + name + '\'' +
+                ", taxiNumber='" + taxiNumber + '\'';
+    }
 }

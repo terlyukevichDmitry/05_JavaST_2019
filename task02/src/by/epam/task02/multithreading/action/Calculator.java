@@ -15,8 +15,8 @@ public class Calculator {
 
     public double calculateSide(final Taxi taxi,
                                 final Person person) {
-        return Math.sqrt(Math.pow(Math.abs(person.getX()) - Math.abs(taxi.getX()), 2)+
-                Math.pow(Math.abs(person.getY()) - Math.abs(taxi.getY()), 2));
+        return Math.sqrt(Math.pow(person.getX() - taxi.getX(), 2) +
+                Math.pow(person.getY() - taxi.getY(), 2));
     }
 
     public boolean checkPosition(final Taxi taxi,
@@ -28,7 +28,7 @@ public class Calculator {
     }
 
     public double checkComparison(final List<Taxi> taxiList,
-                                   final Person person) {
+                                  final Person person) {
         List<Double> doubleList = new ArrayList<>();
         for (Taxi taxi : taxiList) {
             doubleList.add(calculateSide(taxi, person));
@@ -53,23 +53,22 @@ public class Calculator {
 
     public Taxi taxiSelection(final List<Taxi> taxiList, final Person person) {
         //locker
-        double trueTaxi = checkComparison(taxiList, person);
         locker.lock();
         for (Taxi taxi : taxiList) {
-            if (calculateSide(taxi, person)
-                    == trueTaxi) {
+            if (Double.compare(calculateSide(taxi, person), checkComparison(taxiList, person)) == 0) {
+                taxi.setCheckTaxi(true);
                 return taxi;
             }
         }
         locker.unlock();
         //locker
-        return new Taxi(1,1,"sdf", "3");
+        return null;
     }
 
-    public long calculateTime(final Taxi taxi,
-                              final Person person) {
+    public long calculateTime(final Taxi taxi, final Person person) {
         final long speed = 60;
-        long time = (long)calculateSide(taxi, person) * speed * 10;
+        long time = (long) calculateSide(taxi, person) * speed * 10;
         return time;
     }
 }
+

@@ -91,7 +91,6 @@ public class Person implements Callable<Person> {
 
         Taxi taxi = Uber.INSTANCE.getTaxi(this);
         long time = calculator.calculateTime(taxi, this);
-        taxi.setCheckTaxi(true);
 
         System.out.println(taxi + " : I can meet you! number taxi = "
                 + taxi.getTaxiNumber() + " = " + this);

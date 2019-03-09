@@ -2,7 +2,7 @@ package by.epam.task02.multithreading.singleton;
 
 import by.epam.task02.multithreading.action.Calculator;
 import by.epam.task02.multithreading.entity.Taxi;
-import by.epam.task02.multithreading.person.Person;
+import by.epam.task02.multithreading.entity.Person;
 
 import java.util.List;
 

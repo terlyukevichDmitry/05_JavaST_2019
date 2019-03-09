@@ -17,7 +17,7 @@ public class ListFilter {
     /**
      * DIGIT_PATTEN for filtering data.
      */
-    private static final String DIGIT_PATTEN = "^[0-9]*[.]?[0-9]+$";
+    private static final String DIGIT_PATTEN = "^[0-9]*[.-]?[0-9]+$";
     /**
      *DIGIT_PATTEN_FOR_SPLIT for split array.
      */
@@ -47,7 +47,7 @@ public class ListFilter {
                     }
                     counter++;
                 }
-                final int checkNumber = 9;
+                final int checkNumber = 20;
                 if (!isSolution || counter != checkNumber) {
                     LOGGER.info("Validation error: insufficient data : "
                             + string + ".");

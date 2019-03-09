@@ -1,16 +1,20 @@
-package by.epam.task02.multithreading.person;
+package by.epam.task02.multithreading.entity;
 
 import by.epam.task02.multithreading.action.Calculator;
-import by.epam.task02.multithreading.entity.Taxi;
 import by.epam.task02.multithreading.singleton.Uber;
-import by.epam.task02.multithreading.entity.Home;
 import by.epam.task02.multithreading.state.Expectation;
 
 import java.util.Objects;
 import java.util.concurrent.Callable;
 import java.util.concurrent.TimeUnit;
-import java.util.concurrent.locks.ReentrantLock;
 
+/**
+ *An public Home entity class.
+ *
+ * @author Dmitry Terlyukevish
+ *
+ * @version 1.0
+ */
 public class Person implements Callable<Person> {
 
     private double x;

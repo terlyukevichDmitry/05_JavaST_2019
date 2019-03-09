@@ -21,6 +21,8 @@ public class Calculator {
      */
     private ReentrantLock locker = new ReentrantLock();
 
+    private List<Taxi> taxiList1 = new ArrayList<>();
+
     /**
      * calculate side between two points.
      * @param taxi object.
@@ -71,7 +73,7 @@ public class Calculator {
         List<Taxi> list = Uber.INSTANCE.getTaxiList();
         List<Taxi> trueList = new ArrayList<>();
         for (Taxi taxi : list) {
-            if (!taxi.isCheckTaxi() && checkPosition(taxi, person)) {
+            if (!(taxi.isCheckTaxi()) && checkPosition(taxi, person)) {
                 trueList.add(taxi);
             }
         }
@@ -84,6 +86,18 @@ public class Calculator {
                 }
             }
         }
+
+//        for (Taxi ta : list) {
+//            if (!ta.isCheckTaxi()) {
+//                taxiList1.add(ta);
+//            }
+//        }
+//        try {
+//            TimeUnit.MILLISECONDS.sleep(2000);
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        }
+
         return trueList;
     }
 
@@ -99,6 +113,18 @@ public class Calculator {
         for (Taxi taxi : taxiList) {
             if (Double.compare(calculateSide(taxi, person),
                     checkComparison(taxiList, person)) == 0) {
+//                long time = calculateTime(taxi, person);
+//                for (Taxi t : taxiList1) {
+//                    if (calculateTime(t, person) < time) {
+//                        try {
+//                            TimeUnit.MILLISECONDS.sleep(2000);
+//                        } catch (InterruptedException e) {
+//                            e.printStackTrace();
+//                        }
+//                        t.setCheckTaxi(true);
+//                        return t;
+//                    }
+//                }
                 taxi.setCheckTaxi(true);
                 return taxi;
             }

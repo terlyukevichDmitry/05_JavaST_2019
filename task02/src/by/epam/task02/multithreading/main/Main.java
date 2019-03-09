@@ -42,6 +42,7 @@ public class Main {
         final double seven = 7.0;
         final double three = 3.0;
         final double two = 2.0;
+        final double ten = 10.0;
         ExecutorService es = Executors.newFixedThreadPool(fourThreads);
         PersonListCreator personListCreator = new PersonListCreator();
         List<Person> people = personListCreator.createList();
@@ -56,6 +57,8 @@ public class Main {
                         "Dmitriy", "THIRD"));
                 add(new Taxi(-two, -three,
                         "Artem", "FOURTH"));
+                add(new Taxi(1, ten,
+                        "Vladislav", "FIVE"));
             }
         };
         Uber.INSTANCE.setTaxiList(taxiList);

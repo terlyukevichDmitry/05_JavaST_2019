@@ -24,7 +24,7 @@ public class PersonListCreator {
     /**
      * constant.
      */
-    private final int four = 4;
+    private final int five = 5;
     /**
      * create list with Person objects.
      * @return list with persons.
@@ -36,7 +36,7 @@ public class PersonListCreator {
         List<Double> doubleList = getList();
         List<Person> people = new ArrayList<>();
         int counter = -1;
-        for (int i = 0; i < four; i++) {
+        for (int i = 0; i < doubleList.size() / five; i++) {
             people.add(new Person(doubleList.get(++counter),
                     doubleList.get(++counter), doubleList.get(++counter),
                     new Home(doubleList.get(++counter),

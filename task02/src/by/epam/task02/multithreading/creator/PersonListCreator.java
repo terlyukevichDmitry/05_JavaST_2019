@@ -3,6 +3,7 @@ package by.epam.task02.multithreading.creator;
 import by.epam.task02.multithreading.entity.Home;
 import by.epam.task02.multithreading.exception.MissingWayFileException;
 import by.epam.task02.multithreading.entity.Person;
+import by.epam.task02.multithreading.exception.PersonDataException;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -28,8 +29,10 @@ public class PersonListCreator {
      * create list with Person objects.
      * @return list with persons.
      * @throws MissingWayFileException for check exception situation.
+     * @throws PersonDataException for check exception situation.
      */
-    public List<Person> createList() throws MissingWayFileException {
+    public List<Person> createList()
+            throws MissingWayFileException, PersonDataException {
         List<Double> doubleList = getList();
         List<Person> people = new ArrayList<>();
         int counter = -1;

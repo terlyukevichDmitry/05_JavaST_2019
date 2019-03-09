@@ -22,7 +22,6 @@ import java.util.stream.Stream;
  * @version 1.0
  */
 public class DataReader {
-
     /**
      * Logger for recording a program state.
      */

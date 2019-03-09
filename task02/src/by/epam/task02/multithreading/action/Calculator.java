@@ -40,8 +40,8 @@ public class Calculator {
      */
     public boolean checkPosition(final Taxi taxi,
                                  final Person person) {
-        return ((Math.pow((taxi.getX() - person.getX()), 2)
-                + Math.pow((taxi.getY() - person.getY()), 2)))
+        return (Math.pow((taxi.getX() - person.getX()), 2)
+                + Math.pow((taxi.getY() - person.getY()), 2))
                 <= (person.getRadius() * person.getRadius());
     }
 
@@ -71,15 +71,13 @@ public class Calculator {
         List<Taxi> list = Uber.INSTANCE.getTaxiList();
         List<Taxi> trueList = new ArrayList<>();
         for (Taxi taxi : list) {
-            if (!taxi.isCheckTaxi()) {
-                if (checkPosition(taxi, person)) {
-                    trueList.add(taxi);
-                }
+            if (!taxi.isCheckTaxi() && checkPosition(taxi, person)) {
+                trueList.add(taxi);
             }
         }
         // if we don't have correct taxi in this radius,
         // we use taxi without radius!!
-        if (trueList.size() == 0) {
+        if (trueList.isEmpty()) {
             for (Taxi taxi : list) {
                 if (!taxi.isCheckTaxi()) {
                     trueList.add(taxi);

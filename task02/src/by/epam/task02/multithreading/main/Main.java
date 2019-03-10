@@ -23,11 +23,17 @@ import java.util.concurrent.Future;
  * @author Dmitry Terlyukevish
  * @version 1.0
  */
-public class Main {
+public final class Main {
     /**
      * Logger for recording a program state.
      */
     private static final Logger LOGGER = LogManager.getLogger(Main.class);
+
+    /**
+     * constructor.
+     */
+    private Main() {
+    }
 
     /**
      * main method.

@@ -33,7 +33,7 @@ public class ThreadController {
     }
     /**
      * getter for list.
-     * @return List<Future<Persont>>.
+     * @return List<Future<Person>>.
      */
     public List<Future<Person>> getFutureList() {
         return futureList;

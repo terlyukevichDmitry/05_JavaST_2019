@@ -64,8 +64,8 @@ public class Person implements Callable<Person> {
         this.y = coordinateY;
         this.radius = radiusT;
         if (homeT == null) {
-            LOGGER.warn("We have uncorrect home data");
-            throw new PersonDataException("We have uncorrect home data");
+            LOGGER.warn("We have incorrect  home data");
+            throw new PersonDataException("We have incorrect  home data");
         }
         this.home = homeT;
         calculator = new Calculator();
@@ -209,5 +209,4 @@ public class Person implements Callable<Person> {
         }
         return this;
     }
-
 }

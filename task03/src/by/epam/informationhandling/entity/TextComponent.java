@@ -1,8 +1,8 @@
 package by.epam.informationhandling.entity;
 
 public interface TextComponent {
-    void addElement(TextComponent component);
-    TextComponent getChild(int index);
     void operation();
+    TextComponent getChild(int index);
     void remove(TextComponent component);
+    void addElement(TextComponent component);
 }

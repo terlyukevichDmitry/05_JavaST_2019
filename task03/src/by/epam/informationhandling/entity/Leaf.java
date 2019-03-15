@@ -2,36 +2,34 @@ package by.epam.informationhandling.entity;
 
 public class Leaf implements TextComponent {
 
-    private String string;
+    private String text;
 
-    public Leaf(final String str) {
-        this.string = str;
-    }
-
-    @Override
-    public void addElement(TextComponent component) {
-        System.out.println("Leaf -> add. Doing nothing");
-        throw new UnsupportedOperationException();
-    }
-
-    @Override
-    public TextComponent getChild(int index) {
-        return this;
+    public Leaf(String text) {
+        this.text = text;
     }
 
     @Override
     public void operation() {
-        System.out.println("Leaf-> Perf operation");
+        System.out.println("text = " + text);
+    }
+
+    @Override
+    public TextComponent getChild(int index) {
+        return null;
     }
 
     @Override
     public void remove(TextComponent component) {
-        System.out.println("Leaf -> remove. Doing nothing");
-        throw new UnsupportedOperationException();
+
+    }
+
+    @Override
+    public void addElement(TextComponent component) {
+
     }
 
     @Override
     public String toString() {
-        return "Leaf{} + = \n" + string;
+        return "Leaf{" + "text='\n" + text + '\'' + '}';
     }
 }

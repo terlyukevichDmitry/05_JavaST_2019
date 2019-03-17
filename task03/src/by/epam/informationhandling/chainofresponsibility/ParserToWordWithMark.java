@@ -2,9 +2,9 @@ package by.epam.informationhandling.chainofresponsibility;
 
 import by.epam.informationhandling.entity.TextComposite;
 
-public class ParserToWordWithMark implements TextParser {
+public class ParserToWordWithMark extends AbstractParser implements TextParser {
 
-    private static final String WORD_SPLIT_REGEX =  "[a-zA-Z]+";
+    private static final String WORD_SPLIT_REGEX = "[[()'\"-]?a-zA-Z]+";
 
     private static final String SYMBOL_SPLIT_REGEX = "";
 
@@ -19,21 +19,17 @@ public class ParserToWordWithMark implements TextParser {
                                    final String lexeme) {
 
         TextComposite compositesOfWord = new TextComposite();
-        TextComposite compositesOfMark= new TextComposite();
-
+        TextComposite compositesOfMark = new TextComposite();
+        ParserToWordWithMark parserToWordWithMark = new ParserToWordWithMark();
         for (String symbol : lexeme.split(SYMBOL_SPLIT_REGEX)) {
             if (symbol.matches(WORD_SPLIT_REGEX)) {
                 textParser = new ParserToSymbol();
-                TextComposite textComposite = new TextComposite();
-                textComposite = textParser.parseText(textComposite, symbol.trim());
-                textComposite.setStr(symbol);
-                compositesOfWord.addElement(textComposite);
+                compositesOfWord = parserToWordWithMark.parse(symbol,
+                        "", textParser, compositesOfWord);
             } else {
                 textParser = new ParserToPunctuationMark();
-                TextComposite textComposite = new TextComposite();
-                textComposite = textParser.parseText(textComposite, symbol.trim());
-                textComposite.setStr(symbol);
-                compositesOfMark.addElement(textComposite);
+                compositesOfMark = parserToWordWithMark.parse(symbol,
+                        "", textParser, compositesOfMark);
             }
         }
         wholeComposite.addElement(compositesOfWord);

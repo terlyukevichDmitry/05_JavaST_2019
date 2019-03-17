@@ -18,7 +18,7 @@ public class TextSeparator {
 
         TextComposite textComposite = creatingTree(string);
         ArrayList<TextComponent> components = textComposite.getComponents();
-        //System.out.println(components);
+        System.out.println(components);
     }
 
     public TextComposite creatingTree(final String string) {

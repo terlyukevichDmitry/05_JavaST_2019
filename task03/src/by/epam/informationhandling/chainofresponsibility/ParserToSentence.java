@@ -2,7 +2,7 @@ package by.epam.informationhandling.chainofresponsibility;
 
 import by.epam.informationhandling.entity.TextComposite;
 
-public class ParserToSentence implements TextParser {
+public class ParserToSentence extends AbstractParser implements TextParser{
 
     private static final String SENTENCE_SPLIT_REGEX = ("[.!?]\\s*");
 
@@ -16,13 +16,9 @@ public class ParserToSentence implements TextParser {
     public TextComposite parseText(TextComposite wholeSentence, String paragraph) {
 
         textParser = new ParserToLexeme();
-        for (String sentence : paragraph.split(SENTENCE_SPLIT_REGEX)) {
-
-            TextComposite textComposite = new TextComposite();
-            textComposite = textParser.parseText(textComposite, sentence.trim());
-            textComposite.setStr(sentence);
-            wholeSentence.addElement(textComposite);
-        }
+        ParserToSentence parserToSentence = new ParserToSentence();
+        wholeSentence = parserToSentence.parse(paragraph, SENTENCE_SPLIT_REGEX,
+                textParser, wholeSentence);
         //System.out.println("ParserToSentence = " + wholeSentence.getComponents().size());
         return wholeSentence;
     }

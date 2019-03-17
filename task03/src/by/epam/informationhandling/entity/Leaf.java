@@ -8,6 +8,10 @@ public class Leaf implements TextComponent {
         this.text = text;
     }
 
+    public String getText() {
+        return text;
+    }
+
     @Override
     public void operation() {
         System.out.println("text = " + text);

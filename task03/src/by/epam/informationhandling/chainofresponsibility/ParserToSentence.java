@@ -1,6 +1,5 @@
 package by.epam.informationhandling.chainofresponsibility;
 
-import by.epam.informationhandling.entity.Leaf;
 import by.epam.informationhandling.entity.TextComposite;
 
 public class ParserToSentence implements TextParser {
@@ -14,17 +13,17 @@ public class ParserToSentence implements TextParser {
     }
 
     @Override
-    public TextComposite parseText(TextComposite composite, String paragraph) {
+    public TextComposite parseText(TextComposite wholeSentence, String paragraph) {
 
+        textParser = new ParserToLexeme();
         for (String sentence : paragraph.split(SENTENCE_SPLIT_REGEX)) {
 
-            TextComposite compositeHelper = new TextComposite();
-            compositeHelper.addElement(new Leaf(sentence.trim()));
-            textParser = new ParserToLexeme();
-            TextComposite textComposite =
-                    textParser.parseText(compositeHelper, sentence.trim());
-            composite.addElement(textComposite);
+            TextComposite textComposite = new TextComposite();
+            textComposite = textParser.parseText(textComposite, sentence.trim());
+            textComposite.setStr(sentence);
+            wholeSentence.addElement(textComposite);
         }
-        return composite;
+        //System.out.println("ParserToSentence = " + wholeSentence.getComponents().size());
+        return wholeSentence;
     }
 }

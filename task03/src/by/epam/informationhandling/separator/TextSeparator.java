@@ -1,9 +1,7 @@
 package by.epam.informationhandling.separator;
 
 import by.epam.informationhandling.chainofresponsibility.ParserToAllText;
-import by.epam.informationhandling.chainofresponsibility.ParserToParagraph;
 import by.epam.informationhandling.chainofresponsibility.TextParser;
-import by.epam.informationhandling.entity.Leaf;
 import by.epam.informationhandling.entity.TextComponent;
 import by.epam.informationhandling.entity.TextComposite;
 import by.epam.informationhandling.creator.StringCreator;
@@ -20,11 +18,7 @@ public class TextSeparator {
 
         TextComposite textComposite = creatingTree(string);
         ArrayList<TextComponent> components = textComposite.getComponents();
-        for (TextComponent t : components) {
-            System.out.println("----------------------------------------------");
-            System.out.println(t);
-            System.out.println("----------------------------------------------");
-        }
+        //System.out.println(components);
     }
 
     public TextComposite creatingTree(final String string) {
@@ -32,6 +26,9 @@ public class TextSeparator {
 
         TextParser textParser = new ParserToAllText();
         composite = textParser.parseText(composite, string);
+
+        //composite.getChild(0).getChild(0).getChild(0).getChild(0).operation();
+
         return composite;
     }
 

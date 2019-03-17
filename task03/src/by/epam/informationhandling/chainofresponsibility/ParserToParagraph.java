@@ -1,10 +1,6 @@
 package by.epam.informationhandling.chainofresponsibility;
 
-import by.epam.informationhandling.entity.TextComponent;
 import by.epam.informationhandling.entity.TextComposite;
-import by.epam.informationhandling.entity.Leaf;
-
-import java.util.ArrayList;
 
 public class ParserToParagraph implements TextParser {
 
@@ -19,12 +15,11 @@ public class ParserToParagraph implements TextParser {
     @Override
     public TextComposite parseText(TextComposite wholeText,
                                    String string) {
+        textParser = new ParserToSentence();
         for (String paragraph : string.split(PARAGRAPH_SPLIT_REGEX)) {
-            textParser = new ParserToSentence();
-            TextComposite compositeHelper = new TextComposite();
-            compositeHelper.addElement(new Leaf(paragraph.trim()));
-            TextComposite textComposite =
-                    textParser.parseText(compositeHelper, paragraph.trim());
+            TextComposite textComposite = new TextComposite();
+            textComposite = textParser.parseText(textComposite, paragraph.trim());
+            textComposite.setStr(paragraph);
             wholeText.addElement(textComposite);
         }
         return wholeText;

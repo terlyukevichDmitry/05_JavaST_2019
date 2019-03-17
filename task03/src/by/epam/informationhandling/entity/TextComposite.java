@@ -6,6 +6,15 @@ public class TextComposite implements TextComponent {
 
     private ArrayList<TextComponent> components = new ArrayList<>();
 
+    private String str;
+
+    public void setStr(String str) {
+        this.str = str;
+    }
+
+    public String getStr() {
+        return str;
+    }
 
     public ArrayList<TextComponent> getComponents() {
         return components;
@@ -25,9 +34,7 @@ public class TextComposite implements TextComponent {
 
     @Override
     public void operation() {
-        for (int i = 0; i < components.size(); i++) {
-            components.get(i).operation();
-        }
+        System.out.println(getStr());
     }
 
     public void remove(TextComponent component) {
@@ -36,6 +43,7 @@ public class TextComposite implements TextComponent {
 
     @Override
     public String toString() {
+        System.out.println("TextComposite{" + "str=" + str + '}');
         return "TextComposite{" + "components=" + components + '}';
     }
 }

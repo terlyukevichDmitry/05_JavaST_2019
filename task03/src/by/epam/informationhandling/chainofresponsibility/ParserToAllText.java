@@ -1,23 +1,23 @@
 package by.epam.informationhandling.chainofresponsibility;
 
 import by.epam.informationhandling.entity.TextComposite;
+import by.epam.informationhandling.entity.TextElementType;
 
-public class ParserToAllText implements TextParser {
-
-    private TextParser textParser;
-
-    public void setTextParser(final TextParser textP) {
-        this.textParser = textP;
-    }
+public class ParserToAllText extends AbstractParser implements TextParser {
 
     @Override
-    public TextComposite parseText(TextComposite composite, String string) {
-        textParser = new ParserToParagraph();
+    public TextComposite parseText(TextComposite wholeComposite, String string,
+                                   TextElementType textElementType) {
+
+        TextParser textParser = new ParserToParagraph();
         TextComposite textComposite = new TextComposite();
-        textComposite = textParser.parseText(textComposite, string);
-        textComposite.setStr(string);
-        composite.addElement(textComposite);
+        textComposite.setTextElementType(TextElementType.PARAGRAPH);
+        textParser.parseText(textComposite, string, TextElementType.PARAGRAPH);
+        wholeComposite.addElement(textComposite);
+
         //System.out.println("ParserToAllText = " + composite.getComponents().size());
-        return composite;
+        return wholeComposite;
     }
+
+
 }

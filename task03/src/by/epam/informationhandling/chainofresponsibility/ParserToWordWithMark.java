@@ -1,6 +1,7 @@
 package by.epam.informationhandling.chainofresponsibility;
 
 import by.epam.informationhandling.entity.TextComposite;
+import by.epam.informationhandling.entity.TextElementType;
 
 public class ParserToWordWithMark extends AbstractParser implements TextParser {
 
@@ -16,7 +17,8 @@ public class ParserToWordWithMark extends AbstractParser implements TextParser {
 
     @Override
     public TextComposite parseText(final TextComposite wholeComposite,
-                                   final String lexeme) {
+                                   final String lexeme,
+                                   final TextElementType textElementType) {
 
         TextComposite compositesOfWord = new TextComposite();
         TextComposite compositesOfMark = new TextComposite();
@@ -25,11 +27,13 @@ public class ParserToWordWithMark extends AbstractParser implements TextParser {
             if (symbol.matches(WORD_SPLIT_REGEX)) {
                 textParser = new ParserToSymbol();
                 compositesOfWord = parserToWordWithMark.parse(symbol,
-                        "", textParser, compositesOfWord);
+                        "", textParser, compositesOfWord,
+                        TextElementType.SYMBOL);
             } else {
                 textParser = new ParserToPunctuationMark();
                 compositesOfMark = parserToWordWithMark.parse(symbol,
-                        "", textParser, compositesOfMark);
+                        "", textParser, compositesOfMark,
+                        TextElementType.WORDWITHMARK);
             }
         }
         wholeComposite.addElement(compositesOfWord);

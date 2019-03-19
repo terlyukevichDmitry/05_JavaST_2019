@@ -1,9 +1,7 @@
 package by.epam.informationhandling.chainofresponsibility;
 
-import by.epam.informationhandling.entity.Leaf;
 import by.epam.informationhandling.entity.TextComposite;
-
-import java.util.ArrayList;
+import by.epam.informationhandling.entity.TextElementType;
 
 public class ParserToLexeme extends AbstractParser implements TextParser {
 
@@ -13,15 +11,9 @@ public class ParserToLexeme extends AbstractParser implements TextParser {
 
     private static final String EXPRESSION_SPLIT_REGEX = "[^a-zA-Z]+";
 
-    private TextParser textParser;
-
-    public void setTextParser(final TextParser textP) {
-        this.textParser = textP;
-    }
-
     @Override
-    public TextComposite parseText(TextComposite wholeLexeme,
-                                   String sentence) {
+    public TextComposite parseText(TextComposite wholeLexeme, String sentence,
+                                   TextElementType textElementType) {
 
         TextComposite compositesOfWord = new TextComposite();
         TextComposite compositesOfMark= new TextComposite();
@@ -34,22 +26,23 @@ public class ParserToLexeme extends AbstractParser implements TextParser {
 
         for (String lexeme : sentence.split(LEXEME_SPLIT_REGEX)) {
             if (lexeme.matches(WORD_SPLIT_REGEX)) {
-                textParser = new ParserToSymbol();
-                compositesOfWord = parserToLexeme.parse(lexeme,
-                        WORD_SPLIT_REGEX, textParser, compositesOfWord);
+                compositesOfWord.setTextElementType(TextElementType.WORD);
+                parserToLexeme.parse(lexeme,
+                        WORD_SPLIT_REGEX, new ParserToSymbol(), compositesOfWord,
+                        TextElementType.SYMBOL);
                 checkerOne = true;
             } else if (lexeme.matches(EXPRESSION_SPLIT_REGEX)) {
 //                textParser = new ParserToExpression();
-                TextComposite compositeHelper = new TextComposite();
-//                compositeHelper = textParser.parseText(compositeHelper,
-//                        lexeme.trim());
-                compositeHelper.setStr(lexeme);
-                compositesOfExpression.addElement(compositeHelper);
+                compositesOfExpression.setTextElementType(TextElementType.EXPRESSION);
+                parserToLexeme.parse(lexeme,
+                        WORD_SPLIT_REGEX, new ParserToSymbol(), compositesOfWord,
+                        TextElementType.SYMBOL);
                 checkerTwo = true;
             } else {
-                textParser = new ParserToWordWithMark();
-                compositesOfMark = parserToLexeme.parse(lexeme,
-                        "", textParser, compositesOfMark);
+                compositesOfMark.setTextElementType(TextElementType.WORDWITHMARK);
+                 parserToLexeme.parse(lexeme,
+                        "", new ParserToWordWithMark(), compositesOfMark,
+                        TextElementType.WORDWITHMARK);
                 checkerThree = true;
             }
         }

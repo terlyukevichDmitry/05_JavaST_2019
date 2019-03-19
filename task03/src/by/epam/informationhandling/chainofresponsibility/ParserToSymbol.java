@@ -1,6 +1,8 @@
 package by.epam.informationhandling.chainofresponsibility;
 
+import by.epam.informationhandling.entity.SymbolComponent;
 import by.epam.informationhandling.entity.TextComposite;
+import by.epam.informationhandling.entity.TextElementType;
 
 public class ParserToSymbol implements TextParser {
 
@@ -8,11 +10,11 @@ public class ParserToSymbol implements TextParser {
 
     @Override
     public TextComposite parseText(TextComposite compositeSymbol,
-                                   String lexeme) {
+                                   String lexeme, TextElementType textElementType) {
         for (String symbol : lexeme.split(SYMBOL_SPLIT_REGEX)) {
-            TextComposite textComposite = new TextComposite();
-            textComposite.setStr(symbol);
-            compositeSymbol.addElement(textComposite);
+            SymbolComponent symbolComponent = new SymbolComponent();
+            symbolComponent.setSymbol(symbol.charAt(0));
+            compositeSymbol.addElement(symbolComponent);
         }
         return compositeSymbol;
     }

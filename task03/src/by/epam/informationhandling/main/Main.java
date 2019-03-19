@@ -1,6 +1,8 @@
 package by.epam.informationhandling.main;
 
 import by.epam.informationhandling.exception.MissingWayFileException;
+import by.epam.informationhandling.interpreter.Context;
+import by.epam.informationhandling.interpreter.Expression;
 import by.epam.informationhandling.separator.TextSeparator;
 
 import java.io.File;
@@ -16,6 +18,8 @@ public class Main {
 
         TextSeparator textSeparator = new TextSeparator();
         textSeparator.separatingText(FILE);
-
+//        String str = "43|30>>>354";
+//        Context context = new Context();
+//        Expression result = context.evaluate(str);
     }
 }

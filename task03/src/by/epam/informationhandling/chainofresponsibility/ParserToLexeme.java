@@ -19,24 +19,23 @@ public class ParserToLexeme extends AbstractParser implements TextParser {
         ParserToLexeme parserToLexeme = new ParserToLexeme();
         for (String lexeme : sentence.split(LEXEME_SPLIT_REGEX)) {
             if (lexeme.matches(WORD_SPLIT_REGEX)) {
-                wholeLexeme.setTextElementType(TextElementType.LEXEME);
+                wholeLexeme.setTextElementType(textElementType);
                 parserToLexeme.parse(lexeme, WORD_SPLIT_REGEX,
                         new ParserToSymbol(), wholeLexeme,
                         TextElementType.WORD);
             } else if (lexeme.matches(EXPRESSION_SPLIT_REGEX)) {
-                wholeLexeme.setTextElementType(
-                        TextElementType.LEXEME);
+                wholeLexeme.setTextElementType(textElementType);
                 parserToLexeme.parse(lexeme, WORD_SPLIT_REGEX,
                         new ParserToSymbol(), wholeLexeme,
                         TextElementType.EXPRESSION);
             } else {
                 String dopString = "" + removeCharAt(lexeme, lexeme.length() - 1);
-                wholeLexeme.setTextElementType(TextElementType.LEXEME);
+                wholeLexeme.setTextElementType(textElementType);
                 parserToLexeme.parse(dopString, WORD_SPLIT_REGEX,
                         new ParserToSymbol(), wholeLexeme,
                         TextElementType.WORD);
 
-                wholeLexeme.setTextElementType(TextElementType.LEXEME);
+                wholeLexeme.setTextElementType(textElementType);
                 parserToLexeme.parse("" + lexeme.charAt(lexeme.length() - 1), "",
                         new ParserToPunctuationMark(), wholeLexeme,
                         TextElementType.PUNCTUATION_MARK);

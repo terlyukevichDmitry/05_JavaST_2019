@@ -1,8 +1,19 @@
 package by.epam.informationhandling.composite;
 
+import by.epam.informationhandling.exception.NullDataException;
+import by.epam.informationhandling.interpreter.Context;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import java.util.ArrayList;
 
 public class TextComposite implements TextComponent {
+
+    /**
+     * Logger for recording a program state.
+     */
+    private static final Logger LOGGER =
+            LogManager.getLogger(TextComposite.class);
 
     private ArrayList<TextComponent> components = new ArrayList<>();
 
@@ -50,8 +61,23 @@ public class TextComposite implements TextComponent {
                     stringBuilder.append((component.operation() + " "));
                     break;
                 }
+                case EXPRESSION: {
+                    Context context = new Context();
+                    try {
+                        stringBuilder.append(context.evaluate(component.operation().toString()));
+
+                    } catch (NullDataException e) {
+                        e.printStackTrace();
+                    }
+                    break;
+                }
                 case SENTENCE: {
                     stringBuilder.append("\n" + component.operation());
+                    break;
+                }
+                case PARAGRAPH: {
+                    stringBuilder.append("    " + component.operation() + "\n");
+
                     break;
                 }
                 default: stringBuilder.append(component.operation());

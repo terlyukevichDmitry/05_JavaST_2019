@@ -26,10 +26,10 @@ public class Main {
 
         TextSeparator textSeparator = new TextSeparator();
         textSeparator.separatingText(FILE);
-//        String str = "5|(1&2&(3|(4&(25^5|6&47)|3)|2)|1)";
-//        LOGGER.info(5|(1&2&(3|(4&(25^5|6&47)|3)|2)|1));
-//        Context context = new Context();
-//        int result = context.evaluate(str);
-//        LOGGER.info(result);
+        String str = "5|(1&2&(3|(4&(25^5|6&47)|3)|2)|1)";
+        LOGGER.info(5|(1&2&(3|(4&(25^5|6&47)|3)|2)|1));
+        Context context = new Context();
+        int result = context.evaluate(str);
+        LOGGER.info(result);
     }
 }

@@ -11,12 +11,15 @@ public class ParserToSymbol implements TextParser {
     @Override
     public TextComposite parseText(TextComposite compositeSymbol,
                                    String lexeme, TextElementType textElementType) {
+        TextComposite textComposite = new TextComposite();
         for (String symbol : lexeme.split(SYMBOL_SPLIT_REGEX)) {
             SymbolLeaf symbolComponent = new SymbolLeaf();
-            compositeSymbol.setTextElementType(textElementType);
+            textComposite.setTextElementType(TextElementType.SYMBOL);
             symbolComponent.setSymbol(symbol.charAt(0));
-            compositeSymbol.addElement(symbolComponent);
+            textComposite.addElement(symbolComponent);
         }
+        compositeSymbol.addElement(textComposite);
+        compositeSymbol.setTextElementType(textElementType);
         return compositeSymbol;
     }
 }

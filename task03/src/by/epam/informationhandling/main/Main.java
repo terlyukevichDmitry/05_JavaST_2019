@@ -17,8 +17,8 @@ public class Main {
 
     public static void main(String[] args) throws MissingWayFileException, IncorrectDataException {
 
-//        TextSeparator textSeparator = new TextSeparator();
-//        textSeparator.separatingText(FILE);
+        TextSeparator textSeparator = new TextSeparator();
+        textSeparator.separatingText(FILE);
         String str = "(111^5|1&2<<(2|5>>2&71))|1200";
         System.out.println((111^5|1&2<<(2|5>>2&71))|1200);
         Context context = new Context();

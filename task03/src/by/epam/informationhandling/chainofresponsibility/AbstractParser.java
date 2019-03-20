@@ -47,6 +47,7 @@ public abstract class AbstractParser {
                     final TextComposite wholeText,
                     final TextParser textParser,
                     final String string) throws IncorrectDataException {
+        //I should add method which will check point in end of sentence!!!!!!!
         TextComposite textComposite = new TextComposite();
         textComposite.setTextElementType(textElementType);
         wholeText.addElement(textComposite);

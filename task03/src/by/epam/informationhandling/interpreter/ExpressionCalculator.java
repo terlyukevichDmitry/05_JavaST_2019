@@ -4,11 +4,11 @@ import java.util.ArrayDeque;
 import java.util.Deque;
 import java.util.List;
 
-public class CharCalculator implements Expression {
+public class ExpressionCalculator implements Expression {
 
     private List<String> deque;
 
-    public CharCalculator(List<String> arrayDeque) {
+    public ExpressionCalculator(List<String> arrayDeque) {
         this.deque = arrayDeque;
     }
 

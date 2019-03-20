@@ -5,8 +5,8 @@ public enum ExpressionConstant {
     AND(8),
     CAP(9),
     NOT(2),
-    LEFT(6),
-    LEFT_SHIFT(5);
+    LEFT_SHIFT(5),
+    SKOBKA(0);
 
     private int priority;
 

@@ -2,11 +2,19 @@ package by.epam.informationhandling.chainofresponsibility;
 
 import by.epam.informationhandling.entity.TextComposite;
 import by.epam.informationhandling.entity.TextElementType;
+import by.epam.informationhandling.exception.IncorrectDataException;
 
-public class ParserToExpression implements  TextParser {
+public class ParserToExpression extends AbstractParser implements  TextParser {
+
+    private static final String SYMBOL_SPLIT_REGEX = "";
+
     @Override
-    public TextComposite parseText(TextComposite composite, String string,
-                                   TextElementType textElementType) {
-        return null;
+    public TextComposite parseText(TextComposite wholeExpression, String lexeme,
+                                   TextElementType textElementType)
+            throws IncorrectDataException {
+        ParserToExpression parserToExpression = new ParserToExpression();
+        parserToExpression.parse(lexeme, SYMBOL_SPLIT_REGEX,
+                new ParserToSymbol(), wholeExpression, TextElementType.SYMBOL);
+        return wholeExpression;
     }
 }

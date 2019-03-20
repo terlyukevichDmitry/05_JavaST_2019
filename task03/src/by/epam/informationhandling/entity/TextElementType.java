@@ -3,10 +3,11 @@ package by.epam.informationhandling.entity;
 public enum TextElementType {
     TEXT,
     WORD,
+    PUNCTUATION_MARK,
     PARAGRAPH,
     LEXEME,
     EXPRESSION,
     SENTENCE,
     SYMBOL,
-    WORDWITHMARK;
+    WORD_WITH_MARK;
 }

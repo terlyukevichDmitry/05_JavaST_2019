@@ -17,20 +17,33 @@ public class CharCalculator implements Expression {
 
         Deque<Integer> stack = new ArrayDeque<>();
         for (String x : deque) {
+            x = x.trim();
             if (x.equals(">>>")) {
-                Integer b = stack.pop(), a = stack.pop();
-                stack.push(a>>>b);
+                int i1 = stack.pop();
+                int i2 = stack.pop();
+                stack.push(i2 >>> i1);
             } else if (x.equals("|")) {
-                stack.push(stack.pop() | stack.pop());
+                int i1 = stack.pop();
+                int i2 = stack.pop();
+                stack.push(i2 | i1);
             } else if (x.equals("&")) {
-                stack.push(stack.pop() & stack.pop());
+                int i1 = stack.pop();
+                int i2 = stack.pop();
+                stack.push(i2 & i1);
             } else if (x.equals("<<")) {
-                stack.push(stack.pop() << stack.pop());
+                int i1 = stack.pop();
+                int i2 = stack.pop();
+                stack.push(i2 << i1);
             } else if (x.equals("^")) {
-                stack.push(stack.pop() ^ stack.pop());
+                int i1 = stack.pop();
+                int i2 = stack.pop();
+                stack.push(i2 ^ i1);
+            } else if (x.equals(">>")) {
+                int i1 = stack.pop();
+                int i2 = stack.pop();
+                stack.push(i2 >> i1);
             } else stack.push(Integer.valueOf(x));
         }
         return stack.pop();
-        //terminal!,
     }
 }

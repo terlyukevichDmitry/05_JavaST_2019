@@ -19,6 +19,14 @@ public class SymbolPriority {
         return priority;
     }
 
+    public void setPriority(int priority) {
+        this.priority = priority;
+    }
+
+    public void setSymbol(String symbol) {
+        this.symbol = symbol;
+    }
+
     @Override
     public String toString() {
         return "SymbolPriority{" + "priority=" + priority

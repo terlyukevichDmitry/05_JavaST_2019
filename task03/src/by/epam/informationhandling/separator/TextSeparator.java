@@ -6,6 +6,7 @@ import by.epam.informationhandling.entity.TextComponent;
 import by.epam.informationhandling.entity.TextComposite;
 import by.epam.informationhandling.creator.StringCreator;
 import by.epam.informationhandling.entity.TextElementType;
+import by.epam.informationhandling.exception.IncorrectDataException;
 import by.epam.informationhandling.exception.MissingWayFileException;
 
 import java.util.ArrayList;
@@ -13,7 +14,7 @@ import java.util.ArrayList;
 public class TextSeparator {
 
     public void separatingText(final String file)
-            throws MissingWayFileException {
+            throws MissingWayFileException, IncorrectDataException {
         StringCreator stringCreator = new StringCreator();
         String string = stringCreator.creatingString(file);
 
@@ -22,15 +23,12 @@ public class TextSeparator {
         System.out.println(components);
     }
 
-    public TextComposite creatingTree(final String string) {
+    public TextComposite creatingTree(final String string)
+            throws IncorrectDataException {
         TextComposite composite = new TextComposite();
         composite.setTextElementType(TextElementType.TEXT);
         TextParser textParser = new ParserToAllText();
-        composite = textParser.parseText(composite, string, TextElementType.TEXT);
-
-
-
-        //String message = composite.getChild(0).getChild(0).getChild(0).getChild(1).getChild(0).operation();
+        composite = textParser.parseText(composite, string, TextElementType.PARAGRAPH);
         return composite;
     }
 }

@@ -19,9 +19,10 @@ public class Main {
 
 //        TextSeparator textSeparator = new TextSeparator();
 //        textSeparator.separatingText(FILE);
-        String str = "(71&(2&3|(3|(2&1>>2|2)&2)|10&2))|78";
-        System.out.println((71&(2&3|(3|(2&1>>2|2)&2)|10&2))|78);
+        String str = "5|(1&2&(3|(4&(25^5|6&47)|3)|2)|1)";
+        System.out.println(5|(1&2&(3|(4&(25^5|6&47)|3)|2)|1));
         Context context = new Context();
-        Expression result = context.evaluate(str);
+        int result = context.evaluate(str);
+        System.out.println(result);
     }
 }

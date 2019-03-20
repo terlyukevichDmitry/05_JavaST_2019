@@ -6,7 +6,7 @@ public enum ExpressionConstant {
     CAP(9),
     NOT(2),
     LEFT_SHIFT(5),
-    SKOBKA(0);
+    BRACKET(0);
 
     private int priority;
 

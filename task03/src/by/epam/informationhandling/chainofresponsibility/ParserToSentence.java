@@ -1,7 +1,7 @@
 package by.epam.informationhandling.chainofresponsibility;
 
-import by.epam.informationhandling.entity.TextComposite;
-import by.epam.informationhandling.entity.TextElementType;
+import by.epam.informationhandling.composite.TextComposite;
+import by.epam.informationhandling.composite.TextElementType;
 import by.epam.informationhandling.exception.IncorrectDataException;
 
 public class ParserToSentence extends AbstractParser implements TextParser{
@@ -14,7 +14,7 @@ public class ParserToSentence extends AbstractParser implements TextParser{
                                    TextElementType textElementType)
             throws IncorrectDataException {
         ParserToSentence parserToSentence = new ParserToSentence();
-        wholeSentence = parserToSentence.parse(paragraph, SENTENCE_SPLIT_REGEX,
+        parserToSentence.parse(paragraph, SENTENCE_SPLIT_REGEX,
                 new ParserToLexeme(), wholeSentence, TextElementType.LEXEME);
         return wholeSentence;
     }

@@ -1,4 +1,4 @@
-package by.epam.informationhandling.entity;
+package by.epam.informationhandling.composite;
 
 public interface TextComponent {
     String operation();

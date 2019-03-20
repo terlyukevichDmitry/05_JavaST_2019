@@ -2,10 +2,10 @@ package by.epam.informationhandling.separator;
 
 import by.epam.informationhandling.chainofresponsibility.ParserToAllText;
 import by.epam.informationhandling.chainofresponsibility.TextParser;
-import by.epam.informationhandling.entity.TextComponent;
-import by.epam.informationhandling.entity.TextComposite;
+import by.epam.informationhandling.composite.TextComponent;
+import by.epam.informationhandling.composite.TextComposite;
 import by.epam.informationhandling.creator.StringCreator;
-import by.epam.informationhandling.entity.TextElementType;
+import by.epam.informationhandling.composite.TextElementType;
 import by.epam.informationhandling.exception.IncorrectDataException;
 import by.epam.informationhandling.exception.MissingWayFileException;
 
@@ -20,7 +20,9 @@ public class TextSeparator {
 
         TextComposite textComposite = creatingTree(string);
         ArrayList<TextComponent> components = textComposite.getComponents();
-        System.out.println(components);
+
+
+        //System.out.println(components);
     }
 
     public TextComposite creatingTree(final String string)
@@ -29,6 +31,7 @@ public class TextSeparator {
         composite.setTextElementType(TextElementType.TEXT);
         TextParser textParser = new ParserToAllText();
         composite = textParser.parseText(composite, string, TextElementType.PARAGRAPH);
+        System.out.println(composite);
         return composite;
     }
 }

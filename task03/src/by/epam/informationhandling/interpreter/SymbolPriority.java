@@ -21,6 +21,12 @@ public class SymbolPriority {
 
     @Override
     public String toString() {
+
+//
+//        String[] p = textCo.split();
+
+
+
         return "SymbolPriority{" + "priority=" + priority
                 + ", symbol='" + symbol + '\'' + '}';
     }

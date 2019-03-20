@@ -1,20 +1,13 @@
 package by.epam.informationhandling.reader;
 
-import by.epam.informationhandling.exception.FileEmptyException;
 import by.epam.informationhandling.exception.MissingWayFileException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.io.File;
 import java.io.IOException;
 import java.io.UncheckedIOException;
-import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 /**
  * In this class we use for reading data of different files.

@@ -18,6 +18,7 @@ public class ExpressionCalculator implements Expression {
         Deque<Integer> stack = new ArrayDeque<>();
         for (String x : deque) {
             x = x.trim();
+            //TODO new classes!!!LOL KEK CHEBURECK
             if (x.equals(">>>")) {
                 int i1 = stack.pop();
                 int i2 = stack.pop();

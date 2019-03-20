@@ -4,8 +4,8 @@ public enum ExpressionConstant {
     OR(10),
     AND(8),
     CAP(9),
+    SHIFT(5),
     NOT(2),
-    LEFT_SHIFT(5),
     BRACKET(0);
 
     private int priority;

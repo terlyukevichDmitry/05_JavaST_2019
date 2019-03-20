@@ -1,4 +1,4 @@
-package by.epam.informationhandling.entity;
+package by.epam.informationhandling.composite;
 
 import java.util.ArrayList;
 
@@ -34,7 +34,7 @@ public class TextComposite implements TextComponent {
 
     @Override
     public String operation() {
-        return null;
+        return toString();
     }
 
     public void remove(TextComponent component) {
@@ -43,9 +43,20 @@ public class TextComposite implements TextComponent {
 
     @Override
     public String toString() {
-        return "TextComposite{" +
-                "components=" + components +
-                ", textElementType=" + textElementType +
-                '}';
+        StringBuilder stringBuilder = new StringBuilder();
+        for (TextComponent component : components) {
+            switch (textElementType) {
+                case LEXEME: {
+                    stringBuilder.append((component.operation() + " "));
+                    break;
+                }
+                case SENTENCE: {
+                    stringBuilder.append("\n" + component.operation());
+                    break;
+                }
+                default: stringBuilder.append(component.operation());
+            }
+        }
+        return stringBuilder.toString();
     }
 }

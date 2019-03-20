@@ -1,4 +1,4 @@
-package by.epam.informationhandling.entity;
+package by.epam.informationhandling.composite;
 
 public enum TextElementType {
     TEXT,
@@ -9,5 +9,4 @@ public enum TextElementType {
     EXPRESSION,
     SENTENCE,
     SYMBOL,
-    WORD_WITH_MARK;
 }

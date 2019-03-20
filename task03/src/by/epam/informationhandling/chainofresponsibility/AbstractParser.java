@@ -1,7 +1,7 @@
 package by.epam.informationhandling.chainofresponsibility;
 
-import by.epam.informationhandling.entity.TextComposite;
-import by.epam.informationhandling.entity.TextElementType;
+import by.epam.informationhandling.composite.TextComposite;
+import by.epam.informationhandling.composite.TextElementType;
 import by.epam.informationhandling.exception.IncorrectDataException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -31,8 +31,7 @@ public abstract class AbstractParser {
             throw new IncorrectDataException("We have incorrect object data!!");
         }
 
-        if (textParser instanceof ParserToWordWithMark
-                || textParser instanceof ParserToSymbol
+        if (textParser instanceof ParserToSymbol
                 || textParser instanceof ParserToExpression) {
             solving(textElementType,wholeText, textParser, string);
         } else {

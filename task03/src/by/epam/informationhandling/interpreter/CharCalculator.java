@@ -42,6 +42,9 @@ public class CharCalculator implements Expression {
                 int i1 = stack.pop();
                 int i2 = stack.pop();
                 stack.push(i2 >> i1);
+            } else if (x.equals("~")) {
+                int i1 = stack.pop();
+                stack.push(~i1);
             } else stack.push(Integer.valueOf(x));
         }
         return stack.pop();

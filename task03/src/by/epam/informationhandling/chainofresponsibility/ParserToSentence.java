@@ -6,7 +6,7 @@ import by.epam.informationhandling.exception.IncorrectDataException;
 
 public class ParserToSentence extends AbstractParser implements TextParser{
 
-    private static final String SENTENCE_SPLIT_REGEX = ("[.!?]\\s*");
+    private static final String SENTENCE_SPLIT_REGEX =  "(?>=\\.|\\?|!)";
 
     @Override
     public TextComposite parseText(TextComposite wholeSentence,

@@ -1,7 +1,8 @@
 package by.epam.informationhandling.composite;
 
+import by.epam.informationhandling.action.PolishNotationCreator;
 import by.epam.informationhandling.exception.NullDataException;
-import by.epam.informationhandling.interpreter.Context;
+import by.epam.informationhandling.interpreter.ExpressionCalculator;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -57,17 +58,22 @@ public class TextComposite implements TextComponent {
         StringBuilder stringBuilder = new StringBuilder();
         for (TextComponent component : components) {
             switch (textElementType) {
-                case LEXEME: {
-                    stringBuilder.append((component.operation() + " "));
+                case WORD: {
+                    stringBuilder.append(" " + (component.operation()));
                     break;
                 }
                 case EXPRESSION: {
-                    Context context = new Context();
+                    PolishNotationCreator polishNotationCreator = new PolishNotationCreator();
                     try {
-                        stringBuilder.append(context.evaluate(component.operation().toString()));
+                        ExpressionCalculator calculator =
+                                new ExpressionCalculator(
+                                        polishNotationCreator.polishCreating(
+                                                component.operation()));
+                        stringBuilder.append(" " + calculator.calculate());
 
                     } catch (NullDataException e) {
-                        e.printStackTrace();
+                        LOGGER.error(
+                                "We have null object in expression!", e);
                     }
                     break;
                 }
@@ -76,8 +82,7 @@ public class TextComposite implements TextComponent {
                     break;
                 }
                 case PARAGRAPH: {
-                    stringBuilder.append("    " + component.operation() + "\n");
-
+                    stringBuilder.append((component.operation() + "\n"));
                     break;
                 }
                 default: stringBuilder.append(component.operation());

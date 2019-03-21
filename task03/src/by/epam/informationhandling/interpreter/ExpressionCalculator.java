@@ -1,53 +1,70 @@
 package by.epam.informationhandling.interpreter;
 
-import java.util.ArrayDeque;
-import java.util.Deque;
+import java.util.ArrayList;
 import java.util.List;
 
-public class ExpressionCalculator implements Expression {
+public class ExpressionCalculator {
 
-    private List<String> deque;
+    private List<String> strings;
 
-    public ExpressionCalculator(List<String> arrayDeque) {
-        this.deque = arrayDeque;
+    private ArrayList<AbstractMathExpression> listExpression;
+
+    public ExpressionCalculator(List<String> stringList) {
+        listExpression = new ArrayList<>();
+        this.strings = stringList;
+        parse();
     }
 
-    @Override
-    public Integer interpret() {
-
-        Deque<Integer> stack = new ArrayDeque<>();
-        for (String x : deque) {
+    private void parse() {
+        for (String x : strings) {
             x = x.trim();
-            //TODO new classes!!!LOL KEK CHEBURECK
-            if (x.equals(">>>")) {
-                int i1 = stack.pop();
-                int i2 = stack.pop();
-                stack.push(i2 >>> i1);
-            } else if (x.equals("|")) {
-                int i1 = stack.pop();
-                int i2 = stack.pop();
-                stack.push(i2 | i1);
-            } else if (x.equals("&")) {
-                int i1 = stack.pop();
-                int i2 = stack.pop();
-                stack.push(i2 & i1);
-            } else if (x.equals("<<")) {
-                int i1 = stack.pop();
-                int i2 = stack.pop();
-                stack.push(i2 << i1);
-            } else if (x.equals("^")) {
-                int i1 = stack.pop();
-                int i2 = stack.pop();
-                stack.push(i2 ^ i1);
-            } else if (x.equals(">>")) {
-                int i1 = stack.pop();
-                int i2 = stack.pop();
-                stack.push(i2 >> i1);
-            } else if (x.equals("~")) {
-                int i1 = stack.pop();
-                stack.push(~i1);
-            } else stack.push(Integer.valueOf(x));
+
+            switch(x) {
+                case ">>>": {
+                    listExpression.add(
+                            new TerminalExpressionBitThreeRightShift());
+                    break;
+                }
+                case ">>": {
+                    listExpression.add(
+                            new TerminalExpressionBitTwoRightShift());
+                    break;
+                }
+                case "<<": {
+                    listExpression.add(
+                            new TerminalExpressionBitTwoLeftShift());
+                    break;
+                }
+                case "^": {
+                    listExpression.add(new TerminalExpressionBitCap());
+                    break;
+                }
+                case "|": {
+                    listExpression.add(new TerminalExpressionBitOr());
+                    break;
+                }
+                case "&": {
+                    listExpression.add(new TerminalExpressionBitAnd());
+                    break;
+                }
+                case "~": {
+                    listExpression.add(new TerminalExpressionBitNot());
+                    break;
+                }
+                default: {
+                    listExpression.add(
+                            new TerminalExpressionNumber(Integer.valueOf(x)));
+                }
+            }
         }
-        return stack.pop();
     }
+
+    public Number calculate() {
+        ExpressionContext context = new ExpressionContext();
+        for (AbstractMathExpression terminal : listExpression) {
+            terminal.interpret(context);
+        }
+        return context.popValue();
+    }
+
 }

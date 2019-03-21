@@ -28,11 +28,11 @@ public class Main {
         TextSeparator textSeparator = new TextSeparator();
         textSeparator.separatingText(FILE);
         String str = "5|(1&2&(3|(4&(25^5|6&47)|3)|2)|1)";
-        LOGGER.info(5|(1&2&(3|(4&(25^5|6&47)|3)|2)|1));
+        LOGGER.info((5|(1&2&(3|(4&(25^5|6&47)|3)|2)|1)));
         PolishNotationCreator polishNotationCreator = new PolishNotationCreator();
         try {
             ExpressionCalculator calculator = new ExpressionCalculator(polishNotationCreator.polishCreating(str));
-            LOGGER.info(calculator.calculate());
+            System.out.println(calculator.calculate());
         } catch (NullDataException e) {
             LOGGER.error(
                     "We have null object in expression!", e);

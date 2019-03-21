@@ -86,12 +86,11 @@ public class PolishNotationCreator {
                 list.add(str);
             } else {
                 SymbolPriority priority = getSymbolPriority(str);
-                //TODO nullPointerException
                 if (("(").equals(str)) {
                     deque.push(priority);
                 } else if ((")").equals(str)) {
                     SymbolPriority s = deque.pop();
-                    while (!s.getSymbol().equals("(")) {
+                    while (!("(").equals(s.getSymbol())) {
                         list.add(s.getSymbol());
                         s = deque.pop();
                     }
@@ -112,22 +111,23 @@ public class PolishNotationCreator {
 
     private SymbolPriority getSymbolPriority(final String str) {
         SymbolPriority priority = null;
-        if (str.equals(">>>") || str.equals("<<") || str.equals(">>")) {
+        if ((">>>").equals(str) || (">>").equals(str)
+                || ("<<").equals(str)) {
             priority = new SymbolPriority(
                     ExpressionConstant.SHIFT.getPriority(), str);
-        } else if (str.equals("|")) {
+        } else if (("|").equals(str)) {
             priority = new SymbolPriority(
                     ExpressionConstant.OR.getPriority(), str);
-        } else if (str.equals("&")) {
+        } else if (("&").equals(str)) {
             priority = new SymbolPriority(
                     ExpressionConstant.AND.getPriority(), str);
-        } else if (str.equals("~")) {
+        } else if (("~").equals(str)) {
             priority = new SymbolPriority(
                     ExpressionConstant.NOT.getPriority(), str);
-        } else if (str.equals("^")) {
+        } else if (("^").equals(str)) {
             priority = new SymbolPriority(
                     ExpressionConstant.CAP.getPriority(), str);
-        } else if (str.equals("(") || str.equals(")")) {
+        } else if (("(").equals(str) || (")").equals(str)) {
             priority = new SymbolPriority(
                     ExpressionConstant.BRACKET.getPriority(), str);
         }

@@ -1,59 +1,79 @@
 package by.epam.informationhandling.interpreter;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class ExpressionCalculator {
 
     private List<String> strings;
 
-    private ArrayList<AbstractMathExpression> listExpression;
-
     public ExpressionCalculator(List<String> stringList) {
-        listExpression = new ArrayList<>();
         this.strings = stringList;
-        parse();
     }
 
-    private void parse() {
-        for (String x : strings) {
-            x = x.trim();
+    private void parse(final ExpressionContext context) {
 
-            switch(x) {
+        for (String string : strings) {
+            switch(string) {
                 case ">>>": {
-                    listExpression.add(
-                            new TerminalExpressionBitThreeRightShift());
+                    Expression lambda =
+                            x -> {
+                                int f1 = x.popValue();
+                                int f2 = x.popValue();
+                                x.pushValue(f2
+                                        >>> f1);
+                            };
+                    lambda.test(context);
                     break;
                 }
                 case ">>": {
-                    listExpression.add(
-                            new TerminalExpressionBitTwoRightShift());
+                    Expression lambda =
+                            x -> {
+                                int f1 = x.popValue();
+                                int f2 = x.popValue();
+                                x.pushValue(f2
+                                        >> f1);
+                            };
+                    lambda.test(context);
                     break;
                 }
                 case "<<": {
-                    listExpression.add(
-                            new TerminalExpressionBitTwoLeftShift());
+                    Expression lambda =
+                            x -> {
+                                int f1 = x.popValue();
+                                int f2 = x.popValue();
+                                x.pushValue(f2
+                                        << f1);
+                            };
+                    lambda.test(context);
                     break;
                 }
                 case "^": {
-                    listExpression.add(new TerminalExpressionBitCap());
+                    Expression lambda =
+                            x -> x.pushValue(x.popValue() ^ x.popValue());
+                    lambda.test(context);
                     break;
                 }
                 case "|": {
-                    listExpression.add(new TerminalExpressionBitOr());
+                    Expression lambda =
+                            x -> x.pushValue(x.popValue() | x.popValue());
+                    lambda.test(context);
                     break;
                 }
                 case "&": {
-                    listExpression.add(new TerminalExpressionBitAnd());
+                    Expression lambda =
+                            x -> x.pushValue(x.popValue() & x.popValue());
+                    lambda.test(context);
                     break;
                 }
                 case "~": {
-                    listExpression.add(new TerminalExpressionBitNot());
+                    Expression lambda = x -> x.pushValue(~x.popValue());
+                    lambda.test(context);
                     break;
                 }
                 default: {
-                    listExpression.add(
-                            new TerminalExpressionNumber(Integer.valueOf(x)));
+                    Expression lambda =
+                            x -> x.pushValue(Integer.valueOf(string.trim()));
+                    lambda.test(context);
                 }
             }
         }
@@ -61,10 +81,7 @@ public class ExpressionCalculator {
 
     public Number calculate() {
         ExpressionContext context = new ExpressionContext();
-        for (AbstractMathExpression terminal : listExpression) {
-            terminal.interpret(context);
-        }
+        parse(context);
         return context.popValue();
     }
-
 }

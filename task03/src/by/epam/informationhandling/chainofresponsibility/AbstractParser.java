@@ -31,11 +31,12 @@ public abstract class AbstractParser {
             throw new IncorrectDataException("We have incorrect object data!!");
         }
 
-        if (textParser instanceof ParserToSymbol
-                || textParser instanceof ParserToExpression) {
+        if (textParser instanceof ParserToSymbol) {
             solving(textElementType,wholeText, textParser, string);
         } else {
             for (String str : string.split(SPLIT_REGEX)) {
+                if (textElementType == TextElementType.LEXEME) {
+                }
                 solving(textElementType,wholeText, textParser, str);
             }
         }
@@ -46,7 +47,6 @@ public abstract class AbstractParser {
                     final TextComposite wholeText,
                     final TextParser textParser,
                     final String string) throws IncorrectDataException {
-        //I should add method which will check point in end of sentence!!!!!!!
         TextComposite textComposite = new TextComposite();
         textComposite.setTextElementType(textElementType);
         wholeText.addElement(textComposite);

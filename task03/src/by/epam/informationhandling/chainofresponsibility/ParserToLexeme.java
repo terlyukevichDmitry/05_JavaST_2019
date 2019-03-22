@@ -8,7 +8,7 @@ public class ParserToLexeme extends AbstractParser implements TextParser {
 
     private static final String LEXEME_SPLIT_REGEX = "[\\s\\n]+";
 
-    private static final String WORD_SPLIT_REGEX = "[[()'\"-]?a-zA-Z]+";
+    private static final String WORD_SPLIT_REGEX = "[[()'\"-]?^A-Za-z0-9]+";
 
     private static final String EXPRESSION_SPLIT_REGEX = "[^a-zA-Z]+";
 
@@ -29,19 +29,43 @@ public class ParserToLexeme extends AbstractParser implements TextParser {
                         new ParserToSymbol(), wholeLexeme,
                         TextElementType.EXPRESSION);
             } else {
-                String dopString = "" + removeCharAt(lexeme, lexeme.length() - 1);
-                wholeLexeme.setTextElementType(textElementType);
-                parserToLexeme.parse(dopString, WORD_SPLIT_REGEX,
-                        new ParserToSymbol(), wholeLexeme,
-                        TextElementType.WORD);
+                    if (lexeme.charAt(lexeme.length() - 1) == '.'
+                            && lexeme.charAt(lexeme.length() - 2) == '.'
+                            && lexeme.charAt(lexeme.length() - 3) == '.') {
+                        String dopString = "" + removeForWord(lexeme, lexeme.length() - 3);
+                        wholeLexeme.setTextElementType(textElementType);
+                        parserToLexeme.parse(dopString, WORD_SPLIT_REGEX,
+                                new ParserToSymbol(), wholeLexeme,
+                                TextElementType.WORD);
 
-                wholeLexeme.setTextElementType(textElementType);
-                parserToLexeme.parse("" + lexeme.charAt(lexeme.length() - 1), "",
-                        new ParserToPunctuationMark(), wholeLexeme,
-                        TextElementType.PUNCTUATION_MARK);
+                        wholeLexeme.setTextElementType(textElementType);
+                        parserToLexeme.parse("" + removeThreePoints(lexeme,lexeme.length() - 3), "",
+                                new ParserToPunctuationMark(), wholeLexeme,
+                                TextElementType.THREE_POINTS);
+                    } else {
+                        String dopString = "" + removeCharAt(lexeme, lexeme.length() - 1);
+                        wholeLexeme.setTextElementType(textElementType);
+                        parserToLexeme.parse(dopString, WORD_SPLIT_REGEX,
+                                new ParserToSymbol(), wholeLexeme,
+                                TextElementType.WORD);
+
+                        wholeLexeme.setTextElementType(textElementType);
+                        parserToLexeme.parse("" + lexeme.charAt(lexeme.length() - 1), "",
+                                new ParserToPunctuationMark(), wholeLexeme,
+                                TextElementType.PUNCTUATION_MARK);
+                    }
             }
         }
+
         return wholeLexeme;
+    }
+
+    private String removeForWord(final String string, final int pos) {
+        return string.substring(0, pos);
+    }
+
+    private String removeThreePoints(final String string, final int pos) {
+        return string.substring(pos);
     }
 
     private String removeCharAt(final String string, final int pos) {

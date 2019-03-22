@@ -9,6 +9,7 @@ import org.apache.logging.log4j.Logger;
 
 import java.util.ArrayDeque;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class PolishNotationCreator {
@@ -30,41 +31,32 @@ public class PolishNotationCreator {
 
     private List<String> listDataCreating(final String string) {
         int position = 0;
-        ArrayList<Integer> arrayList = new ArrayList<>();
         List<String> stringList = new ArrayList<>();
         while(position != string.length()) {
             String dopString = "";
+            int j = position + 1;
+            StringBuilder stringBuilder = new StringBuilder();
+            stringBuilder.append(string.charAt(position));
             if (Character.isDigit(string.charAt(position))) {
-                int j = position + 1;
-                StringBuilder stringBuilder = new StringBuilder();
-                stringBuilder.append(string.charAt(position));
                 while(j != string.length()
                         && Character.isDigit(string.charAt(j))) {
                     stringBuilder.append(string.charAt(j));
                     j++;
                 }
-                position += stringBuilder.length() - 1;
-                dopString += stringBuilder.toString() + " ";
-                arrayList.add(Integer.parseInt(stringBuilder.toString()));
             } else {
-                StringBuilder stringBuilder = new StringBuilder();
-                stringBuilder.append(string.charAt(position));
-                int i = position + 1;
-                if (i < string.length()) {
-                    while (!Character.isDigit(string.charAt(i))) {
-                        if (string.charAt(i) == string.charAt(position)) {
-                            stringBuilder.append(string.charAt(i));
+                if (j < string.length()) {
+                    while (!Character.isDigit(string.charAt(j))) {
+                        if (string.charAt(j) == string.charAt(position)) {
+                            stringBuilder.append(string.charAt(j));
                         }
-                        i++;
+                        j++;
                     }
                 }
-                position += stringBuilder.length() - 1;
-                dopString += stringBuilder.toString();
             }
+            position += stringBuilder.length() - 1;
+            dopString += stringBuilder.toString();
             if (dopString.charAt(0) == ')') {
-                for (String element : dopString.split("")) {
-                    stringList.add(element);
-                }
+                stringList.addAll(Arrays.asList(dopString.split("")));
             } else {
                 stringList.add(dopString);
             }
@@ -95,7 +87,7 @@ public class PolishNotationCreator {
                         s = deque.pop();
                     }
                 } else {
-                    if (!isEmpty(deque) && !checkingSymbol(deque)
+                    if (checkingEmptyDeque(deque) && !checkingSymbol(deque)
                             && comparePriority(deque, priority)) {
                             list.add(deque.pop().getSymbol());
                         }
@@ -103,7 +95,7 @@ public class PolishNotationCreator {
                 }
             }
         }
-        while (!isEmpty(deque)) {
+        while (checkingEmptyDeque(deque)) {
             list.add(deque.pop().getSymbol());
         }
         return list;
@@ -134,8 +126,8 @@ public class PolishNotationCreator {
         return priority;
     }
 
-    private boolean isEmpty(final ArrayDeque<SymbolPriority> deque) {
-        return deque.isEmpty();
+    private boolean checkingEmptyDeque(final ArrayDeque<SymbolPriority> deque) {
+        return !deque.isEmpty();
     }
 
     private boolean checkingSymbol(final ArrayDeque<SymbolPriority> deque) {

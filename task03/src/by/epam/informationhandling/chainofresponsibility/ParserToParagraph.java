@@ -14,7 +14,7 @@ public class ParserToParagraph extends AbstractParser implements TextParser {
             throws IncorrectDataException {
         ParserToParagraph parserToParagraph = new ParserToParagraph();
         parserToParagraph.parse(string, PARAGRAPH_SPLIT_REGEX,
-                new ParserToSentence(), wholeText, TextElementType.SENTENCE);
+                new ParserToSentence(), wholeText, TextElementType.PARAGRAPH);
         return wholeText;
     }
 }

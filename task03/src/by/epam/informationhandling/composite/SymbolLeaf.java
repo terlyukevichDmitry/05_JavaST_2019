@@ -1,5 +1,7 @@
 package by.epam.informationhandling.composite;
 
+import java.util.ArrayList;
+
 public class SymbolLeaf implements TextComponent {
 
     private char symbol;
@@ -25,6 +27,21 @@ public class SymbolLeaf implements TextComponent {
 
     @Override
     public void addElement(TextComponent component) {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public ArrayList<TextComponent> getComponents() {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public int getSize() {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public void setComponents(ArrayList<TextComponent> components) {
         throw new UnsupportedOperationException();
     }
 

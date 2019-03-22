@@ -5,8 +5,8 @@ public enum TextElementType {
     WORD,
     PUNCTUATION_MARK,
     PARAGRAPH,
-    LEXEME,
     EXPRESSION,
     SENTENCE,
     SYMBOL,
+    THREE_POINTS;
 }

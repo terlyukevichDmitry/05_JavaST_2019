@@ -6,7 +6,7 @@ import by.epam.informationhandling.exception.IncorrectDataException;
 
 public class ParserToSentence extends AbstractParser implements TextParser{
 
-    private static final String SENTENCE_SPLIT_REGEX =  "(?>=\\.|\\?|!)";
+    private static final String SENTENCE_SPLIT_REGEX =  "[^.?!]+?(?:\\.{3}|\\.|!{3}|!|\\?)";
 
     @Override
     public TextComposite parseText(TextComposite wholeSentence,
@@ -15,7 +15,7 @@ public class ParserToSentence extends AbstractParser implements TextParser{
             throws IncorrectDataException {
         ParserToSentence parserToSentence = new ParserToSentence();
         parserToSentence.parse(paragraph, SENTENCE_SPLIT_REGEX,
-                new ParserToLexeme(), wholeSentence, TextElementType.LEXEME);
+                new ParserToLexeme(), wholeSentence, TextElementType.SENTENCE);
         return wholeSentence;
     }
 }

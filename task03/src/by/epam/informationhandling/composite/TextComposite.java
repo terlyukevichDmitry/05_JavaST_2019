@@ -8,7 +8,7 @@ import org.apache.logging.log4j.Logger;
 
 import java.util.ArrayList;
 
-public class TextComposite implements TextComponent {
+public class TextComposite implements TextComponent, Cloneable {
 
     /**
      * Logger for recording a program state.
@@ -28,16 +28,23 @@ public class TextComposite implements TextComponent {
         this.textElementType = textElementType;
     }
 
+    public void addElement(TextComponent component) {
+        components.add(component);
+    }
+
+    @Override
     public ArrayList<TextComponent> getComponents() {
         return components;
     }
 
-    public void setComponents(ArrayList<TextComponent> components) {
-        this.components = components;
+    @Override
+    public int getSize() {
+        return components.size();
     }
 
-    public void addElement(TextComponent component) {
-        components.add(component);
+    @Override
+    public void setComponents(ArrayList<TextComponent> components) {
+        this.components = components;
     }
 
     public TextComponent getChild(int index) {
@@ -75,19 +82,25 @@ public class TextComposite implements TextComponent {
                         LOGGER.error(
                                 "We have null object in expression!", e);
                     }
+
                     break;
                 }
-                case SENTENCE: {
-                    stringBuilder.append("\n" + component.operation());
+                case PUNCTUATION_MARK: {
+                    stringBuilder.append((component.operation()));
                     break;
                 }
-                case PARAGRAPH: {
-                    stringBuilder.append((component.operation() + "\n"));
+                case TEXT: {
+                    stringBuilder.append("    " + (component.operation() + "\n"));
                     break;
                 }
                 default: stringBuilder.append(component.operation());
             }
         }
         return stringBuilder.toString();
+    }
+
+    @Override
+    public Object clone() throws CloneNotSupportedException {
+        return super.clone();
     }
 }

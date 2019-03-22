@@ -23,7 +23,7 @@ public class Main {
      */
     private static final Logger LOGGER = LogManager.getLogger(DataReader.class);
 
-    public static void main(String[] args) throws MissingWayFileException, IncorrectDataException {
+    public static void main(String[] args) throws MissingWayFileException, IncorrectDataException, CloneNotSupportedException {
 
         TextSeparator textSeparator = new TextSeparator();
         textSeparator.separatingText(FILE);

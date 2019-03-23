@@ -15,7 +15,7 @@ import java.util.ArrayList;
  *
  * @version 1.0
  */
-public class TextComposite implements TextComponent, Cloneable {
+public class TextComposite implements TextComponent {
     /**
      * Logger for recording a program state.
      */
@@ -28,7 +28,7 @@ public class TextComposite implements TextComponent, Cloneable {
     /**
      * ENUM type in text.
      */
-    private TextElementType textElementType;
+    private TextElementType textElementType = null;
     /**
      * Getter for get element type in text.
      * @return enum element.
@@ -43,7 +43,6 @@ public class TextComposite implements TextComponent, Cloneable {
     public void setTextElementType(final TextElementType textElementTypeT) {
         this.textElementType = textElementTypeT;
     }
-
     /**
      * Add element in composite.
      * @param component for add in collection with components.
@@ -137,15 +136,5 @@ public class TextComposite implements TextComponent, Cloneable {
             }
         }
         return stringBuilder.toString();
-    }
-
-    /**
-     * {@inheritDoc}
-     * @return clone object.
-     * @throws CloneNotSupportedException exception situation.
-     */
-    @Override
-    public Object clone() throws CloneNotSupportedException {
-        return super.clone();
     }
 }

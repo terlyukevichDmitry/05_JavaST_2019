@@ -28,6 +28,10 @@ public class ParserToLexeme extends AbstractParser implements TextParser {
      */
     private static final String EXPRESSION_SPLIT_REGEX = "[^a-zA-Z]+";
     /**
+     * Constant.
+     */
+    private final int three = 3;
+    /**
      * In this method we are parsing sentence on lexeme and lexeme on different
      * text components.
      * {@inheritDoc}
@@ -38,8 +42,9 @@ public class ParserToLexeme extends AbstractParser implements TextParser {
      * @throws IncorrectDataException
      */
     @Override
-    public TextComposite parseText(TextComposite wholeLexeme, String sentence,
-                                   TextElementType textElementType)
+    public TextComposite parseText(final TextComposite wholeLexeme,
+                                   final String sentence,
+                                   final TextElementType textElementType)
             throws IncorrectDataException {
         ParserToLexeme parserToLexeme = new ParserToLexeme();
         for (String lexeme : sentence.split(LEXEME_SPLIT_REGEX)) {
@@ -56,32 +61,35 @@ public class ParserToLexeme extends AbstractParser implements TextParser {
             } else {
                     if (lexeme.charAt(lexeme.length() - 1) == '.'
                             && lexeme.charAt(lexeme.length() - 2) == '.'
-                            && lexeme.charAt(lexeme.length() - 3) == '.') {
-                        String dopString = "" + removeForWord(lexeme, lexeme.length() - 3);
+                            && lexeme.charAt(lexeme.length() - three) == '.') {
+                        String dopString = "" + removeForWord(lexeme,
+                                lexeme.length() - three);
                         wholeLexeme.setTextElementType(textElementType);
                         parserToLexeme.parse(dopString, WORD_SPLIT_REGEX,
                                 new ParserToSymbol(), wholeLexeme,
                                 TextElementType.WORD);
 
                         wholeLexeme.setTextElementType(textElementType);
-                        parserToLexeme.parse("" + removeThreePoints(lexeme,lexeme.length() - 3), "",
+                        parserToLexeme.parse("" + removeThreePoints(
+                                lexeme, lexeme.length() - three), "",
                                 new ParserToPunctuationMark(), wholeLexeme,
                                 TextElementType.THREE_POINTS);
                     } else {
-                        String dopString = "" + removeCharAt(lexeme, lexeme.length() - 1);
+                        String dopString = "" + removeCharAt(lexeme,
+                                lexeme.length() - 1);
                         wholeLexeme.setTextElementType(textElementType);
                         parserToLexeme.parse(dopString, WORD_SPLIT_REGEX,
                                 new ParserToSymbol(), wholeLexeme,
                                 TextElementType.WORD);
 
                         wholeLexeme.setTextElementType(textElementType);
-                        parserToLexeme.parse("" + lexeme.charAt(lexeme.length() - 1), "",
+                        parserToLexeme.parse("" + lexeme.charAt(
+                                lexeme.length() - 1), "",
                                 new ParserToPunctuationMark(), wholeLexeme,
                                 TextElementType.PUNCTUATION_MARK);
                     }
             }
         }
-
         return wholeLexeme;
     }
 

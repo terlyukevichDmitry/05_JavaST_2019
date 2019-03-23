@@ -26,8 +26,9 @@ public class ParserToSymbol implements TextParser {
      * @return entity with symbols.
      */
     @Override
-    public TextComposite parseText(TextComposite compositeSymbol,
-                                   String lexeme, TextElementType textElementType) {
+    public TextComposite parseText(final TextComposite compositeSymbol,
+                                   final String lexeme,
+                                   final TextElementType textElementType) {
         TextComposite textComposite = new TextComposite();
         for (String symbol : lexeme.split(SYMBOL_SPLIT_REGEX)) {
             SymbolLeaf symbolComponent = new SymbolLeaf();

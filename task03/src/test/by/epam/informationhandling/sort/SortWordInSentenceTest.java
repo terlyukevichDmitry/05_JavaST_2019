@@ -17,7 +17,7 @@ public class SortWordInSentenceTest {
     private static final String FILE = "data" + File.separator + "lab3-text.txt";
 
     @Test
-    public void sortingData() throws MissingWayFileException,
+    public void sortingDataTest() throws MissingWayFileException,
             IncorrectDataException {
         DataReader dataReader = new DataReader();
         TextSeparator textSeparator = new TextSeparator();

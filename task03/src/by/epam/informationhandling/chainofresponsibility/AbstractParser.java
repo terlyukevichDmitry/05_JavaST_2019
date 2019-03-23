@@ -108,13 +108,15 @@ public abstract class AbstractParser {
         String m = "";
         Pattern patternSentence = Pattern.compile(regex);
         Matcher matcher = patternSentence.matcher(string);
-        while(matcher.find()) {
-            m = matcher.group(0);
-            TextComposite textComposite = new TextComposite();
-            textComposite.setTextElementType(textElementType);
-            wholeText.addElement(textComposite);
-            textParser.parseText(textComposite, m.trim(),
-                    textElementType);
+        if (matcher.find()) {
+            do {
+                m = matcher.group(0);
+                TextComposite textComposite = new TextComposite();
+                textComposite.setTextElementType(textElementType);
+                wholeText.addElement(textComposite);
+                textParser.parseText(textComposite, m.trim(),
+                        textElementType);
+            } while (matcher.find());
         }
     }
 }

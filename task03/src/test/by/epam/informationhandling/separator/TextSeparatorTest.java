@@ -3,10 +3,7 @@ package test.by.epam.informationhandling.separator;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-import java.awt.*;
-import java.util.ArrayList;
-
-public class TextSeparator {
+public class TextSeparatorTest {
     /**
      * {@inheritDoc}
      * @return object with data for polish notation.
@@ -20,7 +17,7 @@ public class TextSeparator {
                 };
     }
     @Test
-    public void creatingTree() {
+    public void creatingTreeTest() {
 
     }
 }

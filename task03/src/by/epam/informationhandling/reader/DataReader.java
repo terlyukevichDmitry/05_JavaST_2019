@@ -1,5 +1,6 @@
 package by.epam.informationhandling.reader;
 
+import by.epam.informationhandling.exception.FileEmptyException;
 import by.epam.informationhandling.exception.MissingWayFileException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -17,7 +18,6 @@ import java.nio.file.Paths;
  * @version 1.0
  */
 public class DataReader {
-
     /**
      * Logger for recording a program state.
      */
@@ -35,11 +35,16 @@ public class DataReader {
         if (file != null) {
             try {
                 string = Files.readString(Paths.get(file));
+                if (string.isEmpty()) {
+                    throw new FileEmptyException("File is empty");
+                }
             } catch (IOException ex) {
                 LOGGER.warn("We have problem with this method. Please,"
                         + " correct this mistake.", ex);
             } catch (UncheckedIOException ex) {
                 LOGGER.warn("False file path is a directory", ex);
+            } catch (FileEmptyException ex) {
+                LOGGER.warn("File is empty", ex);
             }
             return string;
         } else {

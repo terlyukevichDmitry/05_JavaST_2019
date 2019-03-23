@@ -1,13 +1,30 @@
 package by.epam.informationhandling.chainofresponsibility;
 
-import by.epam.informationhandling.composite.SymbolLeaf;
-import by.epam.informationhandling.composite.TextComposite;
-import by.epam.informationhandling.composite.TextElementType;
+import by.epam.informationhandling.entity.SymbolLeaf;
+import by.epam.informationhandling.entity.TextComposite;
+import by.epam.informationhandling.entity.TextElementType;
 
+/**
+ * This class we use for parse text to symbol element.
+ *
+ *
+ * @author Dmitry Terlyukevish
+ *
+ * @version 1.0
+ */
 public class ParserToSymbol implements TextParser {
-
+    /**
+     * Regular expression for parse text on lexeme.
+     */
     private static final String SYMBOL_SPLIT_REGEX = "";
 
+    /**
+     * {@inheritDoc}
+     * @param compositeSymbol entity object.
+     * @param lexeme string for parse.
+     * @param textElementType type in text.
+     * @return entity with symbols.
+     */
     @Override
     public TextComposite parseText(TextComposite compositeSymbol,
                                    String lexeme, TextElementType textElementType) {

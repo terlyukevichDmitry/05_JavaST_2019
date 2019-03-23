@@ -1,4 +1,4 @@
-package by.epam.informationhandling.composite;
+package by.epam.informationhandling.entity;
 
 import java.util.ArrayList;
 

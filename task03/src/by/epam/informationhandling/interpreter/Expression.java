@@ -1,6 +1,13 @@
 package by.epam.informationhandling.interpreter;
 
+/**
+ * Functional interface for calculate expression.
+ */
 @FunctionalInterface
 public interface Expression {
-    public void test(ExpressionContext context);
+    /**
+     * Method for calculate expression.
+     * @param context context object.
+     */
+    void calculateExpression(ExpressionContext context);
 }

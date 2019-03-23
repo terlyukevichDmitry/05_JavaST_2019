@@ -8,7 +8,7 @@ import org.testng.annotations.Test;
 import java.io.File;
 
 /**
- *An public class for testing many different methods of DataReader test class.
+ *An public class for testing many different methods of DataReader calculateExpression class.
  *
  * @author Dmitry Terlyukevish
  * @version 1.0

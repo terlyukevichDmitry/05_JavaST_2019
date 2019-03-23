@@ -1,7 +1,7 @@
 package by.epam.informationhandling.sort;
 
-import by.epam.informationhandling.composite.TextComponent;
-import by.epam.informationhandling.composite.TextComposite;
+import by.epam.informationhandling.entity.TextComponent;
+import by.epam.informationhandling.entity.TextComposite;
 
 import java.util.ArrayList;
 import java.util.List;

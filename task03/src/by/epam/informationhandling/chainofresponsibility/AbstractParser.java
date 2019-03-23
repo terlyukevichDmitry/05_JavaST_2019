@@ -1,7 +1,7 @@
 package by.epam.informationhandling.chainofresponsibility;
 
-import by.epam.informationhandling.composite.TextComposite;
-import by.epam.informationhandling.composite.TextElementType;
+import by.epam.informationhandling.entity.TextComposite;
+import by.epam.informationhandling.entity.TextElementType;
 import by.epam.informationhandling.exception.IncorrectDataException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -32,9 +32,9 @@ public abstract class AbstractParser {
      * @param string text state.
      * @param regex regular expression for parse text.
      * @param textParser parse level.
-     * @param wholeText composite object.
+     * @param wholeText entity object.
      * @param textElementType type different state.
-     * @return composite object.
+     * @return entity object.
      * @throws IncorrectDataException for checking exception moments.
      * It will be incorrect data(string or object).
      */
@@ -73,7 +73,7 @@ public abstract class AbstractParser {
     /**
      * In this method we are solving our task to create tree.
      * @param textElementType type different state.
-     * @param wholeText composite object.
+     * @param wholeText entity object.
      * @param textParser parse level.
      * @param string text state.
      * @throws IncorrectDataException for checking exception moments.
@@ -90,6 +90,15 @@ public abstract class AbstractParser {
                 textElementType);
     }
 
+    /**
+     * Method for parse sentence of the different punctuation marks.
+     * @param string sentence.
+     * @param regex for parse sentence on lexeme.
+     * @param textParser type of parser.
+     * @param wholeText entity.
+     * @param textElementType type in text.
+     * @throws IncorrectDataException for checking exception moments.
+     */
     private void solvingSentence(final String string,
                                  final String regex,
                                  final TextParser textParser,

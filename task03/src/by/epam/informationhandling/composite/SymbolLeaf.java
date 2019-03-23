@@ -36,11 +36,6 @@ public class SymbolLeaf implements TextComponent {
     }
 
     @Override
-    public int getSize() {
-        throw new UnsupportedOperationException();
-    }
-
-    @Override
     public void setComponents(ArrayList<TextComponent> components) {
         throw new UnsupportedOperationException();
     }

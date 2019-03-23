@@ -8,5 +8,5 @@ public enum TextElementType {
     EXPRESSION,
     SENTENCE,
     SYMBOL,
-    THREE_POINTS;
+    THREE_POINTS
 }

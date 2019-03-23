@@ -38,11 +38,6 @@ public class TextComposite implements TextComponent, Cloneable {
     }
 
     @Override
-    public int getSize() {
-        return components.size();
-    }
-
-    @Override
     public void setComponents(ArrayList<TextComponent> components) {
         this.components = components;
     }

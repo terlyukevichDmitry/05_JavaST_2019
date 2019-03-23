@@ -8,6 +8,5 @@ public interface TextComponent {
     void remove(TextComponent component);
     void addElement(TextComponent component);
     ArrayList<TextComponent> getComponents();
-    int getSize();
     void setComponents(ArrayList<TextComponent> components);
 }

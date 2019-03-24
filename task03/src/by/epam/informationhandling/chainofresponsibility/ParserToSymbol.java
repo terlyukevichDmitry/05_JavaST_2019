@@ -14,7 +14,7 @@ import by.epam.informationhandling.entity.TextElementType;
  */
 public class ParserToSymbol implements TextParser {
     /**
-     * Regular expression for parse text on lexeme.
+     * Regular expression for parse text on symbol.
      */
     private static final String SYMBOL_SPLIT_REGEX = "";
 

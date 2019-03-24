@@ -14,7 +14,7 @@ import by.epam.informationhandling.exception.IncorrectDataException;
  */
 public class ParserToSentence extends AbstractParser implements TextParser {
     /**
-     * Regular expression for parse text on lexeme.
+     * Regular expression for parse text on sentence.
      */
     private static final String SENTENCE_SPLIT_REGEX =
             "[^.?!]+?(?:\\.{3}|\\.|!{3}|!|\\?)";

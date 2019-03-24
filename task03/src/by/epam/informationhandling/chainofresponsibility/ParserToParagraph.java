@@ -14,7 +14,7 @@ import by.epam.informationhandling.exception.IncorrectDataException;
  */
 public class ParserToParagraph extends AbstractParser implements TextParser {
     /**
-     * Regular expression for parse text on lexeme.
+     * Regular expression for parse text on paragraph.
      */
     private static final String PARAGRAPH_SPLIT_REGEX =
             "(?m)(?!\\A)(?=^\\s{4})";

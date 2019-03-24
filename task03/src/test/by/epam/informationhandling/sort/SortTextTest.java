@@ -28,8 +28,10 @@ public class SortTextTest {
         TextSeparator textSeparator = new TextSeparator();
         TextComposite composite = textSeparator.creatingTree(
                 dataReader.readListOfString(FILE));
+        System.out.println(composite);
         SortText sortText = new SortText();
         ArrayList<TextComponent> actual = sortText.sortingData(
                 composite, symbol);
+        System.out.println(actual);
     }
 }

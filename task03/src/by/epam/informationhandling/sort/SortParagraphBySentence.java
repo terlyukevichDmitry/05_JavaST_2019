@@ -22,7 +22,7 @@ public class SortParagraphBySentence implements SortComparator {
     public void sortingData(final TextComposite textComposite) {
         List<TextComponent> paragraph = textComposite.getComponents();
         ArrayList<TextComponent> components = new ArrayList<>(paragraph);
-        components.sort(Comparator.comparingInt(o -> o.getComponents().size()));
+        components.sort(Comparator.comparingInt(ob -> ob.getComponents().size()));
         textComposite.setComponents(components);
     }
 }

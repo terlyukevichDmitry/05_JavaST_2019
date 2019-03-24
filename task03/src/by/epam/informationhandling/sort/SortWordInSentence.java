@@ -16,16 +16,15 @@ import java.util.List;
 public class SortWordInSentence implements SortComparator {
     /**
      * Method for sort word in sentence by word length.
-     * @param textComposite object witch we will be sort.
+     * @param composite object witch we will be sort.
      */
     @Override
-    public void sortingData(final TextComposite textComposite) {
-        List<TextComponent> textComponents = textComposite.getComponents();
+    public void sortingData(final TextComposite composite) {
+        List<TextComponent> textComponents = composite.getComponents();
         ArrayList<TextComponent> components = new ArrayList<>();
         for (TextComponent textComponent: textComponents) {
             components.addAll(textComponent.getComponents());
         }
-
         for (TextComponent textComponent: components) {
             ArrayList<TextComponent> lexeme =
                     new ArrayList<>(textComponent.getComponents());

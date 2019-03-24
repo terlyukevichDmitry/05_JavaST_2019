@@ -23,33 +23,38 @@ public class SortText {
     public ArrayList<TextComponent> sortingData(
             final TextComposite textComposite, final char symbol) {
         ArrayList<TextComponent> components = getArrayList(textComposite);
-        components.sort(new Comparator<>() {
-            @Override
-            public int compare(final TextComponent a, final TextComponent b) {
-                if (checkSymbol(symbol, a.toString()) - checkSymbol(symbol,
-                        b.toString()) == 0) {
-                    List<TextComponent> list = new ArrayList<>();
-                    list.add(a);
-                    list.add(b);
-                    list.sort(Comparator.comparing(Object::toString));
-                    return 0;
-                } else {
-                    return Integer.signum(checkSymbol(symbol, a.toString())
-                            - checkSymbol(symbol, b.toString()));
-                }
-            }
 
-            private int checkSymbol(final char symbol, final String lexeme) {
-                char[] chars = lexeme.toCharArray();
-                int counter = 0;
-                for (char aChar : chars) {
-                    if (aChar == symbol) {
-                        counter++;
-                    }
-                }
-                return counter;
-            }
-        });
+        components.sort(Comparator.comparing(ob->ob.toString().chars().filter(
+                s->s == symbol).count()).reversed().thenComparing(
+                        Object::toString));
+
+//        components.sort(new Comparator<>() {
+//            @Override
+//            public int compare(final TextComponent a, final TextComponent b) {
+//                if (checkSymbol(symbol, a.toString()) - checkSymbol(symbol,
+//                        b.toString()) == 0) {
+//                    List<TextComponent> list = new ArrayList<>();
+//                    list.add(a);
+//                    list.add(b);
+//                    list.sort(Comparator.comparing(Object::toString));
+//                    return 0;
+//                } else {
+//                    return Integer.signum(checkSymbol(symbol, a.toString())
+//                            - checkSymbol(symbol, b.toString()));
+//                }
+//            }
+//
+//            private int checkSymbol(final char symbol, final String lexeme) {
+//                char[] chars = lexeme.toCharArray();
+//                int counter = 0;
+//                for (char aChar : chars) {
+//                    if (aChar == symbol) {
+//                        counter++;
+//                    }
+//                }
+//                return counter;
+//            }
+//        });
         return components;
     }
 

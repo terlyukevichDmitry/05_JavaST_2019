@@ -21,6 +21,20 @@ public class TextComposite implements TextComponent {
      */
     private static final Logger LOGGER =
             LogManager.getLogger(TextComposite.class);
+
+    /**
+     * Constructor.
+     */
+    public TextComposite() {
+    }
+    /**
+     * Constructor for create clone composite.
+     * @param textComposite new composite.
+     */
+    public TextComposite(final TextComposite textComposite) {
+        components = textComposite.components;
+        textElementType = textComposite.textElementType;
+    }
     /**
      * Collection for storage text components.
      */
@@ -28,7 +42,7 @@ public class TextComposite implements TextComponent {
     /**
      * ENUM type in text.
      */
-    private TextElementType textElementType = null;
+    private TextElementType textElementType;
     /**
      * Getter for get element type in text.
      * @return enum element.

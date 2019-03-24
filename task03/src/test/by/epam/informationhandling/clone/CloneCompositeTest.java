@@ -49,8 +49,9 @@ public class CloneCompositeTest {
     @Test
     public void cloningCompositeTest() throws MissingWayFileException,
             IncorrectDataException {
-        TextComposite expected = textSeparator.creatingTree(
-                dataReader.readListOfString(FILE));
+        TextComposite expected = new TextComposite();
+        expected = textSeparator.creatingTree(
+                dataReader.readListOfString(FILE), expected);
         TextComposite actual = new TextComposite(expected);
         Assert.assertEquals(expected, actual);
     }

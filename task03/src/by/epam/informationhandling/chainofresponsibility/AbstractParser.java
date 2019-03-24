@@ -24,7 +24,6 @@ public abstract class AbstractParser {
      */
     private static final Logger LOGGER =
             LogManager.getLogger(AbstractParser.class);
-
     /**
      * We use this method for parse text on different state.
      * It's will be Paragraph, Sentence, Lexeme, Word, Expression

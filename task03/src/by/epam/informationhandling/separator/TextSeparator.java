@@ -19,10 +19,10 @@ public class TextSeparator {
      * @return composite with text element(paragraph, sentence, lexeme and ...)
      * @throws IncorrectDataException for checking exception moments.
      */
-    public TextComposite creatingTree(final String string)
+    public TextComposite creatingTree(final String string,
+                                      final TextComposite composite)
             throws IncorrectDataException {
-        TextComposite composite = new TextComposite();
-        composite = new ParserToAllText().parseText(composite, string,
+        new ParserToAllText().parseText(composite, string,
                 TextElementType.TEXT);
         return composite;
     }

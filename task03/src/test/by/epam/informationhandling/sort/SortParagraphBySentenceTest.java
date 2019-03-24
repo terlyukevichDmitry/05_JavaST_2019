@@ -10,6 +10,7 @@ import org.testng.Assert;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
+import org.w3c.dom.Text;
 
 import java.io.File;
 
@@ -52,8 +53,9 @@ public class SortParagraphBySentenceTest {
     @Test
     public void sortingDataTest() throws MissingWayFileException,
             IncorrectDataException {
-        TextComposite composite = textSeparator.creatingTree(
-                dataReader.readListOfString(FILE));
+        TextComposite composite = new TextComposite();
+        composite = textSeparator.creatingTree(
+                dataReader.readListOfString(FILE), composite);
         SortParagraphBySentence sortParagraphBySentence =
                 new SortParagraphBySentence();
         sortParagraphBySentence.sortingData(composite);

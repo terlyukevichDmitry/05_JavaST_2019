@@ -1,5 +1,6 @@
 package test.by.epam.informationhandling.separator;
 
+import by.epam.informationhandling.chainofresponsibility.AbstractParser;
 import by.epam.informationhandling.entity.TextComposite;
 import by.epam.informationhandling.exception.IncorrectDataException;
 import by.epam.informationhandling.exception.MissingWayFileException;
@@ -19,7 +20,7 @@ import java.io.File;
  * @author Dmitry Terlyukevish
  * @version 1.0
  */
-public class TextSeparatorTest {
+public class TextSeparatorTest extends AbstractParser {
     /**
      * file direction.
      */
@@ -61,8 +62,9 @@ public class TextSeparatorTest {
     @Test
     public void creatingTreeTest() throws MissingWayFileException,
             IncorrectDataException {
-        TextComposite actual
-                = textSeparator.creatingTree(dataReader.readListOfString(FILE));
+        TextComposite actual = new TextComposite();
+        actual= textSeparator.creatingTree(dataReader.readListOfString(FILE),
+                actual);
         String expected = "     It is a long established fact that a reader "
                 + "will be distracted by the readable content of a page when "
                 + "looking at its layout... The point of using 78 Ipsum is "

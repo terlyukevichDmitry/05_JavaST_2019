@@ -53,8 +53,9 @@ public class SortAllLexemeInTextTest {
     public void sortingDataTest() throws MissingWayFileException,
             IncorrectDataException {
         final char symbol = 't';
-        TextComposite composite = textSeparator.creatingTree(
-                dataReader.readListOfString(FILE));
+        TextComposite composite = new TextComposite();
+        composite = textSeparator.creatingTree(
+                dataReader.readListOfString(FILE), composite);
         ArrayList<TextComponent> actual = new SortAllLexemeInText().sortingData(
                 composite, symbol);
         String expected = "[ content,  distracted,  that,  It,  at,  "

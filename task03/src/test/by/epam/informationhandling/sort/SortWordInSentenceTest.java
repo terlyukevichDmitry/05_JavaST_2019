@@ -50,8 +50,9 @@ public class SortWordInSentenceTest {
     @Test
     public void sortingDataTest() throws MissingWayFileException,
             IncorrectDataException {
-        TextComposite composite = textSeparator.creatingTree(
-                dataReader.readListOfString(FILE));
+        TextComposite composite = new TextComposite();
+        composite = textSeparator.creatingTree(
+                dataReader.readListOfString(FILE), composite);
         SortWordInSentence sortWordInSentence = new SortWordInSentence();
         sortWordInSentence.sortingData(composite);
         String expected = "    ... a a a It is be by of at the its long fact "

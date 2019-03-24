@@ -32,7 +32,6 @@ public enum ExpressionConstant {
      * priority different expression elements.
      */
     private int priority;
-
     /**
      * Constructor for priority.
      * @param priorityEnum priority expression element.
@@ -40,7 +39,6 @@ public enum ExpressionConstant {
     ExpressionConstant(final int priorityEnum) {
         this.priority = priorityEnum;
     }
-
     /**
      * Getter for get priority.
      * @return priority different element.

@@ -13,7 +13,7 @@ import java.util.List;
  *
  * @version 1.0
  */
-public class SortText {
+public class SortAllLexemeInText {
     /**
      * Method for sorting word in all text by one symbol or by alphabetically.
      * @param textComposite object witch we will be sort.

@@ -35,7 +35,7 @@ public class PolishNotationCreator {
     public List<String> polishCreating(final String string)
             throws NullDataException {
         if (string == null) {
-            LOGGER.info("We have null object!");
+            LOGGER.error("We have null object!");
             throw new NullDataException("We have null object!");
         }
         List<String> stringList = listDataCreating(string);

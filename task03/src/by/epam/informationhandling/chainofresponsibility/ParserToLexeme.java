@@ -14,7 +14,6 @@ import by.epam.informationhandling.exception.IncorrectDataException;
  * @version 1.0
  */
 public class ParserToLexeme extends AbstractParser implements TextParser {
-
     /**
      * Regular expression for parse text on lexeme.
      */
@@ -27,10 +26,6 @@ public class ParserToLexeme extends AbstractParser implements TextParser {
      * Regular expression for parse text on expression.
      */
     private static final String EXPRESSION_SPLIT_REGEX = "[^a-zA-Z]+";
-    /**
-     * Constant.
-     */
-    private final int three = 3;
     /**
      * In this method we are parsing sentence on lexeme and lexeme on different
      * text components.
@@ -59,7 +54,8 @@ public class ParserToLexeme extends AbstractParser implements TextParser {
                         new ParserToSymbol(), wholeLexeme,
                         TextElementType.EXPRESSION);
             } else {
-                    if (lexeme.charAt(lexeme.length() - 1) == '.'
+                final int three = 3;
+                if (lexeme.charAt(lexeme.length() - 1) == '.'
                             && lexeme.charAt(lexeme.length() - 2) == '.'
                             && lexeme.charAt(lexeme.length() - three) == '.') {
                         String dopString = "" + removeForWord(lexeme,

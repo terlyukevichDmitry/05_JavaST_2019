@@ -14,7 +14,6 @@ class ExpressionContext {
      * Deque for calculate polish notation.
      */
     private Deque<Integer> deque = new ArrayDeque<>();
-
     /**
      * get deque.pop() element in Deque.
      * @return deque element.
@@ -22,7 +21,6 @@ class ExpressionContext {
     Integer popValue() {
         return deque.pop();
     }
-
     /**
      * push element in Deque.
      * @param value element for push in Deque.

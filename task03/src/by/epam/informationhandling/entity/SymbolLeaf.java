@@ -1,6 +1,7 @@
 package by.epam.informationhandling.entity;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 /**
  * This class we use for save symbol text element.
@@ -78,5 +79,29 @@ public class SymbolLeaf implements TextComponent {
     @Override
     public String toString() {
         return "" + symbol;
+    }
+    /**
+     * Equals method for compare objects.
+     * @param o our object for compare.
+     * @return result, true or false. equal or not.
+     */
+    @Override
+    public boolean equals(final Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        SymbolLeaf that = (SymbolLeaf) o;
+        return symbol == that.symbol;
+    }
+    /**
+     * object hashcode.
+     * @return int hashcode.
+     */
+    @Override
+    public int hashCode() {
+        return Objects.hash(symbol);
     }
 }

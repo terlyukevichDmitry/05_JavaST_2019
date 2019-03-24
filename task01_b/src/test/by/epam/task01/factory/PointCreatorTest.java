@@ -48,11 +48,10 @@ public class PointCreatorTest {
                                 final double coordinateY,
                                 final double coordinateZ,
                                 final Point expectedPoint) {
-        Factory<Point> pointFactory = new PointCreator();
-        Point actual = ((PointCreator) pointFactory).createPoint(coordinateX,
+        PointCreator pointFactory = new PointCreator();
+        Point actual = pointFactory.createPoint(coordinateX,
                 coordinateY,
                 coordinateZ);
-        Point expected = expectedPoint;
-        Assert.assertEquals(expected, actual);
+        Assert.assertEquals(expectedPoint, actual);
     }
 }

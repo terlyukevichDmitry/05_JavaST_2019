@@ -24,8 +24,8 @@ public class SortText {
             final TextComposite textComposite, final char symbol) {
         ArrayList<TextComponent> components = getArrayList(textComposite);
 
-        components.sort(Comparator.comparing(ob->ob.toString().chars().filter(
-                s->s == symbol).count()).reversed().thenComparing(
+        components.sort(Comparator.comparing(ob -> ob.toString().chars().filter(
+                s -> s == symbol).count()).reversed().thenComparing(
                         Object::toString));
 
 //        components.sort(new Comparator<>() {

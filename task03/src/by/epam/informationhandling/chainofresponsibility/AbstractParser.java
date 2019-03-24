@@ -34,21 +34,15 @@ public abstract class AbstractParser {
      * @param textParser parse level.
      * @param wholeText entity object.
      * @param textElementType type different state.
-     * @return entity object.
      * @throws IncorrectDataException for checking exception moments.
      * It will be incorrect data(string or object).
      */
-    public TextComposite parse(final String string,
-                               final String regex,
-                               final TextParser textParser,
-                               final TextComposite wholeText,
-                               final TextElementType textElementType)
+    void parse(final String string,
+               final String regex,
+               final TextParser textParser,
+               final TextComposite wholeText,
+               final TextElementType textElementType)
             throws IncorrectDataException {
-        if (string.isEmpty()) {
-            LOGGER.error("We have incorrect string!");
-            throw new IncorrectDataException("We have incorrect string!!");
-        }
-
         if (textParser == null || wholeText == null
                 || textElementType == null) {
             LOGGER.error("We have incorrect object data!");
@@ -67,7 +61,6 @@ public abstract class AbstractParser {
                 }
             }
         }
-        return wholeText;
     }
 
     /**

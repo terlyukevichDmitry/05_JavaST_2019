@@ -7,6 +7,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 /**
  * This class we use for storage text element(symbol).
@@ -21,7 +22,6 @@ public class TextComposite implements TextComponent {
      */
     private static final Logger LOGGER =
             LogManager.getLogger(TextComposite.class);
-
     /**
      * Constructor.
      */
@@ -150,5 +150,30 @@ public class TextComposite implements TextComponent {
             }
         }
         return stringBuilder.toString();
+    }
+    /**
+     * Equals method for compare objects.
+     * @param o our object for compare.
+     * @return result, true or false. equal or not.
+     */
+    @Override
+    public boolean equals(final Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        TextComposite that = (TextComposite) o;
+        return Objects.equals(components, that.components)
+                && textElementType == that.textElementType;
+    }
+    /**
+     * object hashcode.
+     * @return int hashcode.
+     */
+    @Override
+    public int hashCode() {
+        return Objects.hash(components, textElementType);
     }
 }

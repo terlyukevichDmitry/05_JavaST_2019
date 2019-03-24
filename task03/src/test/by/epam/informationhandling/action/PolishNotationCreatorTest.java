@@ -41,13 +41,31 @@ public class PolishNotationCreatorTest {
      * @param expected true result.
      * @throws NullDataException for checking exception situations.
      */
-    @Test(dataProvider = "polish_notation")
-    public void polishCreating(final String string,
+    @Test(description = "Positive script for check result.",
+            dataProvider = "polish_notation")
+    public void polishCreatingTest(final String string,
                                final List<String> expected)
             throws NullDataException {
         PolishNotationCreator creator = new PolishNotationCreator();
         List<String> actual = creator.polishCreating(string);
 
         Assert.assertEquals(expected, actual);
+    }
+
+    /**
+     * Test for checking good works for creating polish notation.
+     * @param string example string for create notation.
+     * @param expected true result.
+     * @throws NullDataException for checking exception situations.
+     */
+    @Test(expectedExceptions = NullDataException.class,
+            description = "Negative script for check result.",
+            dataProvider = "polish_notation")
+    public void polishCreatingNegativeTest(final String string,
+                               final List<String> expected)
+            throws NullDataException {
+        PolishNotationCreator creator = new PolishNotationCreator();
+        List<String> actual = creator.polishCreating(null);
+        Assert.assertEquals(expected, String.valueOf(actual));
     }
 }

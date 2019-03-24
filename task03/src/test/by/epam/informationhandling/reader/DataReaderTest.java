@@ -8,7 +8,8 @@ import org.testng.annotations.Test;
 import java.io.File;
 
 /**
- *An public class for testing many different methods of DataReader calculateExpression class.
+ *An public class for testing many different methods
+ * of DataReader calculateExpression class.
  *
  * @author Dmitry Terlyukevish
  * @version 1.0
@@ -20,17 +21,18 @@ public class DataReaderTest {
     private static final String FILE = "data" + File.separator + "test.txt";
     /**
      * {@inheritDoc}.
+     * @throws MissingWayFileException for checking exception situation.
      */
     @Test(expectedExceptions = MissingWayFileException.class,
             description = "Negative script for show my exception.")
     public void checkFileTest() throws MissingWayFileException {
         String expected = "1";
         String actual = new DataReader().readListOfString(null);
-        Assert.assertEquals("For check, \n" + "do we have a file path: ",
-                expected, String.valueOf(actual));
+        Assert.assertEquals(expected, String.valueOf(actual));
     }
     /**
      * {@inheritDoc}.
+     * @throws MissingWayFileException for checking exception situation.
      */
     @Test(description = "Positive script for reading file.")
     public void checkFileTestA() throws MissingWayFileException {

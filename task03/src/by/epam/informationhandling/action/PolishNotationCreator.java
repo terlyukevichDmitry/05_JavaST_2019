@@ -34,7 +34,10 @@ public class PolishNotationCreator {
      */
     public List<String> polishCreating(final String string)
             throws NullDataException {
-
+        if (string == null) {
+            LOGGER.info("We have null object!");
+            throw new NullDataException("We have null object!");
+        }
         List<String> stringList = listDataCreating(string);
         ArrayDeque<SymbolPriority> deque = new ArrayDeque<>();
 
@@ -92,36 +95,32 @@ public class PolishNotationCreator {
      * @param stringList list with expression components.
      * @param deque for create polish notation.
      * @return list with polish notation elements.
-     * @throws NullDataException for checking exception moments.
      */
     private List<String> listCreator(final List<String> stringList,
-                                     final ArrayDeque<SymbolPriority> deque)
-            throws NullDataException {
+                                     final ArrayDeque<SymbolPriority> deque) {
         List<String> list = new ArrayList<>();
-        if (deque == null) {
-            LOGGER.info("We have null object!");
-            throw new NullDataException("We have null object!");
-        }
         for (String str : stringList) {
-            if (Character.isDigit(str.charAt(0))) {
-                list.add(str);
-            } else {
+            if (!Character.isDigit(str.charAt(0))) {
                 SymbolPriority priority = getSymbolPriority(str);
-                if (("(").equals(str)) {
-                    deque.push(priority);
-                } else if ((")").equals(str)) {
-                    SymbolPriority s = deque.pop();
-                    while (!("(").equals(s.getSymbol())) {
-                        list.add(s.getSymbol());
-                        s = deque.pop();
-                    }
-                } else {
-                    if (checkingEmptyDeque(deque) && !checkingSymbol(deque)
-                            && comparePriority(deque, priority)) {
+                if (!("(").equals(str)) {
+                    if (!(")").equals(str)) {
+                        if (checkingEmptyDeque(deque) && !checkingSymbol(deque)
+                                && comparePriority(deque, priority)) {
                             list.add(deque.pop().getSymbol());
                         }
+                        deque.push(priority);
+                    } else {
+                        SymbolPriority s = deque.pop();
+                        while (!("(").equals(s.getSymbol())) {
+                            list.add(s.getSymbol());
+                            s = deque.pop();
+                        }
+                    }
+                } else {
                     deque.push(priority);
                 }
+            } else {
+                list.add(str);
             }
         }
         while (checkingEmptyDeque(deque)) {

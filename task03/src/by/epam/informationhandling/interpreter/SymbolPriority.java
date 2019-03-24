@@ -1,5 +1,7 @@
 package by.epam.informationhandling.interpreter;
 
+import java.util.Objects;
+
 /**
  * An public class for storage element and his priority.
  * @author Dmitry Terlyukevish
@@ -24,7 +26,6 @@ public class SymbolPriority {
         this.priority = priorityT;
         this.symbol = symbolT;
     }
-
     /**
      * Getter for get symbol.
      * @return symbol.
@@ -38,5 +39,30 @@ public class SymbolPriority {
      */
     public int getPriority() {
         return priority;
+    }
+    /**
+     * Equals method for compare objects.
+     * @param o our object for compare.
+     * @return result, true or false. equal or not.
+     */
+    @Override
+    public boolean equals(final Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        SymbolPriority that = (SymbolPriority) o;
+        return priority == that.priority
+                && Objects.equals(symbol, that.symbol);
+    }
+    /**
+     * object hashcode.
+     * @return int hashcode.
+     */
+    @Override
+    public int hashCode() {
+        return Objects.hash(priority, symbol);
     }
 }

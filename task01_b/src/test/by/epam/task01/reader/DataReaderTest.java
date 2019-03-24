@@ -7,7 +7,7 @@ import org.testng.annotations.Test;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -27,7 +27,7 @@ public class DataReaderTest {
     @Test(expectedExceptions = MissingWayFileException.class,
     description = "Negative script for show my exception.")
     public void checkFileTest() throws MissingWayFileException {
-        List<String> expected = Arrays.asList("1");
+        List<String> expected = Collections.singletonList("1");
         List<String> actual = new DataReader().readListOfString(null);
         Assert.assertEquals("For check, \n" + "do we have a file path: ",
                 expected, String.valueOf(actual));

@@ -9,7 +9,7 @@ import java.util.Deque;
  *
  * @version 1.0
  */
-public class ExpressionContext {
+class ExpressionContext {
     /**
      * Deque for calculate polish notation.
      */
@@ -19,7 +19,7 @@ public class ExpressionContext {
      * get deque.pop() element in Deque.
      * @return deque element.
      */
-    public Integer popValue() {
+    Integer popValue() {
         return deque.pop();
     }
 
@@ -27,7 +27,7 @@ public class ExpressionContext {
      * push element in Deque.
      * @param value element for push in Deque.
      */
-    public void pushValue(final Integer value) {
+    void pushValue(final Integer value) {
         this.deque.push(value);
     }
 }

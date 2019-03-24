@@ -61,7 +61,6 @@ public class SortAllLexemeInTextTest {
                 + "established,  fact,  its,  layout,  the,  a,  a,  a,  be,  "
                 + "by,  is,  long,  looking,  of,  page,  readable,  reader,  "
                 + "when,  will, .]";
-        System.out.println(actual.toString());
         Assert.assertEquals(actual.toString(), expected);
     }
     /**

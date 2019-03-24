@@ -61,9 +61,9 @@ public class SortWordInSentenceTest {
                 + "normal making letters opposed content English (Content "
                 + "readable more-or-less distribution\n"
                 + "    . a a a It is be of at its 1274 fact that will page "
-                + "when reader layout looking established\n" +
-                "    . Bye\n" +
-                "    ,,. - 3 9 It 52 has not but the only also into (five) "
+                + "when reader layout looking established\n"
+                + "    . Bye\n"
+                + "    ,,. - 3 9 It 52 has not but the only also into (five) "
                 + "leap34 survived centuries remaining unchanged electronic "
                 + "typesetting essentially,. 5 It in of of was the the and "
                 + "with more with like Lorem Ipsum Aldus Lorem Ipsum sheets "

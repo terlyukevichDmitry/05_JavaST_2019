@@ -58,15 +58,15 @@ public class SortParagraphBySentenceTest {
                 new SortParagraphBySentence();
         sortParagraphBySentence.sortingData(composite);
         String expected = "     It is a 1274 established fact that a reader "
-                + "will be of a page when looking at its layout.\n" +
-                "     Bye.\n" +
-                "     It is a long established fact that a reader will be "
+                + "will be of a page when looking at its layout.\n"
+                + "     Bye.\n"
+                + "     It is a long established fact that a reader will be "
                 + "distracted by the readable content of a page when looking "
                 + "at its layout... The point of using 78 Ipsum is that it "
                 + "has a more-or-less normal distribution of letters, as "
                 + "opposed to using (Content here), content here', making it "
-                + "look like readable English.\n" +
-                "     It has survived - not only (five) centuries, but also "
+                + "look like readable English.\n"
+                + "     It has survived - not only (five) centuries, but also "
                 + "the leap34 into 52 electronic typesetting, remaining 3 "
                 + "essentially 9 unchanged. It was popularised in the 5 with "
                 + "the release of Letraset sheets containing Lorem Ipsum "

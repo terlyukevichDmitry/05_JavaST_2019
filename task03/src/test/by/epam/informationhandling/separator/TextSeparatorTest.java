@@ -13,6 +13,12 @@ import org.testng.annotations.Test;
 
 import java.io.File;
 
+/**
+ * An public class for testing create method. In this class we are testing
+ * good works method to create tree with text elements.
+ * @author Dmitry Terlyukevish
+ * @version 1.0
+ */
 public class TextSeparatorTest {
     /**
      * file direction.
@@ -45,8 +51,16 @@ public class TextSeparatorTest {
         return
                 new Object[][]{};
     }
+
+    /**
+     * Method for testing method.
+     * {@inheritDoc}
+     * @throws MissingWayFileException for checking exception moments.
+     * @throws IncorrectDataException for checking exception moments.
+     */
     @Test
-    public void creatingTreeTest() throws MissingWayFileException, IncorrectDataException {
+    public void creatingTreeTest() throws MissingWayFileException,
+            IncorrectDataException {
         TextComposite actual
                 = textSeparator.creatingTree(dataReader.readListOfString(FILE));
         String expected = "     It is a long established fact that a reader "

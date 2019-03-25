@@ -67,5 +67,6 @@ public class PolishNotationCreatorTest {
         PolishNotationCreator creator = new PolishNotationCreator();
         List<String> actual = creator.polishCreating(null);
         Assert.assertEquals(expected, String.valueOf(actual));
+        //Functional interfaces suka blyat!!!!!!!
     }
 }

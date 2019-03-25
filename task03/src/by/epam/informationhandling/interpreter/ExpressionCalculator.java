@@ -13,7 +13,6 @@ public class ExpressionCalculator {
      * Collection which consists of String elements.
      */
     private List<String> strings;
-
     /**
      * Constructor for collection.
      * @param stringList collection with String elements for calculate

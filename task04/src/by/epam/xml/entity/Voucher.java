@@ -318,6 +318,7 @@ public class Voucher
                 ", dataFinish='" + dataFinish + '\'' +
                 ", id='" + id + '\'' +
                 ", numberNights=" + numberNights +
+                ", type='" + type + '\'' +
                 '}';
     }
 }

@@ -26,10 +26,10 @@
                     <element name="country" type="tns:CountryInEnglishLanguage"/>
                     <element name="numberDays" type="positiveInteger"/>
                     <element name="transport" type="tns:Transport"/>
-                    <element name="hotel-characteristics" type="tns:Characteristics"/>
+                    <element name="hotel_characteristics" type="tns:Characteristics"/>
                     <element name="cost" type="tns:Price"/>
-                    <element name="data-start" type="string"/>
-                    <element name="data-finish" type="string"/>
+                    <element name="data_start" type="string"/>
+                    <element name="data_finish" type="string"/>
                 </sequence>
                 <attribute name="id" type="ID" use="required"/>
                 <attribute name="numberNights" type="positiveInteger"
@@ -60,8 +60,8 @@
             <element name="nutrition" type="tns:Nutrition"/>
             <element name="room" type="positiveInteger"/>
             <element name="TV" type="boolean"/>
-            <element name="WI-FI" type="boolean"/>
-            <element name="air-conditioning" type="boolean"/>
+            <element name="WI_FI" type="boolean"/>
+            <element name="air_conditioning" type="boolean"/>
         </sequence>
     </complexType>
 

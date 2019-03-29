@@ -7,17 +7,17 @@
         <country>Egypt</country>
         <numberDays>10</numberDays>
         <transport>plane</transport>
-        <hotel-characteristics>
+        <hotel_characteristics>
             <stars>5</stars>
             <nutrition>AL</nutrition>
             <room>3</room>
             <TV>true</TV>
-            <WI-FI>true</WI-FI>
-            <air-conditioning>true</air-conditioning>
-        </hotel-characteristics>
+            <WI_FI>true</WI_FI>
+            <air_conditioning>true</air_conditioning>
+        </hotel_characteristics>
         <cost currency="USD">1000</cost>
-        <data-start>18.04.2019</data-start>
-        <data-finish>28.04.2019</data-finish>
+        <data_start>18.04.2019</data_start>
+        <data_finish>28.04.2019</data_finish>
     </voucher>
 </vouchers>
         <!--<element name="weekend" type="string"/>-->

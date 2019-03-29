@@ -41,7 +41,12 @@ public enum Nutrition {
     }
 
     public static Nutrition fromValue(String v) {
-        return valueOf(v);
+        for (Nutrition c: Nutrition.values()) {
+            if (c.value().equalsIgnoreCase(v)) {
+                return c;
+            }
+        }
+        throw new IllegalArgumentException(v);
     }
 
 }

@@ -178,4 +178,15 @@ public class Characteristics {
         this.airConditioning = value;
     }
 
+    @Override
+    public String toString() {
+        return "Characteristics{" +
+                "stars=" + stars +
+                ", nutrition=" + nutrition +
+                ", room=" + room +
+                ", tv=" + tv +
+                ", wifi=" + wifi +
+                ", airConditioning=" + airConditioning +
+                '}';
+    }
 }

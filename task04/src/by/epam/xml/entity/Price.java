@@ -58,7 +58,7 @@ public class Price {
 
     /**
      * Sets the value of the value property.
-     * 
+     *
      * @param value
      *     allowed object is
      *     {@link BigDecimal }
@@ -96,4 +96,11 @@ public class Price {
         this.currency = value;
     }
 
+    @Override
+    public String toString() {
+        return "Price{" +
+                "value=" + value +
+                ", currency=" + currency +
+                '}';
+    }
 }

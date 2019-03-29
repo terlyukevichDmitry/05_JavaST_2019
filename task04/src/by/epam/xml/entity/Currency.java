@@ -33,17 +33,22 @@ import javax.xml.bind.annotation.XmlType;
 @XmlEnum
 public enum Currency {
 
-    EUR,
+    USD,
     RUB,
     BYN,
-    USD;
+    EUR;
 
     public String value() {
         return name();
     }
 
     public static Currency fromValue(String v) {
-        return valueOf(v);
+        for (Currency c: Currency.values()) {
+            if (c.value().equalsIgnoreCase(v)) {
+                return c;
+            }
+        }
+        throw new IllegalArgumentException(v);
     }
 
 }

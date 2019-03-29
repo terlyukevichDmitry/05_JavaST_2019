@@ -306,4 +306,18 @@ public class Voucher
         this.numberNights = value;
     }
 
+    @Override
+    public String toString() {
+        return "Voucher{" +
+                "country='" + country + '\'' +
+                ", numberDays=" + numberDays +
+                ", transport=" + transport +
+                ", hotelCharacteristics=" + hotelCharacteristics +
+                ", cost=" + cost +
+                ", dataStart='" + dataStart + '\'' +
+                ", dataFinish='" + dataFinish + '\'' +
+                ", id='" + id + '\'' +
+                ", numberNights=" + numberNights +
+                '}';
+    }
 }

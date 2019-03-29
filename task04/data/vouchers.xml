@@ -2,15 +2,15 @@
 <vouchers xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
           xmlns="http://www.training.by/vouchers"
           xsi:schemaLocation="http://www.training.by/vouchers vouchers.xsd">
-    <voucher id="first">
+    <voucher id="first" numberNights="3">
         <type>weekend</type>
         <country>Egypt</country>
-        <numberDaysNights>10</numberDaysNights>
+        <numberDays>10</numberDays>
         <transport>plane</transport>
         <hotel-characteristics>
             <stars>5</stars>
             <nutrition>AL</nutrition>
-            <room>2</room>
+            <room>3</room>
             <TV>true</TV>
             <WI-FI>true</WI-FI>
             <air-conditioning>true</air-conditioning>

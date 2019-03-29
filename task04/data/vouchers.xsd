@@ -24,7 +24,7 @@
             <extension base="tns:VoucherTypes">
                 <sequence>
                     <element name="country" type="tns:CountryInEnglishLanguage"/>
-                    <element name="numberDaysNights" type="positiveInteger"/>
+                    <element name="numberDays" type="positiveInteger"/>
                     <element name="transport" type="tns:Transport"/>
                     <element name="hotel-characteristics" type="tns:Characteristics"/>
                     <element name="cost" type="tns:Price"/>
@@ -32,6 +32,8 @@
                     <element name="data-finish" type="string"/>
                 </sequence>
                 <attribute name="id" type="ID" use="required"/>
+                <attribute name="numberNights" type="positiveInteger"
+                           default="3"/>
             </extension>
         </complexContent>
     </complexType>

@@ -45,10 +45,6 @@ public class VouchersDOMBuilder extends AbstractVouchersBuilder {
 
     @Override
     public void buildSetVouchers(String fileName) {
-
-    }
-
-    public void buildSetStudents(String fileName) {
         Document doc = null;
         try {
 // parsing XML-документа и создание древовидной структуры
@@ -83,8 +79,8 @@ public class VouchersDOMBuilder extends AbstractVouchersBuilder {
         price.setValue(BigDecimal.valueOf(Integer.valueOf(getElementTextContent(voucherElement, "cost"))));
         price.setCurrency(Currency.fromValue(getCurrency(voucherElement)));
         voucher.setCost(price);
-        voucher.setDataStart(getElementTextContent(voucherElement, "data-start"));
-        voucher.setDataFinish(getElementTextContent(voucherElement, "data-finish"));
+        voucher.setDataStart(getElementTextContent(voucherElement, "data_start"));
+        voucher.setDataFinish(getElementTextContent(voucherElement, "data_finish"));
 
         return voucher;
     }
@@ -99,8 +95,8 @@ public class VouchersDOMBuilder extends AbstractVouchersBuilder {
                 Integer.valueOf(getElementTextContent(voucherElement, "room"))));
         characteristics.setTV(Boolean.parseBoolean(
                 getElementTextContent(voucherElement, "TV")));
-        characteristics.setWIFI(Boolean.parseBoolean(getElementTextContent(voucherElement, "WI-FI")));
-        characteristics.setAirConditioning(Boolean.parseBoolean(getElementTextContent(voucherElement, "air-conditioning")));
+        characteristics.setWIFI(Boolean.parseBoolean(getElementTextContent(voucherElement, "WI_FI")));
+        characteristics.setAirConditioning(Boolean.parseBoolean(getElementTextContent(voucherElement, "air_conditioning")));
         return characteristics;
     }
 

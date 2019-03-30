@@ -70,7 +70,7 @@ public class Voucher
     @XmlSchemaType(name = "string")
     protected Transport transport;
     @XmlElement(name = "hotel-characteristics", required = true)
-    protected Characteristics hotelCharacteristics;
+    protected Characteristics hotelCharacteristics = new Characteristics();
     @XmlElement(required = true)
     protected Price cost;
     @XmlElement(name = "data-start", required = true)

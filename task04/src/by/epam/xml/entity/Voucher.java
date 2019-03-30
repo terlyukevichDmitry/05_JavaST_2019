@@ -279,22 +279,6 @@ public class Voucher
     }
 
     /**
-     * Gets the value of the numberNights property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigInteger }
-     *     
-     */
-    public BigInteger getNumberNights() {
-        if (numberNights == null) {
-            return new BigInteger("3");
-        } else {
-            return numberNights;
-        }
-    }
-
-    /**
      * Sets the value of the numberNights property.
      * 
      * @param value

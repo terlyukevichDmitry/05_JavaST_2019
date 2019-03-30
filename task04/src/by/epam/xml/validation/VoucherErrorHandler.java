@@ -11,16 +11,15 @@ public class VoucherErrorHandler extends DefaultHandler {
      */
     private static final Logger LOGGER =
             LogManager.getLogger(VoucherErrorHandler.class);
-
-    public VoucherErrorHandler() {
-    }
-
+    @Override
     public void warning(SAXParseException e) {
         LOGGER.warn(getLineAddress(e) + "-" + e.getMessage());
     }
+    @Override
     public void error(SAXParseException e) {
         LOGGER.error(getLineAddress(e) + " - " + e.getMessage());
     }
+    @Override
     public void fatalError(SAXParseException e) {
         LOGGER.fatal(getLineAddress(e) + " - " + e.getMessage());
     }

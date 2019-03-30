@@ -28,18 +28,4 @@ public enum VoucherEnum {
     public String getValue() {
         return value;
     }
-
-    public static VoucherEnum fromValue(String v) {
-        System.out.println("fkjfklasjfakfsaldkfjasl;fasjdflaskjdfasldk;fjsd");
-        for (VoucherEnum voucherEnum: VoucherEnum.values()) {
-            System.out.println(voucherEnum);
-            if (voucherEnum.getValue().equalsIgnoreCase(v)) {
-                return voucherEnum;
-            }
-        }
-        System.out.println("fkjfklasjfakfsaldkfjasl;fasjdflaskjdfasldk;fjsd");
-
-        throw new IllegalArgumentException(v);
-    }
-
 }

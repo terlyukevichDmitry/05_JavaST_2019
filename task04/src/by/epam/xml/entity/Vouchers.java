@@ -8,7 +8,6 @@
 
 package by.epam.xml.entity;
 
-import java.util.ArrayList;
 import java.util.List;
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.annotation.XmlAccessType;
@@ -46,35 +45,4 @@ public class Vouchers {
 
     @XmlElementRef(name = "AllVouchers", namespace = "http://www.training.by/vouchers", type = JAXBElement.class)
     protected List<JAXBElement<? extends VoucherTypes>> allVouchers;
-
-    /**
-     * Gets the value of the allVouchers property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the allVouchers property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getAllVouchers().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link JAXBElement }{@code <}{@link Voucher }{@code >}
-     * {@link JAXBElement }{@code <}{@link VoucherTypes }{@code >}
-     * 
-     * 
-     */
-    public List<JAXBElement<? extends VoucherTypes>> getAllVouchers() {
-        if (allVouchers == null) {
-            allVouchers = new ArrayList<JAXBElement<? extends VoucherTypes>>();
-        }
-        return this.allVouchers;
-    }
-
 }

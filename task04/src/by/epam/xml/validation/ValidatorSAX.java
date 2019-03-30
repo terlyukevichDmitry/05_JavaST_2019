@@ -1,6 +1,5 @@
 package by.epam.xml.validation;
 
-import jdk.internal.org.xml.sax.SAXException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 

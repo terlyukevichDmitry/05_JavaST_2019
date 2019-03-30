@@ -13,10 +13,10 @@ import java.util.Set;
 public class VoucherHandler extends DefaultHandler {
 
     private Set<Voucher> vouchers;
-
-    private Voucher current = null;
-    private VoucherEnum currentEnum = null;
+    private Voucher current;
+    private VoucherEnum currentEnum;
     private EnumSet<VoucherEnum> withText;
+
     VoucherHandler() {
         vouchers = new HashSet<>();
         withText = EnumSet.range(VoucherEnum.TYPE, VoucherEnum.DATA_FINISH);
@@ -26,29 +26,36 @@ public class VoucherHandler extends DefaultHandler {
     }
 
     @Override
-    public void startElement(String uri, String localName, String qName, Attributes attrs) {
+    public void startElement(final String uri, final String localName,
+                             final String qName, final Attributes attrs) {
         if (qName.equals("voucher")) {
             current = new Voucher();
-            current.setId(attrs.getValue(0));
-            current.setNumberNights(BigInteger.valueOf(
-                    Integer.parseInt(attrs.getValue(1))));
-        }else {
+            setAttributesVouches(attrs);
+            } else {
             VoucherEnum temp = VoucherEnum.valueOf(qName.toUpperCase());
             if (withText.contains(temp)) {
                 currentEnum = temp;
             }
         }
-        //exception
     }
+
+    private void setAttributesVouches(final Attributes attrs) {
+        current.setId(attrs.getValue(0));
+        current.setNumberNights(BigInteger.valueOf(
+                Integer.parseInt(attrs.getValue(1))));
+    }
+
     @Override
-    public void endElement(String uri, String localName, String qName) {
+    public void endElement(final String uri, final String localName,
+                           final String qName) {
         if ("voucher".equals(qName)) {
             vouchers.add(current);
         }
     }
-    @Override
-    public void characters(char[] ch, int start, int length) {
 
+    @Override
+    public void characters(final char[] ch, final int start,
+                           final int length) {
         String s = new String(ch, start, length).trim();
         if (currentEnum != null) {
             switch (currentEnum) {
@@ -63,23 +70,29 @@ public class VoucherHandler extends DefaultHandler {
                     current.setTransport(Transport.fromValue(s));
                     break;
                 case STARS:
-                    current.getHotelCharacteristics().setStars(Integer.parseInt(s));
+                    current.getHotelCharacteristics().setStars(
+                            Integer.parseInt(s));
                     break;
                 case NUTRITION:
-                    current.getHotelCharacteristics().setNutrition(Nutrition.fromValue(s));
+                    current.getHotelCharacteristics().setNutrition(
+                            Nutrition.fromValue(s));
                     break;
                 case ROOM:
-                    current.getHotelCharacteristics().setRoom(BigInteger.valueOf(
+                    current.getHotelCharacteristics().setRoom(
+                            BigInteger.valueOf(
                             Integer.parseInt(s)));
                     break;
                 case TV:
-                    current.getHotelCharacteristics().setTV(Boolean.parseBoolean(s));
+                    current.getHotelCharacteristics().setTV(
+                            Boolean.parseBoolean(s));
                     break;
                 case WI_FI:
-                    current.getHotelCharacteristics().setWIFI(Boolean.parseBoolean(s));
+                    current.getHotelCharacteristics().setWIFI(
+                            Boolean.parseBoolean(s));
                     break;
                 case AIR_CONDITIONING:
-                    current.getHotelCharacteristics().setAirConditioning(Boolean.parseBoolean(s));
+                    current.getHotelCharacteristics().setAirConditioning(
+                            Boolean.parseBoolean(s));
                     break;
                 case COUNTRY:
                     current.setCountry(s);
@@ -93,6 +106,7 @@ public class VoucherHandler extends DefaultHandler {
                 case DATA_FINISH:
                     current.setDataFinish(s);
                     break;
+                    default: break;
             }
             currentEnum = null;
         }

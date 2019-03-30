@@ -1,6 +1,9 @@
 package by.epam.xml.sax;
 
+import by.epam.xml.builder.AbstractVouchersBuilder;
 import by.epam.xml.entity.Voucher;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.xml.sax.XMLReader;
 
 import javax.xml.parsers.ParserConfigurationException;
@@ -9,12 +12,36 @@ import javax.xml.parsers.SAXParserFactory;
 import java.io.IOException;
 import java.util.Set;
 
-public class VouchersSAXBuilder {
+public class VouchersSAXBuilder extends AbstractVouchersBuilder {
+
+    /**
+     * Logger for recording a program state.
+     */
+    private static final Logger LOGGER =
+            LogManager.getLogger(VouchersSAXBuilder.class);
+
     private Set<Voucher> vouchers;
+
     private VoucherHandler voucherHandler;
+
     private XMLReader reader;
+
+    public VouchersSAXBuilder(Set<Voucher> vouchers) {
+        super(vouchers);
+    }
+
+    @Override
+    public void buildSetVouchers(String fileName) {
+        try {
+            reader.parse(fileName);
+        } catch (IOException e) {
+            LOGGER.error("Mistake I/О thread: " + e);
+        } catch (org.xml.sax.SAXException e) {
+            LOGGER.error("We have exception: " + e);
+        }
+        vouchers = voucherHandler.getVouchers();
+    }
     public VouchersSAXBuilder() {
-        // создание SAX-анализатора
         voucherHandler = new VoucherHandler();
         try {
             SAXParserFactory factory = SAXParserFactory.newInstance();
@@ -22,25 +49,14 @@ public class VouchersSAXBuilder {
             reader = parser.getXMLReader();
             reader.setContentHandler(voucherHandler);
         } catch (org.xml.sax.SAXException e) {
-            System.err.print("ошибка SAX парсера: " + e);
+            LOGGER.error("SAX parser mistake: " + e);
         } catch (ParserConfigurationException e) {
-            e.printStackTrace();
+            LOGGER.error("We have exception: ", e);
         }
     }
+
+    @Override
     public Set<Voucher> getVouchers() {
         return vouchers;
     }
-    public void buildSetStudents(String fileName) {
-        try {
-            // разбор XML-документа
-            reader.parse(fileName);
-        } catch (IOException e) {
-            System.err.print("ошибка I/О потока: " + e);
-        } catch (org.xml.sax.SAXException e) {
-            e.printStackTrace();
-        }
-        vouchers = voucherHandler.getVouchers();
-    }
 }
-
-

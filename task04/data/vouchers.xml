@@ -19,6 +19,23 @@
         <data_start>18.04.2019</data_start>
         <data_finish>28.04.2019</data_finish>
     </voucher>
+    <voucher id="second" numberNights="3">
+        <type>weekend</type>
+        <country>USA</country>
+        <numberDays>2</numberDays>
+        <transport>ship</transport>
+        <hotel_characteristics>
+            <stars>4</stars>
+            <nutrition>HB</nutrition>
+            <room>2</room>
+            <TV>false</TV>
+            <WI_FI>true</WI_FI>
+            <air_conditioning>true</air_conditioning>
+        </hotel_characteristics>
+        <cost currency="EUR">1500</cost>
+        <data_start>12.04.2019</data_start>
+        <data_finish>24.04.2019</data_finish>
+    </voucher>
 </vouchers>
         <!--<element name="weekend" type="string"/>-->
         <!--<element name="relaxation" type="string"/>-->

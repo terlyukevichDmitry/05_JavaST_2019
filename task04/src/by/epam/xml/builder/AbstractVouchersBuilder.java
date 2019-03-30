@@ -8,7 +8,7 @@ import java.util.Set;
 public abstract class AbstractVouchersBuilder {
     protected Set<Voucher> vouchers;
     public AbstractVouchersBuilder() {
-        vouchers = new HashSet<Voucher>();
+        vouchers = new HashSet<>();
     }
     public AbstractVouchersBuilder(Set<Voucher> students) {
         this.vouchers = students;

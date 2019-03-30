@@ -1,6 +1,9 @@
 package by.epam.xml.stax;
 
+import by.epam.xml.builder.AbstractVouchersBuilder;
 import by.epam.xml.entity.*;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.XMLStreamConstants;
@@ -16,7 +19,12 @@ import java.util.Set;
 import java.io.File;
 
 
-public class VouchersStAXBuilder {
+public class VouchersStAXBuilder extends AbstractVouchersBuilder {
+    /**
+     * Logger for recording a program state.
+     */
+    private static final Logger LOGGER =
+            LogManager.getLogger(VouchersStAXBuilder.class);
 
     private HashSet<Voucher> vouchers = new HashSet<>();
     private XMLInputFactory inputFactory;
@@ -24,52 +32,47 @@ public class VouchersStAXBuilder {
         inputFactory = XMLInputFactory.newInstance();
     }
 
+    public VouchersStAXBuilder(Set<Voucher> students) {
+        super(students);
+    }
 
+    @Override
     public Set<Voucher> getVouchers() {
         return vouchers;
     }
 
-    public Set<Voucher> buildSetVouchers(String fileName) {
-        FileInputStream inputStream = null;
+    @Override
+    public void buildSetVouchers(final String fileName) {
         XMLStreamReader reader;
         String name;
-        try {
-            inputStream = new FileInputStream(new File(fileName));
+        try(FileInputStream inputStream
+                    = new FileInputStream(new File(fileName))) {
             reader = inputFactory.createXMLStreamReader(inputStream);
 
-            // StAX parsing
             while (reader.hasNext()) {
                 int type = reader.next();
                 if (type == XMLStreamConstants.START_ELEMENT) {
                     name = reader.getLocalName();
-                    if (VoucherEnum.valueOf(name.toUpperCase()) == VoucherEnum.VOUCHER) {
+                    if (VoucherEnum.valueOf(name.toUpperCase())
+                            == VoucherEnum.VOUCHER) {
                         Voucher st = buildVoucher(reader);
                         vouchers.add(st);
                     }
                 }
             }
         } catch (XMLStreamException ex) {
-            System.err.println("StAX parsing error! " + ex.getMessage());
+            LOGGER.error("StAX parsing error! " + ex.getMessage());
         } catch (FileNotFoundException ex) {
-            System.err.println("File " + fileName + " not found! " + ex);
-        } finally {
-            try {
-                if (inputStream != null) {
-                    inputStream.close();
-                }
-            } catch (IOException e) {
-                System.err.println("Impossible close file "+fileName+" : "+e);
-            }
+            LOGGER.error("File " + fileName + " not found! " + ex);
+        } catch (IOException e) {
+            LOGGER.error("Impossible close file " + fileName + " : " + e);
         }
-        return vouchers;
     }
 
-    private Voucher buildVoucher(XMLStreamReader reader) throws XMLStreamException {
+    private Voucher buildVoucher(final XMLStreamReader reader)
+            throws XMLStreamException {
         Voucher voucher = new Voucher();
-        voucher.setId(reader.getAttributeValue(null, VoucherEnum.ID.getValue()));
-        voucher.setNumberNights(BigInteger.valueOf(Integer.parseInt(
-                reader.getAttributeValue(null,
-                        VoucherEnum.NUMBER_NIGHTS.getValue()))));
+        setAttributes(voucher, reader);
         String name;
         while (reader.hasNext()) {
             int type = reader.next();
@@ -98,15 +101,7 @@ public class VouchersStAXBuilder {
                             voucher.setHotelCharacteristics(characteristics);
                             break;
                         case COST:
-                            Price price = new Price();
-                            price.setCurrency(Currency.fromValue(
-                                    reader.getAttributeValue(null,
-                                            VoucherEnum.CURRENCY.getValue())));
-
-                            price.setValue(BigDecimal.valueOf(
-                                    Integer.parseInt(getXMLText(reader))));
-
-                            voucher.setCost(price);
+                            voucher.setCost(getPrice(reader));
                             break;
                         case DATA_START:
                             voucher.setDataStart(getXMLText(reader));
@@ -114,6 +109,7 @@ public class VouchersStAXBuilder {
                         case DATA_FINISH:
                             voucher.setDataFinish(getXMLText(reader));
                             break;
+                            default: break;
                     }
                     break;
                 case XMLStreamConstants.END_ELEMENT:
@@ -123,21 +119,40 @@ public class VouchersStAXBuilder {
                         return voucher;
                     }
                     break;
+                    default: break;
             }
         }
         throw new XMLStreamException("Unknown element in tag Student");
     }
 
-    private Characteristics getXMLCharacteristics(XMLStreamReader reader)
+    private Price getPrice(final XMLStreamReader reader)
+            throws XMLStreamException {
+        Price price = new Price();
+        price.setCurrency(Currency.fromValue(
+                reader.getAttributeValue(null,
+                        VoucherEnum.CURRENCY.getValue())));
+        price.setValue(BigDecimal.valueOf(
+                Integer.parseInt(getXMLText(reader))));
+        return price;
+    }
+
+    private void setAttributes(final Voucher voucher,
+                               final XMLStreamReader reader) {
+        voucher.setId(reader.getAttributeValue(null,
+                VoucherEnum.ID.getValue()));
+        voucher.setNumberNights(BigInteger.valueOf(Integer.parseInt(
+                reader.getAttributeValue(null,
+                        VoucherEnum.NUMBER_NIGHTS.getValue()))));
+    }
+
+    private Characteristics getXMLCharacteristics(final XMLStreamReader reader)
             throws XMLStreamException {
         Characteristics characteristics = new Characteristics();
-        int type;
-        String name;
         while (reader.hasNext()) {
-            type = reader.next();
+            int type = reader.next();
             switch (type) {
                 case XMLStreamConstants.START_ELEMENT:
-                    name = reader.getLocalName();
+                    String name = reader.getLocalName();
                     switch (VoucherEnum.valueOf(name.toUpperCase())) {
                         case STARS:
                             characteristics.setStars(Integer.parseInt(
@@ -163,6 +178,7 @@ public class VouchersStAXBuilder {
                             characteristics.setAirConditioning(
                                     Boolean.parseBoolean(getXMLText(reader)));
                             break;
+                            default: break;
                     }
                     break;
                 case XMLStreamConstants.END_ELEMENT:
@@ -172,11 +188,12 @@ public class VouchersStAXBuilder {
                         return characteristics;
                     }
                     break;
+                    default: break;
             }
         }
         throw new XMLStreamException("Unknown element in tag Address");
     }
-    private String getXMLText(XMLStreamReader reader)
+    private String getXMLText(final XMLStreamReader reader)
             throws XMLStreamException {
         String text = null;
         if (reader.hasNext()) {

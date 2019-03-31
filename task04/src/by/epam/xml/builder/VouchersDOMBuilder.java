@@ -1,8 +1,15 @@
 package by.epam.xml.builder;
 
-import by.epam.xml.entity.*;
+import by.epam.xml.entity.Characteristics;
+import by.epam.xml.entity.Transport;
+import by.epam.xml.entity.Voucher;
+import by.epam.xml.entity.Currency;
+import by.epam.xml.entity.Price;
+import by.epam.xml.entity.Nutrition;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -17,14 +24,30 @@ import java.math.BigInteger;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * This class we use for parsing xml file with DOM method.
+ *
+ * @author Dmitry Terlyukevish
+ *
+ * @version 1.0
+ */
 public class VouchersDOMBuilder extends AbstractVouchersBuilder {
     /**
      * Logger for recording a program state.
      */
     private static final Logger LOGGER =
             LogManager.getLogger(VouchersDOMBuilder.class);
+    /**
+     * DocumentBuilder object for reading data.
+     */
     private DocumentBuilder documentBuilder;
+    /**
+     * Set with voucher object of xml file.
+     */
     private Set<Voucher> vouchers;
+    /**
+     * Constructor for initializing data.
+     */
     public VouchersDOMBuilder() {
         super();
         this.vouchers = new HashSet<>();
@@ -35,20 +58,25 @@ public class VouchersDOMBuilder extends AbstractVouchersBuilder {
             LOGGER.error("We have exception", e);
         }
     }
-
-    public void setVouchers(Set<Voucher> vouchers) {
-        this.vouchers = vouchers;
+    /**
+     * Setter for setting data.
+     * @param vouchersT set with voucher object.
+     */
+    public void setVouchers(final Set<Voucher> vouchersT) {
+        this.vouchers = vouchersT;
     }
-
-    public VouchersDOMBuilder(Set<Voucher> vouchers) {
-        super(vouchers);
-    }
-
+    /**
+     * {@inheritDoc}
+     * @return getter for getting set with voucher object.
+     */
     @Override
     public Set<Voucher> getVouchers() {
         return vouchers;
     }
-
+    /**
+     * {@inheritDoc}
+     * @param fileName file which save xml direction.
+     */
     @Override
     public void buildSetVouchers(final String fileName) {
         Document doc;
@@ -58,7 +86,7 @@ public class VouchersDOMBuilder extends AbstractVouchersBuilder {
             NodeList vouchersList = root.getElementsByTagName("voucher");
             for (int i = 0; i < vouchersList.getLength(); i++) {
                 Element voucherElement = (Element) vouchersList.item(i);
-                Voucher voucher = buildStudent(voucherElement);
+                Voucher voucher = buildVoucher(voucherElement);
                 vouchers.add(voucher);
             }
         } catch (IOException e) {
@@ -67,8 +95,12 @@ public class VouchersDOMBuilder extends AbstractVouchersBuilder {
             LOGGER.error("File error or SAX error: " + e);
         }
     }
-
-    private Voucher buildStudent(Element voucherElement) {
+    /**
+     * Method for build voucher object with data of xml file.
+     * @param voucherElement for reading data.
+     * @return get voucher object.
+     */
+    private Voucher buildVoucher(final Element voucherElement) {
         Voucher voucher = new Voucher();
         voucher.setId(voucherElement.getAttribute("id"));
         voucher.setNumberNights(BigInteger.valueOf(Integer.valueOf(
@@ -90,7 +122,11 @@ public class VouchersDOMBuilder extends AbstractVouchersBuilder {
                 "data_finish"));
         return voucher;
     }
-
+    /**
+     * Method for creating price object for the next creating voucher object.
+     * @param voucherElement for creating object.
+     * @return price object.
+     */
     private Price getPrice(final Element voucherElement) {
         Price price = new Price();
         price.setValue(BigDecimal.valueOf(Integer.valueOf(
@@ -98,8 +134,12 @@ public class VouchersDOMBuilder extends AbstractVouchersBuilder {
         price.setCurrency(Currency.fromValue(getCurrency(voucherElement)));
         return price;
     }
-
-    private Characteristics getCharacteristics(Element voucherElement) {
+    /**
+     * Method for initializing characteristics object.
+     * @param voucherElement for reading data.
+     * @return Characteristics object.
+     */
+    private Characteristics getCharacteristics(final Element voucherElement) {
         Characteristics characteristics = new Characteristics();
         characteristics.setStars(Integer.parseInt(
                 getElementTextContent(voucherElement, "stars")));
@@ -119,6 +159,12 @@ public class VouchersDOMBuilder extends AbstractVouchersBuilder {
         return characteristics;
     }
 
+    /**
+     * Getter for getting necessary element of xml file.
+     * @param element object for reading data.
+     * @param elementName string element.
+     * @return textContent.
+     */
     private static String getElementTextContent(final Element element,
                                                 final String elementName) {
         NodeList nList = element.getElementsByTagName(elementName);
@@ -126,7 +172,12 @@ public class VouchersDOMBuilder extends AbstractVouchersBuilder {
         return node.getTextContent();
     }
 
-    private String getCurrency(Element element) {
+    /**
+     * Getter for getting element.
+     * @param element object for reading data.
+     * @return textContent.
+     */
+    private String getCurrency(final Element element) {
         return String.valueOf(element.getElementsByTagName("cost").item(
                 0).getAttributes().item(0).getTextContent());
     }

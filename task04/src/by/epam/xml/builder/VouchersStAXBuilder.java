@@ -1,6 +1,13 @@
 package by.epam.xml.builder;
 
-import by.epam.xml.entity.*;
+import by.epam.xml.entity.Characteristics;
+import by.epam.xml.entity.Transport;
+import by.epam.xml.entity.Voucher;
+import by.epam.xml.entity.VoucherEnum;
+import by.epam.xml.entity.Currency;
+import by.epam.xml.entity.Price;
+import by.epam.xml.entity.Nutrition;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -17,47 +24,68 @@ import java.util.HashSet;
 import java.util.Set;
 import java.io.File;
 
-
+/**
+ * This class we use for parsing xml file with StAX method.
+ *
+ * @author Dmitry Terlyukevish
+ *
+ * @version 1.0
+ */
 public class VouchersStAXBuilder extends AbstractVouchersBuilder {
     /**
      * Logger for recording a program state.
      */
     private static final Logger LOGGER =
             LogManager.getLogger(VouchersStAXBuilder.class);
-
+    /**
+     * HashSet for saving vouchers.
+     */
     private HashSet<Voucher> vouchers = new HashSet<>();
+    /**
+     * object for reading data.
+     */
     private XMLInputFactory inputFactory;
+    /**
+     * constructor for initializing data.
+     */
     public VouchersStAXBuilder() {
         inputFactory = XMLInputFactory.newInstance();
     }
-
-    public VouchersStAXBuilder(Set<Voucher> students) {
-        super(students);
-    }
-
+    /**
+     * {@inheritDoc}
+     * @return get set with voucher objects.
+     */
     @Override
     public Set<Voucher> getVouchers() {
         return vouchers;
     }
 
+    /**
+     * {@inheritDoc}
+     * @param fileName file which save xml direction.
+     */
     @Override
     public void buildSetVouchers(final String fileName) {
         XMLStreamReader reader;
         String name;
-        try(FileInputStream inputStream
-                    = new FileInputStream(new File(fileName))) {
-            reader = inputFactory.createXMLStreamReader(inputStream);
-
-            while (reader.hasNext()) {
-                int type = reader.next();
-                if (type == XMLStreamConstants.START_ELEMENT) {
-                    name = reader.getLocalName();
-                    if (VoucherEnum.valueOf(name.toUpperCase())
-                            == VoucherEnum.VOUCHER) {
-                        Voucher st = buildVoucher(reader);
-                        vouchers.add(st);
+        try {
+            FileInputStream inputStream
+                    = new FileInputStream(new File(fileName));
+            try {
+                reader = inputFactory.createXMLStreamReader(inputStream);
+                while (reader.hasNext()) {
+                    int type = reader.next();
+                    if (type == XMLStreamConstants.START_ELEMENT) {
+                        name = reader.getLocalName();
+                        if (VoucherEnum.valueOf(name.toUpperCase())
+                                == VoucherEnum.VOUCHER) {
+                            Voucher st = buildVoucher(reader);
+                            vouchers.add(st);
+                        }
                     }
                 }
+            } finally {
+                inputStream.close();
             }
         } catch (XMLStreamException ex) {
             LOGGER.error("StAX parsing error! " + ex.getMessage());
@@ -68,6 +96,12 @@ public class VouchersStAXBuilder extends AbstractVouchersBuilder {
         }
     }
 
+    /**
+     * Method for build voucher object with data of xml file.
+     * @param reader for reading data of xml file.
+     * @return get voucher object.
+     * @throws XMLStreamException for checking exception moments.
+     */
     private Voucher buildVoucher(final XMLStreamReader reader)
             throws XMLStreamException {
         Voucher voucher = new Voucher();
@@ -113,8 +147,8 @@ public class VouchersStAXBuilder extends AbstractVouchersBuilder {
                     break;
                 case XMLStreamConstants.END_ELEMENT:
                     name = reader.getLocalName();
-                    if (VoucherEnum.valueOf(name.toUpperCase()) ==
-                            VoucherEnum.VOUCHER) {
+                    if (VoucherEnum.valueOf(name.toUpperCase())
+                            == VoucherEnum.VOUCHER) {
                         return voucher;
                     }
                     break;
@@ -124,6 +158,12 @@ public class VouchersStAXBuilder extends AbstractVouchersBuilder {
         throw new XMLStreamException("Unknown element in tag Student");
     }
 
+    /**
+     * Method for creating price object for the next creating voucher object.
+     * @param reader for creating object.
+     * @return price object.
+     * @throws XMLStreamException for checking exception moments.
+     */
     private Price getPrice(final XMLStreamReader reader)
             throws XMLStreamException {
         Price price = new Price();
@@ -135,6 +175,11 @@ public class VouchersStAXBuilder extends AbstractVouchersBuilder {
         return price;
     }
 
+    /**
+     * Method for set data.
+     * @param voucher main object.
+     * @param reader for reading data.
+     */
     private void setAttributes(final Voucher voucher,
                                final XMLStreamReader reader) {
         voucher.setId(reader.getAttributeValue(null,
@@ -144,6 +189,12 @@ public class VouchersStAXBuilder extends AbstractVouchersBuilder {
                         VoucherEnum.NUMBER_NIGHTS.getValue()))));
     }
 
+    /**
+     * Method for initializing characteristics object.
+     * @param reader for reading data.
+     * @return Characteristics object.
+     * @throws XMLStreamException for checking exception moments.
+     */
     private Characteristics getXMLCharacteristics(final XMLStreamReader reader)
             throws XMLStreamException {
         Characteristics characteristics = new Characteristics();
@@ -182,8 +233,8 @@ public class VouchersStAXBuilder extends AbstractVouchersBuilder {
                     break;
                 case XMLStreamConstants.END_ELEMENT:
                     name = reader.getLocalName();
-                    if (VoucherEnum.valueOf(name.toUpperCase()) ==
-                            VoucherEnum.HOTEL_CHARACTERISTICS){
+                    if (VoucherEnum.valueOf(name.toUpperCase())
+                            == VoucherEnum.HOTEL_CHARACTERISTICS) {
                         return characteristics;
                     }
                     break;
@@ -192,6 +243,13 @@ public class VouchersStAXBuilder extends AbstractVouchersBuilder {
         }
         throw new XMLStreamException("Unknown element in tag Address");
     }
+
+    /**
+     * Method for getting text of xml file.
+     * @param reader for reading data.
+     * @return xmlText.
+     * @throws XMLStreamException for checking exception moments.
+     */
     private String getXMLText(final XMLStreamReader reader)
             throws XMLStreamException {
         String text = null;

@@ -11,6 +11,13 @@ import javax.xml.parsers.SAXParserFactory;
 import java.io.IOException;
 import java.util.Set;
 
+/**
+ * This class we use for parsing xml file with SAX method.
+ *
+ * @author Dmitry Terlyukevish
+ *
+ * @version 1.0
+ */
 public class VouchersSAXBuilder extends AbstractVouchersBuilder {
 
     /**
@@ -18,28 +25,21 @@ public class VouchersSAXBuilder extends AbstractVouchersBuilder {
      */
     private static final Logger LOGGER =
             LogManager.getLogger(VouchersSAXBuilder.class);
-
+    /**
+     * Set with voucher object of xml file.
+     */
     private Set<Voucher> vouchers;
-
+    /**
+     * object for parsing xml file.
+     */
     private VoucherHandler voucherHandler;
-
+    /**
+     * Xml reader is for reading data of xml file.
+     */
     private XMLReader reader;
-
-    public VouchersSAXBuilder(Set<Voucher> vouchers) {
-        super(vouchers);
-    }
-
-    @Override
-    public void buildSetVouchers(String fileName) {
-        try {
-            reader.parse(fileName);
-        } catch (IOException e) {
-            LOGGER.error("Mistake I/О thread: " + e);
-        } catch (org.xml.sax.SAXException e) {
-            LOGGER.error("We have exception: " + e);
-        }
-        vouchers = voucherHandler.getVouchers();
-    }
+    /**
+     * Constructor for initializing data.
+     */
     public VouchersSAXBuilder() {
         voucherHandler = new VoucherHandler();
         try {
@@ -53,7 +53,25 @@ public class VouchersSAXBuilder extends AbstractVouchersBuilder {
             LOGGER.error("We have exception: ", e);
         }
     }
-
+    /**
+     * {@inheritDoc}
+     * @param fileName file which save xml direction.
+     */
+    @Override
+    public void buildSetVouchers(final String fileName) {
+        try {
+            reader.parse(fileName);
+        } catch (IOException e) {
+            LOGGER.error("Mistake I/О thread: " + e);
+        } catch (org.xml.sax.SAXException e) {
+            LOGGER.error("We have exception: " + e);
+        }
+        vouchers = voucherHandler.getVouchers();
+    }
+    /**
+     * {@inheritDoc}
+     * @return getter for getting set with voucher object.
+     */
     @Override
     public Set<Voucher> getVouchers() {
         return vouchers;

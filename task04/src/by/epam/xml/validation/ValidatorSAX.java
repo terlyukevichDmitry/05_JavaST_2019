@@ -12,12 +12,25 @@ import javax.xml.validation.SchemaFactory;
 import java.io.File;
 import java.io.IOException;
 
+/**
+ * This class we use for validating xml file with SAX method.
+ *
+ * @author Dmitry Terlyukevish
+ *
+ * @version 1.0
+ */
 public class ValidatorSAX {
     /**
      * Logger for recording a program state.
      */
     private static final Logger LOGGER =
             LogManager.getLogger(ValidatorSAX.class);
+
+    /**
+     * Method for validating data.
+     * @param filename string.
+     * @param schemaName string.
+     */
     public void validatingSAX(final String filename,
                               final String schemaName) {
         String language = XMLConstants.W3C_XML_SCHEMA_NS_URI;

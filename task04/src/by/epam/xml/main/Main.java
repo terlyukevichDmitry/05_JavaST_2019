@@ -1,9 +1,9 @@
 package by.epam.xml.main;
 
-import by.epam.xml.dom.VouchersDOMBuilder;
+import by.epam.xml.builder.VouchersDOMBuilder;
 import by.epam.xml.entity.Voucher;
-import by.epam.xml.sax.VouchersSAXBuilder;
-import by.epam.xml.stax.VouchersStAXBuilder;
+import by.epam.xml.builder.VouchersSAXBuilder;
+import by.epam.xml.builder.VouchersStAXBuilder;
 import by.epam.xml.validation.ValidatorSAX;
 
 import java.io.File;

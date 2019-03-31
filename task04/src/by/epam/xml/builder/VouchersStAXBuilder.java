@@ -1,6 +1,5 @@
-package by.epam.xml.stax;
+package by.epam.xml.builder;
 
-import by.epam.xml.builder.AbstractVouchersBuilder;
 import by.epam.xml.entity.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

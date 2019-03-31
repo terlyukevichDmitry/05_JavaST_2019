@@ -1,4 +1,4 @@
-package by.epam.xml.sax;
+package by.epam.xml.builder;
 
 import by.epam.xml.entity.*;
 import org.xml.sax.Attributes;

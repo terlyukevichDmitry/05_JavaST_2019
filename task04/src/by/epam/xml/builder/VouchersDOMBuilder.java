@@ -1,6 +1,5 @@
-package by.epam.xml.dom;
+package by.epam.xml.builder;
 
-import by.epam.xml.builder.AbstractVouchersBuilder;
 import by.epam.xml.entity.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -51,7 +50,7 @@ public class VouchersDOMBuilder extends AbstractVouchersBuilder {
     }
 
     @Override
-    public void buildSetVouchers(String fileName) {
+    public void buildSetVouchers(final String fileName) {
         Document doc;
         try {
             doc = documentBuilder.parse(fileName);

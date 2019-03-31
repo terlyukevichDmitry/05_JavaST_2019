@@ -16,5 +16,5 @@ public abstract class AbstractVouchersBuilder {
     public Set<Voucher> getVouchers() {
         return vouchers;
     }
-    abstract public void buildSetVouchers(String fileName);
+    protected abstract void buildSetVouchers(String fileName);
 }

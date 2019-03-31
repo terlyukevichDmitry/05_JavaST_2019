@@ -1,6 +1,5 @@
-package by.epam.xml.sax;
+package by.epam.xml.builder;
 
-import by.epam.xml.builder.AbstractVouchersBuilder;
 import by.epam.xml.entity.Voucher;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

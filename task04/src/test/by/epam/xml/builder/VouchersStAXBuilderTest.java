@@ -25,21 +25,7 @@ public class VouchersStAXBuilderTest {
         return
                 new Object[][]{
                         {"data" + File.separator + "vouchers.xml",
-                                "[Voucher{country='USA', " +
-                                        "numberDays=2, transport=SHIP, "
-                                        + "hotelCharacteristics="
-                                        + "Characteristics{"
-                                        + "stars=4, nutrition=HB, room=2, "
-                                        + "tv=false, wifi=true, "
-                                        + "airConditioning=true}, "
-                                        + "cost=Price{value=1500, "
-                                        + "currency=null}, "
-                                        + "dataStart='12.04.2019', "
-                                        + "dataFinish='24.04.2019', "
-                                        + "id='second', "
-                                        + "numberNights=3, type='weekend'}, "
-                                        + "Voucher{country='Egypt', "
-                                        + "numberDays=10, "
+                                "[Voucher{country='Egypt', numberDays=10, "
                                         + "transport=PLANE, "
                                         + "hotelCharacteristics="
                                         + "Characteristics{"
@@ -51,8 +37,20 @@ public class VouchersStAXBuilderTest {
                                         + "dataStart='18.04.2019', "
                                         + "dataFinish='28.04.2019', "
                                         + "id='first', "
-                                        + "numberNights=3, type='weekend"
-                                        + "'}]"}
+                                        + "numberNights=3, type='weekend'}"
+                                        + ", Voucher{country='USA', "
+                                        + "numberDays=2, transport=SHIP, "
+                                        + "hotelCharacteristics="
+                                        + "Characteristics{"
+                                        + "stars=4, nutrition=HB, room=2, "
+                                        + "tv=false, " + "wifi=true, "
+                                        + "airConditioning=true}, "
+                                        + "cost=Price{value=1500, "
+                                        + "currency=null}, "
+                                        + "dataStart='12.04.2019', "
+                                        + "dataFinish='24.04.2019', "
+                                        + "id='second', "
+                                        + "numberNights=3, type='weekend'}]"}
                 };
     }
 

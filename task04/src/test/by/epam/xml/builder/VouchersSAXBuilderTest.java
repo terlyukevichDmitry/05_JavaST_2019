@@ -1,5 +1,6 @@
 package test.by.epam.xml.builder;
 
+import by.epam.xml.builder.VouchersSAXBuilder;
 import by.epam.xml.builder.VouchersStAXBuilder;
 import by.epam.xml.entity.Voucher;
 import org.testng.Assert;
@@ -33,7 +34,7 @@ public class VouchersSAXBuilderTest {
                                         + "tv=true, wifi=true, "
                                         + "airConditioning=true}, "
                                         + "cost=Price{value=1000, "
-                                        + "currency=USD}, "
+                                        + "currency=null}, "
                                         + "dataStart='18.04.2019', "
                                         + "dataFinish='28.04.2019', "
                                         + "id='first', "
@@ -46,7 +47,7 @@ public class VouchersSAXBuilderTest {
                                         + "tv=false, " + "wifi=true, "
                                         + "airConditioning=true}, "
                                         + "cost=Price{value=1500, "
-                                        + "currency=EUR}, "
+                                        + "currency=null}, "
                                         + "dataStart='12.04.2019', "
                                         + "dataFinish='24.04.2019', "
                                         + "id='second', "
@@ -63,9 +64,9 @@ public class VouchersSAXBuilderTest {
             dataProvider = "xml_sax")
     public void buildSetVouchersTest(final String fileXml,
                                      final String expected) {
-        VouchersStAXBuilder staxBuilder = new VouchersStAXBuilder();
-        staxBuilder.buildSetVouchers(fileXml);
-        Set<Voucher> actual = staxBuilder.getVouchers();
+        VouchersSAXBuilder vouchersSAXBuilder = new VouchersSAXBuilder();
+        vouchersSAXBuilder.buildSetVouchers(fileXml);
+        Set<Voucher> actual = vouchersSAXBuilder.getVouchers();
         Assert.assertEquals(actual.toString(), expected);
     }
 }

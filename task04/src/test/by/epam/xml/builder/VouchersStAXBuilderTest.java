@@ -1,6 +1,7 @@
 package test.by.epam.xml.builder;
 
 import by.epam.xml.builder.VouchersSAXBuilder;
+import by.epam.xml.builder.VouchersStAXBuilder;
 import by.epam.xml.entity.Voucher;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
@@ -33,7 +34,7 @@ public class VouchersStAXBuilderTest {
                                         + "tv=true, wifi=true, "
                                         + "airConditioning=true}, "
                                         + "cost=Price{value=1000, "
-                                        + "currency=null}, "
+                                        + "currency=USD}, "
                                         + "dataStart='18.04.2019', "
                                         + "dataFinish='28.04.2019', "
                                         + "id='first', "
@@ -46,7 +47,7 @@ public class VouchersStAXBuilderTest {
                                         + "tv=false, " + "wifi=true, "
                                         + "airConditioning=true}, "
                                         + "cost=Price{value=1500, "
-                                        + "currency=null}, "
+                                        + "currency=EUR}, "
                                         + "dataStart='12.04.2019', "
                                         + "dataFinish='24.04.2019', "
                                         + "id='second', "
@@ -63,9 +64,9 @@ public class VouchersStAXBuilderTest {
             dataProvider = "xml_stax")
     public void buildSetVouchersTest(final String fileXml,
                                      final String expected) {
-        VouchersSAXBuilder vouchersSAXBuilder = new VouchersSAXBuilder();
-        vouchersSAXBuilder.buildSetVouchers(fileXml);
-        Set<Voucher> actual = vouchersSAXBuilder.getVouchers();
+        VouchersStAXBuilder vouchersStAXBuilder = new VouchersStAXBuilder();
+        vouchersStAXBuilder.buildSetVouchers(fileXml);
+        Set<Voucher> actual = vouchersStAXBuilder.getVouchers();
         Assert.assertEquals(actual.toString(), expected);
     }
 }

@@ -13,11 +13,17 @@ import org.xml.sax.helpers.DefaultHandler;
  * @version 1.0
  */
 public class VoucherErrorHandler extends DefaultHandler {
+    Logger logger;
     /**
      * Logger for recording a program state.
      */
     private static final Logger LOGGER =
             LogManager.getLogger(VoucherErrorHandler.class);
+
+    public VoucherErrorHandler(String log) {
+        logger = LogManager.getLogger("error");
+        //logger..addAppender(new FileAppender(new SimpleLayout(), log));
+    }
 
     /**
      * {@inheritDoc}

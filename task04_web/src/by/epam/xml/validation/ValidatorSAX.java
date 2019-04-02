@@ -34,13 +34,14 @@ public class ValidatorSAX {
     public void validatingSAX(final String filename,
                               final String schemaName) {
         String language = XMLConstants.W3C_XML_SCHEMA_NS_URI;
+        String logname = "logs" + File.separator + "text.xml";
         SchemaFactory factory = SchemaFactory.newInstance(language);
         try {
             Schema schema = factory.newSchema(new File(schemaName));
             SAXParserFactory spf = SAXParserFactory.newInstance();
             spf.setSchema(schema);
             SAXParser parser = spf.newSAXParser();
-            parser.parse(filename, new VoucherErrorHandler());
+            parser.parse(filename, new VoucherErrorHandler(logname));
             LOGGER.info(filename + " is valid");
         } catch (ParserConfigurationException e) {
             LOGGER.error(filename + " config error: " + e.getMessage());

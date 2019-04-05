@@ -41,7 +41,7 @@ public class ValidatorSAX {
             SAXParserFactory spf = SAXParserFactory.newInstance();
             spf.setSchema(schema);
             SAXParser parser = spf.newSAXParser();
-            parser.parse(filename, new VoucherErrorHandler(logname));
+            parser.parse(filename, new VoucherErrorHandler());
             LOGGER.info(filename + " is valid");
         } catch (ParserConfigurationException e) {
             LOGGER.error(filename + " config error: " + e.getMessage());

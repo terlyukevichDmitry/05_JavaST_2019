@@ -1,5 +1,6 @@
 package by.epam.xml.builder;
 
+import by.epam.xml.datetime.DateTimeConverter;
 import by.epam.xml.entity.Characteristics;
 import by.epam.xml.entity.Transport;
 import by.epam.xml.entity.Voucher;
@@ -8,9 +9,13 @@ import by.epam.xml.entity.Currency;
 import by.epam.xml.entity.Price;
 import by.epam.xml.entity.Nutrition;
 
+import by.epam.xml.entity.Voucher;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import javax.xml.datatype.DatatypeConfigurationException;
+import javax.xml.datatype.DatatypeFactory;
+import javax.xml.datatype.XMLGregorianCalendar;
 import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.XMLStreamConstants;
 import javax.xml.stream.XMLStreamException;
@@ -20,6 +25,11 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.HashSet;
 import java.util.Set;
 import java.io.File;
@@ -137,10 +147,14 @@ public class VouchersStAXBuilder extends AbstractVouchersBuilder {
                             voucher.setCost(getPrice(reader));
                             break;
                         case DATA_START:
-                            voucher.setDataStart(getXMLText(reader));
+                            voucher.setDataStart(
+                                    new DateTimeConverter().getDataTime(
+                                    getXMLText(reader)));
                             break;
                         case DATA_FINISH:
-                            voucher.setDataFinish(getXMLText(reader));
+                            voucher.setDataFinish(
+                                    new DateTimeConverter().getDataTime(
+                                            getXMLText(reader)));
                             break;
                             default: break;
                     }
@@ -259,5 +273,4 @@ public class VouchersStAXBuilder extends AbstractVouchersBuilder {
         }
         return text;
     }
-
 }

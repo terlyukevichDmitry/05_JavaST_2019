@@ -1,5 +1,6 @@
 package by.epam.xml.builder;
 
+import by.epam.xml.datetime.DateTimeConverter;
 import by.epam.xml.entity.VoucherEnum;
 import by.epam.xml.entity.Transport;
 import by.epam.xml.entity.Voucher;
@@ -9,11 +10,15 @@ import by.epam.xml.entity.Nutrition;
 import org.xml.sax.Attributes;
 import org.xml.sax.helpers.DefaultHandler;
 
+import javax.xml.datatype.DatatypeConfigurationException;
+import javax.xml.datatype.DatatypeFactory;
+import javax.xml.datatype.XMLGregorianCalendar;
 import java.math.BigDecimal;
 import java.math.BigInteger;
-import java.util.EnumSet;
-import java.util.HashSet;
-import java.util.Set;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 /**
  * This class we use for parsing xml file with SAX method.
@@ -152,16 +157,19 @@ public class VoucherHandler extends DefaultHandler {
                     current.setCost(getPrice(string));
                     break;
                 case DATA_START:
-                    current.setDataStart(string);
+                    current.setDataStart(
+                            new DateTimeConverter().getDataTime(string));
                     break;
                 case DATA_FINISH:
-                    current.setDataFinish(string);
+                    current.setDataFinish(
+                            new DateTimeConverter().getDataTime(string));
                     break;
                     default: break;
             }
             currentEnum = null;
         }
     }
+
     /**
      * Method for creating price object for the next creating voucher object.
      * @param string for reading data.

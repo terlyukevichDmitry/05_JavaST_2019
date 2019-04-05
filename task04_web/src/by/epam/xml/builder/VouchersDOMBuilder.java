@@ -1,5 +1,6 @@
 package by.epam.xml.builder;
 
+import by.epam.xml.datetime.DateTimeConverter;
 import by.epam.xml.entity.Characteristics;
 import by.epam.xml.entity.Transport;
 import by.epam.xml.entity.Voucher;
@@ -15,12 +16,20 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import javax.xml.datatype.DatatypeConfigurationException;
+import javax.xml.datatype.DatatypeFactory;
+import javax.xml.datatype.XMLGregorianCalendar;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -116,10 +125,14 @@ public class VouchersDOMBuilder extends AbstractVouchersBuilder {
                 voucherElement, "transport")));
         voucher.setHotelCharacteristics(getCharacteristics(voucherElement));
         voucher.setCost(getPrice(voucherElement));
-        voucher.setDataStart(getElementTextContent(voucherElement,
-                "data_start"));
-        voucher.setDataFinish(getElementTextContent(voucherElement,
-                "data_finish"));
+
+        DateTimeConverter dateTimeConverter = new DateTimeConverter();
+        voucher.setDataStart(dateTimeConverter.getDataTime(
+                getElementTextContent(voucherElement,
+                        "data_start")));
+        voucher.setDataFinish(dateTimeConverter.getDataTime(
+                getElementTextContent(voucherElement,
+                        "data_finish")));
         return voucher;
     }
     /**

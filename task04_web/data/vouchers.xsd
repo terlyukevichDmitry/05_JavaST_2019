@@ -28,8 +28,8 @@
                     <element name="transport" type="tns:Transport"/>
                     <element name="hotel_characteristics" type="tns:Characteristics"/>
                     <element name="cost" type="tns:Price"/>
-                    <element name="data_start" type="string"/>
-                    <element name="data_finish" type="string"/>
+                    <element name="data_start" type="dateTime"/>
+                    <element name="data_finish" type="dateTime"/>
                 </sequence>
                 <attribute name="id" type="ID" use="required"/>
                 <attribute name="numberNights" type="positiveInteger"

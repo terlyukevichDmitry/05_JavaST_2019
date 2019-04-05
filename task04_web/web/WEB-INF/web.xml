@@ -14,15 +14,12 @@
     <welcome-file-list>
         <welcome-file>index.jsp</welcome-file>
     </welcome-file-list>
-
     <servlet>
-        <servlet-name>HelloWorld</servlet-name>
-        <servlet-class>by.epam.xml.servlet.HelloWorld</servlet-class>
+        <servlet-name>TimeServlet</servlet-name>
+        <servlet-class>by.epam.xml.servlet.TimeServlet</servlet-class>
     </servlet>
-
     <servlet-mapping>
-        <servlet-name>HelloWorld</servlet-name>
-        <url-pattern>/HelloWorld</url-pattern>
+        <servlet-name>TimeServlet</servlet-name>
+        <url-pattern>/timeaction</url-pattern>
     </servlet-mapping>
-
 </web-app>

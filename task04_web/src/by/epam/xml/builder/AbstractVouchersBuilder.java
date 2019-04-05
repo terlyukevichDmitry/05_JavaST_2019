@@ -1,6 +1,7 @@
 package by.epam.xml.builder;
 
 import by.epam.xml.entity.Voucher;
+import by.epam.xml.entity.Voucher;
 
 import java.util.HashSet;
 import java.util.Set;

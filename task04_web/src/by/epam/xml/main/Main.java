@@ -1,12 +1,14 @@
 package by.epam.xml.main;
 
+import by.epam.xml.action.Action;
 import by.epam.xml.builder.VouchersDOMBuilder;
-import by.epam.xml.entity.Voucher;
 import by.epam.xml.builder.VouchersSAXBuilder;
 import by.epam.xml.builder.VouchersStAXBuilder;
+import by.epam.xml.entity.Voucher;
 import by.epam.xml.validation.ValidatorSAX;
 
 import java.io.File;
+import java.util.Locale;
 import java.util.Set;
 
 public class Main {
@@ -16,6 +18,9 @@ public class Main {
     private static final String FILE = "data" + File.separator + "vouchers.xml";
 
     public static void main(String[] args) {
+
+        Locale locale = new Locale("ru", "RU");
+
         System.out.println(">---------------------DOM------------------<");
         VouchersDOMBuilder domBuilder = new VouchersDOMBuilder();
         domBuilder.buildSetVouchers(FILE);
@@ -37,6 +42,7 @@ public class Main {
         for (Voucher v :vouchers2) {
             System.out.println(v);
         }
+
         String filename = "data" + File.separator + "vouchers.xml";
         String schemaName = "data" + File.separator + "vouchers.xsd";
         ValidatorSAX validatorSAX = new ValidatorSAX();

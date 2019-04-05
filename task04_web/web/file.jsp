@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -5,5 +6,9 @@
 </head>
 <body>
 <p>Hello WORLD!</p>
+
+<table>
+</table>
+
 </body>
 </html>

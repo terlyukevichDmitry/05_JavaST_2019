@@ -36,6 +36,57 @@
         <data_start>2019-12-04T18:13:51</data_start>
         <data_finish>2019-12-14T18:13:51</data_finish>
     </voucher>
+    <voucher id="third" numberNights="4">
+        <type>weekend</type>
+        <country>Germany</country>
+        <numberDays>5</numberDays>
+        <transport>car</transport>
+        <hotel_characteristics>
+            <stars>5</stars>
+            <nutrition>AL</nutrition>
+            <room>3</room>
+            <TV>true</TV>
+            <WI_FI>true</WI_FI>
+            <air_conditioning>true</air_conditioning>
+        </hotel_characteristics>
+        <cost currency="BYN">4000</cost>
+        <data_start>2019-11-04T12:40:00</data_start>
+        <data_finish>2019-11-09T21:00:00</data_finish>
+    </voucher>
+    <voucher id="fourth" numberNights="10">
+        <type>weekend</type>
+        <country>Altai</country>
+        <numberDays>11</numberDays>
+        <transport>plane</transport>
+        <hotel_characteristics>
+            <stars>4</stars>
+            <nutrition>HB</nutrition>
+            <room>2</room>
+            <TV>true</TV>
+            <WI_FI>true</WI_FI>
+            <air_conditioning>false</air_conditioning>
+        </hotel_characteristics>
+        <cost currency="EUR">4000</cost>
+        <data_start>2019-05-01T10:00:00</data_start>
+        <data_finish>2019-05-12T23:00:00</data_finish>
+    </voucher>
+    <voucher id="fifth" numberNights="20">
+        <type>3 weekend</type>
+        <country>Maldives</country>
+        <numberDays>21</numberDays>
+        <transport>plane</transport>
+        <hotel_characteristics>
+            <stars>5</stars>
+            <nutrition>AL</nutrition>
+            <room>3</room>
+            <TV>true</TV>
+            <WI_FI>true</WI_FI>
+            <air_conditioning>true</air_conditioning>
+        </hotel_characteristics>
+        <cost currency="EUR">5000</cost>
+        <data_start>2019-07-01T08:00:00</data_start>
+        <data_finish>2019-07-22T23:00:00</data_finish>
+    </voucher>
 </vouchers>
         <!--<element name="weekend" type="string"/>-->
         <!--<element name="relaxation" type="string"/>-->

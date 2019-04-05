@@ -16,10 +16,10 @@
     </welcome-file-list>
     <servlet>
         <servlet-name>TimeServlet</servlet-name>
-        <servlet-class>by.epam.xml.servlet.TimeServlet</servlet-class>
+        <servlet-class>by.epam.xml.servlet.ParserServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>TimeServlet</servlet-name>
-        <url-pattern>/timeaction</url-pattern>
+        <url-pattern>/parserAction</url-pattern>
     </servlet-mapping>
 </web-app>

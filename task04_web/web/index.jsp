@@ -12,34 +12,37 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>My super project!</title>
+    <meta charset="UTF-8">
+    <title>My super project!</title>
+    <link rel="stylesheet" href="css/style.css" type="text/css"/>
 </head>
-<body>
-
-    <h5>Счетчик времени от запуска приложения до нажатия кнопки</h5>
-    <jsp:useBean id="calendar" class="java.util.GregorianCalendar"/>
-    <form name="Simple" action="timeaction" method="POST">
-        <input type="hidden" name="time" value="${calendar.timeInMillis}"/>
-        <input type="submit" name="button" value="Посчитать время"/>
-    </form>
-
-<div align="center">
-<p><b>Ваше имя:</b><br>
-  <input type="text" size="40" name="hello">
-  <h1>Super app!</h1>
-<%--<form action="hekko" method="POST">--%>
-      <%--<input type="radio" name="browser" value="dom" > DOMParser<br><br>--%>
-      <%--<input type="radio" name="browser" value="sax"> SAXParser<br><br>--%>
-      <%--<input type="radio" name="browser" value="stax"> StAXParser<br><br>--%>
-    <%--<input type="submit" value="Submit">--%>
-    <%--<p><%= getFormattedDate()%></p><br><br>--%>
-<%--</form>--%>
-</div>
-</body>
+    <body>
+    <div align="center">
+        <h1>Super app!</h1>
+        <form action="parserAction" method="POST">
+            <label class="container">DOMParser
+                <input type="radio" name="browser" value="dom" checked>
+                <span class="checkmark"></span>
+            </label>
+            <br>
+            <label class="container">SAXParser
+                <input type="radio" name="browser" value="sax" checked>
+                <span class="checkmark"></span>
+            </label>
+            <br>
+            <label class="container">StAXParser
+                <input type="radio" name="browser" value="stax">
+                <span class="checkmark"></span>
+            </label>
+            <br>
+            <input type="submit" value="Submit" class="myButton">
+            <p style="font-size: 22px"><%= getFormattedDate()%></p><br><br>
+        </form>
+    </div>
+    </body>
 </html>
 <%!
-    String getFormattedDate () {
+    private String getFormattedDate() {
         SimpleDateFormat simpleDateFormat
                 = new SimpleDateFormat ("dd.MM.yyyy hh:mm:ss");
         return simpleDateFormat.format (new Date());

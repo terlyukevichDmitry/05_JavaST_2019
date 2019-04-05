@@ -1,6 +1,5 @@
 package by.epam.xml.datetime;
 
-import by.epam.xml.validation.ValidatorSAX;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 

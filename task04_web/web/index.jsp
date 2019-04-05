@@ -26,7 +26,7 @@
             </label>
             <br>
             <label class="container">SAXParser
-                <input type="radio" name="browser" value="sax" checked>
+                <input type="radio" name="browser" value="sax">
                 <span class="checkmark"></span>
             </label>
             <br>

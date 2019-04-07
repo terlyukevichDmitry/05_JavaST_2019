@@ -12,7 +12,10 @@ import org.xml.sax.helpers.DefaultHandler;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
-import java.util.*;
+import java.util.EnumSet;
+import java.util.HashSet;
+import java.util.Set;
+
 
 /**
  * This class we use for parsing xml file with SAX method.
@@ -152,11 +155,11 @@ public class VoucherHandler extends DefaultHandler {
                     break;
                 case DATA_START:
                     current.setDataStart(
-                            new DateTimeConverter().getDataTime(string));
+                            new DateTimeConverter().getDateTime(string));
                     break;
                 case DATA_FINISH:
                     current.setDataFinish(
-                            new DateTimeConverter().getDataTime(string));
+                            new DateTimeConverter().getDateTime(string));
                     break;
                     default: break;
             }

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<vouchers xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xmlns="http://www.training.by/vouchers"
+          xsi:schemaLocation="http://www.training.by/vouchers vouchers.xsd">
+    <voucher id="first" numberNights="3">
+        <type>weekend</type>
+        <country>Egypt</country>
+        <numberDays>10</numberDays>
+        <transport>plane</transport>
+        <hotel_characteristics>
+            <stars>4</stars>
+            <nutrition>AL</nutrition>
+            <room>3</room>
+            <TV>true</TV>
+            <WI_FI>true</WI_FI>
+            <air_conditioning>true</air_conditioning>
+        </hotel_characteristics>
+        <cost currency="USD">1000</cost>
+        <data_start>2019-06-04T18:13:51</data_start>
+        <data_finish>2019-06-06T18:13:51</data_finish>
+    </voucher>
+</vouchers>

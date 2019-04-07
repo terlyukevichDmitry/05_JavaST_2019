@@ -119,10 +119,10 @@ public class VouchersDOMBuilder extends AbstractVouchersBuilder {
         voucher.setCost(getPrice(voucherElement));
 
         DateTimeConverter dateTimeConverter = new DateTimeConverter();
-        voucher.setDataStart(dateTimeConverter.getDataTime(
+        voucher.setDataStart(dateTimeConverter.getDateTime(
                 getElementTextContent(voucherElement,
                         "data_start")));
-        voucher.setDataFinish(dateTimeConverter.getDataTime(
+        voucher.setDataFinish(dateTimeConverter.getDateTime(
                 getElementTextContent(voucherElement,
                         "data_finish")));
         return voucher;

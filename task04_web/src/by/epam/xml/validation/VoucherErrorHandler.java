@@ -20,6 +20,9 @@ public class VoucherErrorHandler extends DefaultHandler {
     private static final Logger LOGGER =
             LogManager.getLogger(VoucherErrorHandler.class);
 
+    /**
+     * Constructor.
+     */
     public VoucherErrorHandler() {
         //logger..addAppender(new FileAppender(new SimpleLayout(), log));
     }

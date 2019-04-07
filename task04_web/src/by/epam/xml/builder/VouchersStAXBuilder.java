@@ -139,12 +139,12 @@ public class VouchersStAXBuilder extends AbstractVouchersBuilder {
                             break;
                         case DATA_START:
                             voucher.setDataStart(
-                                    new DateTimeConverter().getDataTime(
+                                    new DateTimeConverter().getDateTime(
                                     getXMLText(reader)));
                             break;
                         case DATA_FINISH:
                             voucher.setDataFinish(
-                                    new DateTimeConverter().getDataTime(
+                                    new DateTimeConverter().getDateTime(
                                             getXMLText(reader)));
                             break;
                             default: break;

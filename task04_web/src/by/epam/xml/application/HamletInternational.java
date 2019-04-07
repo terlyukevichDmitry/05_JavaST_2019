@@ -14,6 +14,15 @@ import java.util.ResourceBundle;
 import java.util.Scanner;
 import java.util.Set;
 
+/**
+ * It is the main class in this application.
+ * Main in this class have not bad application for parse xml file with
+ * different methods.
+ *
+ * @author Dmitry Terlyukevish
+ *
+ * @version 1.0
+ */
 public class HamletInternational {
     /**
      * Logger for recording a program state.
@@ -24,12 +33,25 @@ public class HamletInternational {
      * file direction.
      */
     private static final String FILE = "data" + File.separator + "vouchers.xml";
+    /**
+     * constant.
+     */
+    private static final int THREE = 3;
 
-    public static void main(String[ ] args) {
+    /**
+     * Constructor.
+     */
+    public HamletInternational() {
+    }
+
+    /**
+     * Main method for stating application.
+     * @param args array.
+     */
+    public static void main(final String[] args) {
         Scanner scanner = new Scanner(System.in);
         LOGGER.info("Hello, choose the number between 1 and 3.");
-        LOGGER.info( "1 — английский || 2 — белорусский || 3 — русский");
-
+        LOGGER.info("1—английский || 2—белорусский || 3—русский");
         int k = scanner.nextInt();
         String country;
         String language;
@@ -42,7 +64,7 @@ public class HamletInternational {
                 country = "BY";
                 language = "be";
                 break;
-            case 3:
+            case THREE:
                 country = "RU";
                 language = "ru";
                 break;
@@ -55,7 +77,6 @@ public class HamletInternational {
         ResourceBundle rb = ResourceBundle.getBundle("text", current);
 
         LOGGER.info(getStringOfProperties(rb, "chooseParser"));
-        LOGGER.info(getStringOfProperties(rb, "parsersText"));
 
         Set<Voucher> vouchers = getVouchersOfDifferentMethods(scanner, rb);
 
@@ -65,6 +86,12 @@ public class HamletInternational {
         }
     }
 
+    /**
+     * Method for set voucher calculated one of parser methods.
+     * @param scanner for write number.
+     * @param rb resource.
+     * @return set with voucher objects.
+     */
     private static Set<Voucher> getVouchersOfDifferentMethods(
             final Scanner scanner,
             final ResourceBundle rb) {
@@ -80,14 +107,15 @@ public class HamletInternational {
                         "domParserText"));
                 break;
             case 2:
-                VouchersSAXBuilder vouchersSAXBuilder = new VouchersSAXBuilder();
+                VouchersSAXBuilder vouchersSAXBuilder
+                        = new VouchersSAXBuilder();
                 vouchersSAXBuilder.buildSetVouchers(FILE);
                 vouchers = vouchersSAXBuilder.getVouchers();
 
                 LOGGER.info(getStringOfProperties(rb,
                         "saxParserText"));
                 break;
-            case 3:
+            case THREE:
                 VouchersStAXBuilder staxBuilder = new VouchersStAXBuilder();
                 staxBuilder.buildSetVouchers(FILE);
                 vouchers = staxBuilder.getVouchers();
@@ -107,6 +135,12 @@ public class HamletInternational {
         return vouchers;
     }
 
+    /**
+     * Method for getting str properties.
+     * @param rb resource.
+     * @param stringBundle str resource.
+     * @return string.
+     */
     private static String getStringOfProperties(final ResourceBundle rb,
                                          final String stringBundle) {
         return new String(rb.getString(stringBundle).getBytes(

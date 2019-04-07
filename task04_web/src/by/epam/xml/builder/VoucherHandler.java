@@ -136,11 +136,11 @@ public class VoucherHandler extends DefaultHandler {
                             Integer.parseInt(string)));
                     break;
                 case TV:
-                    current.getHotelCharacteristics().setTV(
+                    current.getHotelCharacteristics().setTv(
                             Boolean.parseBoolean(string));
                     break;
                 case WI_FI:
-                    current.getHotelCharacteristics().setWIFI(
+                    current.getHotelCharacteristics().setWifi(
                             Boolean.parseBoolean(string));
                     break;
                 case AIR_CONDITIONING:

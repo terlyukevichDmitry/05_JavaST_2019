@@ -154,9 +154,9 @@ public class VouchersDOMBuilder extends AbstractVouchersBuilder {
         characteristics.setRoom(BigInteger.valueOf(
                 Integer.valueOf(getElementTextContent(voucherElement,
                         "room"))));
-        characteristics.setTV(Boolean.parseBoolean(
+        characteristics.setTv(Boolean.parseBoolean(
                 getElementTextContent(voucherElement, "TV")));
-        characteristics.setWIFI(Boolean.parseBoolean(getElementTextContent(
+        characteristics.setWifi(Boolean.parseBoolean(getElementTextContent(
                 voucherElement, "WI_FI")));
         characteristics.setAirConditioning(Boolean.parseBoolean(
                 getElementTextContent(voucherElement,

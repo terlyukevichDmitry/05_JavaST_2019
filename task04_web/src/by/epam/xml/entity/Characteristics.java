@@ -112,38 +112,6 @@ public class Characteristics {
     }
 
     /**
-     * Gets the value of the tv property.
-     * @return boolean value.
-     */
-    public boolean isTV() {
-        return tv;
-    }
-
-    /**
-     * Sets the value of the tv property.
-     * @param value set tv value.
-     */
-    public void setTV(final boolean value) {
-        this.tv = value;
-    }
-
-    /**
-     * Gets the value of the wifi property.
-     * @return boolean value.
-     */
-    public boolean isWIFI() {
-        return wifi;
-    }
-
-    /**
-     * Sets the value of the wifi property.
-     * @param value wifi value.
-     */
-    public void setWIFI(final boolean value) {
-        this.wifi = value;
-    }
-
-    /**
      * Gets the value of the airConditioning property.
      * @return boolean value.
      */
@@ -157,6 +125,34 @@ public class Characteristics {
      */
     public void setAirConditioning(final boolean value) {
         this.airConditioning = value;
+    }
+    /**
+     * Gets the value of the tv property.
+     * @return boolean value.
+     */
+    public boolean isTv() {
+        return tv;
+    }
+    /**
+     * Sets the value of the tv property.
+     * @param value set tv value.
+     */
+    public void setTv(final boolean value) {
+        this.tv = value;
+    }
+    /**
+     * Gets the value of the wifi property.
+     * @return boolean value.
+     */
+    public boolean isWifi() {
+        return wifi;
+    }
+    /**
+     * Sets the value of the wifi property.
+     * @param value wifi value.
+     */
+    public void setWifi(final boolean value) {
+        this.wifi = value;
     }
 
     /**

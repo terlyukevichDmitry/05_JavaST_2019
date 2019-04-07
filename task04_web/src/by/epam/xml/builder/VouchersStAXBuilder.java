@@ -222,11 +222,11 @@ public class VouchersStAXBuilder extends AbstractVouchersBuilder {
                                     Integer.parseInt(getXMLText(reader))));
                             break;
                         case TV:
-                            characteristics.setTV(Boolean.parseBoolean(
+                            characteristics.setTv(Boolean.parseBoolean(
                                     getXMLText(reader)));
                             break;
                         case WI_FI:
-                            characteristics.setWIFI(Boolean.parseBoolean(
+                            characteristics.setWifi(Boolean.parseBoolean(
                                     getXMLText(reader)));
                             break;
                         case AIR_CONDITIONING:

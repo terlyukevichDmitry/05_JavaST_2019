@@ -9,15 +9,6 @@
 package by.epam.xml.entity;
 
 import java.math.BigInteger;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlID;
-import javax.xml.bind.annotation.XmlSchemaType;
-import javax.xml.bind.annotation.XmlType;
-import javax.xml.bind.annotation.adapters.CollapsedStringAdapter;
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import javax.xml.datatype.XMLGregorianCalendar;
 
 
@@ -48,45 +39,16 @@ import javax.xml.datatype.XMLGregorianCalendar;
  * 
  * 
  */
-@XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "Voucher", propOrder = {
-    "country",
-    "numberDays",
-    "transport",
-    "hotelCharacteristics",
-    "cost",
-    "dataStart",
-    "dataFinish"
-})
-public class Voucher
-    extends VoucherTypes
-{
+public class Voucher extends VoucherTypes {
 
-    @XmlElement(required = true)
     protected String country;
-    @XmlElement(required = true)
-    @XmlSchemaType(name = "positiveInteger")
     protected BigInteger numberDays;
-    @XmlElement(required = true)
-    @XmlSchemaType(name = "string")
     protected Transport transport;
-    @XmlElement(name = "hotel_characteristics", required = true)
     protected Characteristics hotelCharacteristics = new Characteristics();
-    @XmlElement(required = true)
     protected Price cost;
-    @XmlElement(name = "data_start", required = true)
-    @XmlSchemaType(name = "dateTime")
     protected XMLGregorianCalendar dataStart;
-    @XmlElement(name = "data_finish", required = true)
-    @XmlSchemaType(name = "dateTime")
     protected XMLGregorianCalendar dataFinish;
-    @XmlAttribute(name = "id", required = true)
-    @XmlJavaTypeAdapter(CollapsedStringAdapter.class)
-    @XmlID
-    @XmlSchemaType(name = "ID")
     protected String id;
-    @XmlAttribute(name = "numberNights")
-    @XmlSchemaType(name = "positiveInteger")
     protected BigInteger numberNights;
 
     /**

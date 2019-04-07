@@ -8,8 +8,6 @@
 
 package by.epam.xml.entity;
 
-import javax.xml.bind.annotation.XmlEnum;
-import javax.xml.bind.annotation.XmlType;
 
 
 /**
@@ -28,8 +26,6 @@ import javax.xml.bind.annotation.XmlType;
  * </pre>
  * 
  */
-@XmlType(name = "Nutrition")
-@XmlEnum
 public enum Nutrition {
 
     BB,

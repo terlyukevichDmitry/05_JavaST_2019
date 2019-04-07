@@ -7,11 +7,6 @@
 
 
 package by.epam.xml.entity;
-
-import javax.xml.bind.annotation.XmlEnum;
-import javax.xml.bind.annotation.XmlType;
-
-
 /**
  * <p>Java class for Currency.
  * 
@@ -29,8 +24,6 @@ import javax.xml.bind.annotation.XmlType;
  * </pre>
  * 
  */
-@XmlType(name = "Currency")
-@XmlEnum
 public enum Currency {
 
     EUR,

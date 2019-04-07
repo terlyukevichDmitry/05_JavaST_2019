@@ -18,6 +18,7 @@ public class Main {
 
     public static void main(String[] args) {
 
+        System.out.println("fksdjf");
         System.out.println(">---------------------DOM------------------<");
         VouchersDOMBuilder domBuilder = new VouchersDOMBuilder();
         domBuilder.buildSetVouchers(FILE1);

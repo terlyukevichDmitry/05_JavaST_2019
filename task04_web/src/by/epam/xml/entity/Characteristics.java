@@ -9,11 +9,6 @@
 package by.epam.xml.entity;
 
 import java.math.BigInteger;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlSchemaType;
-import javax.xml.bind.annotation.XmlType;
 
 
 /**
@@ -40,30 +35,13 @@ import javax.xml.bind.annotation.XmlType;
  * 
  * 
  */
-@XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "Characteristics", propOrder = {
-    "stars",
-    "nutrition",
-    "room",
-    "tv",
-    "wifi",
-    "airConditioning"
-})
 public class Characteristics {
 
-    @XmlSchemaType(name = "positiveInteger")
     protected int stars;
-    @XmlElement(required = true)
-    @XmlSchemaType(name = "string")
     protected Nutrition nutrition;
-    @XmlElement(required = true)
-    @XmlSchemaType(name = "positiveInteger")
     protected BigInteger room;
-    @XmlElement(name = "TV")
     protected boolean tv;
-    @XmlElement(name = "WI_FI")
     protected boolean wifi;
-    @XmlElement(name = "air_conditioning")
     protected boolean airConditioning;
 
     /**

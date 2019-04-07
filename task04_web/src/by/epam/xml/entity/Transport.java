@@ -8,9 +8,6 @@
 
 package by.epam.xml.entity;
 
-import javax.xml.bind.annotation.XmlEnum;
-import javax.xml.bind.annotation.XmlEnumValue;
-import javax.xml.bind.annotation.XmlType;
 
 
 /**
@@ -31,19 +28,12 @@ import javax.xml.bind.annotation.XmlType;
  * </pre>
  * 
  */
-@XmlType(name = "Transport")
-@XmlEnum
 public enum Transport {
 
-    @XmlEnumValue("plane")
     PLANE("plane"),
-    @XmlEnumValue("car")
     CAR("car"),
-    @XmlEnumValue("bus")
     BUS("bus"),
-    @XmlEnumValue("train")
     TRAIN("train"),
-    @XmlEnumValue("ship")
     SHIP("ship");
     private final String value;
 

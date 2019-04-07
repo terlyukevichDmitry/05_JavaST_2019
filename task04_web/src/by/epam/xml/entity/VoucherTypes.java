@@ -8,11 +8,6 @@
 
 package by.epam.xml.entity;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlSeeAlso;
-import javax.xml.bind.annotation.XmlType;
 
 
 /**
@@ -34,16 +29,8 @@ import javax.xml.bind.annotation.XmlType;
  * 
  * 
  */
-@XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "VoucherTypes", propOrder = {
-    "type"
-})
-@XmlSeeAlso({
-    Voucher.class
-})
 public class VoucherTypes {
 
-    @XmlElement(required = true)
     protected String type;
 
     /**
@@ -72,8 +59,6 @@ public class VoucherTypes {
 
     @Override
     public String toString() {
-        return "VoucherTypes{" +
-                "type='" + type + '\'' +
-                '}';
+        return "VoucherTypes{" + "type='" + type + '\'' + '}';
     }
 }

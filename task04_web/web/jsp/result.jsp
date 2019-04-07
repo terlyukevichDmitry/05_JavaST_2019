@@ -1,5 +1,8 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix="fmt"   uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<fmt:setBundle basename="text" scope="session"/>
+<!DOCTYPE html>
 <html>
 <head>
     <title>Parser result</title>
@@ -12,27 +15,25 @@
 </script>
 
 <body>
-<a href="#" class="myButton" onclick="goBack()">Go Back</a><br><br>
-
 <table border="2" width="95%" cellpadding="7" bgcolor="#191970">
         <span style="color: black ">
                 <tr align="center" bgcolor="#ff1493">
-                        <th>Тип Поездки</th>
-                        <th>Страна</th>
-                        <th>Кол-во дней</th>
-                        <th>Кол-во ночей</th>
-                        <th>Вид перевозки</th>
-                        <th>Кол-во звезд</th>
-                        <th>Тип питания</th>
-                        <th>Кол-во комнат</th>
-                        <th>Наличие телевизора</th>
-                        <th>Наличие интернета</th>
-                        <th>Наличие кондиционера</th>
-                        <th>Кол-во денег</th>
-                        <th>Тип валюты</th>
-                        <th>Дата начала</th>
-                        <th>Дата окончания</th>
-                        <th>ID</th>
+                        <th><fmt:message key="type"/></th>
+                        <th><fmt:message key="country"/></th>
+                        <th><fmt:message key="numberDays"/></th>
+                        <th><fmt:message key="numberNights"/></th>
+                        <th><fmt:message key="transport"/></th>
+                        <th><fmt:message key="stars"/></th>
+                        <th><fmt:message key="nutrition"/></th>
+                        <th><fmt:message key="room"/></th>
+                        <th><fmt:message key="tv"/></th>
+                        <th><fmt:message key="wifi"/></th>
+                        <th><fmt:message key="air"/></th>
+                        <th><fmt:message key="money"/></th>
+                        <th><fmt:message key="currency"/></th>
+                        <th><fmt:message key="startTime"/></th>
+                        <th><fmt:message key="finishDate"/></th>
+                        <th><fmt:message key="id"/></th>
                 </tr>
         </span>
     <%--@elvariable id="lst" type="java.util.List"--%>
@@ -58,6 +59,7 @@
                 </tr>
         </span>
     </c:forEach>
-</table>
+</table><br><br>
+<a href="#" class="myButton" onclick="goBack()"><fmt:message key="button"/></a><br><br>
 </body>
 </html>

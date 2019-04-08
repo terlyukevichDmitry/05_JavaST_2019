@@ -4,6 +4,8 @@ import by.epam.xml.builder.AbstractVouchersBuilder;
 import by.epam.xml.builder.VouchersDOMBuilder;
 import by.epam.xml.builder.VouchersSAXBuilder;
 import by.epam.xml.builder.VouchersStAXBuilder;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.io.IOException;
 import java.io.File;
@@ -23,7 +25,11 @@ public class ParserServlet extends HttpServlet {
 
     //private static final String FI
     // = "C:\\05_JavaST_2019\\task04_web\\data\\vouchers.xml";
-
+    /**
+     * Logger for recording a program state.
+     */
+    private static final Logger LOGGER =
+            LogManager.getLogger(ParserServlet.class);
     /**
      * Method for get information on web part.
      * {@inheritDoc}
@@ -34,9 +40,12 @@ public class ParserServlet extends HttpServlet {
      */
     @Override
     protected void doGet(final HttpServletRequest request,
-                         final HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request, response);
+                         final HttpServletResponse response) {
+        try {
+            processRequest(request, response);
+        } catch (ServletException | IOException ignored) {
+            LOGGER.error("We have exception ServletException | IOException");
+        }
     }
 
     /**
@@ -49,9 +58,12 @@ public class ParserServlet extends HttpServlet {
      */
     @Override
     protected void doPost(final HttpServletRequest request,
-                          final HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request, response);
+                          final HttpServletResponse response) {
+        try {
+            processRequest(request, response);
+        } catch (ServletException | IOException ignored) {
+            LOGGER.error("We have exception ServletException | IOException");
+        }
     }
 
     /**

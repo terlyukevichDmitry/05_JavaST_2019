@@ -24,7 +24,7 @@ import java.util.Set;
  *
  * @version 1.0
  */
-public class HamletInternational {
+public final class HamletInternational {
     /**
      * Logger for recording a program state.
      */
@@ -42,7 +42,7 @@ public class HamletInternational {
     /**
      * Constructor.
      */
-    public HamletInternational() {
+    private HamletInternational() {
     }
 
     /**
@@ -52,7 +52,7 @@ public class HamletInternational {
     public static void main(final String[] args) {
         Scanner scanner = new Scanner(System.in);
         LOGGER.info("Hello, choose the number between 1 and 3.");
-        LOGGER.info("1—английский || 2—белорусский || 3—русский");
+        LOGGER.info("1-english, 2-belorussian, 3-russian");
         int k = scanner.nextInt();
         String country;
         String language;

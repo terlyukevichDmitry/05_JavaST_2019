@@ -268,7 +268,7 @@ public class Voucher extends VoucherTypes {
                 + ", hotelCharacteristics=" + hotelCharacteristics
                 + ", cost=" + cost + ", dataStart=" + dataStart
                 + ", dataFinish=" + dataFinish + ", id='" + id + '\''
-                + ", numberNights=" + numberNights + ", type='" + type + '\''
-                + '}';
+                + ", numberNights=" + numberNights + ", type='" + getType()
+                + '\'' + '}';
     }
 }

@@ -89,6 +89,7 @@ public class ParserServlet extends HttpServlet {
                                 final HttpServletResponse response)
             throws ServletException, IOException {
 
+        String file_name = null;
         String file = null;
         response.setContentType("text/html");
         boolean isMultipartContent = ServletFileUpload.isMultipartContent(request);
@@ -105,22 +106,24 @@ public class ParserServlet extends HttpServlet {
             }
             while (it.hasNext()) {
                 FileItem fileItem = it.next();
-                    if (fileItem.getSize() > 0) {
-                        fileItem.write(new File("C:\\05_JavaST_2019\\task04_web\\web\\xml\\" + fileItem.getName()));
-                        file = "C:\\05_JavaST_2019\\task04_web\\web\\xml\\" + fileItem.getName();
+                boolean isFormField = fileItem.isFormField();
+                if (isFormField) {
+                    if (file_name == null) {
+                        if (fileItem.getFieldName().equals("browser")) {
+                            file_name = fileItem.getString();
+                        }
                     }
-
+                } else {
+                    if (fileItem.getSize() > 0) {
+                        fileItem.write(new File("C:\\05_JavaST_2019\\task04_web\\web\\xml" + fileItem.getName()));
+                        file = "C:\\05_JavaST_2019\\task04_web\\web\\xml" + fileItem.getName();
+                    }
+                }
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        System.out.println(file);
-        String element;
-        element="stax";
-//        String file = "C:\\05_JavaST_2019\\task04_web\\data\\"
-//                + new File(request.getParameter("fileReader"));
-
-        switch (element) {
+        switch (file_name) {
             case "dom":
                 AbstractVouchersBuilder vouchersDOMBuilder
                         = new VouchersDOMBuilder();

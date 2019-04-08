@@ -1,0 +1,277 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<vouchers xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xmlns="http://www.training.by/vouchers"
+          xsi:schemaLocation="http://www.training.by/vouchers vouchers.xsd">
+    <voucher id="first" numberNights="3">
+        <type>weekend</type>
+        <country>Egypt</country>
+        <numberDays>10</numberDays>
+        <transport>plane</transport>
+        <hotel_characteristics>
+            <stars>4</stars>
+            <nutrition>AL</nutrition>
+            <room>3</room>
+            <TV>true</TV>
+            <WI_FI>true</WI_FI>
+            <air_conditioning>true</air_conditioning>
+        </hotel_characteristics>
+        <cost currency="USD">1000</cost>
+        <data_start>2019-06-04T18:13:51</data_start>
+        <data_finish>2019-06-06T18:13:51</data_finish>
+    </voucher>
+    <voucher id="second" numberNights="3">
+        <type>weekend</type>
+        <country>USA</country>
+        <numberDays>2</numberDays>
+        <transport>ship</transport>
+        <hotel_characteristics>
+            <stars>4</stars>
+            <nutrition>HB</nutrition>
+            <room>2</room>
+            <TV>false</TV>
+            <WI_FI>true</WI_FI>
+            <air_conditioning>true</air_conditioning>
+        </hotel_characteristics>
+        <cost currency="EUR">1500</cost>
+        <data_start>2019-12-04T18:13:51</data_start>
+        <data_finish>2019-12-14T18:13:51</data_finish>
+    </voucher>
+    <voucher id="third" numberNights="4">
+        <type>weekend</type>
+        <country>Germany</country>
+        <numberDays>5</numberDays>
+        <transport>car</transport>
+        <hotel_characteristics>
+            <stars>5</stars>
+            <nutrition>AL</nutrition>
+            <room>3</room>
+            <TV>true</TV>
+            <WI_FI>true</WI_FI>
+            <air_conditioning>true</air_conditioning>
+        </hotel_characteristics>
+        <cost currency="BYN">4000</cost>
+        <data_start>2019-11-04T12:40:00</data_start>
+        <data_finish>2019-11-09T21:00:00</data_finish>
+    </voucher>
+    <voucher id="fourth" numberNights="10">
+        <type>weekend</type>
+        <country>Altai</country>
+        <numberDays>11</numberDays>
+        <transport>plane</transport>
+        <hotel_characteristics>
+            <stars>4</stars>
+            <nutrition>HB</nutrition>
+            <room>2</room>
+            <TV>true</TV>
+            <WI_FI>true</WI_FI>
+            <air_conditioning>false</air_conditioning>
+        </hotel_characteristics>
+        <cost currency="EUR">4000</cost>
+        <data_start>2019-05-01T10:00:00</data_start>
+        <data_finish>2019-05-12T23:00:00</data_finish>
+    </voucher>
+    <voucher id="fifth" numberNights="20">
+        <type>3 weekend</type>
+        <country>Maldives</country>
+        <numberDays>21</numberDays>
+        <transport>plane</transport>
+        <hotel_characteristics>
+            <stars>5</stars>
+            <nutrition>AL</nutrition>
+            <room>3</room>
+            <TV>true</TV>
+            <WI_FI>true</WI_FI>
+            <air_conditioning>true</air_conditioning>
+        </hotel_characteristics>
+        <cost currency="EUR">5000</cost>
+        <data_start>2019-07-01T08:00:00</data_start>
+        <data_finish>2019-07-22T23:00:00</data_finish>
+    </voucher>
+    <voucher id="sixth" numberNights="13">
+        <type>2 week</type>
+        <country>Italy</country>
+        <numberDays>14</numberDays>
+        <transport>plane</transport>
+        <hotel_characteristics>
+            <stars>4</stars>
+            <nutrition>HB</nutrition>
+            <room>3</room>
+            <TV>true</TV>
+            <WI_FI>true</WI_FI>
+            <air_conditioning>true</air_conditioning>
+        </hotel_characteristics>
+        <cost currency="EUR">2500</cost>
+        <data_start>2020-01-10T06:00:00</data_start>
+        <data_finish>2020-01-24T00:00:00</data_finish>
+    </voucher>
+    <voucher id="seventh" numberNights="6">
+        <type>1 week</type>
+        <country>USA</country>
+        <numberDays>7</numberDays>
+        <transport>plane</transport>
+        <hotel_characteristics>
+            <stars>4</stars>
+            <nutrition>HB</nutrition>
+            <room>2</room>
+            <TV>true</TV>
+            <WI_FI>true</WI_FI>
+            <air_conditioning>true</air_conditioning>
+        </hotel_characteristics>
+        <cost currency="EUR">1500</cost>
+        <data_start>2019-06-06T10:00:00</data_start>
+        <data_finish>2019-06-13T22:00:00</data_finish>
+    </voucher>
+    <voucher id="eighth" numberNights="2">
+        <type>weekend</type>
+        <country>Poland</country>
+        <numberDays>3</numberDays>
+        <transport>bus</transport>
+        <hotel_characteristics>
+            <stars>3</stars>
+            <nutrition>BB</nutrition>
+            <room>1</room>
+            <TV>false</TV>
+            <WI_FI>true</WI_FI>
+            <air_conditioning>false</air_conditioning>
+        </hotel_characteristics>
+        <cost currency="RUB">30000</cost>
+        <data_start>2019-07-15T10:00:00</data_start>
+        <data_finish>2019-07-17T22:00:00</data_finish>
+    </voucher>
+    <voucher id="ninth" numberNights="6">
+        <type>1 week</type>
+        <country>Albania</country>
+        <numberDays>7</numberDays>
+        <transport>plane</transport>
+        <hotel_characteristics>
+            <stars>4</stars>
+            <nutrition>HB</nutrition>
+            <room>1</room>
+            <TV>true</TV>
+            <WI_FI>true</WI_FI>
+            <air_conditioning>true</air_conditioning>
+        </hotel_characteristics>
+        <cost currency="USD">1150</cost>
+        <data_start>2021-09-15T12:00:00</data_start>
+        <data_finish>2021-09-22T23:00:00</data_finish>
+    </voucher>
+    <voucher id="tenth" numberNights="13">
+        <type>2 week</type>
+        <country>India</country>
+        <numberDays>14</numberDays>
+        <transport>plane</transport>
+        <hotel_characteristics>
+            <stars>5</stars>
+            <nutrition>AL</nutrition>
+            <room>2</room>
+            <TV>true</TV>
+            <WI_FI>true</WI_FI>
+            <air_conditioning>true</air_conditioning>
+        </hotel_characteristics>
+        <cost currency="USD">2150</cost>
+        <data_start>2021-03-03T11:00:00</data_start>
+        <data_finish>2021-03-17T20:00:00</data_finish>
+    </voucher>
+    <voucher id="eleventh" numberNights="6">
+        <type>1 week</type>
+        <country>Wales</country>
+        <numberDays>7</numberDays>
+        <transport>plane</transport>
+        <hotel_characteristics>
+            <stars>2</stars>
+            <nutrition>BB</nutrition>
+            <room>1</room>
+            <TV>false</TV>
+            <WI_FI>false</WI_FI>
+            <air_conditioning>false</air_conditioning>
+        </hotel_characteristics>
+        <cost currency="USD">450</cost>
+        <data_start>2019-04-24T11:00:00</data_start>
+        <data_finish>2019-04-30T20:00:00</data_finish>
+    </voucher>
+    <voucher id="twelfth" numberNights="30">
+        <type>1 month</type>
+        <country>Japan</country>
+        <numberDays>31</numberDays>
+        <transport>plane</transport>
+        <hotel_characteristics>
+            <stars>5</stars>
+            <nutrition>AL</nutrition>
+            <room>3</room>
+            <TV>true</TV>
+            <WI_FI>true</WI_FI>
+            <air_conditioning>true</air_conditioning>
+        </hotel_characteristics>
+        <cost currency="USD">3800</cost>
+        <data_start>2020-07-01T11:00:00</data_start>
+        <data_finish>2020-07-31T20:00:00</data_finish>
+    </voucher>
+    <voucher id="thirteenth" numberNights="364">
+        <type>1 year</type>
+        <country>Morocco</country>
+        <numberDays>365</numberDays>
+        <transport>plane</transport>
+        <hotel_characteristics>
+            <stars>5</stars>
+            <nutrition>AL</nutrition>
+            <room>3</room>
+            <TV>true</TV>
+            <WI_FI>true</WI_FI>
+            <air_conditioning>true</air_conditioning>
+        </hotel_characteristics>
+        <cost currency="USD">30000</cost>
+        <data_start>2020-07-11T10:00:00</data_start>
+        <data_finish>2021-07-11T21:00:00</data_finish>
+    </voucher>
+    <voucher id="fourteenth" numberNights="2">
+        <type>weekend</type>
+        <country>Russia</country>
+        <numberDays>3</numberDays>
+        <transport>car</transport>
+        <hotel_characteristics>
+            <stars>2</stars>
+            <nutrition>BB</nutrition>
+            <room>1</room>
+            <TV>false</TV>
+            <WI_FI>false</WI_FI>
+            <air_conditioning>false</air_conditioning>
+        </hotel_characteristics>
+        <cost currency="RUB">20000</cost>
+        <data_start>2019-04-07T03:00:00</data_start>
+        <data_finish>2019-04-09T23:00:00</data_finish>
+    </voucher>
+    <voucher id="fifteenth" numberNights="6">
+        <type>1 week</type>
+        <country>Spain</country>
+        <numberDays>7</numberDays>
+        <transport>plane</transport>
+        <hotel_characteristics>
+            <stars>4</stars>
+            <nutrition>HB</nutrition>
+            <room>2</room>
+            <TV>true</TV>
+            <WI_FI>true</WI_FI>
+            <air_conditioning>true</air_conditioning>
+        </hotel_characteristics>
+        <cost currency="EUR">2500</cost>
+        <data_start>2019-11-07T09:30:00</data_start>
+        <data_finish>2019-11-09T22:45:00</data_finish>
+    </voucher>
+    <voucher id="sixteenth" numberNights="20">
+        <type>3 week</type>
+        <country>Greece</country>
+        <numberDays>21</numberDays>
+        <transport>plane</transport>
+        <hotel_characteristics>
+            <stars>5</stars>
+            <nutrition>AL</nutrition>
+            <room>3</room>
+            <TV>true</TV>
+            <WI_FI>true</WI_FI>
+            <air_conditioning>true</air_conditioning>
+        </hotel_characteristics>
+        <cost currency="EUR">3560</cost>
+        <data_start>2021-12-06T09:30:00</data_start>
+        <data_finish>2021-12-26T22:45:00</data_finish>
+    </voucher>
+</vouchers>

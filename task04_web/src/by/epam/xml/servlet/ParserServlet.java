@@ -78,7 +78,7 @@ public class ParserServlet extends HttpServlet {
             throws ServletException, IOException {
         String element = request.getParameter("browser");
         String file = "C:\\05_JavaST_2019\\task04_web\\data\\"
-                + new File(request.getParameter("fload"));
+                + new File(request.getParameter("fileReader"));
         switch (element) {
             case "dom":
                 AbstractVouchersBuilder vouchersDOMBuilder

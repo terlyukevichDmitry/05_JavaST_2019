@@ -26,18 +26,15 @@
 </head>
     <body>
     <div align="center">
-
         <h1><fmt:message key="hello_message"/> </h1>
         <form action="#" method="POST" class="form">
-            <div class="form_select">
             <label>
                 <select name="dd">
-                    <option value="ru_RU">Ru</option>
-                    <option value="en_US">En</option>
-                    <option value="be_BY">By</option>
+                    <option value="ru_RU">Russian language</option>
+                    <option value="en_US">English language</option>
+                    <option value="be_BY">Belarus language</option>
                 </select>
             </label>
-            </div>
             <input type="submit" class="myButton" value="<fmt:message key="button"/>"/>
         </form><br><br>
 
@@ -57,8 +54,7 @@
                 <span class="checkmark"></span>
             </label>
             <br>
-            <p><input class="load_file" type="file" accept="file.xml"
-                      name="fload"></p>
+            <input accept="file.xml" class="myButton" type="file" name="fileReader"></p>
             <input type="submit" value="<fmt:message key="button"/>" class="myButton">
             <p style="font-size: 22px"><%=getFormattedDate()%></p><br><br>
         </form>

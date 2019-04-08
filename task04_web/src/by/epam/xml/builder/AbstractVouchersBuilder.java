@@ -46,5 +46,5 @@ public abstract class AbstractVouchersBuilder {
      * realization.
      * @param fileName file which save xml direction.
      */
-    protected abstract void buildSetVouchers(String fileName);
+    public abstract void buildSetVouchers(String fileName);
 }

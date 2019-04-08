@@ -10,7 +10,7 @@
     </description>
     <display-name>Hi, Man</display-name>
     <welcome-file-list>
-        <welcome-file>index.jsp</welcome-file>
+        <welcome-file>jsp/index.jsp</welcome-file>
     </welcome-file-list>
     <servlet>
     <servlet-name>ParserServlet</servlet-name>
@@ -18,6 +18,6 @@
     </servlet>
     <servlet-mapping>
     <servlet-name>ParserServlet</servlet-name>
-    <url-pattern>/parserAction</url-pattern>
+    <url-pattern>/parserServlet</url-pattern>
     </servlet-mapping>
 </web-app>

@@ -41,7 +41,7 @@
             <input type="submit" class="myButton" value="<fmt:message key="button"/>"/>
         </form><br><br>
 
-        <form action="http://localhost:8080/xmlParser/parserAction" method="POST">
+        <form action="http://localhost:8080/xmlParser/parserServlet" method="POST">
             <label class="container">DOMParser
                 <input type="radio" name="browser" value="dom" checked>
                 <span class="checkmark"></span>

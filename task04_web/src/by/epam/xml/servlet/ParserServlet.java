@@ -1,5 +1,6 @@
 package by.epam.xml.servlet;
 
+import by.epam.xml.builder.AbstractVouchersBuilder;
 import by.epam.xml.builder.VouchersDOMBuilder;
 import by.epam.xml.builder.VouchersSAXBuilder;
 import by.epam.xml.builder.VouchersStAXBuilder;
@@ -66,31 +67,32 @@ public class ParserServlet extends HttpServlet {
         String element = request.getParameter("browser");
         String file = "C:\\05_JavaST_2019\\task04_web\\data\\"
                 + new File(request.getParameter("fload"));
-
         switch (element) {
             case "dom":
-                VouchersDOMBuilder vouchersDOMBuilder
+                AbstractVouchersBuilder vouchersDOMBuilder
                         = new VouchersDOMBuilder();
                 vouchersDOMBuilder.buildSetVouchers(file);
                 request.setAttribute("lst",
                         vouchersDOMBuilder.getVouchers());
                 break;
             case "sax":
-                VouchersSAXBuilder vouchersSAXBuilder
+                AbstractVouchersBuilder vouchersSAXBuilder
                         = new VouchersSAXBuilder();
                 vouchersSAXBuilder.buildSetVouchers(file);
                 request.setAttribute("lst",
                         vouchersSAXBuilder.getVouchers());
                 break;
             case "stax":
-                VouchersStAXBuilder vouchersStAXBuilder
+                AbstractVouchersBuilder vouchersStAXBuilder
                         = new VouchersStAXBuilder();
                 vouchersStAXBuilder.buildSetVouchers(file);
                 request.setAttribute("lst",
                         vouchersStAXBuilder.getVouchers());
                 break;
-                default: break;
+            default:
+                break;
         }
+
         request.getRequestDispatcher(
                 "jsp/result.jsp").forward(request, response);
     }

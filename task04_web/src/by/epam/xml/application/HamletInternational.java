@@ -1,5 +1,6 @@
 package by.epam.xml.application;
 
+import by.epam.xml.builder.AbstractVouchersBuilder;
 import by.epam.xml.builder.VouchersDOMBuilder;
 import by.epam.xml.builder.VouchersSAXBuilder;
 import by.epam.xml.builder.VouchersStAXBuilder;
@@ -99,7 +100,7 @@ public class HamletInternational {
         Set<Voucher> vouchers = null;
         switch (k) {
             case 1:
-                VouchersDOMBuilder domBuilder = new VouchersDOMBuilder();
+                AbstractVouchersBuilder domBuilder = new VouchersDOMBuilder();
                 domBuilder.buildSetVouchers(FILE);
                 vouchers = domBuilder.getVouchers();
 
@@ -107,7 +108,7 @@ public class HamletInternational {
                         "domParserText"));
                 break;
             case 2:
-                VouchersSAXBuilder vouchersSAXBuilder
+                AbstractVouchersBuilder vouchersSAXBuilder
                         = new VouchersSAXBuilder();
                 vouchersSAXBuilder.buildSetVouchers(FILE);
                 vouchers = vouchersSAXBuilder.getVouchers();
@@ -116,7 +117,7 @@ public class HamletInternational {
                         "saxParserText"));
                 break;
             case THREE:
-                VouchersStAXBuilder staxBuilder = new VouchersStAXBuilder();
+                AbstractVouchersBuilder staxBuilder = new VouchersStAXBuilder();
                 staxBuilder.buildSetVouchers(FILE);
                 vouchers = staxBuilder.getVouchers();
 

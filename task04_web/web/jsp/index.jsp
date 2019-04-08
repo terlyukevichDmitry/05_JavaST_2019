@@ -27,7 +27,8 @@
     <body>
     <div align="center">
         <h1><fmt:message key="hello_message"/> </h1>
-        <form action="#" method="POST" class="form">
+
+        <form action="#" method="POST">
             <label>
                 <select name="dd">
                     <option value="ru_RU">Russian language</option>
@@ -38,7 +39,7 @@
             <input type="submit" class="myButton" value="<fmt:message key="button"/>"/>
         </form><br><br>
 
-        <form action="http://localhost:8080/xmlParser/parserServlet" method="POST">
+        <form action="http://localhost:8080/xmlParser/parserServlet" enctype="multipart/form-data" method="POST">
             <label class="container">DOMParser
                 <input type="radio" name="browser" value="dom" checked>
                 <span class="checkmark"></span>
@@ -54,7 +55,7 @@
                 <span class="checkmark"></span>
             </label>
             <br>
-            <input accept="file.xml" class="myButton" type="file" name="fileReader"></p>
+            <input accept="file.xml" class="myButton" type="file" name="fileReader">
             <input type="submit" value="<fmt:message key="button"/>" class="myButton">
             <p style="font-size: 22px"><%=getFormattedDate()%></p><br><br>
         </form>

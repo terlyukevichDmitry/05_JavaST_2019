@@ -4,12 +4,21 @@ import by.epam.xml.builder.AbstractVouchersBuilder;
 import by.epam.xml.builder.VouchersDOMBuilder;
 import by.epam.xml.builder.VouchersSAXBuilder;
 import by.epam.xml.builder.VouchersStAXBuilder;
+import org.apache.commons.fileupload.FileItem;
+import org.apache.commons.fileupload.FileItemFactory;
+import org.apache.commons.fileupload.FileUploadException;
+import org.apache.commons.fileupload.disk.DiskFileItemFactory;
+import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.io.IOException;
 import java.io.File;
+import java.io.PrintWriter;
+import java.util.Iterator;
+import java.util.List;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -22,6 +31,7 @@ import javax.servlet.http.HttpServletResponse;
  * @version 1.0
  */
 public class ParserServlet extends HttpServlet {
+    private static final long serialVersionUID = 1L;
 
     //private static final String FI
     // = "C:\\05_JavaST_2019\\task04_web\\data\\vouchers.xml";
@@ -30,6 +40,8 @@ public class ParserServlet extends HttpServlet {
      */
     private static final Logger LOGGER =
             LogManager.getLogger(ParserServlet.class);
+    private File file;
+
     /**
      * Method for get information on web part.
      * {@inheritDoc}
@@ -76,9 +88,38 @@ public class ParserServlet extends HttpServlet {
     private void processRequest(final HttpServletRequest request,
                                 final HttpServletResponse response)
             throws ServletException, IOException {
-        String element = request.getParameter("browser");
-        String file = "C:\\05_JavaST_2019\\task04_web\\data\\"
-                + new File(request.getParameter("fileReader"));
+
+        String file = null;
+        response.setContentType("text/html");
+        boolean isMultipartContent = ServletFileUpload.isMultipartContent(request);
+        if (!isMultipartContent) {
+            return;
+        }
+        FileItemFactory factory = new DiskFileItemFactory();
+        ServletFileUpload upload = new ServletFileUpload(factory);
+        try {
+            List < FileItem > fields = upload.parseRequest(request);
+            Iterator < FileItem > it = fields.iterator();
+            if (!it.hasNext()) {
+                return;
+            }
+            while (it.hasNext()) {
+                FileItem fileItem = it.next();
+                    if (fileItem.getSize() > 0) {
+                        fileItem.write(new File("C:\\05_JavaST_2019\\task04_web\\web\\xml\\" + fileItem.getName()));
+                        file = "C:\\05_JavaST_2019\\task04_web\\web\\xml\\" + fileItem.getName();
+                    }
+
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        System.out.println(file);
+        String element;
+        element="stax";
+//        String file = "C:\\05_JavaST_2019\\task04_web\\data\\"
+//                + new File(request.getParameter("fileReader"));
+
         switch (element) {
             case "dom":
                 AbstractVouchersBuilder vouchersDOMBuilder

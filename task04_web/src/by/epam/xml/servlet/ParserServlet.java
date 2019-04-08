@@ -115,8 +115,8 @@ public class ParserServlet extends HttpServlet {
                     }
                 } else {
                     if (fileItem.getSize() > 0) {
-                        fileItem.write(new File("C:\\05_JavaST_2019\\task04_web\\web\\xml" + fileItem.getName()));
-                        file = "C:\\05_JavaST_2019\\task04_web\\web\\xml" + fileItem.getName();
+                        fileItem.write(new File("C:\\05_JavaST_2019\\task04_web\\web\\xml\\" + fileItem.getName()));
+                        file = "C:\\05_JavaST_2019\\task04_web\\web\\xml\\" + fileItem.getName();
                     }
                 }
             }

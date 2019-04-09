@@ -14,12 +14,14 @@
         }
     </script>
     <body>
-    <div style="font-size: 72px;
+    <div align="center">
+        <div style="font-size: 72px;
 color:red;">
-        <fmt:message key="fileError"/><br>
-    </div>
-    <div style="font-size: 30px">
-        <fmt:message key="error"/><br><br>
+            <fmt:message key="fileError"/><br>
+        </div>
+        <div style="font-size: 30px">
+            <fmt:message key="error"/><br><br>
+     </div>
     </div>
         <a href="#" class="myButton" onclick="goBack()"><fmt:message key="button"/></a><br><br>
     </body>

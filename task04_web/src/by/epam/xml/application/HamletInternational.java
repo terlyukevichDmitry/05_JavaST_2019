@@ -9,7 +9,6 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.io.File;
-import java.nio.charset.StandardCharsets;
 import java.util.Locale;
 import java.util.ResourceBundle;
 import java.util.Scanner;
@@ -144,7 +143,6 @@ public final class HamletInternational {
      */
     private static String getStringOfProperties(final ResourceBundle rb,
                                          final String stringBundle) {
-        return new String(rb.getString(stringBundle).getBytes(
-                StandardCharsets.ISO_8859_1), StandardCharsets.UTF_8);
+        return rb.getString(stringBundle);
     }
 }

@@ -6,7 +6,6 @@ import by.epam.xml.builder.VouchersSAXBuilder;
 import by.epam.xml.builder.VouchersStAXBuilder;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileItemFactory;
-import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.logging.log4j.LogManager;
@@ -14,11 +13,9 @@ import org.apache.logging.log4j.Logger;
 
 import java.io.IOException;
 import java.io.File;
-import java.io.PrintWriter;
 import java.util.Iterator;
 import java.util.List;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -31,16 +28,11 @@ import javax.servlet.http.HttpServletResponse;
  * @version 1.0
  */
 public class ParserServlet extends HttpServlet {
-    private static final long serialVersionUID = 1L;
-
-    //private static final String FI
-    // = "C:\\05_JavaST_2019\\task04_web\\data\\vouchers.xml";
     /**
      * Logger for recording a program state.
      */
     private static final Logger LOGGER =
             LogManager.getLogger(ParserServlet.class);
-    private File file;
 
     /**
      * Method for get information on web part.
@@ -89,18 +81,19 @@ public class ParserServlet extends HttpServlet {
                                 final HttpServletResponse response)
             throws ServletException, IOException {
 
-        String file_name = null;
-        String file = null;
         response.setContentType("text/html");
-        boolean isMultipartContent = ServletFileUpload.isMultipartContent(request);
+        boolean isMultipartContent
+                = ServletFileUpload.isMultipartContent(request);
         if (!isMultipartContent) {
             return;
         }
         FileItemFactory factory = new DiskFileItemFactory();
         ServletFileUpload upload = new ServletFileUpload(factory);
+        String fileName = null;
+        String filePath = null;
         try {
-            List < FileItem > fields = upload.parseRequest(request);
-            Iterator < FileItem > it = fields.iterator();
+            List<FileItem> fields = upload.parseRequest(request);
+            Iterator<FileItem> it = fields.iterator();
             if (!it.hasNext()) {
                 return;
             }
@@ -108,48 +101,62 @@ public class ParserServlet extends HttpServlet {
                 FileItem fileItem = it.next();
                 boolean isFormField = fileItem.isFormField();
                 if (isFormField) {
-                    if (file_name == null) {
-                        if (fileItem.getFieldName().equals("browser")) {
-                            file_name = fileItem.getString();
-                        }
+                    if (fileName == null
+                            && fileItem.getFieldName().equals("browser")) {
+                        fileName = fileItem.getString();
                     }
                 } else {
                     if (fileItem.getSize() > 0) {
-                        fileItem.write(new File("C:\\05_JavaST_2019\\task04_web\\web\\xml\\" + fileItem.getName()));
-                        file = "C:\\05_JavaST_2019\\task04_web\\web\\xml\\" + fileItem.getName();
+                        fileItem.write(new File(
+                                "C:\\05_JavaST_2019\\task04_web\\"
+                                        + "web\\xml\\" + fileItem.getName()));
+                        filePath = "C:\\05_JavaST_2019\\task04_web\\web\\"
+                                + "xml\\" + fileItem.getName();
                     }
                 }
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            LOGGER.error("We have exception of the write text!", e);
         }
-        switch (file_name) {
+        assert fileName != null;
+        parsingFile(fileName, filePath, request);
+        request.getRequestDispatcher(
+                "jsp/result.jsp").forward(request, response);
+    }
+
+    /**
+     * Method for parsing file.
+     * @param fileName parser name.
+     * @param filePath file path for our file to parsing.
+     * @param request object.
+     */
+    private void parsingFile(final String fileName,
+                             final String filePath,
+                             final HttpServletRequest request) {
+        switch (fileName) {
             case "dom":
                 AbstractVouchersBuilder vouchersDOMBuilder
                         = new VouchersDOMBuilder();
-                vouchersDOMBuilder.buildSetVouchers(file);
+                vouchersDOMBuilder.buildSetVouchers(filePath);
                 request.setAttribute("lst",
                         vouchersDOMBuilder.getVouchers());
                 break;
             case "sax":
                 AbstractVouchersBuilder vouchersSAXBuilder
                         = new VouchersSAXBuilder();
-                vouchersSAXBuilder.buildSetVouchers(file);
+                vouchersSAXBuilder.buildSetVouchers(filePath);
                 request.setAttribute("lst",
                         vouchersSAXBuilder.getVouchers());
                 break;
             case "stax":
                 AbstractVouchersBuilder vouchersStAXBuilder
                         = new VouchersStAXBuilder();
-                vouchersStAXBuilder.buildSetVouchers(file);
+                vouchersStAXBuilder.buildSetVouchers(filePath);
                 request.setAttribute("lst",
                         vouchersStAXBuilder.getVouchers());
                 break;
             default:
                 break;
         }
-
-        request.getRequestDispatcher(
-                "jsp/result.jsp").forward(request, response);
     }
 }

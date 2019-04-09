@@ -25,7 +25,6 @@ public class DateTimeConverter {
      */
     private static final Logger LOGGER =
             LogManager.getLogger(DateTimeConverter.class);
-
     /**
      * Method for creating string with date time.
      * @param string date of xml file.

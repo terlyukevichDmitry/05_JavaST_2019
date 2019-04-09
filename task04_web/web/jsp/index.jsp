@@ -13,7 +13,7 @@
          pageEncoding="UTF-8" isELIgnored="false" %>
 <%@ taglib prefix="fmt"   uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<c:set var="current" value="${param.dd}" scope="session"/>
+<c:set var="current" value="${param.language}" scope="session"/>
 <c:if test="${not empty current}">
     <fmt:setLocale value="${current}" scope="session"/>
 </c:if>
@@ -30,7 +30,7 @@
 
         <form action="#" method="POST">
             <label>
-                <select name="dd">
+                <select name="language">
                     <option value="ru_RU">Russian language</option>
                     <option value="en_US">English language</option>
                     <option value="be_BY">Belarus language</option>

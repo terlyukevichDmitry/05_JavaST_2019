@@ -55,7 +55,7 @@
                 <span class="checkmark"></span>
             </label>
             <br>
-            <input accept="file.xml" class="myButton" type="file" name="fileReader">
+            <input accept=".xml" class="myButton" type="file" name="fileReader">
             <input type="submit" value="<fmt:message key="button"/>" class="myButton" >
             <p style="font-size: 22px"><%=getFormattedDate()%></p><br><br>
         </form>

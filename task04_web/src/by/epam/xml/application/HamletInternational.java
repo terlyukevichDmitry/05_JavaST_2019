@@ -142,7 +142,7 @@ public final class HamletInternational {
      * @return string.
      */
     private static String getStringOfProperties(final ResourceBundle rb,
-                                         final String stringBundle) {
+                                                final String stringBundle) {
         return rb.getString(stringBundle);
     }
 }

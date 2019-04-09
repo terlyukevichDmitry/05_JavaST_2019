@@ -20,4 +20,7 @@
     <servlet-name>ParserServlet</servlet-name>
     <url-pattern>/parserServlet</url-pattern>
     </servlet-mapping>
+    <session-config>
+        <session-timeout>10</session-timeout>
+    </session-config>
 </web-app>

@@ -19,6 +19,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  * This class we use for working in web parts.
@@ -80,12 +81,12 @@ public class ParserServlet extends HttpServlet {
     private void processRequest(final HttpServletRequest request,
                                 final HttpServletResponse response)
             throws ServletException, IOException {
-
         response.setContentType("text/html");
         boolean isMultipartContent
                 = ServletFileUpload.isMultipartContent(request);
         if (!isMultipartContent) {
-            return;
+            request.getRequestDispatcher(
+                    "jsp/error.jsp").forward(request, response);
         }
         FileItemFactory factory = new DiskFileItemFactory();
         ServletFileUpload upload = new ServletFileUpload(factory);
@@ -119,9 +120,14 @@ public class ParserServlet extends HttpServlet {
             LOGGER.error("We have exception of the write text!", e);
         }
         assert fileName != null;
-        parsingFile(fileName, filePath, request);
-        request.getRequestDispatcher(
-                "jsp/result.jsp").forward(request, response);
+        if (filePath == null) {
+            request.getRequestDispatcher(
+                    "jsp/error.jsp").forward(request, response);
+        } else {
+            parsingFile(fileName, filePath, request);
+            request.getRequestDispatcher(
+                    "jsp/result.jsp").forward(request, response);
+        }
     }
 
     /**

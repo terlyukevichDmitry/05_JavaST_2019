@@ -76,6 +76,7 @@ CREATE TABLE `used_quest` (
 CREATE TABLE `review` (
 	`id` INTEGER NOT NULL AUTO_INCREMENT,
 	`message` VARCHAR(255) NOT NULL,
+	`date` DATE NOT NULL,
 	`client_id` INTEGER NOT NULL ,
 	PRIMARY KEY (`id`),
 	FOREIGN KEY (`client_id`)
@@ -86,6 +87,7 @@ CREATE TABLE `review` (
 
 CREATE TABLE `my_booking` (
 	`id` INTEGER NOT NULL AUTO_INCREMENT,
+	`date` DATE NOT NULL,
 	`client_id` INTEGER NOT NULL,
 	`quest_id` INTEGER NOT NULL,
 	PRIMARY KEY (`id`),

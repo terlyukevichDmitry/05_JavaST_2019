@@ -4,10 +4,7 @@ import by.epam.site.entity.AuthorQuest;
 import by.epam.site.entity.Quest;
 import by.epam.site.exception.ConstantException;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,10 +14,10 @@ public class QuestDAO extends AbstractDAO<Quest> {
             + "`level`, `max_people`, `author_id` FROM `quest`";
     private static final String DB_DELETE = "DELETE FROM `quest` WHERE `id`"
             + " = ?";
-    private static final String DB_CLIENT_CREATE = "INSERT INTO `quest` "
+    private static final String DB_QUEST_CREATE = "INSERT INTO `quest` "
             + "(`title`, `level`, `max_people`, `author_id`)"
             + " VALUES (?, ?, ?, ?)";
-    private static final String DB_CLIENT_UPDATE = "UPDATE `quest` SET `title` "
+    private static final String DB_QUEST_UPDATE = "UPDATE `quest` SET `title` "
             + "= ?, `level` = ?, `max_people` = ?, " + "`author_id` = ? "
             + "WHERE `id` = ?";
 
@@ -53,17 +50,48 @@ public class QuestDAO extends AbstractDAO<Quest> {
 
     @Override
     public void delete(Integer id) throws ConstantException {
-
+        try (Connection connection = getConnection();
+             PreparedStatement statement
+                     = connection.prepareStatement(DB_DELETE)) {
+            statement.setInt(1, id);
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            throw new ConstantException(e);
+        }
     }
 
     @Override
-    public void create(Quest entity) throws ConstantException {
-
+    public void create(Quest quest) throws ConstantException {
+        try (Connection connection = getConnection();
+             PreparedStatement statement
+                     = connection.prepareStatement(DB_QUEST_CREATE,
+                     Statement.RETURN_GENERATED_KEYS)) {
+            statement.setString(1, quest.getTitle());
+            statement.setInt(2, quest.getAuthorQuest().getId());
+            statement.setInt(3, quest.getLevel());
+            statement.setInt(4, quest.getMaxPeople());
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            throw new ConstantException(e);
+        }
     }
 
     @Override
-    public Quest update(Quest entity) throws ConstantException {
-        return null;
+    public Quest update(Quest quest) throws ConstantException {
+        try (Connection connection = getConnection();
+             PreparedStatement statement
+                     = connection.prepareStatement(DB_QUEST_UPDATE,
+                     Statement.RETURN_GENERATED_KEYS)) {
+            statement.setInt(1, quest.getMaxPeople());
+            statement.setInt(2, quest.getLevel());
+            statement.setInt(3, quest.getAuthorQuest().getId());
+            statement.setString(4, quest.getTitle());
+            statement.setInt(5, quest.getId());
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            throw new ConstantException(e);
+        }
+        return quest;
     }
 
     public void initializeAuthorQuest(Quest quest) throws ConstantException {

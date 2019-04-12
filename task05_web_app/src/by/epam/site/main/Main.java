@@ -21,6 +21,10 @@ public class Main {
         for (Quest quest :l) {
             System.out.println(quest);
         }
-
+        abstractDAO.delete(2);
+        l = abstractDAO.readAll();
+        for (Quest quest :l) {
+            System.out.println(quest);
+        }
     }
 }

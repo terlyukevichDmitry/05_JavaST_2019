@@ -1,7 +1,10 @@
 package by.epam.site.main;
 
+import by.epam.site.dao.AbstractDAO;
+import by.epam.site.dao.UserDAO;
 import by.epam.site.entity.Role;
 import by.epam.site.entity.User;
+import by.epam.site.exception.ConstantException;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -17,25 +20,16 @@ public class Main {
 //    public static final int DB_POOL_MAX_SIZE = 1000;
 //    public static final int DB_POOL_CHECK_CONNECTION_TIMEOUT = 0;
 
-    public static void main(String[] args) throws SQLException {
-        Connection connection
-                = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
-        Statement st = connection.createStatement();//  статический запрос, выполянется в том виде, какой есть.
-        ResultSet resultSet = st.executeQuery(DB_SELECT_ALL);
-        User user = null;
-        List<User> userList = new ArrayList<>();
-        while(resultSet.next()) {
-            user = new User();
-            user.setId(resultSet.getInt("id"));
-            user.setLogin(resultSet.getString("login"));
-            user.setPassword(resultSet.getString("password"));
-            user.setRole(Role.getByIdentity(resultSet.getInt("role")));
-            userList.add(user);
+    public static void main(String[] args) throws SQLException, ConstantException {
+        AbstractDAO<User> abstractDAO = new UserDAO();
+        List<User> users = abstractDAO.readAll();
+        for (User user : users) {
+            System.out.println(user);
         }
-        for (User us :userList) {
-            System.out.println(us);
+        users.get(0).setPassword("KJKJSD3423J4KDJ8DK32KSDF2FWEJ239");
+        abstractDAO.update(users.get(0));
+        for (User user : users) {
+            System.out.println(user);
         }
-        st.close();
-        connection.close();
     }
 }

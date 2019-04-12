@@ -3,14 +3,11 @@ package by.epam.site.dao;
 import by.epam.site.entity.Client;
 import by.epam.site.exception.ConstantException;
 
-import java.sql.SQLException;
+import java.sql.*;
+import java.util.ArrayList;
 import java.util.List;
 
-public class ClientDAO implements AbstractDAO<Client> {
-    private static final String DB_URL = "jdbc:mysql://localhost:3306/quest_bd?"
-            + "useUnicode=true&characterEncoding=UTF-8";
-    private static final String DB_LOGIN = "quest_user";
-    private static final String DB_PASSWORD = "quest_password";
+public class ClientDAO extends AbstractDAO<Client> {
     private static final String DB_SELECT_ALL = "SELECT `id`, `name`, "
             + "`surname`, `patronymic`, `years`, `email`, "
             + "`phone` FROM `client`";
@@ -25,21 +22,76 @@ public class ClientDAO implements AbstractDAO<Client> {
 
     @Override
     public List<Client> readAll() throws SQLException, ConstantException {
-        return null;
+        try(Connection connection = getConnection();
+        Statement statement = connection.createStatement();
+        ResultSet resultSet = statement.executeQuery(DB_SELECT_ALL)) {
+
+            List<Client> clients = new ArrayList<>();
+            while (resultSet.next()) {
+                Client client = new Client();
+                client.setId(resultSet.getInt("id"));
+                client.setName(resultSet.getString("name"));
+                client.setSurname(resultSet.getString("surname"));
+                client.setPatronymic(resultSet.getString(
+                        "patronymic"));
+                client.setYears(resultSet.getInt("years"));
+                client.setEmail(resultSet.getString("email"));
+                client.setPhone(resultSet.getString("phone"));
+                clients.add(client);
+            }
+            return clients;
+        } catch (SQLException exception) {
+            throw new ConstantException(exception);
+        }
     }
 
     @Override
-    public void delete(Integer id) throws ConstantException {
-
+    public void delete(final Integer id) throws ConstantException {
+        try (Connection connection = getConnection();
+             PreparedStatement statement
+                     = connection.prepareStatement(DB_DELETE)) {
+            statement.setInt(1, id);
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            throw new ConstantException(e);
+        }
     }
 
     @Override
-    public void create(Client entity) throws ConstantException {
-
+    public void create(Client client) throws ConstantException {
+        try(Connection connection = getConnection();
+            PreparedStatement statement
+                    = connection.prepareStatement(DB_CLIENT_CREATE,
+                    Statement.RETURN_GENERATED_KEYS)) {
+            statement.setString(1, client.getName());
+            statement.setString(2, client.getSurname());
+            statement.setString(3, client.getPatronymic());
+            statement.setInt(4, client.getYears());
+            statement.setString(5, client.getEmail());
+            statement.setString(6, client.getPhone());
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            throw new ConstantException(e);
+        }
     }
 
     @Override
-    public Client update(Client entity) throws ConstantException {
-        return null;
+    public Client update(Client client) throws ConstantException {
+        try(Connection connection = getConnection();
+            PreparedStatement statement
+                    = connection.prepareStatement(DB_CLIENT_UPDATE,
+                    Statement.RETURN_GENERATED_KEYS)) {
+            statement.setString(1, client.getName());
+            statement.setString(2, client.getSurname());
+            statement.setString(3, client.getPatronymic());
+            statement.setInt(4, client.getYears());
+            statement.setString(5, client.getEmail());
+            statement.setString(6, client.getPhone());
+            statement.setInt(7, client.getId());
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            throw new ConstantException(e);
+        }
+        return client;
     }
 }

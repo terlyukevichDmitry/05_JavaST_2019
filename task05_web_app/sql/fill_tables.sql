@@ -19,3 +19,10 @@ VALUES
 			 (1, "Ivan", "Ivanov", "Ivanovich", "1994", "1"),
 			 (2, "Sidor", "Sidorov", "Sidorovich", "1964", "2019"),
 			 (3, "Ivan", "Ivanov", "Ivanovich", "1970", "2015");
+
+INSERT INTO `quest`
+		(`id`, `title`, `level`, `max_people`, `author_id`)
+VALUES
+			 (1, "first quest", 5, 9, 1),
+			 (2, "second quest", 5, 3, 1),
+			 (3, "third quest", 4, 5, 2);

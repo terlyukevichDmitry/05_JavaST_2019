@@ -1,5 +1,6 @@
 package by.epam.site.dao;
 
+import by.epam.site.entity.Client;
 import by.epam.site.entity.Role;
 import by.epam.site.entity.User;
 import by.epam.site.exception.ConstantException;
@@ -8,11 +9,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UserDAO implements AbstractDAO<User>{
-    private static final String DB_URL = "jdbc:mysql://localhost:3306/quest_bd?"
-            + "useUnicode=true&characterEncoding=UTF-8";
-    private static final String DB_LOGIN = "quest_user";
-    private static final String DB_PASSWORD = "quest_password";
+public class UserDAO extends AbstractDAO<User>{
     private static final String DB_SELECT_ALL = "SELECT `id`, `login`,"
             + " `password`, `role` FROM `user`";
     private static final String DB_DELETE = "DELETE FROM `user` WHERE `id` = ?"
@@ -112,9 +109,5 @@ public class UserDAO implements AbstractDAO<User>{
             throw new ConstantException(e);
         }
         return user;
-    }
-    private Connection getConnection() throws SQLException {
-        return DriverManager.getConnection(DB_URL,
-                DB_LOGIN, DB_PASSWORD);
     }
 }

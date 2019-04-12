@@ -6,7 +6,7 @@ public class Quest extends Entity {
     @NotNull private String title;
     @NotNull private Integer level;
     @NotNull private Integer maxPeople;
-    @NotNull private Integer authorId; //or @NotNull private AuthorQuest authorQuest;
+    @NotNull private AuthorQuest authorQuest;
 
     public String getTitle() {
         return title;
@@ -32,17 +32,17 @@ public class Quest extends Entity {
         this.maxPeople = maxPeople;
     }
 
-    public Integer getAuthorId() {
-        return authorId;
+    public AuthorQuest getAuthorQuest() {
+        return authorQuest;
     }
 
-    public void setAuthorId(Integer authorId) {
-        this.authorId = authorId;
+    public void setAuthorQuest(final AuthorQuest authorQuest) {
+        this.authorQuest = authorQuest;
     }
-
     @Override
     public String toString() {
         return "Quest{" + "title='" + title + '\'' + ", level=" + level
-                + ", maxPeople=" + maxPeople + ", authorId=" + authorId + '}';
+                + ", maxPeople=" + maxPeople + ", authorQuest="
+                + authorQuest + '}';
     }
 }

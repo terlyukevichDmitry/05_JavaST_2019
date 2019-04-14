@@ -22,7 +22,7 @@ public class AuthorQuestDAO extends AbstractDAO<AuthorQuest> {
             + " `year_of_death` = ? WHERE `id` = ?";
 
     @Override
-    public List<AuthorQuest> readAll() throws SQLException, ConstantException {
+    public List<AuthorQuest> readAll() throws SQLException, ConstantException, ClassNotFoundException {
         try(Connection connection = getConnection();
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(DB_SELECT_ALL)) {
@@ -56,6 +56,8 @@ public class AuthorQuestDAO extends AbstractDAO<AuthorQuest> {
             statement.executeUpdate();
         } catch (SQLException e) {
             throw new ConstantException(e);
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
         }
     }
 
@@ -73,6 +75,8 @@ public class AuthorQuestDAO extends AbstractDAO<AuthorQuest> {
             statement.executeUpdate();
         } catch (SQLException e) {
             throw new ConstantException(e);
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
         }
     }
 
@@ -92,6 +96,8 @@ public class AuthorQuestDAO extends AbstractDAO<AuthorQuest> {
             statement.executeUpdate();
         } catch (SQLException e) {
             throw new ConstantException(e);
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
         }
         return authorQuest;
     }

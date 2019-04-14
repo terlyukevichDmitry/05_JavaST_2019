@@ -21,7 +21,7 @@ public class ClientDAO extends AbstractDAO<Client> {
             + "`email` = ?, `phone` = ? WHERE `id` = ?";
 
     @Override
-    public List<Client> readAll() throws SQLException, ConstantException {
+    public List<Client> readAll() throws SQLException, ConstantException, ClassNotFoundException {
         try(Connection connection = getConnection();
         Statement statement = connection.createStatement();
         ResultSet resultSet = statement.executeQuery(DB_SELECT_ALL)) {
@@ -46,7 +46,7 @@ public class ClientDAO extends AbstractDAO<Client> {
     }
 
     @Override
-    public void delete(final Integer id) throws ConstantException {
+    public void delete(final Integer id) throws ConstantException, ClassNotFoundException {
         try (Connection connection = getConnection();
              PreparedStatement statement
                      = connection.prepareStatement(DB_DELETE)) {
@@ -58,7 +58,7 @@ public class ClientDAO extends AbstractDAO<Client> {
     }
 
     @Override
-    public void create(Client client) throws ConstantException {
+    public void create(Client client) throws ConstantException, ClassNotFoundException {
         try(Connection connection = getConnection();
             PreparedStatement statement
                     = connection.prepareStatement(DB_CLIENT_CREATE,
@@ -76,7 +76,7 @@ public class ClientDAO extends AbstractDAO<Client> {
     }
 
     @Override
-    public Client update(Client client) throws ConstantException {
+    public Client update(Client client) throws ConstantException, ClassNotFoundException {
         try(Connection connection = getConnection();
             PreparedStatement statement
                     = connection.prepareStatement(DB_CLIENT_UPDATE,

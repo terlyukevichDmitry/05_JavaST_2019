@@ -22,7 +22,7 @@ public class QuestDAO extends AbstractDAO<Quest> {
             + "WHERE `id` = ?";
 
     @Override
-    public List<Quest> readAll() throws SQLException, ConstantException {
+    public List<Quest> readAll() throws SQLException, ConstantException, ClassNotFoundException {
 
         try(Connection connection = getConnection();
             Statement statement = connection.createStatement();
@@ -49,7 +49,7 @@ public class QuestDAO extends AbstractDAO<Quest> {
     }
 
     @Override
-    public void delete(Integer id) throws ConstantException {
+    public void delete(Integer id) throws ConstantException, ClassNotFoundException {
         try (Connection connection = getConnection();
              PreparedStatement statement
                      = connection.prepareStatement(DB_DELETE)) {
@@ -61,7 +61,7 @@ public class QuestDAO extends AbstractDAO<Quest> {
     }
 
     @Override
-    public void create(Quest quest) throws ConstantException {
+    public void create(Quest quest) throws ConstantException, ClassNotFoundException {
         try (Connection connection = getConnection();
              PreparedStatement statement
                      = connection.prepareStatement(DB_QUEST_CREATE,
@@ -77,7 +77,7 @@ public class QuestDAO extends AbstractDAO<Quest> {
     }
 
     @Override
-    public Quest update(Quest quest) throws ConstantException {
+    public Quest update(Quest quest) throws ConstantException, ClassNotFoundException {
         try (Connection connection = getConnection();
              PreparedStatement statement
                      = connection.prepareStatement(DB_QUEST_UPDATE,
@@ -94,7 +94,7 @@ public class QuestDAO extends AbstractDAO<Quest> {
         return quest;
     }
 
-    public void initializeAuthorQuest(Quest quest) throws ConstantException {
+    public void initializeAuthorQuest(Quest quest) throws ConstantException, ClassNotFoundException {
         final String DB_AUTHOR_SELECT = "SELECT `name`, `surname`, "
                 + "`patronymic`, "
                 + "`year_of_birth`, `year_of_death` FROM `author_quest` "

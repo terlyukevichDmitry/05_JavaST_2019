@@ -10,21 +10,12 @@ import java.util.List;
 
 public class Main {
 
-    public static void main(String[] args) throws SQLException, ConstantException {
-        AbstractDAO<Quest> abstractDAO = new QuestDAO();
-        List<Quest> l = abstractDAO.readAll();
-        for (Quest q :l) {
-            if (q.getAuthorQuest().getId().equals(q.getId())) {
-                ((QuestDAO) abstractDAO).initializeAuthorQuest(q);
-            }
+    public static void main(String[] args) throws SQLException, ConstantException, ClassNotFoundException {
+        AbstractDAO<User> abstractDAO = new UserDAO();
+        List<User> list = abstractDAO.readAll();
+        for (User client : list) {
+            System.out.println(client.toString());
         }
-        for (Quest quest :l) {
-            System.out.println(quest);
-        }
-        abstractDAO.delete(2);
-        l = abstractDAO.readAll();
-        for (Quest quest :l) {
-            System.out.println(quest);
-        }
+
     }
 }

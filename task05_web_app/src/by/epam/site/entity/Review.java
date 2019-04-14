@@ -3,10 +3,12 @@ package by.epam.site.entity;
 import com.sun.istack.internal.NotNull;
 
 import java.util.Date;
+import java.util.Objects;
 
 public class Review extends Entity {
+
     @NotNull private String message;
-    @NotNull private Integer clientId;
+    @NotNull private Client client;
     @NotNull private Date date;
 
     public String getMessage() {
@@ -17,12 +19,12 @@ public class Review extends Entity {
         this.message = message;
     }
 
-    public Integer getClientId() {
-        return clientId;
+    public Client getClient() {
+        return client;
     }
 
-    public void setClientId(Integer clientId) {
-        this.clientId = clientId;
+    public void setClient(Client client) {
+        this.client = client;
     }
 
     public Date getDate() {
@@ -34,8 +36,24 @@ public class Review extends Entity {
     }
 
     @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+        Review review = (Review) o;
+        return Objects.equals(message, review.message) &&
+                Objects.equals(client, review.client) &&
+                Objects.equals(date, review.date);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), message, client, date);
+    }
+
+    @Override
     public String toString() {
-        return "Review{" + "message='" + message + '\''
-                + ", clientId=" + clientId + ", date=" + date + '}';
+        return "Review{" + "message='" + message + '\'' + ", client=" + client
+                + ", date=" + date + '}';
     }
 }

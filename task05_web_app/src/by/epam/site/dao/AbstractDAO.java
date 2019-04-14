@@ -1,5 +1,7 @@
 package by.epam.site.dao;
 
+import by.epam.site.dao.connection.BasicConnectionPool;
+import by.epam.site.dao.connection.ConnectionPool;
 import by.epam.site.entity.Entity;
 import by.epam.site.exception.ConstantException;
 
@@ -14,13 +16,14 @@ public abstract class AbstractDAO <T extends Entity> {
     private static final String DB_LOGIN = "quest_user";
     private static final String DB_PASSWORD = "quest_password";
 
-    public abstract List<T> readAll() throws SQLException, ConstantException;
-    public abstract void delete(Integer id) throws ConstantException;
-    public abstract void create(T entity) throws ConstantException;
-    public abstract T update(T entity) throws ConstantException;
+    public abstract List<T> readAll() throws SQLException, ConstantException, ClassNotFoundException;
+    public abstract void delete(Integer id) throws ConstantException, ClassNotFoundException;
+    public abstract void create(T entity) throws ConstantException, ClassNotFoundException;
+    public abstract T update(T entity) throws ConstantException, ClassNotFoundException;
 
-    public Connection getConnection() throws SQLException {
-        return DriverManager.getConnection(DB_URL,
-                DB_LOGIN, DB_PASSWORD);
+    Connection getConnection() throws SQLException, ClassNotFoundException {
+        Class.forName("com.mysql.jdbc.Driver");
+        BasicConnectionPool basicConnectionPool = BasicConnectionPool.create(DB_URL, DB_LOGIN, DB_PASSWORD);
+        return basicConnectionPool.getConnection();
     }
 }

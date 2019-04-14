@@ -22,7 +22,7 @@ public class UserDAO extends AbstractDAO<User>{
             + "= ?, `password` = ?, `role` = ? WHERE `id` = ?";
 
     @Override
-    public List<User> readAll() throws ConstantException {
+    public List<User> readAll() throws ConstantException, ClassNotFoundException {
         Connection connection = null;
         Statement statement = null;
         ResultSet resultSet = null;
@@ -55,7 +55,7 @@ public class UserDAO extends AbstractDAO<User>{
     }
 
     @Override
-    public void delete(Integer id) throws ConstantException {
+    public void delete(Integer id) throws ConstantException, ClassNotFoundException {
         try (Connection connection = getConnection();
              PreparedStatement statement
                      = connection.prepareStatement(DB_DELETE_WITH_ONE_PARAM)) {
@@ -67,7 +67,7 @@ public class UserDAO extends AbstractDAO<User>{
     }
 
     // Method in this class.
-    public void delete(final Integer id, final Role role) throws ConstantException {
+    public void delete(final Integer id, final Role role) throws ConstantException, ClassNotFoundException {
         try (Connection connection = getConnection();
              PreparedStatement statement
                 = connection.prepareStatement(DB_DELETE)) {
@@ -80,7 +80,7 @@ public class UserDAO extends AbstractDAO<User>{
     }
 
     @Override
-    public void create(final User user) throws ConstantException {
+    public void create(final User user) throws ConstantException, ClassNotFoundException {
         try(Connection connection = getConnection();
             PreparedStatement statement
                     = connection.prepareStatement(DB_USER_CREATE,
@@ -95,7 +95,7 @@ public class UserDAO extends AbstractDAO<User>{
     }
 
     @Override
-    public User update(final User user) throws ConstantException {
+    public User update(final User user) throws ConstantException, ClassNotFoundException {
         try(Connection connection = getConnection();
             PreparedStatement statement
                     = connection.prepareStatement(DB_USER_UPDATE,

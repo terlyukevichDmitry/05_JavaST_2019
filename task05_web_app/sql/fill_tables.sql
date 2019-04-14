@@ -26,3 +26,10 @@ VALUES
 			 (1, "first quest", 5, 9, 1),
 			 (2, "second quest", 5, 3, 1),
 			 (3, "third quest", 4, 5, 2);
+
+INSERT INTO `review`
+		(`id`, `message`, `date`, `client_id`)
+VALUES
+			 (1, "first", "1989-09-10", 1),
+			 (2, "second", "2020-06-12", 1),
+			 (3, "third", "2014-09-11", 2);

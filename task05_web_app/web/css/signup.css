@@ -11,7 +11,7 @@ body {
     padding: 40px;
     width: 250px;
     margin: 0 auto;
-    margin-top: 50px;
+    margin-top: 90px;
     height: 400px;
 }
 
@@ -19,6 +19,7 @@ form {
     width: 240px;
     text-align: center;
 }
+
 input {
     width: 240px;
     text-align: center;
@@ -52,10 +53,20 @@ input[type=button]:hover {
 }
 
 h2 {
-    color: #000000;
+    color: white;
+}
+
+a {
+    color:yellow;
+    text-decoration: blink;
+}
+
+a:hover {
+    color: skyblue;
 }
 
 ::placeholder {
     color:aliceblue;
     opacity: 0.8;
 }
+

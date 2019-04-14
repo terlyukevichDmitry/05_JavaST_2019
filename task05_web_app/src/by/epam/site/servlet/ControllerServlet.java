@@ -46,16 +46,10 @@ public class ControllerServlet extends HttpServlet {
         response.setContentType("text/html");
         String username = request.getParameter("username");
         String password = request.getParameter("password");
-        String signup = request.getParameter("signup");
-        if (!username.equals("") && !password.equals("")) {
-            if (checker(username, password)) {
-                request.getRequestDispatcher(
-                        "jsp/home.jsp").forward(request, response);
-            }
-        } else if(signup.equals("Sign Up")) {
-            request.getRequestDispatcher("jsp/signUp.jsp").forward(request, response);
+        if (!username.equals("") && !password.equals("") && checker(username, password)) {
+            request.getRequestDispatcher(
+                    "jsp/home.jsp").forward(request, response);
         }
-
     }
 
     private boolean checker(String username, String password) throws ConstantException, SQLException, ClassNotFoundException {

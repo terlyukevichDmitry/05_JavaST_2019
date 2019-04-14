@@ -5,17 +5,18 @@
 <head>
     <title>My super project!</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <link rel="stylesheet" href="css/signup.css" type="text/css"/>
+    <link rel="stylesheet" href="http://localhost:8080/sigIn/css/signup.css" type="text/css"/>
     <link href="https://fonts.googleapis.com/css?family=Play" rel="stylesheet"/>
     <style>
         #msg {
             visibility: hidden;
             min-width: 250px;
-            background-color: #0CF;
+            background-color: yellow;
             color: #000;
             text-align: center;
             border-radius: 2px;
             padding: 16px;
+            margin-right: 122px;
             position: fixed;
             z-index: 1;
             right: 30%;
@@ -58,11 +59,21 @@
             <input type="text" name="username" placeholder="Username"><br><br>
             <input type="password" name="password" placeholder="Password"><br><br>
             <input type="password" name="password" placeholder="Confirm Password"><br><br>
-            <input type="button" value="Sign Up"><br><br>
+            <input type="button" value="Sign Up" onclick="myFunction()"><br><br>
             <div id="msg">
                 Congratulations!!! You sign up successfully!!!
-            </div>
+            </div><br><br>
+            <script>
+                function myFunction() {
+                    var x = document.getElementById("msg");
+                    x.className = "show";
+                    setTimeout(function () {
+                        x.className = x.className.replace("show", "");
+                    }, 3000);
+                }
+            </script>
         </form>
+        Already have account? <a href="http://localhost:8080/sigIn" style="text-decoration: blink; font-family: 'Play', sans-serif; color: yellow;">&nbsp;Log in</a>
     </div>
 </body>
 </html>

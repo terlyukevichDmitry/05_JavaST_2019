@@ -5,11 +5,10 @@
 <head>
     <title>My super project!</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <link rel="stylesheet" href="css/login.css" type="text/css"/>
+    <link rel="stylesheet" href="http://localhost:8080/sigIn/css/login.css" type="text/css"/>
     <link href="https://fonts.googleapis.com/css?family=Play" rel="stylesheet"/>
 </head>
 <body>
-
     <div class="signIn">
         <form action="http://localhost:8080/sigIn/controller" method="post">
             <h2 style="color:white">Log In</h2>

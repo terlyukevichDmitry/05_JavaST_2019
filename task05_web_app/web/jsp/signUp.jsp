@@ -73,7 +73,7 @@
                 }
             </script>
         </form>
-        Already have account? <a href="http://localhost:8080/sigIn" style="text-decoration: blink; font-family: 'Play', sans-serif; color: yellow;">&nbsp;Log in</a>
+        Already have account? <a href="http://localhost:8080/sigIn/jsp/sigIn.jsp" style="text-decoration: blink; font-family: 'Play', sans-serif; color: yellow;">&nbsp;Log in</a>
     </div>
 </body>
 </html>

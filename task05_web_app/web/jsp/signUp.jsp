@@ -56,9 +56,9 @@
     <div class="signUp">
         <form action="http://localhost:8080/sigIn/controller" method="post">
             <h2 style="color: #ffffff;">Sign Up</h2>
-            <input type="text" name="username" placeholder="Username"><br><br>
-            <input type="password" name="password" placeholder="Password"><br><br>
-            <input type="password" name="password" placeholder="Confirm Password"><br><br>
+            <input type="text" name="username" placeholder="Username" required><br><br>
+            <input type="password" name="password" placeholder="Password" required><br><br>
+            <input type="password" name="password" placeholder="Confirm Password" required><br><br>
             <input type="button" value="Sign Up" onclick="myFunction()"><br><br>
             <div id="msg">
                 Congratulations!!! You sign up successfully!!!

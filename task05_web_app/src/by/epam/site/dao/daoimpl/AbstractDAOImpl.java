@@ -1,16 +1,14 @@
-package by.epam.site.dao;
+package by.epam.site.dao.daoimpl;
 
 import by.epam.site.dao.connection.BasicConnectionPool;
-import by.epam.site.dao.connection.ConnectionPool;
 import by.epam.site.entity.Entity;
 import by.epam.site.exception.ConstantException;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.List;
 
-public abstract class AbstractDAO <T extends Entity> {
+public abstract class AbstractDAOImpl<T extends Entity> {
     private static final String DB_URL = "jdbc:mysql://localhost:3306/quest_bd?"
             + "useUnicode=true&characterEncoding=UTF-8";
     private static final String DB_LOGIN = "quest_user";

@@ -12,8 +12,8 @@
     <div class="signIn">
         <form action="http://localhost:8080/sigIn/controller" method="post">
             <h2 style="color:white">Log In</h2>
-            <input type="text" name="username" placeholder="Username"><br><br>
-            <input type="password" name="password" placeholder="Password"><br><br>
+            <input type="text" name="username" placeholder="Username" required><br><br>
+            <input type="password" name="password" placeholder="Password" required><br><br>
             <a><input type="submit" value="Log in"></a><br><br>
             <div class="container">
                 <a href="#" style="margin-right: 0; font-size: 13px; font-family: Tahoma, Geneva, sans-serif;">Resent password</a>

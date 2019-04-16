@@ -1,7 +1,7 @@
 package by.epam.site.servlet;
 
-import by.epam.site.dao.AbstractDAO;
-import by.epam.site.dao.UserDAO;
+import by.epam.site.dao.daoimpl.AbstractDAOImpl;
+import by.epam.site.dao.daoimpl.UserDAOImpl;
 import by.epam.site.entity.User;
 import by.epam.site.exception.ConstantException;
 
@@ -53,7 +53,7 @@ public class ControllerServlet extends HttpServlet {
     }
 
     private boolean checker(String username, String password) throws ConstantException, SQLException, ClassNotFoundException {
-        AbstractDAO<User> abstractDAO = new UserDAO();
+        AbstractDAOImpl<User> abstractDAO = new UserDAOImpl();
         List<User> userList = abstractDAO.readAll();
         for (User user :userList) {
             if (!username.equals(user.getLogin()) || !password.equals(user.getPassword())) {

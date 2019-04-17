@@ -1,9 +1,9 @@
 package by.epam.site.dao.daoimpl;
 
 import by.epam.site.dao.QuestDAO;
-import by.epam.site.dao.daoimpl.AbstractDAOImpl;
 import by.epam.site.entity.AuthorQuest;
 import by.epam.site.entity.Quest;
+import by.epam.site.entity.Review;
 import by.epam.site.exception.ConstantException;
 
 import java.sql.*;
@@ -13,21 +13,22 @@ import java.util.List;
 public class QuestDAOImpl extends AbstractDAOImpl<Quest> implements QuestDAO {
 
     private static final String DB_SELECT_ALL = "SELECT `id`, `title`, "
-            + "`level`, `max_people`, `author_id` FROM `quest`";
+            + "`level`, `max_people`, `author_id`, `review_id` FROM `quest`";
     private static final String DB_DELETE = "DELETE FROM `quest` WHERE `id`"
             + " = ?";
     private static final String DB_QUEST_CREATE = "INSERT INTO `quest` "
-            + "(`title`, `level`, `max_people`, `author_id`)"
-            + " VALUES (?, ?, ?, ?)";
+            + "(`title`, `level`, `max_people`, `author_id`, `review_id`)"
+            + " VALUES (?, ?, ?, ?, ?)";
     private static final String DB_QUEST_UPDATE = "UPDATE `quest` SET `title` "
-            + "= ?, `level` = ?, `max_people` = ?, " + "`author_id` = ? "
-            + "WHERE `id` = ?";
+            + "= ?, `level` = ?, `max_people` = ?, " + "`author_id` = ?, "
+            + "`review_id` = ? WHERE `id` = ?";
 
     @Override
-    public List<Quest> readAll() throws SQLException, ConstantException, ClassNotFoundException {
+    public List<Quest> readAll()
+            throws ConstantException, ClassNotFoundException {
 
         try(Connection connection = getConnection();
-            Statement statement = connection.createStatement();
+            PreparedStatement statement = connection.prepareStatement(DB_SELECT_ALL);
             ResultSet resultSet = statement.executeQuery(DB_SELECT_ALL)) {
 
             List<Quest> quests = new ArrayList<>();
@@ -41,6 +42,11 @@ public class QuestDAOImpl extends AbstractDAOImpl<Quest> implements QuestDAO {
                 authorQuest.setId(resultSet.getInt("author_id"));
                 if(!resultSet.wasNull()) {
                     quest.setAuthorQuest(authorQuest);
+                }
+                Review review = new Review();
+                review.setId(resultSet.getInt("review_id"));
+                if(!resultSet.wasNull()) {
+                    quest.setReviewList(review);
                 }
                 quests.add(quest);
             }
@@ -103,9 +109,9 @@ public class QuestDAOImpl extends AbstractDAOImpl<Quest> implements QuestDAO {
                 + "`year_of_birth`, `year_of_death` FROM `author_quest` "
                 + "WHERE `id` = " + quest.getAuthorQuest().getId();
         try {
-            Connection c = getConnection();
-            Statement statement = c.createStatement();
-            ResultSet resultSet1 = statement.executeQuery(DB_AUTHOR_SELECT);
+            Connection connection = getConnection();
+            PreparedStatement statement = connection.prepareStatement(DB_AUTHOR_SELECT);
+            ResultSet resultSet1 = statement.executeQuery();
 
             if(resultSet1.next()) {
                 quest.getAuthorQuest().setName(resultSet1.getString("name"));

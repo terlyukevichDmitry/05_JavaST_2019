@@ -21,11 +21,11 @@ VALUES
 			 (3, "Ivan", "Ivanov", "Ivanovich", "1970", "2015");
 
 INSERT INTO `quest`
-		(`id`, `title`, `level`, `max_people`, `author_id`)
+		(`id`, `title`, `level`, `max_people`, `author_id`, `review_id`)
 VALUES
-			 (1, "first quest", 5, 9, 1),
-			 (2, "second quest", 5, 3, 1),
-			 (3, "third quest", 4, 5, 2);
+			 (1, "first quest", 5, 9, 1, 1),
+			 (2, "second quest", 5, 3, 1, 2),
+			 (3, "third quest", 4, 5, 2, 2);
 
 INSERT INTO `review`
 		(`id`, `message`, `date`, `client_id`)

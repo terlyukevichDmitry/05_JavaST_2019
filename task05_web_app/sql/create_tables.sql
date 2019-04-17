@@ -39,9 +39,11 @@ CREATE TABLE IF NOT EXISTS `quest` (
 	`title` VARCHAR(255) NOT NULL,
 	`level` INTEGER(1) NOT NULL,
 	`max_people` INTEGER(1) NOT NULL,
-	`author_id` INTEGER NOT NULL ,
-	CONSTRAINT PK_quest PRIMARY KEY (`id`),
-	CONSTRAINT FK_quest_author_quest  FOREIGN KEY (`author_id`) REFERENCES `author_quest` (`id`)
+	`author_id` INTEGER NOT NULL,
+	`review_id` INTEGER NOT NULL,
+	PRIMARY KEY (`id`),
+  FOREIGN KEY (`author_id`) REFERENCES `author_quest` (`id`),
+	FOREIGN KEY (`review_id`) REFERENCES `review` (`id`)
 ) ENGINE=INNODB DEFAULT CHARACTER SET utf8;
 
 CREATE TABLE IF NOT EXISTS `quest_place` (

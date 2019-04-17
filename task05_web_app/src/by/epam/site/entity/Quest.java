@@ -2,11 +2,19 @@ package by.epam.site.entity;
 
 import com.sun.istack.internal.NotNull;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Quest extends Entity {
     @NotNull private String title;
     @NotNull private Integer level;
     @NotNull private Integer maxPeople;
     @NotNull private AuthorQuest authorQuest;
+    @NotNull private List<Review> reviewList;
+
+    public Quest() {
+        reviewList = new ArrayList<>();
+    }
 
     public String getTitle() {
         return title;
@@ -39,10 +47,23 @@ public class Quest extends Entity {
     public void setAuthorQuest(final AuthorQuest authorQuest) {
         this.authorQuest = authorQuest;
     }
+
+    public List<Review> getReviewList() {
+        return reviewList;
+    }
+
+    public void setReviewList(final Review review) {
+        reviewList.add(review);
+    }
+
     @Override
     public String toString() {
-        return "Quest{" + "title='" + title + '\'' + ", level=" + level
-                + ", maxPeople=" + maxPeople + ", authorQuest="
-                + authorQuest + '}';
+        return "Quest{" +
+                "title='" + title + '\'' +
+                ", level=" + level +
+                ", maxPeople=" + maxPeople +
+                ", authorQuest=" + authorQuest +
+                ", reviewList=" + reviewList +
+                '}';
     }
 }

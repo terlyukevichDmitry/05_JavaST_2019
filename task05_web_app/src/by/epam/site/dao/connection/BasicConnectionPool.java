@@ -15,8 +15,8 @@ public class BasicConnectionPool implements ConnectionPool {
     private List<Connection> usedConnections = new ArrayList<>();
     private static int INITIAL_POOL_SIZE = 10;
 
-    public BasicConnectionPool(String url, String user,
-                               String password, List<Connection> pool) {
+    private BasicConnectionPool(String url, String user,
+                                String password, List<Connection> pool) {
         this.url = url;
         this.user = user;
         this.password = password;
@@ -24,7 +24,7 @@ public class BasicConnectionPool implements ConnectionPool {
     }
 
     public static BasicConnectionPool create(String url, String user,
-            String password) throws SQLException, ClassNotFoundException {
+            String password) throws SQLException {
         List<Connection> pool = new ArrayList<>(INITIAL_POOL_SIZE);
         for (int i = 0; i < INITIAL_POOL_SIZE; i++) {
             pool.add(createConnection(url, user, password));
@@ -45,28 +45,9 @@ public class BasicConnectionPool implements ConnectionPool {
         return usedConnections.remove(connection);
     }
 
-    @Override
-    public String getUrl() {
-        return url;
-    }
-
-    @Override
-    public String getUser() {
-        return user;
-    }
-
-    @Override
-    public String getPassword() {
-        return password;
-    }
-
     private static Connection createConnection(
             String url, String user, String password)
             throws SQLException {
         return DriverManager.getConnection(url, user, password);
-    }
-
-    public int getSize() {
-        return connectionPool.size() + usedConnections.size();
     }
 }

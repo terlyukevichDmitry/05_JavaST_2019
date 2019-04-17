@@ -18,4 +18,63 @@
         <servlet-name>ControllerServlet</servlet-name>
         <url-pattern>/controller</url-pattern>
     </servlet-mapping>
+
+
+    <!-- -<filter>-->
+
+    <!--<filter-name>EncodingFilter</filter-name>-->
+
+    <!--<filter-class>controller.EncodingFilter</filter-class>-->
+
+<!--&lt;!&ndash;</filter>&ndash;&gt;-->
+
+
+    <!--&lt;!&ndash; -<filter-mapping>&ndash;&gt;-->
+
+    <!--&lt;!&ndash;<filter-name>EncodingFilter</filter-name>&ndash;&gt;-->
+
+    <!--&lt;!&ndash;<url-pattern>*.html</url-pattern>&ndash;&gt;-->
+
+<!--&lt;!&ndash;</filter-mapping>&ndash;&gt;-->
+
+
+    <!--&lt;!&ndash; -<filter>&ndash;&gt;-->
+
+    <!--&lt;!&ndash;<filter-name>ActionFromUriFilter</filter-name>&ndash;&gt;-->
+
+    <!--&lt;!&ndash;<filter-class>controller.ActionFromUriFilter</filter-class>&ndash;&gt;-->
+
+<!--&lt;!&ndash;</filter>&ndash;&gt;-->
+
+
+    <!--&lt;!&ndash; -<filter-mapping>&ndash;&gt;-->
+
+    <!--&lt;!&ndash;<filter-name>ActionFromUriFilter</filter-name>&ndash;&gt;-->
+
+    <!--&lt;!&ndash;<url-pattern>*.html</url-pattern>&ndash;&gt;-->
+
+<!--&lt;!&ndash;</filter-mapping>&ndash;&gt;-->
+
+
+    <!--&lt;!&ndash; -<filter>&ndash;&gt;-->
+
+    <!--&lt;!&ndash;<filter-name>SecurityFilter</filter-name>&ndash;&gt;-->
+
+    <!--&lt;!&ndash;<filter-class>controller.SecurityFilter</filter-class>&ndash;&gt;-->
+
+<!--&lt;!&ndash;</filter>&ndash;&gt;-->
+    <!--&lt;!&ndash; -<filter-mapping>&ndash;&gt;-->
+    <!--&lt;!&ndash;<filter-name>SecurityFilter</filter-name>&ndash;&gt;-->
+    <!--&lt;!&ndash;<url-pattern>*.html</url-pattern>&ndash;&gt;-->
+<!--&lt;!&ndash;</filter-mapping>&ndash;&gt;-->
+    <!--&lt;!&ndash;<error-page>&ndash;&gt;-->
+    <!--&lt;!&ndash;<error-code>404</error-code>&ndash;&gt;-->
+    <!--&lt;!&ndash;<location>/WEB-INF/jsp/error.jsp</location>&ndash;&gt;-->
+<!--&lt;!&ndash;</error-page>&ndash;&gt;-->
+    <!--&lt;!&ndash;&ndash;&gt;-->
+
+
+
+
+
 </web-app>

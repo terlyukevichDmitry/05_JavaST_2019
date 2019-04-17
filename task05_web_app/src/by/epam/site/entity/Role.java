@@ -3,11 +3,11 @@ package by.epam.site.entity;
 public enum Role {
 	ADMINISTRATOR("администратор"),
 	MANAGER("менеджер"),
-	Client("клиент");
+	CLIENT("клиент");
 
 	private String name;
 
-	private Role(String name) {
+	Role(String name) {
 		this.name = name;
 	}
 

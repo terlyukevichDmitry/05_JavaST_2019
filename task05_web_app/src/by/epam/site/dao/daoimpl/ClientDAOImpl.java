@@ -25,8 +25,8 @@ public class ClientDAOImpl extends AbstractDAOImpl<Client> implements ClientDAO 
     @Override
     public List<Client> readAll() throws SQLException, ConstantException, ClassNotFoundException {
         try(Connection connection = getConnection();
-        Statement statement = connection.createStatement();
-        ResultSet resultSet = statement.executeQuery(DB_SELECT_ALL)) {
+            PreparedStatement statement = connection.prepareStatement(DB_SELECT_ALL);
+        ResultSet resultSet = statement.executeQuery()) {
 
             List<Client> clients = new ArrayList<>();
             while (resultSet.next()) {

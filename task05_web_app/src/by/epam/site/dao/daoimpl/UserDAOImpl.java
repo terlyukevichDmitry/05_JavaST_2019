@@ -1,7 +1,6 @@
 package by.epam.site.dao.daoimpl;
 
 import by.epam.site.dao.UserDAO;
-import by.epam.site.dao.daoimpl.AbstractDAOImpl;
 import by.epam.site.entity.Role;
 import by.epam.site.entity.User;
 import by.epam.site.exception.ConstantException;
@@ -25,34 +24,21 @@ public class UserDAOImpl extends AbstractDAOImpl<User> implements UserDAO {
     @Override
     public List<User> readAll()
             throws ConstantException, ClassNotFoundException {
-        Connection connection = null;
-        Statement statement = null;
-        ResultSet resultSet = null;
-        try {
-            assert false;
-            connection = getConnection();
-            statement = connection.createStatement();
-            resultSet = statement.executeQuery(DB_SELECT_ALL);
+        try(Connection connection = getConnection();
+            PreparedStatement statement = connection.prepareStatement(DB_SELECT_ALL);
+            ResultSet resultSet = statement.executeQuery(DB_SELECT_ALL)) {
             List<User> userList = new ArrayList<>();
             while (resultSet.next()) {
                 User user = new User();
                 user.setId(resultSet.getInt("id"));
                 user.setLogin(resultSet.getString("login"));
                 user.setPassword(resultSet.getString("password"));
-                user.setRole(Role.getByIdentity(resultSet.getInt(
-                        "role")));
+                user.setRole(Role.getByIdentity(resultSet.getInt("role")));
                 userList.add(user);
             }
             return userList;
         } catch (SQLException exception) {
             throw new ConstantException(exception);
-        } finally {
-            try {
-                assert false;
-                resultSet.close();
-                statement.close();
-                connection.close();
-            } catch (SQLException | NullPointerException ignored) {}
         }
     }
 

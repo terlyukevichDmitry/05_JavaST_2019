@@ -23,7 +23,7 @@ public class ReviewDAOImpl extends AbstractDAOImpl<Review> implements ReviewDAO 
     @Override
     public List<Review> readAll() throws SQLException, ConstantException, ClassNotFoundException {
         try(Connection connection = getConnection();
-            Statement statement = connection.createStatement();
+            PreparedStatement statement = connection.prepareStatement(DB_SELECT_ALL);
             ResultSet resultSet = statement.executeQuery(DB_SELECT_ALL)) {
 
             List<Review> reviews = new ArrayList<>();
@@ -94,8 +94,8 @@ public class ReviewDAOImpl extends AbstractDAOImpl<Review> implements ReviewDAO 
         final String DB_CLIENT_SELECT = "SELECT `name`, `surname`, `patronymic`, `years`, `email`, `phone` FROM `client` "
                 + "WHERE `id` = " + review.getClient().getId();
         try {
-            Connection c = getConnection();
-            Statement statement = c.createStatement();
+            Connection connection = getConnection();
+            PreparedStatement statement = connection.prepareStatement(DB_CLIENT_SELECT);
             ResultSet resultSet = statement.executeQuery(DB_CLIENT_SELECT);
 
             if(resultSet.next()) {

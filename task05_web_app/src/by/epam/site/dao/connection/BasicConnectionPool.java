@@ -4,7 +4,9 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.concurrent.locks.ReentrantLock;
 
 public class BasicConnectionPool implements ConnectionPool {
 
@@ -12,15 +14,20 @@ public class BasicConnectionPool implements ConnectionPool {
     private String user;
     private String password;
     private List<Connection> connectionPool;
-    private List<Connection> usedConnections = new ArrayList<>();
+    private List<Connection> usedConnections;
     private static int INITIAL_POOL_SIZE = 10;
+    private ReentrantLock reentrantLock;
 
-    private BasicConnectionPool(String url, String user,
-                                String password, List<Connection> pool) {
+    private BasicConnectionPool(final String url,
+                                final String user,
+                                final String password,
+                                final List<Connection> pool) {
         this.url = url;
         this.user = user;
         this.password = password;
         this.connectionPool = pool;
+        reentrantLock = new ReentrantLock();
+        usedConnections = Collections.synchronizedList(new ArrayList<>());
     }
 
     public static BasicConnectionPool create(String url, String user,
@@ -33,15 +40,19 @@ public class BasicConnectionPool implements ConnectionPool {
     }
     @Override
     public Connection getConnection() {
+        reentrantLock.lock();
         Connection connection = connectionPool
                 .remove(connectionPool.size() - 1);
         usedConnections.add(connection);
+        reentrantLock.unlock();
         return connection;
     }
 
     @Override
     public boolean releaseConnection(Connection connection) {
+        reentrantLock.lock();
         connectionPool.add(connection);
+        reentrantLock.unlock();
         return usedConnections.remove(connection);
     }
 

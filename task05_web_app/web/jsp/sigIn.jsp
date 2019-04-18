@@ -7,6 +7,8 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <link rel="stylesheet" href="http://localhost:8080/sigIn/css/login.css" type="text/css"/>
     <link href="https://fonts.googleapis.com/css?family=Play" rel="stylesheet"/>
+    <link rel="shortcut icon" href="images/image-icon.png" type="image/x-icon">
+
 </head>
 <body>
     <div class="signIn">
@@ -14,6 +16,7 @@
             <h2 style="color:white">Log In</h2>
             <input type="text" name="username" placeholder="Username" required><br><br>
             <input type="password" name="password" placeholder="Password" required><br><br>
+            <input type="reset" value="Reset">
             <a><input type="submit" value="Log in"></a><br><br>
             <div class="container">
                 <a href="#" style="margin-right: 0; font-size: 13px; font-family: Tahoma, Geneva, sans-serif;">Resent password</a>

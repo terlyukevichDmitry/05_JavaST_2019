@@ -7,6 +7,8 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <link rel="stylesheet" href="http://localhost:8080/sigIn/css/signup.css" type="text/css"/>
     <link href="https://fonts.googleapis.com/css?family=Play" rel="stylesheet"/>
+    <link rel="shortcut icon" href="images/image-icon.png" type="image/x-icon">
+
     <style>
         #msg {
             visibility: hidden;

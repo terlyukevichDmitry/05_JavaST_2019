@@ -1,10 +1,15 @@
 package by.epam.site.servlet;
 
+import by.epam.site.action.factory.ActionFactory;
+import by.epam.site.action.logic.ActionCommand;
+import by.epam.site.action.logic.ConfigurationManager;
+import by.epam.site.action.logic.MessageManager;
 import by.epam.site.dao.daoimpl.AbstractDAOImpl;
 import by.epam.site.dao.daoimpl.UserDAOImpl;
 import by.epam.site.entity.User;
 import by.epam.site.exception.ConstantException;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -44,12 +49,25 @@ public class ControllerServlet extends HttpServlet {
                                 final HttpServletResponse response)
             throws ServletException, IOException, ConstantException, SQLException, ClassNotFoundException {
         response.setContentType("text/html");
-        String username = request.getParameter("username");
-        String password = request.getParameter("password");
-        if (!username.equals("") && !password.equals("") && checker(username, password)) {
-            request.getRequestDispatcher(
-                    "jsp/home.jsp").forward(request, response);
+        String page = null;
+        ActionFactory client = new ActionFactory();
+        ActionCommand command = client.defineCommand(request);
+
+        page = command.execute(request);
+        if (page != null) {
+            request.getRequestDispatcher(page).forward(request, response);
+        } else {
+            page = ConfigurationManager.getProperty("home");
+            request.getSession().setAttribute("nullPage",
+                    MessageManager.getProperty("nullpage"));
+            response.sendRedirect(request.getContextPath() + page);
         }
+//        String username = request.getParameter("username");
+//        String password = request.getParameter("password");
+//        if (!username.equals("") && !password.equals("") && checker(username, password)) {
+//            request.getRequestDispatcher(
+//                    "jsp/home.jsp").forward(request, response);
+//        }
     }
 
     private boolean checker(String username, String password) throws ConstantException, SQLException, ClassNotFoundException {

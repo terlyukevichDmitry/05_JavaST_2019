@@ -74,13 +74,3 @@ CREATE TABLE IF NOT EXISTS `review` (
 	PRIMARY KEY (`id`),
 	FOREIGN KEY (`client_id`) REFERENCES `client` (`id`)
 )ENGINE=INNODB DEFAULT CHARACTER SET utf8;
-
-CREATE TABLE IF NOT EXISTS `my_booking` (
-	`id` INTEGER NOT NULL AUTO_INCREMENT,
-	`date` DATE NOT NULL,
-	`client_id` INTEGER NOT NULL,
-	`quest_id` INTEGER NOT NULL,
-	PRIMARY KEY (`id`),
-	FOREIGN KEY (`client_id`) REFERENCES `client` (`id`),
-	FOREIGN KEY (`quest_id`) REFERENCES `quest` (`id`)
-)ENGINE=INNODB DEFAULT CHARACTER SET utf8;

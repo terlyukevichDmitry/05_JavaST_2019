@@ -41,7 +41,6 @@
                 <a href="#" class="h_slogan_btn">Best Quests</a>
             </div>
         </div>
-    <ctg:info-time/>
 
 </div>
 </body>

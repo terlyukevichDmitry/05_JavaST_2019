@@ -1,3 +1,7 @@
+
+
+
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" isELIgnored="false" %>
 <!DOCTYPE html>
@@ -11,18 +15,33 @@
 
 </head>
 <body>
-    <div class="signIn">
-        <form action="http://localhost:8080/sigIn/controller" method="post">
-            <h2 style="color:white">Log In</h2>
-            <input type="text" name="username" placeholder="Username" required><br><br>
-            <input type="password" name="password" placeholder="Password" required><br><br>
-            <input type="reset" value="Reset">
-            <a><input type="submit" value="Log in"></a><br><br>
-            <div class="container">
-                <a href="#" style="margin-right: 0; font-size: 13px; font-family: Tahoma, Geneva, sans-serif;">Resent password</a>
-            </div><br><br><br><br><br>
-        </form>
-        Don't have account? <a href="http://localhost:8080/sigIn/jsp/signUp.jsp">&nbsp;Sign Up</a>
-    </div>
+    <%--<div class="signIn">--%>
+        <%--<form action="http://localhost:8080/sigIn/controller" method="post">--%>
+            <%--<h2 style="color:white">Log In</h2>--%>
+            <%--<input type="text" name="username" placeholder="Username" required><br><br>--%>
+            <%--<input type="password" name="password" placeholder="Password" required><br><br>--%>
+            <%--<input type="reset" value="Reset">--%>
+            <%--<a><input type="submit" value="Log in"></a><br><br>--%>
+            <%--<div class="container">--%>
+                <%--<a href="#" style="margin-right: 0; font-size: 13px; font-family: Tahoma, Geneva, sans-serif;">Resent password</a>--%>
+            <%--</div><br><br><br><br><br>--%>
+        <%--</form>--%>
+        <%--Don't have account? <a href="http://localhost:8080/sigIn/jsp/signUp.jsp">&nbsp;Sign Up</a>--%>
+    <%--</div>--%>
+    <form action="http://localhost:8080/sigIn/controller" method="post">
+        <input type="hidden" name="command" value="login" />
+        Login:<br/>
+        <input type="text" name="login" value=""/>
+        <br/>Password:<br/>
+        <input type="password" name="password" value=""/>
+        <br/>
+        ${errorLoginPassMessage}
+        <br/>
+        ${wrongAction}
+        <br/>
+        ${nullPage}
+        <br/>
+        <input type="submit" value="Log in"/>
+    </form>
 </body>
 </html>

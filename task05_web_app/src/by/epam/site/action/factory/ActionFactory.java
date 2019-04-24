@@ -1,8 +1,8 @@
 package by.epam.site.action.factory;
 
-import by.epam.site.action.logic.ActionCommand;
-import by.epam.site.action.logic.EmptyCommand;
-import by.epam.site.action.logic.MessageManager;
+import by.epam.site.action.loginout.ActionCommand;
+import by.epam.site.action.loginout.EmptyCommand;
+import by.epam.site.action.loginout.MessageManager;
 
 import javax.servlet.http.HttpServletRequest;
 

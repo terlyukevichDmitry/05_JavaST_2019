@@ -1,9 +1,9 @@
 USE `quest_bd`;
 
 CREATE TABLE IF NOT EXISTS `user` (
-	`id` INTEGER NOT NULL AUTO_INCREMENT,
-	`login` VARCHAR(255) NOT NULL UNIQUE,
-	`password` CHAR(32) NOT NULL,
+	`id` INT(11) NOT NULL AUTO_INCREMENT,
+	`login` varchar(50) NOT NULL ,
+	`password` varchar(64) NOT NULL ,
 	/*
 	 * 0 - администратор (Role.ADMINISTRATOR)
 	 * 1 - менеджер (Role.Manager)
@@ -14,63 +14,68 @@ CREATE TABLE IF NOT EXISTS `user` (
 ) ENGINE=INNODB DEFAULT CHARACTER SET utf8;
 
 CREATE TABLE IF NOT EXISTS `client` (
-	`id` INTEGER NOT NULL AUTO_INCREMENT,
-	`name` VARCHAR(255) NOT NULL,
-	`surname` VARCHAR(255) NOT NULL,
-	`patronymic` VARCHAR(255) NOT NULL,
-	`years` integer(3) NOT NULL,
-	`email` VARCHAR(255) NOT NULL,
-	`phone` VARCHAR(255) NOT NULL,
+	`id` INT(11) NOT NULL AUTO_INCREMENT,
+	`name` varchar(32) NOT NULL ,
+	`surname` varchar(32) NOT NULL ,
+	`patronymic` varchar(64) NOT NULL,
+	`date_of_birth` DATE NOT NULL,
+	`email` varchar(129) NOT NULL ,
+	`phone` varchar(25) NOT NULL ,
 	PRIMARY KEY (`id`)
-) ENGINE=INNODB DEFAULT CHARACTER SET utf8;
-
-CREATE TABLE IF NOT EXISTS `author_quest` (
-	`id` INTEGER NOT NULL AUTO_INCREMENT,
-	`name` VARCHAR(255) NOT NULL,
-	`surname` VARCHAR(255) NOT NULL,
-	`patronymic` VARCHAR(255) NOT NULL,
-	`year_of_birth` INTEGER NOT NULL,
-	`year_of_death` INTEGER,
-	PRIMARY KEY (`id`)
-) ENGINE=INNODB DEFAULT CHARACTER SET utf8;
+);
 
 CREATE TABLE IF NOT EXISTS `quest` (
-	`id` INTEGER NOT NULL AUTO_INCREMENT,
-	`title` VARCHAR(255) NOT NULL,
-	`level` INTEGER(1) NOT NULL,
-	`max_people` INTEGER(1) NOT NULL,
-	`author_id` INTEGER NOT NULL,
-	`review_id` INTEGER NOT NULL,
-	PRIMARY KEY (`id`),
-  FOREIGN KEY (`author_id`) REFERENCES `author_quest` (`id`),
-	FOREIGN KEY (`review_id`) REFERENCES `review` (`id`)
-) ENGINE=INNODB DEFAULT CHARACTER SET utf8;
+	`id` INT(11) NOT NULL AUTO_INCREMENT,
+	`title` varchar(255) NOT NULL ,
+	`level` INT(1) NOT NULL ,
+	`max_people` INT(1) NOT NULL ,
+	PRIMARY KEY (`id`)
+);
 
 CREATE TABLE IF NOT EXISTS `quest_place` (
-	`id` INTEGER NOT NULL AUTO_INCREMENT,
-	`title` VARCHAR(255) NOT NULL,
-	`address` VARCHAR(255) NOT NULL,
-	`phone` VARCHAR(255) NOT NULL,
-	`quest_id` INTEGER NOT NULL ,
-	PRIMARY KEY (`id`),
-	FOREIGN KEY (`quest_id`) REFERENCES `quest` (`id`)
-)ENGINE=INNODB DEFAULT CHARACTER SET utf8;
+	`id` INT(11) NOT NULL AUTO_INCREMENT,
+	`name` varchar(32) NOT NULL ,
+	`phone` varchar(52) NOT NULL ,
+	`address` varchar(129) NOT NULL ,
+	`image_id` INT(11) NOT NULL ,
+	`quest_id` INT(11) NOT NULL ,
+	PRIMARY KEY (`id`)
+);
 
 CREATE TABLE IF NOT EXISTS `used_quest` (
-	`id` INTEGER NOT NULL AUTO_INCREMENT,
-	`title` VARCHAR(255) NOT NULL,
-	`date` DATE NOT NULL,
-	`level` INTEGER(1) NOT NULL,
-	`client_id` INTEGER NOT NULL ,
-	PRIMARY KEY (`id`),
-	FOREIGN KEY (`client_id`) REFERENCES `client` (`id`)
-)ENGINE=INNODB DEFAULT CHARACTER SET utf8;
+	`id` INT(11) NOT NULL AUTO_INCREMENT,
+	`date` DATE NOT NULL ,
+	`client_id` INT(11) NOT NULL ,
+	`quest_place_id` INT(11) NOT NULL ,
+	PRIMARY KEY (`id`)
+);
 
 CREATE TABLE IF NOT EXISTS `review` (
-	`id` INTEGER NOT NULL AUTO_INCREMENT,
-	`message` VARCHAR(255) NOT NULL,
-	`date` DATE NOT NULL,
-	`client_id` INTEGER NOT NULL ,
-	PRIMARY KEY (`id`),
-	FOREIGN KEY (`client_id`) REFERENCES `client` (`id`)
-)ENGINE=INNODB DEFAULT CHARACTER SET utf8;
+	`id` INT(11) NOT NULL AUTO_INCREMENT,
+	`message` varchar(222) NOT NULL ,
+	`date` DATE NOT NULL ,
+	`quest_place_id` INT(11) NOT NULL,
+	`client_id` INT(11) NOT NULL,
+	PRIMARY KEY (`id`)
+);
+
+
+CREATE TABLE `image` (
+	`id` INT(11) NOT NULL AUTO_INCREMENT,
+	`address` varchar(255) NOT NULL,
+	PRIMARY KEY (`id`)
+);
+
+ALTER TABLE `client` ADD CONSTRAINT `client_fk0` FOREIGN KEY (`id`) REFERENCES `user`(`id`);
+
+ALTER TABLE `quest_place` ADD CONSTRAINT `quest_place_fk0` FOREIGN KEY (`image_id`) REFERENCES `image`(`id`);
+
+ALTER TABLE `quest_place` ADD CONSTRAINT `quest_place_fk1` FOREIGN KEY (`quest_id`) REFERENCES `quest`(`id`);
+
+ALTER TABLE `used_quest` ADD CONSTRAINT `used_quest_fk0` FOREIGN KEY (`client_id`) REFERENCES `client`(`id`);
+
+ALTER TABLE `used_quest` ADD CONSTRAINT `used_quest_fk1` FOREIGN KEY (`quest_place_id`) REFERENCES `quest_place`(`id`);
+
+ALTER TABLE `review` ADD CONSTRAINT `review_fk0` FOREIGN KEY (`quest_place_id`) REFERENCES `quest_place`(`id`);
+
+ALTER TABLE `review` ADD CONSTRAINT `review_fk1` FOREIGN KEY (`client_id`) REFERENCES `client`(`id`);

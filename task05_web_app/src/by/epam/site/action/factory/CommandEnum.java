@@ -1,8 +1,9 @@
 package by.epam.site.action.factory;
 
-import by.epam.site.action.logic.ActionCommand;
-import by.epam.site.action.logic.LoginCommand;
-import by.epam.site.action.logic.LogoutCommand;
+import by.epam.site.action.loginout.ActionCommand;
+import by.epam.site.action.loginout.LoginCommand;
+import by.epam.site.action.loginout.LogoutCommand;
+import by.epam.site.action.signup.SignUpCommand;
 
 public enum CommandEnum {
     LOGIN {
@@ -14,7 +15,13 @@ public enum CommandEnum {
         {
             this.command = new LogoutCommand();
         }
+    },
+    SIGNUP {
+        {
+            this.command = new SignUpCommand();
+        }
     };
+
     ActionCommand command;
     public ActionCommand getCurrentCommand() {
         return command;

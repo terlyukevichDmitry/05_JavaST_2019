@@ -1,4 +1,4 @@
-package by.epam.site.action.logic;
+package by.epam.site.action.loginout;
 
 import javax.servlet.http.HttpServletRequest;
 

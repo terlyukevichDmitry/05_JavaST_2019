@@ -6,30 +6,23 @@ VALUES
 			 (4, "user3", "HELLOWORLD180420ABCGDEHIMANWHATA", 2);
 
 INSERT INTO `client`
-		(`id`, `name`, `surname`, `patronymic`, `years`, `email`, `phone`)
+		(`id`, `name`, `surname`, `patronymic`, `date_of_birth`, `email`, `phone`)
 VALUES
-			 (1, "Dmitry", "Terlyukevich", "Sergeevich", 18, "lanselot_2000@mail.ru", "+375298619783"),
-			 (2, "Eugene", "Dragun", "Dmitrievich", 18, "zheka@mail.ru", "+375337681345"),
-			 (3, "Ivan", "Ivanov", "Ivanovich", 20, "ivan@mail.ru", "+375337431986"),
-			 (4, "Petr", "Petrov", "Petrovich", 15, "petrov_forever@mail.ru", "+80295673521");
-
-INSERT INTO `author_quest`
-		(`id`, `name`, `surname`, `patronymic`, `year_of_birth`, `year_of_death`)
-VALUES
-			 (1, "Ivan", "Ivanov", "Ivanovich", "1994", "1"),
-			 (2, "Sidor", "Sidorov", "Sidorovich", "1964", "2019"),
-			 (3, "Ivan", "Ivanov", "Ivanovich", "1970", "2015");
+			 (1, "Dmitry", "Terlyukevich", "Sergeevich", "2005-09-10", "lanselot_2000@mail.ru", "+375298619783"),
+			 (2, "Eugene", "Dragun", "Dmitrievich", "1999-09-10", "zheka@mail.ru", "+375337681345"),
+			 (3, "Ivan", "Ivanov", "Ivanovich", "2001-09-10", "ivan@mail.ru", "+375337431986"),
+			 (4, "Petr", "Petrov", "Petrovich", "2010-09-10", "petrov_forever@mail.ru", "+80295673521");
 
 INSERT INTO `quest`
-		(`id`, `title`, `level`, `max_people`, `author_id`, `review_id`)
+		(`id`, `title`, `level`, `max_people`)
 VALUES
-			 (1, "first quest", 5, 9, 1, 1),
-			 (2, "second quest", 5, 3, 1, 2),
-			 (3, "third quest", 4, 5, 2, 2);
+			 (1, "first quest", 5, 9),
+			 (2, "second quest", 5, 3),
+			 (3, "third quest", 4, 5);
 
 INSERT INTO `review`
-		(`id`, `message`, `date`, `client_id`)
+		(`id`, `message`, `date`, `quest_place_id`, `client_id`)
 VALUES
-			 (1, "first", "1989-09-10", 1),
-			 (2, "second", "2020-06-12", 1),
-			 (3, "third", "2014-09-11", 2);
+			 (1, "first", "1989-09-10", 1, 1),
+			 (2, "second", "2020-06-12", 1, 2),
+			 (3, "third", "2014-09-11", 2, 3);

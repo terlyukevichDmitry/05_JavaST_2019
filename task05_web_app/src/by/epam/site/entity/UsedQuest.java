@@ -5,18 +5,9 @@ import com.sun.istack.internal.NotNull;
 import java.util.Date;
 
 public class UsedQuest extends Entity{
-    @NotNull private String title;
     @NotNull private Date date;
     @NotNull private Integer level;
     @NotNull private Integer clientId;
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
 
     public Date getDate() {
         return date;
@@ -44,7 +35,10 @@ public class UsedQuest extends Entity{
 
     @Override
     public String toString() {
-        return "UsedQuest{" + "title='" + title + '\'' + ", date=" + date
-                + ", level=" + level + ", clientId=" + clientId + '}';
+        return "UsedQuest{" +
+                "date=" + date +
+                ", level=" + level +
+                ", clientId=" + clientId +
+                '}';
     }
 }

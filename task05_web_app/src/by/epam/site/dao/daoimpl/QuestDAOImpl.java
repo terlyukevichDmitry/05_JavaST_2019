@@ -1,27 +1,23 @@
 package by.epam.site.dao.daoimpl;
 
-import by.epam.site.dao.QuestDAO;
-import by.epam.site.entity.AuthorQuest;
 import by.epam.site.entity.Quest;
-import by.epam.site.entity.Review;
 import by.epam.site.exception.ConstantException;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class QuestDAOImpl extends AbstractDAOImpl<Quest> implements QuestDAO {
+public class QuestDAOImpl extends AbstractDAOImpl<Quest> {
 
     private static final String DB_SELECT_ALL = "SELECT `id`, `title`, "
-            + "`level`, `max_people`, `author_id`, `review_id` FROM `quest`";
+            + "`level`, `max_people` FROM `quest`";
     private static final String DB_DELETE = "DELETE FROM `quest` WHERE `id`"
             + " = ?";
     private static final String DB_QUEST_CREATE = "INSERT INTO `quest` "
-            + "(`title`, `level`, `max_people`, `author_id`, `review_id`)"
-            + " VALUES (?, ?, ?, ?, ?)";
+            + "(`title`, `level`, `max_people`)"
+            + " VALUES (?, ?, ?)";
     private static final String DB_QUEST_UPDATE = "UPDATE `quest` SET `title` "
-            + "= ?, `level` = ?, `max_people` = ?, " + "`author_id` = ?, "
-            + "`review_id` = ? WHERE `id` = ?";
+            + "= ?, `level` = ?, `max_people` = ? WHERE `id` = ?";
 
     @Override
     public List<Quest> readAll()
@@ -38,16 +34,6 @@ public class QuestDAOImpl extends AbstractDAOImpl<Quest> implements QuestDAO {
                 quest.setTitle(resultSet.getString("title"));
                 quest.setLevel(resultSet.getInt("level"));
                 quest.setMaxPeople(resultSet.getInt("max_people"));
-                AuthorQuest authorQuest = new AuthorQuest();
-                authorQuest.setId(resultSet.getInt("author_id"));
-                if(!resultSet.wasNull()) {
-                    quest.setAuthorQuest(authorQuest);
-                }
-                Review review = new Review();
-                review.setId(resultSet.getInt("review_id"));
-                if(!resultSet.wasNull()) {
-                    quest.setReviewList(review);
-                }
                 quests.add(quest);
             }
             return quests;
@@ -75,9 +61,8 @@ public class QuestDAOImpl extends AbstractDAOImpl<Quest> implements QuestDAO {
                      = connection.prepareStatement(DB_QUEST_CREATE,
                      Statement.RETURN_GENERATED_KEYS)) {
             statement.setString(1, quest.getTitle());
-            statement.setInt(2, quest.getAuthorQuest().getId());
-            statement.setInt(3, quest.getLevel());
-            statement.setInt(4, quest.getMaxPeople());
+            statement.setInt(2, quest.getLevel());
+            statement.setInt(3, quest.getMaxPeople());
             statement.executeUpdate();
         } catch (SQLException e) {
             throw new ConstantException(e);
@@ -92,41 +77,12 @@ public class QuestDAOImpl extends AbstractDAOImpl<Quest> implements QuestDAO {
                      Statement.RETURN_GENERATED_KEYS)) {
             statement.setInt(1, quest.getMaxPeople());
             statement.setInt(2, quest.getLevel());
-            statement.setInt(3, quest.getAuthorQuest().getId());
-            statement.setString(4, quest.getTitle());
-            statement.setInt(5, quest.getId());
+            statement.setString(3, quest.getTitle());
+            statement.setInt(4, quest.getId());
             statement.executeUpdate();
         } catch (SQLException e) {
             throw new ConstantException(e);
         }
         return quest;
-    }
-
-    @Override
-    public void initializeAuthorQuest(Quest quest) throws ConstantException, ClassNotFoundException {
-        final String DB_AUTHOR_SELECT = "SELECT `name`, `surname`, "
-                + "`patronymic`, "
-                + "`year_of_birth`, `year_of_death` FROM `author_quest` "
-                + "WHERE `id` = " + quest.getAuthorQuest().getId();
-        try {
-            Connection connection = getConnection();
-            PreparedStatement statement = connection.prepareStatement(DB_AUTHOR_SELECT);
-            ResultSet resultSet1 = statement.executeQuery();
-
-            if(resultSet1.next()) {
-                quest.getAuthorQuest().setName(resultSet1.getString("name"));
-
-                quest.getAuthorQuest().setSurname(resultSet1.getString("surname"));
-
-                quest.getAuthorQuest().setPatronymic(resultSet1.getString(
-                        "patronymic"));
-                quest.getAuthorQuest().setYearOfBirth(resultSet1.getInt(
-                        "year_of_birth"));
-                quest.getAuthorQuest().setYearOfDeath(resultSet1.getInt(
-                        "year_of_death"));
-            }
-        } catch (SQLException e) {
-            throw new ConstantException(e);
-        }
     }
 }

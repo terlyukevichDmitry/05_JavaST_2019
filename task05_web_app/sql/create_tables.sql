@@ -59,10 +59,9 @@ CREATE TABLE IF NOT EXISTS `review` (
 	PRIMARY KEY (`id`)
 );
 
-
 CREATE TABLE `image` (
 	`id` INT(11) NOT NULL AUTO_INCREMENT,
-	`address` varchar(255) NOT NULL,
+	`imageAddress` BLOB NOT NULL,
 	PRIMARY KEY (`id`)
 );
 

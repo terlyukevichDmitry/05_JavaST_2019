@@ -1,4 +1,4 @@
-package by.epam.site.dao;
+package by.epam.site.dao.interfaces;
 
 import by.epam.site.entity.Review;
 import by.epam.site.exception.ConstantException;

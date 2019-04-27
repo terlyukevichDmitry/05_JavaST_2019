@@ -1,6 +1,6 @@
 package by.epam.site.dao.daoimpl;
 
-import by.epam.site.dao.ReviewDAO;
+import by.epam.site.dao.interfaces.ReviewDAO;
 import by.epam.site.entity.Client;
 import by.epam.site.entity.Review;
 import by.epam.site.exception.ConstantException;
@@ -105,8 +105,8 @@ public class ReviewDAOImpl extends AbstractDAOImpl<Review> implements ReviewDAO 
                         "surname"));
                 review.getClient().setPatronymic(resultSet.getString(
                         "patronymic"));
-                review.getClient().setYears(resultSet.getInt(
-                        "years"));
+                review.getClient().setDate_of_birth(resultSet.getDate(
+                        "date_of_birth"));
                 review.getClient().setEmail(resultSet.getString(
                         "email"));
                 review.getClient().setPhone(resultSet.getString(

@@ -1,7 +1,6 @@
 package by.epam.site.dao.daoimpl;
 
-import by.epam.site.dao.ClientDAO;
-import by.epam.site.dao.daoimpl.AbstractDAOImpl;
+import by.epam.site.dao.interfaces.ClientDAO;
 import by.epam.site.entity.Client;
 import by.epam.site.exception.ConstantException;
 
@@ -11,22 +10,22 @@ import java.util.List;
 
 public class ClientDAOImpl extends AbstractDAOImpl<Client> implements ClientDAO {
     private static final String DB_SELECT_ALL = "SELECT `id`, `name`, "
-            + "`surname`, `patronymic`, `years`, `email`, "
+            + "`surname`, `patronymic`, `date_of_birth`, `email`, "
             + "`phone` FROM `client`";
     private static final String DB_DELETE = "DELETE FROM `client` WHERE `id`"
             + " = ?";
     private static final String DB_CLIENT_CREATE = "INSERT INTO `client` "
-            + "(`name`, `surname`, `patronymic`, `years`, `email`, `phone`)"
+            + "(`name`, `surname`, `patronymic`, `date_of_birth`, `email`, `phone`)"
             + " VALUES (?, ?, ?, ?, ?, ?)";
     private static final String DB_CLIENT_UPDATE = "UPDATE `client` SET `name` "
-            + "= ?, `surname` = ?, `patronymic` = ?, " + "`years` = ?, "
+            + "= ?, `surname` = ?, `patronymic` = ?, " + "`date_of_birth` = ?, "
             + "`email` = ?, `phone` = ? WHERE `id` = ?";
 
     @Override
     public List<Client> readAll() throws SQLException, ConstantException, ClassNotFoundException {
         try(Connection connection = getConnection();
             PreparedStatement statement = connection.prepareStatement(DB_SELECT_ALL);
-        ResultSet resultSet = statement.executeQuery()) {
+            ResultSet resultSet = statement.executeQuery()) {
 
             List<Client> clients = new ArrayList<>();
             while (resultSet.next()) {
@@ -36,7 +35,7 @@ public class ClientDAOImpl extends AbstractDAOImpl<Client> implements ClientDAO 
                 client.setSurname(resultSet.getString("surname"));
                 client.setPatronymic(resultSet.getString(
                         "patronymic"));
-                client.setYears(resultSet.getInt("years"));
+                client.setDate_of_birth(resultSet.getDate("date_of_birth"));
                 client.setEmail(resultSet.getString("email"));
                 client.setPhone(resultSet.getString("phone"));
                 clients.add(client);
@@ -68,7 +67,7 @@ public class ClientDAOImpl extends AbstractDAOImpl<Client> implements ClientDAO 
             statement.setString(1, client.getName());
             statement.setString(2, client.getSurname());
             statement.setString(3, client.getPatronymic());
-            statement.setInt(4, client.getYears());
+            statement.setDate(4, (Date) client.getDate_of_birth());
             statement.setString(5, client.getEmail());
             statement.setString(6, client.getPhone());
             statement.executeUpdate();
@@ -86,7 +85,7 @@ public class ClientDAOImpl extends AbstractDAOImpl<Client> implements ClientDAO 
             statement.setString(1, client.getName());
             statement.setString(2, client.getSurname());
             statement.setString(3, client.getPatronymic());
-            statement.setInt(4, client.getYears());
+            statement.setDate(4, (Date) client.getDate_of_birth());
             statement.setString(5, client.getEmail());
             statement.setString(6, client.getPhone());
             statement.setInt(7, client.getId());

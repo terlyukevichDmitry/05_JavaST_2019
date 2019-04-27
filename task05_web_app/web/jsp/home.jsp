@@ -41,6 +41,17 @@
                 <a href="#" class="h_slogan_btn">Best Quests</a>
             </div>
         </div>
+    <br>
+    <br><br>
+    <br><br>
+    <br><br>
+    <br><br>
+    <br><br>
+
+    <div>
+        ${hollo}
+    </div>
+
 
 </div>
 </body>

@@ -4,7 +4,7 @@ import java.sql.Blob;
 import java.util.Arrays;
 
 public class Image extends Entity {
-    private byte[] imageData;
+    private String filePath;
     private String fileName;
 
     public String getFileName() {
@@ -15,18 +15,18 @@ public class Image extends Entity {
         this.fileName = fileName;
     }
 
-    public byte[] getImageData() {
-        return imageData;
+    public String getFilePath() {
+        return filePath;
     }
 
-    public void setImageData(byte[] imageData) {
-        this.imageData = imageData;
+    public void setFilePath(String filePath) {
+        this.filePath = filePath;
     }
 
     @Override
     public String toString() {
         return "Image{" +
-                "imageData=" + Arrays.toString(imageData) +
+                "filePath='" + filePath + '\'' +
                 ", fileName='" + fileName + '\'' +
                 '}';
     }

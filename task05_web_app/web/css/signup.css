@@ -1,7 +1,7 @@
 body {
     font-family: Tahoma, Geneva, sans-serif;
     color: #ffffff;
-    background-image: url(first.jpg);
+    background-image: url(fourth.jpg);
     background-size: cover;
 }
 
@@ -28,7 +28,6 @@ input {
     border-bottom: 1px solid #ffffff;
     font-family: 'Play', sans-serif;
     font-size: 16px;
-    font-weight: 200px;
     padding: 10px 0;
     transition: border 0.5s;
     outline: none;

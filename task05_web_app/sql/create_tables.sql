@@ -61,7 +61,7 @@ CREATE TABLE IF NOT EXISTS `review` (
 
 CREATE TABLE `image` (
 	`id` INT(11) NOT NULL AUTO_INCREMENT,
-	`imageAddress` BLOB NOT NULL,
+	`imageAddress` VARCHAR(255) NOT NULL,
 	PRIMARY KEY (`id`)
 );
 

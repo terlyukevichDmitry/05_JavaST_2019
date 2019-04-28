@@ -10,7 +10,10 @@
 <body>
 <div>THE DISPLAY</div>
 <div style="width:25%; height:25%">
-    <img src="${lst}"/>
+    <%--@elvariable id="lst" type="java.util.List"--%>
+        <c:forEach var="elem" items="${lst}" varStatus="status">
+        <img src="${elem.filePath}"/>
+        </c:forEach>
 </div>
 
 </body>

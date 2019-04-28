@@ -23,9 +23,9 @@ VALUES
 INSERT INTO `image`
 		(`id`, `imageAddress`)
 VALUES
-			 (1, "C:\05_JavaST_2019\task05_web_app\web\css\logo.png"),
-			 (2, "C:\05_JavaST_2019\task05_web_app\web\css\logo.png"),
-			 (3, "C:\05_JavaST_2019\task05_web_app\web\css\logo.png");
+			 (1, "images/first.jpg"),
+			 (2, "images/second.jpg"),
+			 (3, "images/third.jpg");
 
 INSERT INTO `quest_place`
 		(`id`, `name`, `phone`, `address`, `image_id`, `quest_id`)

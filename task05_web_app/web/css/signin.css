@@ -1,7 +1,7 @@
 body {
     font-family: Tahoma, Geneva, sans-serif;
     color: #ffffff;
-    background-image: url(first.jpg);
+    background-image: url(fourth.jpg);
     background-size: cover;
 }
 
@@ -74,14 +74,3 @@ input[type=submit]:hover {
     color:aliceblue;
     opacity: 0.8;
 }
-
-
-
-
-
-
-
-
-
-
-

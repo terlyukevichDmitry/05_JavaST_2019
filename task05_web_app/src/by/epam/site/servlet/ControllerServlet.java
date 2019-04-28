@@ -72,12 +72,10 @@ public class ControllerServlet extends HttpServlet {
         List<Image> list = abstractDAO.readAll();
         page = command.execute(request);
         if (page != null) {
-            request.setAttribute("lst", "css/home/logo.png");
-
-            request.getRequestDispatcher("jsp/contact.jsp").forward(request, response);
-            //            request.getSession().setAttribute("hollo", "asdasd");
-//            request.getRequestDispatcher(page).forward(request, response);
-
+//            request.setAttribute("lst", list);
+//            request.getRequestDispatcher("jsp/contact.jsp").forward(request, response);
+            request.getSession().setAttribute("hollo", "asdasd");
+            request.getRequestDispatcher(page).forward(request, response);
         } else {
             page = ConfigurationManager.getProperty("home");
             request.getSession().setAttribute("nullPage",

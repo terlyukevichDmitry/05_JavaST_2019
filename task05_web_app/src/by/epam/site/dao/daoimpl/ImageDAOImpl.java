@@ -22,8 +22,7 @@ public class ImageDAOImpl extends AbstractDAOImpl<Image> {
             while (resultSet.next()) {
                 Image image = new Image();
                 image.setId(resultSet.getInt("id"));
-                System.out.println(resultSet.getString("imageAddress"));
-                image.setImageData(resultSet.getBytes("imageAddress"));
+                image.setFilePath(resultSet.getString("imageAddress"));
                 images.add(image);
             }
             return images;

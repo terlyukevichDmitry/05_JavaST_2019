@@ -16,6 +16,5 @@
         <%--<img src="${elem.filePath}"/>--%>
         <%--</c:forEach>--%>
 </div>
-
 </body>
 </html>

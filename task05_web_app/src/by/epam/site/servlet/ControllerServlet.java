@@ -61,7 +61,7 @@ public class ControllerServlet extends HttpServlet {
         if (page != null) {
 //            request.setAttribute("lst", list);
 //            request.getRequestDispatcher("jsp/profile.jsp").forward(request, response);
-            request.getSession().setAttribute("hollo", "asdasd");
+//            request.getSession().setAttribute("hollo", "asdasd");
             request.getRequestDispatcher(page).forward(request, response);
         } else {
             page = ConfigurationManager.getProperty("home");

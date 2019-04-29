@@ -42,7 +42,8 @@
     </style>
 </head>
 <body>
-<form action="http://localhost:8080/sigIn/controller" method="post">
+<c:url value="/home.html" var="home"/>
+<form action="${home}" method="post">
 <div class="header">
         <div class="header_texture"></div>
         <div class="header_mask">
@@ -65,10 +66,10 @@
                             <div class="dropdown">
                                 <button class="mainmenubtn">Main Menu</button>
                                 <div class="dropdown-child">
-                                    <input type="hidden" name="command" value="logout" />
                                     <a href="http://localhost:8080/sigIn/jsp/profile.jsp">Profile</a>
                                     <a href="http://www.вашдомен.ru/page2.html">Used Quest</a>
-                                    <a href="http://localhost:8080/sigIn/jsp/home.jsp">Exit</a>
+                                    <input type="hidden" name="command" value="logout" />
+                                    <a><input type="submit" value="Log out">Exit</a>
                                 </div>
                             </div>
                         </c:when>
@@ -76,7 +77,6 @@
                             <a href="http://localhost:8080/sigIn/jsp/sigIn.jsp" class="menu_link"><i class="fas fa-sign-in-alt"></i>&nbsp; Sign In</a>
                         </c:otherwise>
                     </c:choose>
-
                 </div>
             </div>
             <div class="header_slogan">

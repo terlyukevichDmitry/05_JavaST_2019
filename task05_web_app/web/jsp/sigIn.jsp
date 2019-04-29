@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" isELIgnored="false" %>
 <!DOCTYPE html>
@@ -12,7 +13,8 @@
 </head>
 <body>
     <div class="signIn">
-        <form action="http://localhost:8080/sigIn/controller" method="post">
+        <c:url value="/home.html" var="home"/>
+        <form action="${home}" method="post">
             <h2 style="color:white">Log In</h2>
             <input type="hidden" name="command" value="login" />
             <input type="text" name="login" placeholder="Username" required><br><br>

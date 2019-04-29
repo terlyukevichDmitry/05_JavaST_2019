@@ -8,7 +8,7 @@
     </description>
     <display-name>log in</display-name>
     <welcome-file-list>
-        <welcome-file>jsp/home.jsp</welcome-file>
+        <welcome-file>/jsp/home.jsp</welcome-file>
     </welcome-file-list>
     <jsp-config>
         <taglib>
@@ -22,7 +22,7 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>ControllerServlet</servlet-name>
-        <url-pattern>/controller</url-pattern>
+        <url-pattern>*.html</url-pattern>
     </servlet-mapping>
 
     <error-page>

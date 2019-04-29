@@ -1,19 +1,7 @@
 package by.epam.site.entity;
 
-import java.sql.Blob;
-import java.util.Arrays;
-
 public class Image extends Entity {
     private String filePath;
-    private String fileName;
-
-    public String getFileName() {
-        return fileName;
-    }
-
-    public void setFileName(String fileName) {
-        this.fileName = fileName;
-    }
 
     public String getFilePath() {
         return filePath;
@@ -24,10 +12,17 @@ public class Image extends Entity {
     }
 
     @Override
+    public boolean equals(Object object) {
+        return super.equals(object);
+    }
+
+    @Override
+    public int hashCode() {
+        return super.hashCode();
+    }
+
+    @Override
     public String toString() {
-        return "Image{" +
-                "filePath='" + filePath + '\'' +
-                ", fileName='" + fileName + '\'' +
-                '}';
+        return "Image{" + "filePath='" + filePath + '\'' + '}';
     }
 }

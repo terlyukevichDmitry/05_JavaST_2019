@@ -3,6 +3,7 @@ package by.epam.site.action.loginout;
 import by.epam.site.exception.ConstantException;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.sql.SQLException;
 
 public class LoginCommand implements ActionCommand {
@@ -15,7 +16,8 @@ public class LoginCommand implements ActionCommand {
         String pass = request.getParameter(PARAM_NAME_PASSWORD);
         try {
             if (LoginLogic.checkLogin(login, pass)) {
-                request.setAttribute("user", login);
+                HttpSession httpSession = request.getSession();
+                httpSession.setAttribute("user", login);
                 page = ConfigurationManager.getProperty("home");
             } else {
                 request.setAttribute("errorLoginPassMessage",

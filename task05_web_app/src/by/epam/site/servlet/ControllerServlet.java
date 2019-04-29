@@ -68,8 +68,8 @@ public class ControllerServlet extends HttpServlet {
         ActionFactory client = new ActionFactory();
         ActionCommand command = client.defineCommand(request);
 
-        AbstractDAOImpl<Image> abstractDAO = new ImageDAOImpl();
-        List<Image> list = abstractDAO.readAll();
+//        AbstractDAOImpl<Image> abstractDAO = new ImageDAOImpl();
+//        List<Image> list = abstractDAO.readAll();
         page = command.execute(request);
         if (page != null) {
 //            request.setAttribute("lst", list);

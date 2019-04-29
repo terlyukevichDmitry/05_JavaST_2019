@@ -57,6 +57,10 @@
         <img src="css/logo.png" name="suka">
     </div>
 
+    <body>
+    <ctg:info-time/>
+    </body>
+
 
 </div>
 </body>

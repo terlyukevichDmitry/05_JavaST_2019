@@ -22,7 +22,7 @@ public class ClientDAOImpl extends AbstractDAOImpl<Client> implements ClientDAO 
             + "`email` = ?, `phone` = ? WHERE `id` = ?";
 
     @Override
-    public List<Client> readAll() throws SQLException, ConstantException, ClassNotFoundException {
+    public List<Client> readAll() throws ConstantException {
         try(Connection connection = getConnection();
             PreparedStatement statement = connection.prepareStatement(DB_SELECT_ALL);
             ResultSet resultSet = statement.executeQuery()) {
@@ -77,7 +77,7 @@ public class ClientDAOImpl extends AbstractDAOImpl<Client> implements ClientDAO 
     }
 
     @Override
-    public Client update(Client client) throws ConstantException, ClassNotFoundException {
+    public Client update(Client client) throws ConstantException {
         try(Connection connection = getConnection();
             PreparedStatement statement
                     = connection.prepareStatement(DB_CLIENT_UPDATE,

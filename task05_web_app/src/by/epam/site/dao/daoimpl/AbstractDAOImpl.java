@@ -23,11 +23,15 @@ public abstract class AbstractDAOImpl<T extends Entity> {
     public abstract T update(T entity)
             throws ConstantException, ClassNotFoundException;
 
-    Connection getConnection() throws SQLException, ClassNotFoundException {
+    Connection getConnection() throws ConstantException {
         ConnectionPoolImpl connectionPool = ConnectionPoolImpl.getInstance();
-        connectionPool.init("com.mysql.jdbc.Driver",
-                DB_URL, DB_LOGIN, DB_PASSWORD, 3, 15,
-                100);
-        return connectionPool.getConnection();
+        try {
+            connectionPool.init("com.mysql.jdbc.Driver",
+                    DB_URL, DB_LOGIN, DB_PASSWORD, 3, 15,
+                    100);
+            return connectionPool.getConnection();
+        } catch (ConstantException e) {
+            throw new ConstantException();
+        }
     }
 }

@@ -1,5 +1,7 @@
 package by.epam.site.dao.connection;
 
+import by.epam.site.exception.ConstantException;
+
 import java.sql.Array;
 import java.sql.Blob;
 import java.sql.CallableStatement;
@@ -52,7 +54,11 @@ public class PooledConnection implements Connection, Comparable<PooledConnection
 
     @Override
     public void close() throws SQLException {
-        ConnectionPoolImpl.getInstance().freeConnection(this);
+        try {
+            ConnectionPoolImpl.getInstance().freeConnection(this);
+        } catch (ConstantException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override

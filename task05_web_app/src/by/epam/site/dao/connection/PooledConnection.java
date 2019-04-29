@@ -55,7 +55,7 @@ public class PooledConnection implements Connection, Comparable<PooledConnection
     @Override
     public void close() throws SQLException {
         try {
-            ConnectionPoolImpl.getInstance().freeConnection(this);
+            ConnectionPool.getInstance().freeConnection(this);
         } catch (ConstantException e) {
             e.printStackTrace();
         }

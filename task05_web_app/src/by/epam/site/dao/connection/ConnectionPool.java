@@ -13,11 +13,11 @@ import by.epam.site.exception.ConstantException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-final public class ConnectionPoolImpl {
+final public class ConnectionPool {
     private static Logger logger
-            = LogManager.getLogger(ConnectionPoolImpl.class);
+            = LogManager.getLogger(ConnectionPool.class);
 
-    private static ConnectionPoolImpl instance = new ConnectionPoolImpl();
+    private static ConnectionPool instance = new ConnectionPool();
 
     private String url;
     private String user;
@@ -32,7 +32,7 @@ final public class ConnectionPoolImpl {
     private Set<PooledConnection> usedConnections
             = new ConcurrentSkipListSet<>();
 
-    private ConnectionPoolImpl() {}
+    private ConnectionPool() {}
 
     public Connection getConnection() throws ConstantException {
         lock.lock();
@@ -129,7 +129,7 @@ final public class ConnectionPoolImpl {
         lock.unlock();
     }
 
-    public static ConnectionPoolImpl getInstance() {
+    public static ConnectionPool getInstance() {
         return instance;
     }
 

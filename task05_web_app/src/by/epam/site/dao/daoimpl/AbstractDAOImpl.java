@@ -1,6 +1,6 @@
 package by.epam.site.dao.daoimpl;
 
-import by.epam.site.dao.connection.ConnectionPoolImpl;
+import by.epam.site.dao.connection.ConnectionPool;
 import by.epam.site.entity.Entity;
 import by.epam.site.exception.ConstantException;
 
@@ -24,7 +24,7 @@ public abstract class AbstractDAOImpl<T extends Entity> {
             throws ConstantException, ClassNotFoundException;
 
     Connection getConnection() throws ConstantException {
-        ConnectionPoolImpl connectionPool = ConnectionPoolImpl.getInstance();
+        ConnectionPool connectionPool = ConnectionPool.getInstance();
         try {
             connectionPool.init("com.mysql.jdbc.Driver",
                     DB_URL, DB_LOGIN, DB_PASSWORD, 3, 15,

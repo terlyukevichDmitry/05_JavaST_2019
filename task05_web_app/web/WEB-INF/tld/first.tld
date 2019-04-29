@@ -1,15 +1,19 @@
-<?xml version="1.0" encoding="ISO-8859-1"?>
-
-<taglib xmlns="http://java.sun.com/xml/ns/javaee"
+<?xml version="1.0" encoding="UTF-8" ?>
+<taglib version="2.1"
+        xmlns="http://java.sun.com/xml/ns/javaee"
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-jsptaglibrary_2_1.xsd"
-        version="2.1">
-
-    <tlib-version>1.0</tlib-version>
-        <short-name>bar-baz</short-name>
-        <tag-file>
-            <name>d</name>
-            <path>/tags/first.tag</path>
-        </tag-file>
-
+        xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-jsptaglibrary_2_1.xsd">
+<tlib-version>1.0</tlib-version>
+<short-name>m</short-name>
+<uri>customMenu</uri>
+    <tag>
+        <name>hello</name>
+        <tag-class>by.epam.site.teg.InfoTimeTag</tag-class>
+        <body-content>empty</body-content>
+        <attribute>
+            <name>role</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+    </tag>
 </taglib>

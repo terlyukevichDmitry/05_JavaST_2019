@@ -1,7 +1,7 @@
 package by.epam.site.action.factory;
 
-import by.epam.site.action.loginout.ActionCommand;
-import by.epam.site.action.loginout.LoginCommand;
+import by.epam.site.action.login.ActionCommand;
+import by.epam.site.action.login.LoginCommand;
 import by.epam.site.action.loginout.LogoutCommand;
 import by.epam.site.action.signup.SignUpCommand;
 

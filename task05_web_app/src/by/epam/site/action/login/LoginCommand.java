@@ -1,6 +1,9 @@
-package by.epam.site.action.loginout;
+package by.epam.site.action.login;
 
+import by.epam.site.entity.User;
 import by.epam.site.exception.ConstantException;
+import by.epam.site.service.serviceimpl.UserServiceImpl;
+import by.epam.site.teg.InfoTimeTag;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -13,11 +16,17 @@ public class LoginCommand implements ActionCommand {
     public String execute(HttpServletRequest request) {
         String page = null;
         String login = request.getParameter(PARAM_NAME_LOGIN);
-        String pass = request.getParameter(PARAM_NAME_PASSWORD);
+        String password = request.getParameter(PARAM_NAME_PASSWORD);
+        UserServiceImpl service = new UserServiceImpl();
         try {
-            if (LoginLogic.checkLogin(login, pass)) {
+            User user = service.findByLoginAndPassword(login, password);
+            if (user != null) {
+                InfoTimeTag timeTag = new InfoTimeTag();
+                timeTag.setRole(user.getRole().getName());
                 HttpSession httpSession = request.getSession();
                 httpSession.setAttribute("user", login);
+                request.setAttribute("user", "administrator");
+                //in this position i should tell page to open menu for different role!!!!
                 page = ConfigurationManager.getProperty("home");
             } else {
                 request.setAttribute("errorLoginPassMessage",

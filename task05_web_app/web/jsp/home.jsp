@@ -1,4 +1,6 @@
 <%@ taglib prefix="ctg" uri="customtags" %>
+<%@ taglib prefix="m" uri="customMenu" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core_1_1" %>
 <!DOCTYPE html>
 <html lang="en_US">
 <head>
@@ -10,12 +12,37 @@
           integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf"
           crossorigin="anonymous">
     <link rel="shortcut icon" href="images/image-icon.png" type="image/x-icon">
-
+    <style>
+        .mainmenubtn {
+            background-color: red;
+            color: white;
+            border: none;
+            cursor: pointer;
+            padding:20px;
+            margin-top:20px;
+        }
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+        .dropdown-child {
+            display: none;
+            background-color: black;
+            min-width: 200px;
+        }
+        .dropdown-child a {
+            color: white;
+            padding: 20px;
+            text-decoration: none;
+            display: block;
+        }
+        .dropdown:hover .dropdown-child {
+            display: block;
+        }
+    </style>
 </head>
 <body>
-
-<%--ДОБАВИЬБ ИМПЛЕМЕНТЕЙШЕН!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!НАХУЙ???--%>
-
+<form action="http://localhost:8080/sigIn/controller" method="post">
 <div class="header">
         <div class="header_texture"></div>
         <div class="header_mask">
@@ -33,7 +60,23 @@
                     <a href="#" class="menu_link"><i class="fas fa-home"></i> Home</a>
                     <a href="#" class="menu_link"><i class="fas fa-newspaper"></i> About</a>
                     <a href="#" class="menu_link"><i class="fas fa-phone"></i> Contact</a>
-                    <a href="http://localhost:8080/sigIn/jsp/sigIn.jsp" class="menu_link"><i class="fas fa-sign-in-alt"></i>&nbsp; Sign In</a>
+                    <c:choose>
+                        <c:when test="${user.equals('administrator')}">
+                            <div class="dropdown">
+                                <button class="mainmenubtn">Main Menu</button>
+                                <div class="dropdown-child">
+                                    <input type="hidden" name="command" value="logout" />
+                                    <a href="http://localhost:8080/sigIn/jsp/profile.jsp">Profile</a>
+                                    <a href="http://www.вашдомен.ru/page2.html">Used Quest</a>
+                                    <a href="http://localhost:8080/sigIn/jsp/home.jsp">Exit</a>
+                                </div>
+                            </div>
+                        </c:when>
+                        <c:otherwise>
+                            <a href="http://localhost:8080/sigIn/jsp/sigIn.jsp" class="menu_link"><i class="fas fa-sign-in-alt"></i>&nbsp; Sign In</a>
+                        </c:otherwise>
+                    </c:choose>
+
                 </div>
             </div>
             <div class="header_slogan">
@@ -41,27 +84,18 @@
                 <a href="#" class="h_slogan_btn">Best Quests</a>
             </div>
         </div>
-    <br>
-    <br><br>
-    <br><br>
-    <br><br>
-    <br><br>
-    <br><br>
+    <%--<br>--%>
+    <%--<br><br>--%>
+    <%--<br><br>--%>
+    <%--<br><br>--%>
+    <%--<br><br>--%>
+    <%--<br><br>--%>
 
-    <div>
-        ${hollo}
-    </div>
-
-
-    <div>
-        <img src="css/logo.png" name="suka">
-    </div>
-
-    <body>
-    <ctg:info-time/>
-    </body>
-
+    <%--<div>--%>
+        <%--${hollo}--%>
+    <%--</div>--%>
 
 </div>
+</form>
 </body>
 </html>

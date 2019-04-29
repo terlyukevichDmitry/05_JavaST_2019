@@ -1,32 +1,19 @@
 package by.epam.site.servlet;
 
 import by.epam.site.action.factory.ActionFactory;
-import by.epam.site.action.loginout.ActionCommand;
-import by.epam.site.action.loginout.ConfigurationManager;
-import by.epam.site.action.loginout.MessageManager;
-import by.epam.site.dao.daoimpl.AbstractDAOImpl;
-import by.epam.site.dao.daoimpl.ImageDAOImpl;
-import by.epam.site.entity.Client;
-import by.epam.site.entity.Image;
+import by.epam.site.action.login.ActionCommand;
+import by.epam.site.action.login.ConfigurationManager;
+import by.epam.site.action.login.MessageManager;
 import by.epam.site.exception.ConstantException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Base64;
-import java.util.List;
 
 public class ControllerServlet extends HttpServlet {
     /**
@@ -73,7 +60,7 @@ public class ControllerServlet extends HttpServlet {
         page = command.execute(request);
         if (page != null) {
 //            request.setAttribute("lst", list);
-//            request.getRequestDispatcher("jsp/contact.jsp").forward(request, response);
+//            request.getRequestDispatcher("jsp/profile.jsp").forward(request, response);
             request.getSession().setAttribute("hollo", "asdasd");
             request.getRequestDispatcher(page).forward(request, response);
         } else {

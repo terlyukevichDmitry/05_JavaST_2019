@@ -1,7 +1,7 @@
 package by.epam.site.entity;
 
 public enum Role {
-	ADMINISTRATOR("администратор"),
+	ADMINISTRATOR("administrator"),
 	MANAGER("менеджер"),
 	CLIENT("клиент");
 

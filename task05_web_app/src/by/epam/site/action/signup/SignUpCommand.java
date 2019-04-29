@@ -1,6 +1,6 @@
 package by.epam.site.action.signup;
 
-import by.epam.site.action.loginout.ActionCommand;
+import by.epam.site.action.login.ActionCommand;
 
 import javax.servlet.http.HttpServletRequest;
 

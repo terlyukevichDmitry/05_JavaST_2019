@@ -10,10 +10,11 @@
 <body>
 <div>THE DISPLAY</div>
 <div style="width:25%; height:25%">
-    <%--@elvariable id="lst" type="java.util.List"--%>
-        <c:forEach var="elem" items="${lst}" varStatus="status">
-        <img src="${elem.filePath}"/>
-        </c:forEach>
+    fasjdf;kljaskdfjaksdfja;ksdjf;lksajdflk;ajsd;kfljasdklf
+    <%--&lt;%&ndash;@elvariable id="lst" type="java.util.List"&ndash;%&gt;--%>
+        <%--<c:forEach var="elem" items="${lst}" varStatus="status">--%>
+        <%--<img src="${elem.filePath}"/>--%>
+        <%--</c:forEach>--%>
 </div>
 
 </body>

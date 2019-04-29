@@ -1,11 +1,11 @@
-package by.epam.site.action.loginout;
+package by.epam.site.action.login;
 
 import java.util.ResourceBundle;
 
-public class MessageManager {
+public class ConfigurationManager {
     private final static ResourceBundle resourceBundle
-            = ResourceBundle.getBundle("messages");
-    private MessageManager() { }
+            = ResourceBundle.getBundle("config");
+    private ConfigurationManager() { }
     public static String getProperty(String key) {
         return resourceBundle.getString(key);
     }

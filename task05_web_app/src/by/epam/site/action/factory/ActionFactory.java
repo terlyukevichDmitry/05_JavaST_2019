@@ -1,8 +1,8 @@
 package by.epam.site.action.factory;
 
-import by.epam.site.action.loginout.ActionCommand;
-import by.epam.site.action.loginout.EmptyCommand;
-import by.epam.site.action.loginout.MessageManager;
+import by.epam.site.action.login.ActionCommand;
+import by.epam.site.action.login.EmptyCommand;
+import by.epam.site.action.login.MessageManager;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -10,6 +10,7 @@ public class ActionFactory {
     public ActionCommand defineCommand(HttpServletRequest request) {
         ActionCommand current = new EmptyCommand();
         String action = request.getParameter("command");
+        System.out.println(action);
         if (action == null || action.isEmpty()) {
             return current;
         }

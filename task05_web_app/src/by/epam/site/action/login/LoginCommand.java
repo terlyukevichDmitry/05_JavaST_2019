@@ -26,7 +26,7 @@ public class LoginCommand implements ActionCommand {
                 HttpSession httpSession = request.getSession();
                 httpSession.setAttribute("user", login);
                 request.setAttribute("user", "administrator");
-                //in this position i should tell page to open menu for different role!!!!
+                //in this position i should tell page to open menu fo different role!!!!
                 page = ConfigurationManager.getProperty("home");
             } else {
                 request.setAttribute("errorLoginPassMessage",

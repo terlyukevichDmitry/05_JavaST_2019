@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<vouchers xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xmlns="http://www.training.by/vouchers"
+          xsi:schemaLocation="http://www.training.by/vouchers vouchers.xsd">
+    <voucher id="sixteenth" numberNights="20">
+        <type>3 week</type>
+        <country>Greece</country>
+        <numberDays>21</numberDays>
+        <transport>plane</transport>
+        <hotel_characteristics>
+            <stars>5</stars>
+            <nutrition>AL</nutrition>
+            <room>3</room>
+            <TV>true</TV>
+            <WI_FI>true</WI_FI>
+            <air_conditioning>true</air_conditioning>
+        </hotel_characteristics>
+        <cost currency="EUR">3560</cost>
+        <data_start>2021-12-06T09:30:00</data_start>
+        <data_finish>2021-12-26T22:45:00</data_finish>
+    </voucher>
+</vouchers>

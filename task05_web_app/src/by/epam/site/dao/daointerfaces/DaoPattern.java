@@ -11,7 +11,7 @@ public interface DaoPattern<T extends Entity> {
             throws SQLException, ConstantException, ClassNotFoundException;
     void delete(Integer id)
             throws ConstantException, ClassNotFoundException;
-    void create(T entity)
+    Integer create(T entity)
             throws ConstantException, ClassNotFoundException;
     T update(T entity)
             throws ConstantException, ClassNotFoundException;

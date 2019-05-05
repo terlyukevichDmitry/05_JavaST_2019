@@ -4,12 +4,20 @@ import by.epam.site.dao.daointerfaces.ReviewDAO;
 import by.epam.site.entity.Client;
 import by.epam.site.entity.Review;
 import by.epam.site.exception.ConstantException;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class ReviewDAOImpl extends AbstractDAOImpl implements ReviewDAO {
+
+    /**
+     * Logger for recording a program state.
+     */
+    private static final Logger LOGGER
+            = LogManager.getLogger(ReviewDAOImpl.class);
 
     private static final String DB_SELECT_ALL = "SELECT `id`, `message`, "
             + "`date`, `client_id` FROM `review`";
@@ -58,7 +66,8 @@ public class ReviewDAOImpl extends AbstractDAOImpl implements ReviewDAO {
     }
 
     @Override
-    public void create(final Review review) throws ConstantException, ClassNotFoundException {
+    public Integer create(final Review review) throws ConstantException, ClassNotFoundException {
+        ResultSet resultSet = null;
         try (Connection connection = getConnection();
              PreparedStatement statement
                      = connection.prepareStatement(DB_REVIEW_CREATE,
@@ -67,6 +76,13 @@ public class ReviewDAOImpl extends AbstractDAOImpl implements ReviewDAO {
             statement.setDate(2, (java.sql.Date) review.getDate());
             statement.setInt(3, review.getClient().getId());
             statement.executeUpdate();
+            resultSet = statement.getGeneratedKeys();
+            if(resultSet.next()) {
+                return resultSet.getInt(1);
+            } else {
+                LOGGER.error("There is no autoincremented index after trying to add record into table `users`");
+                throw new ConstantException();
+            }
         } catch (SQLException e) {
             throw new ConstantException(e);
         }

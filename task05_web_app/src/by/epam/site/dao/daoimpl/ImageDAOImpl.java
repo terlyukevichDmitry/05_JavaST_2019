@@ -3,12 +3,20 @@ package by.epam.site.dao.daoimpl;
 import by.epam.site.dao.daointerfaces.ImageDAO;
 import by.epam.site.entity.Image;
 import by.epam.site.exception.ConstantException;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class ImageDAOImpl extends AbstractDAOImpl implements ImageDAO {
+    /**
+     * Logger for recording a program state.
+     */
+    private static final Logger LOGGER
+            = LogManager.getLogger(ImageDAOImpl.class);
+
     private static final String DB_SELECT_ALL = "SELECT `id`, `imageAddress` FROM `image`";
     private static final String DB_DELETE = "DELETE FROM `image` WHERE `id`"
             + " = ?";
@@ -49,13 +57,21 @@ public class ImageDAOImpl extends AbstractDAOImpl implements ImageDAO {
     }
 
     @Override
-    public void create(Image image) throws ConstantException, ClassNotFoundException {
+    public Integer create(Image image) throws ConstantException, ClassNotFoundException {
+        ResultSet resultSet = null;
         try(Connection connection = getConnection();
             PreparedStatement statement
                     = connection.prepareStatement(DB_IMAGE_CREATE,
                     Statement.RETURN_GENERATED_KEYS)) {
             statement.setString(1, image.getFilePath());
             statement.executeUpdate();
+            resultSet = statement.getGeneratedKeys();
+            if(resultSet.next()) {
+                return resultSet.getInt(1);
+            } else {
+                LOGGER.error("There is no autoincremented index after trying to add record into table `users`");
+                throw new ConstantException();
+            }
         } catch (SQLException e) {
             throw new ConstantException(e);
         }

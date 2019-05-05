@@ -4,12 +4,21 @@ import by.epam.site.dao.daointerfaces.UserDAO;
 import by.epam.site.entity.Role;
 import by.epam.site.entity.User;
 import by.epam.site.exception.ConstantException;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class UserDAOImpl extends AbstractDAOImpl implements UserDAO {
+
+    /**
+     * Logger for recording a program state.
+     */
+    private static final Logger LOGGER
+            = LogManager.getLogger(UserDAOImpl.class);
+
     private static final String DB_SELECT_ALL = "SELECT `id`, `login`,"
             + " `password`, `role` FROM `user`";
     private static final String DB_DELETE = "DELETE FROM `user` WHERE `id` = ?"
@@ -22,6 +31,8 @@ public class UserDAOImpl extends AbstractDAOImpl implements UserDAO {
             + "= ?, `password` = ?, `role` = ? WHERE `id` = ?";
     private static final String DB_USER = "SELECT `id`, `role` FROM `user` " +
             "WHERE `login` = ? AND `password` = ?";
+    private static final String DB_FIND_BY_ID = "SELECT `login`, `password`, " +
+            "`role` FROM `user` WHERE `id` = ?";
 
     @Override
     public List<User> readAll()
@@ -72,8 +83,9 @@ public class UserDAOImpl extends AbstractDAOImpl implements UserDAO {
     }
 
     @Override
-    public void create(final User user)
+    public Integer create(final User user)
             throws ConstantException {
+        ResultSet resultSet = null;
         try(Connection connection = getConnection();
             PreparedStatement statement
                     = connection.prepareStatement(DB_USER_CREATE,
@@ -82,6 +94,13 @@ public class UserDAOImpl extends AbstractDAOImpl implements UserDAO {
             statement.setString(2, user.getPassword());
             statement.setInt(3, user.getRole().getIdentity());
             statement.executeUpdate();
+            resultSet = statement.getGeneratedKeys();
+            if(resultSet.next()) {
+                return resultSet.getInt(1);
+            } else {
+                LOGGER.error("There is no autoincremented index after trying to add record into table `users`");
+                throw new ConstantException();
+            }
         } catch (SQLException e) {
             throw new ConstantException(e);
         }
@@ -120,6 +139,35 @@ public class UserDAOImpl extends AbstractDAOImpl implements UserDAO {
                 user.setId(resultSet.getInt("id"));
                 user.setLogin(login);
                 user.setPassword(password);
+                user.setRole(Role.getByIdentity(resultSet.getInt("role")));
+            }
+            return user;
+        } catch(SQLException e) {
+            throw new ConstantException(e);
+        } finally {
+            try {
+                resultSet.close();
+            } catch(SQLException | NullPointerException e) {}
+            try {
+                statement.close();
+            } catch(SQLException | NullPointerException e) {}
+        }
+    }
+
+    @Override
+    public User read(Integer id) throws ConstantException {
+        PreparedStatement statement = null;
+        ResultSet resultSet = null;
+        try {
+            statement = getConnection().prepareStatement(DB_USER);
+            statement.setInt(1, id);
+            resultSet = statement.executeQuery();
+            User user = null;
+            if(resultSet.next()) {
+                user = new User();
+                user.setId(id);
+                user.setLogin(resultSet.getString("login"));
+                user.setPassword(resultSet.getString("password"));
                 user.setRole(Role.getByIdentity(resultSet.getInt("role")));
             }
             return user;

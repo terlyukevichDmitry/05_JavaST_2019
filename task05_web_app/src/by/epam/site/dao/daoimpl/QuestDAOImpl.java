@@ -3,12 +3,20 @@ package by.epam.site.dao.daoimpl;
 import by.epam.site.dao.daointerfaces.QuestDAO;
 import by.epam.site.entity.Quest;
 import by.epam.site.exception.ConstantException;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class QuestDAOImpl extends AbstractDAOImpl implements QuestDAO {
+
+    /**
+     * Logger for recording a program state.
+     */
+    private static final Logger LOGGER
+            = LogManager.getLogger(QuestDAOImpl.class);
 
     private static final String DB_SELECT_ALL = "SELECT `id`, `title`, "
             + "`level`, `max_people` FROM `quest`";
@@ -56,7 +64,8 @@ public class QuestDAOImpl extends AbstractDAOImpl implements QuestDAO {
     }
 
     @Override
-    public void create(Quest quest) throws ConstantException, ClassNotFoundException {
+    public Integer create(Quest quest) throws ConstantException {
+        ResultSet resultSet = null;
         try (Connection connection = getConnection();
              PreparedStatement statement
                      = connection.prepareStatement(DB_QUEST_CREATE,
@@ -65,6 +74,13 @@ public class QuestDAOImpl extends AbstractDAOImpl implements QuestDAO {
             statement.setInt(2, quest.getLevel());
             statement.setInt(3, quest.getMaxPeople());
             statement.executeUpdate();
+            resultSet = statement.getGeneratedKeys();
+            if(resultSet.next()) {
+                return resultSet.getInt(1);
+            } else {
+                LOGGER.error("There is no autoincremented index after trying to add record into table `users`");
+                throw new ConstantException();
+            }
         } catch (SQLException e) {
             throw new ConstantException(e);
         }

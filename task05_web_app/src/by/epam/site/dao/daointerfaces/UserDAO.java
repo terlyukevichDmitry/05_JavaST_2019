@@ -9,4 +9,5 @@ public interface UserDAO extends DaoPattern<User> {
             throws ConstantException, ClassNotFoundException;
 
     User read(String login, String password) throws ConstantException;
+    User read(Integer id) throws ConstantException;
 }

@@ -3,12 +3,21 @@ package by.epam.site.dao.daoimpl;
 import by.epam.site.dao.daointerfaces.ClientDAO;
 import by.epam.site.entity.Client;
 import by.epam.site.exception.ConstantException;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class ClientDAOImpl extends AbstractDAOImpl implements ClientDAO {
+
+    /**
+     * Logger for recording a program state.
+     */
+    private static final Logger LOGGER
+            = LogManager.getLogger(ClientDAOImpl.class);
+
     private static final String DB_SELECT_ALL = "SELECT `id`, `name`, "
             + "`surname`, `patronymic`, `date_of_birth`, `email`, "
             + "`phone` FROM `client`";
@@ -59,7 +68,8 @@ public class ClientDAOImpl extends AbstractDAOImpl implements ClientDAO {
     }
 
     @Override
-    public void create(Client client) throws ConstantException {
+    public Integer create(Client client) throws ConstantException {
+        ResultSet resultSet = null;
         try(Connection connection = getConnection();
             PreparedStatement statement
                     = connection.prepareStatement(DB_CLIENT_CREATE,
@@ -71,6 +81,13 @@ public class ClientDAOImpl extends AbstractDAOImpl implements ClientDAO {
             statement.setString(5, client.getEmail());
             statement.setString(6, client.getPhone());
             statement.executeUpdate();
+            resultSet = statement.getGeneratedKeys();
+            if(resultSet.next()) {
+                return resultSet.getInt(1);
+            } else {
+                LOGGER.error("There is no autoincremented index after trying to add record into table `users`");
+                throw new ConstantException();
+            }
         } catch (SQLException e) {
             throw new ConstantException(e);
         }

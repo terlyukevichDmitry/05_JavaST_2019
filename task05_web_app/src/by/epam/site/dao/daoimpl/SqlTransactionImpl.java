@@ -2,7 +2,6 @@ package by.epam.site.dao.daoimpl;
 
 import by.epam.site.dao.daointerfaces.*;
 import by.epam.site.dao.transaction.SqlTransaction;
-import by.epam.site.entity.UsedQuest;
 import by.epam.site.exception.ConstantException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

@@ -26,7 +26,7 @@ public class ImageDAOImpl extends AbstractDAOImpl implements ImageDAO {
     private static final String DB_IMAGE_UPDATE = "UPDATE `image` SET " +
             "`filePath` = ? WHERE `id` = ?";
     @Override
-    public List<Image> readAll() throws SQLException, ConstantException, ClassNotFoundException {
+    public List<Image> readAll() throws ConstantException {
         try(Connection connection = getConnection();
             PreparedStatement statement = connection.prepareStatement(DB_SELECT_ALL);
             ResultSet resultSet = statement.executeQuery()) {
@@ -45,7 +45,7 @@ public class ImageDAOImpl extends AbstractDAOImpl implements ImageDAO {
     }
 
     @Override
-    public void delete(Integer id) throws ConstantException, ClassNotFoundException {
+    public void delete(Integer id) throws ConstantException {
         try (Connection connection = getConnection();
              PreparedStatement statement
                      = connection.prepareStatement(DB_DELETE)) {
@@ -57,7 +57,7 @@ public class ImageDAOImpl extends AbstractDAOImpl implements ImageDAO {
     }
 
     @Override
-    public Integer create(Image image) throws ConstantException, ClassNotFoundException {
+    public Integer create(Image image) throws ConstantException {
         ResultSet resultSet = null;
         try(Connection connection = getConnection();
             PreparedStatement statement
@@ -78,7 +78,7 @@ public class ImageDAOImpl extends AbstractDAOImpl implements ImageDAO {
     }
 
     @Override
-    public Image update(Image image) throws ConstantException, ClassNotFoundException {
+    public Image update(Image image) throws ConstantException {
         try(Connection connection = getConnection();
             PreparedStatement statement
                     = connection.prepareStatement(DB_IMAGE_UPDATE,

@@ -4,9 +4,7 @@ package by.epam.site.main;
 import by.epam.site.dao.daoimpl.AbstractDAOImpl;
 import by.epam.site.dao.daoimpl.SqlTransactionFactoryImpl;
 import by.epam.site.dao.daoimpl.UsedQuestDAOImpl;
-import by.epam.site.entity.QuestPlace;
-import by.epam.site.entity.UsedQuest;
-import by.epam.site.entity.User;
+import by.epam.site.entity.*;
 import by.epam.site.exception.ConstantException;
 import by.epam.site.service.interfaces.*;
 import by.epam.site.service.serviceimpl.ServiceFactoryImpl;
@@ -31,9 +29,9 @@ public class Main {
 //        System.out.println(user);
 
         ServiceFactory factory = new ServiceFactoryImpl(new SqlTransactionFactoryImpl());
-        QuestPlaceService service = factory.getService(QuestPlaceService.class);
-        List<QuestPlace> list = service.findAll();
-        for (QuestPlace l :list) {
+        QuestService service = factory.getService(QuestService.class);
+        List<Quest> list = service.findAll();
+        for (Quest l :list) {
             System.out.println(l);
         }
 

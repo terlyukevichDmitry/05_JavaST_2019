@@ -18,6 +18,10 @@ public class ServiceFactoryImpl implements ServiceFactory {
                 UsedQuestServiceImpl.class);
         serviceContainer.put(QuestPlaceService.class,
                 QuestPlaceServiceImpl.class);
+        serviceContainer.put(ImageService.class, ImageServiceImpl.class);
+        serviceContainer.put(ClientService.class, ClientServiceImpl.class);
+        serviceContainer.put(ReviewService.class, ReviewServiceImpl.class);
+        serviceContainer.put(QuestService.class, QuestServiceImpl.class);
     }
 
     private SqlTransactionFactory factory;

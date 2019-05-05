@@ -1,3 +1,5 @@
 package by.epam.site.dao.interfaces;
 
-public interface ImageDAO {}
+import by.epam.site.entity.Image;
+
+public interface ImageDAO extends DaoPattern<Image> {}

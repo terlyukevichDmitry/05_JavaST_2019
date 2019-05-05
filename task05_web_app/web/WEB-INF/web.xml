@@ -35,4 +35,13 @@
         <location>/jsp/error.jsp</location>
     </error-page>
 
+    <filter>
+        <filter-name>UriFilter</filter-name>
+        <filter-class>by.epam.site.servlet.UriFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>UriFilter</filter-name>
+        <url-pattern>*.html</url-pattern>
+    </filter-mapping>
+
 </web-app>

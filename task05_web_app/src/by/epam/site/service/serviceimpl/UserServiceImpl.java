@@ -14,11 +14,13 @@ import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
 import java.util.List;
 
-public class UserServiceImpl extends AbstractService implements UserService {
+public class UserServiceImpl extends ServiceImpl implements UserService {
     private static Logger logger
             = LogManager.getLogger(UserServiceImpl.class);
+
     @Override
-    public User findByLoginAndPassword(String login, String password) throws ConstantException, SQLException, ClassNotFoundException {
+    public User findByLoginAndPassword(String login, String password)
+            throws ConstantException, SQLException, ClassNotFoundException {
         AbstractDAOImpl<User> user  = new UserDAOImpl();
         List<User> list = user.readAll();
         for (User ur :list) {

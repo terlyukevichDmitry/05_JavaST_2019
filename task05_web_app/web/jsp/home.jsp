@@ -42,8 +42,7 @@
     </style>
 </head>
 <body>
-<c:url value="/home.html" var="home"/>
-<form action="${home}" method="post">
+<form method="post">
 <div class="header">
         <div class="header_texture"></div>
         <div class="header_mask">

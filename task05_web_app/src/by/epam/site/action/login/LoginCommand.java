@@ -1,5 +1,6 @@
 package by.epam.site.action.login;
 
+import by.epam.site.action.calculator.Cl;
 import by.epam.site.entity.User;
 import by.epam.site.exception.ConstantException;
 import by.epam.site.service.serviceimpl.UserServiceImpl;
@@ -9,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.sql.SQLException;
 
-public class LoginCommand implements ActionCommand {
+public class LoginCommand extends Cl implements ActionCommand{
     private static final String PARAM_NAME_LOGIN = "login";
     private static final String PARAM_NAME_PASSWORD = "password";
     @Override

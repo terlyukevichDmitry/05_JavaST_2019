@@ -23,6 +23,12 @@ public abstract class AbstractDAOImpl<T extends Entity> {
     public abstract T update(T entity)
             throws ConstantException, ClassNotFoundException;
 
+    private Connection connection;
+
+    public void setConnection(Connection connection) {
+        this.connection = connection;
+    }
+
     Connection getConnection() throws ConstantException {
         ConnectionPool connectionPool = ConnectionPool.getInstance();
         try {

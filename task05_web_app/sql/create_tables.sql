@@ -26,7 +26,7 @@ CREATE TABLE IF NOT EXISTS `client` (
 
 CREATE TABLE IF NOT EXISTS `quest` (
 	`id` INT(11) NOT NULL AUTO_INCREMENT,
-	`title` varchar(255) NOT NULL ,
+	`name` varchar(255) NOT NULL ,
 	`level` INT(1) NOT NULL ,
 	`max_people` INT(1) NOT NULL ,
 	PRIMARY KEY (`id`)

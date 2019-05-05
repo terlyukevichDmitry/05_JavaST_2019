@@ -14,7 +14,7 @@ VALUES
 			 (4, "Petr", "Petrov", "Petrovich", "2010-09-10", "petrov_forever@mail.ru", "+80295673521");
 
 INSERT INTO `quest`
-		(`id`, `title`, `level`, `max_people`)
+		(`id`, `name`, `level`, `max_people`)
 VALUES
 			 (1, "first quest", 5, 9),
 			 (2, "second quest", 5, 3),

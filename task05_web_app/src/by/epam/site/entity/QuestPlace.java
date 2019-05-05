@@ -3,25 +3,26 @@ package by.epam.site.entity;
 import com.sun.istack.internal.NotNull;
 
 public class QuestPlace extends Entity {
-    @NotNull private String title;
-    @NotNull private String adress;
+    @NotNull private String name;
+    @NotNull private String address;
     @NotNull private String phone;
-    @NotNull private Integer questId; //@NotNull private Quest Quest;
+    @NotNull private Quest quest;
+    @NotNull private Image image;
 
-    public String getTitle() {
-        return title;
+    public String getName() {
+        return name;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getAdress() {
-        return adress;
+    public String getAddress() {
+        return address;
     }
 
-    public void setAdress(String adress) {
-        this.adress = adress;
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public String getPhone() {
@@ -32,18 +33,30 @@ public class QuestPlace extends Entity {
         this.phone = phone;
     }
 
-    public Integer getQuestId() {
-        return questId;
+    public Quest getQuest() {
+        return quest;
     }
 
-    public void setQuestId(Integer questId) {
-        questId = questId;
+    public void setQuest(Quest quest) {
+        this.quest = quest;
+    }
+
+    public Image getImage() {
+        return image;
+    }
+
+    public void setImage(Image image) {
+        this.image = image;
     }
 
     @Override
     public String toString() {
-        return "QuestPlace{" + "title='" + title + '\'' + ", adress='"
-                + adress + '\'' + ", phone='" + phone + '\''
-                + ", questId=" + questId + '}';
+        return "QuestPlace{" +
+                "name='" + name + '\'' +
+                ", address='" + address + '\'' +
+                ", phone='" + phone + '\'' +
+                ", quest=" + quest +
+                ", image=" + image +
+                '}';
     }
 }

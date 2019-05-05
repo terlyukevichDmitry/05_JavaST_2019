@@ -4,10 +4,10 @@ import com.sun.istack.internal.NotNull;
 
 import java.util.Date;
 
-public class UsedQuest extends Entity{
+public class UsedQuest extends Entity {
     @NotNull private Date date;
-    @NotNull private Integer level;
-    @NotNull private Integer clientId;
+    @NotNull private Client client;
+    @NotNull private QuestPlace questPlace;
 
     public Date getDate() {
         return date;
@@ -17,28 +17,28 @@ public class UsedQuest extends Entity{
         this.date = date;
     }
 
-    public Integer getLevel() {
-        return level;
+    public Client getClient() {
+        return client;
     }
 
-    public void setLevel(Integer level) {
-        this.level = level;
+    public void setClient(Client client) {
+        this.client = client;
     }
 
-    public Integer getClientId() {
-        return clientId;
+    public QuestPlace getQuestPlace() {
+        return questPlace;
     }
 
-    public void setClientId(Integer clientId) {
-        this.clientId = clientId;
+    public void setQuestPlace(QuestPlace questPlace) {
+        this.questPlace = questPlace;
     }
 
     @Override
     public String toString() {
         return "UsedQuest{" +
                 "date=" + date +
-                ", level=" + level +
-                ", clientId=" + clientId +
+                ", client=" + client +
+                ", questPlace=" + questPlace +
                 '}';
     }
 }

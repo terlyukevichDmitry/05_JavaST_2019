@@ -2,9 +2,8 @@ package by.epam.site.service.serviceimpl;
 
 import by.epam.site.dao.transaction.SqlTransaction;
 import by.epam.site.dao.transaction.SqlTransactionFactory;
-import by.epam.site.service.interfaces.Service;
-import by.epam.site.service.interfaces.ServiceFactory;
-import by.epam.site.service.interfaces.UserService;
+import by.epam.site.entity.QuestPlace;
+import by.epam.site.service.interfaces.*;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -15,6 +14,10 @@ public class ServiceFactoryImpl implements ServiceFactory {
 
     static {
         serviceContainer.put(UserService.class, UserServiceImpl.class);
+        serviceContainer.put(UsedQuestService.class,
+                UsedQuestServiceImpl.class);
+        serviceContainer.put(QuestPlaceService.class,
+                QuestPlaceServiceImpl.class);
     }
 
     private SqlTransactionFactory factory;

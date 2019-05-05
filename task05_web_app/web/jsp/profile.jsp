@@ -5,7 +5,7 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-    <title>Display Image</title>
+    <name>Display Image</name>
 </head>
 <body>
 <div>THE DISPLAY</div>

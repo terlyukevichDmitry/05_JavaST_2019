@@ -2,6 +2,7 @@ package by.epam.site.dao.daoimpl;
 
 import by.epam.site.dao.daointerfaces.*;
 import by.epam.site.dao.transaction.SqlTransaction;
+import by.epam.site.entity.UsedQuest;
 import by.epam.site.exception.ConstantException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -27,6 +28,8 @@ public class SqlTransactionImpl implements SqlTransaction {
         mapContainer.put(QuestDAO.class, QuestDAOImpl.class);
         mapContainer.put(ReviewDAO.class, ReviewDAOImpl.class);
         mapContainer.put(ImageDAO.class, ImageDAOImpl.class);
+        mapContainer.put(UsedQuestDAO.class, UsedQuestDAOImpl.class);
+        mapContainer.put(QuestPlaceDAO.class, QuestPlaceDAOImpl.class);
     }
     private Connection connection;
 

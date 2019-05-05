@@ -2,13 +2,13 @@ SELECT `id`, `name`, `surname`, `patronymic`, `date_of_birth`, `email`, `phone` 
 
 INSERT INTO `client` (`name`, `surname`, `patronymic`, `date_of_birth`, `email`, `phone`) VALUES (?, ?, ?, ?, ?, ?);
 
-SELECT `id`, `title`, `level`, `max_people` FROM quest;
+SELECT `id`, `name`, `level`, `max_people` FROM quest;
 
 DELETE FROM quest WHERE `id` = ?;
 
-INSERT INTO quest (`title`, `level`, `max_people`) VALUES (?, ?, ?);
+INSERT INTO quest (`name`, `level`, `max_people`) VALUES (?, ?, ?);
 
-UPDATE quest SET `title` = ?, `level` = ?, `max_people` = ? WHERE `id` = ?;
+UPDATE quest SET `name` = ?, `level` = ?, `max_people` = ? WHERE `id` = ?;
 
 SELECT `id`, `login`, `password`, `role` FROM `user`;
 

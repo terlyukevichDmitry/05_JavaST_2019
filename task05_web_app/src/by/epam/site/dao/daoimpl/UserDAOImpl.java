@@ -159,7 +159,7 @@ public class UserDAOImpl extends AbstractDAOImpl implements UserDAO {
         PreparedStatement statement = null;
         ResultSet resultSet = null;
         try {
-            statement = getConnection().prepareStatement(DB_USER);
+            statement = getConnection().prepareStatement(DB_FIND_BY_ID);
             statement.setInt(1, id);
             resultSet = statement.executeQuery();
             User user = null;

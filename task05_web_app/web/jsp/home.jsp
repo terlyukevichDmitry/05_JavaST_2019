@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html lang="en_US">
 <head>
-    <title>JukeBox Quest</title>
+    <name>JukeBox Quest</name>
     <meta charset="utf-8">
     <link rel="stylesheet" href="http://localhost:8080/sigIn/css/home/header.css" type="text/css"/>
     <link rel="stylesheet" href="http://localhost:8080/sigIn/css/home/base.css" type="text/css"/>

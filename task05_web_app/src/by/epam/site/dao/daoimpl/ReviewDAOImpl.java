@@ -1,6 +1,6 @@
 package by.epam.site.dao.daoimpl;
 
-import by.epam.site.dao.interfaces.ReviewDAO;
+import by.epam.site.dao.daointerfaces.ReviewDAO;
 import by.epam.site.entity.Client;
 import by.epam.site.entity.Review;
 import by.epam.site.exception.ConstantException;
@@ -9,7 +9,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ReviewDAOImpl extends AbstractDAOImpl<Review> implements ReviewDAO {
+public class ReviewDAOImpl extends AbstractDAOImpl implements ReviewDAO {
 
     private static final String DB_SELECT_ALL = "SELECT `id`, `message`, "
             + "`date`, `client_id` FROM `review`";

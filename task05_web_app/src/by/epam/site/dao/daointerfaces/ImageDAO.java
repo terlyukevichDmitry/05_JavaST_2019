@@ -1,4 +1,4 @@
-package by.epam.site.dao.interfaces;
+package by.epam.site.dao.daointerfaces;
 
 import by.epam.site.entity.Image;
 

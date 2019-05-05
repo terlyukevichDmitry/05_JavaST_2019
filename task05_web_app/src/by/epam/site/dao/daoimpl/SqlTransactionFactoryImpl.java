@@ -23,7 +23,7 @@ public class SqlTransactionFactoryImpl implements SqlTransactionFactory {
     private static final String DB_LOGIN = "quest_user";
     private static final String DB_PASSWORD = "quest_password";
 
-    public Connection connection;
+    private Connection connection;
 
     public SqlTransactionFactoryImpl()
             throws ConstantException {

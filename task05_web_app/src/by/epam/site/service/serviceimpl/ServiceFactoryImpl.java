@@ -28,10 +28,10 @@ public class ServiceFactoryImpl implements ServiceFactory {
         Class<? extends ServiceImpl> value = serviceContainer.get(key);
         if(value != null) {
             try {
-            SqlTransaction transaction = factory.createSqlTransaction();
-            ServiceImpl service = value.newInstance();
-            service.setTransaction(transaction);
-            return (Type) service;
+                SqlTransaction transaction = factory.createSqlTransaction();
+                ServiceImpl service = value.newInstance();
+                service.setTransaction(transaction);
+                return (Type) service;
             } catch (InstantiationException e) {
                 e.printStackTrace();
             } catch (IllegalAccessException e) {

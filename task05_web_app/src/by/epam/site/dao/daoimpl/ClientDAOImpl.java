@@ -1,6 +1,6 @@
 package by.epam.site.dao.daoimpl;
 
-import by.epam.site.dao.interfaces.ClientDAO;
+import by.epam.site.dao.daointerfaces.ClientDAO;
 import by.epam.site.entity.Client;
 import by.epam.site.exception.ConstantException;
 
@@ -8,7 +8,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ClientDAOImpl extends AbstractDAOImpl<Client> implements ClientDAO {
+public class ClientDAOImpl extends AbstractDAOImpl implements ClientDAO {
     private static final String DB_SELECT_ALL = "SELECT `id`, `name`, "
             + "`surname`, `patronymic`, `date_of_birth`, `email`, "
             + "`phone` FROM `client`";
@@ -47,7 +47,7 @@ public class ClientDAOImpl extends AbstractDAOImpl<Client> implements ClientDAO 
     }
 
     @Override
-    public void delete(final Integer id) throws ConstantException, ClassNotFoundException {
+    public void delete(final Integer id) throws ConstantException {
         try (Connection connection = getConnection();
              PreparedStatement statement
                      = connection.prepareStatement(DB_DELETE)) {
@@ -59,7 +59,7 @@ public class ClientDAOImpl extends AbstractDAOImpl<Client> implements ClientDAO 
     }
 
     @Override
-    public void create(Client client) throws ConstantException, ClassNotFoundException {
+    public void create(Client client) throws ConstantException {
         try(Connection connection = getConnection();
             PreparedStatement statement
                     = connection.prepareStatement(DB_CLIENT_CREATE,

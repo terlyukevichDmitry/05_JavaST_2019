@@ -1,6 +1,6 @@
 package by.epam.site.dao.daoimpl;
 
-import by.epam.site.dao.interfaces.ImageDAO;
+import by.epam.site.dao.daointerfaces.ImageDAO;
 import by.epam.site.entity.Image;
 import by.epam.site.exception.ConstantException;
 
@@ -8,7 +8,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ImageDAOImpl extends AbstractDAOImpl<Image> implements ImageDAO {
+public class ImageDAOImpl extends AbstractDAOImpl implements ImageDAO {
     private static final String DB_SELECT_ALL = "SELECT `id`, `imageAddress` FROM `image`";
     private static final String DB_DELETE = "DELETE FROM `image` WHERE `id`"
             + " = ?";

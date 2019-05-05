@@ -1,6 +1,6 @@
 package by.epam.site.dao.daoimpl;
 
-import by.epam.site.dao.interfaces.UserDAO;
+import by.epam.site.dao.daointerfaces.UserDAO;
 import by.epam.site.entity.Role;
 import by.epam.site.entity.User;
 import by.epam.site.exception.ConstantException;
@@ -9,7 +9,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UserDAOImpl extends AbstractDAOImpl<User> implements UserDAO {
+public class UserDAOImpl extends AbstractDAOImpl implements UserDAO {
     private static final String DB_SELECT_ALL = "SELECT `id`, `login`,"
             + " `password`, `role` FROM `user`";
     private static final String DB_DELETE = "DELETE FROM `user` WHERE `id` = ?"
@@ -20,10 +20,12 @@ public class UserDAOImpl extends AbstractDAOImpl<User> implements UserDAO {
             + "(`login`, `password`, `role`) VALUES (?, ?, ?)";
     private static final String DB_USER_UPDATE = "UPDATE `user` SET `login` "
             + "= ?, `password` = ?, `role` = ? WHERE `id` = ?";
+    private static final String DB_USER = "SELECT `id`, `role` FROM `user` " +
+            "WHERE `login` = ? AND `password` = ?";
 
     @Override
     public List<User> readAll()
-            throws ConstantException, ClassNotFoundException {
+            throws ConstantException {
         try(Connection connection = getConnection();
             PreparedStatement statement = connection.prepareStatement(DB_SELECT_ALL);
             ResultSet resultSet = statement.executeQuery(DB_SELECT_ALL)) {
@@ -44,7 +46,7 @@ public class UserDAOImpl extends AbstractDAOImpl<User> implements UserDAO {
 
     @Override
     public void delete(Integer id)
-            throws ConstantException, ClassNotFoundException {
+            throws ConstantException {
         try (Connection connection = getConnection();
              PreparedStatement statement
                      = connection.prepareStatement(DB_DELETE_WITH_ONE_PARAM)) {
@@ -57,7 +59,7 @@ public class UserDAOImpl extends AbstractDAOImpl<User> implements UserDAO {
 
     @Override
     public void deleteByRole(final Integer id, final Role role)
-            throws ConstantException, ClassNotFoundException {
+            throws ConstantException {
         try (Connection connection = getConnection();
              PreparedStatement statement
                 = connection.prepareStatement(DB_DELETE)) {
@@ -71,7 +73,7 @@ public class UserDAOImpl extends AbstractDAOImpl<User> implements UserDAO {
 
     @Override
     public void create(final User user)
-            throws ConstantException, ClassNotFoundException {
+            throws ConstantException {
         try(Connection connection = getConnection();
             PreparedStatement statement
                     = connection.prepareStatement(DB_USER_CREATE,
@@ -87,7 +89,7 @@ public class UserDAOImpl extends AbstractDAOImpl<User> implements UserDAO {
 
     @Override
     public User update(final User user)
-            throws ConstantException, ClassNotFoundException {
+            throws ConstantException {
         try(Connection connection = getConnection();
             PreparedStatement statement
                     = connection.prepareStatement(DB_USER_UPDATE,
@@ -101,5 +103,35 @@ public class UserDAOImpl extends AbstractDAOImpl<User> implements UserDAO {
             throw new ConstantException(e);
         }
         return user;
+    }
+
+    @Override
+    public User read(String login, String password) throws ConstantException {
+        PreparedStatement statement = null;
+        ResultSet resultSet = null;
+        try {
+            statement = getConnection().prepareStatement(DB_USER);
+            statement.setString(1, login);
+            statement.setString(2, password);
+            resultSet = statement.executeQuery();
+            User user = null;
+            if(resultSet.next()) {
+                user = new User();
+                user.setId(resultSet.getInt("id"));
+                user.setLogin(login);
+                user.setPassword(password);
+                user.setRole(Role.getByIdentity(resultSet.getInt("role")));
+            }
+            return user;
+        } catch(SQLException e) {
+            throw new ConstantException(e);
+        } finally {
+            try {
+                resultSet.close();
+            } catch(SQLException | NullPointerException e) {}
+            try {
+                statement.close();
+            } catch(SQLException | NullPointerException e) {}
+        }
     }
 }

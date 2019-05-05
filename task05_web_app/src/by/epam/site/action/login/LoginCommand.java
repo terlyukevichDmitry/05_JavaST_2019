@@ -1,8 +1,12 @@
 package by.epam.site.action.login;
 
 import by.epam.site.action.calculator.Cl;
+import by.epam.site.dao.daoimpl.SqlTransactionFactoryImpl;
 import by.epam.site.entity.User;
 import by.epam.site.exception.ConstantException;
+import by.epam.site.service.interfaces.ServiceFactory;
+import by.epam.site.service.interfaces.UserService;
+import by.epam.site.service.serviceimpl.ServiceFactoryImpl;
 import by.epam.site.service.serviceimpl.UserServiceImpl;
 import by.epam.site.teg.InfoTimeTag;
 
@@ -18,8 +22,9 @@ public class LoginCommand extends Cl implements ActionCommand{
         String page = null;
         String login = request.getParameter(PARAM_NAME_LOGIN);
         String password = request.getParameter(PARAM_NAME_PASSWORD);
-        UserServiceImpl service = new UserServiceImpl();
         try {
+            ServiceFactory factory = new ServiceFactoryImpl(new SqlTransactionFactoryImpl());
+            UserService service = factory.getService(UserService.class);
             User user = service.findByLoginAndPassword(login, password);
             if (user != null) {
                 InfoTimeTag timeTag = new InfoTimeTag();
@@ -34,7 +39,11 @@ public class LoginCommand extends Cl implements ActionCommand{
                         MessageManager.getProperty("loginerror"));
                 page = ConfigurationManager.getProperty("signin");
             }
-        } catch (ConstantException | ClassNotFoundException | SQLException e) {
+        } catch (ConstantException  e) {
+            e.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
         return page;

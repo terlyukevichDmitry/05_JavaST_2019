@@ -1,6 +1,6 @@
 package by.epam.site.dao.daoimpl;
 
-import by.epam.site.dao.interfaces.*;
+import by.epam.site.dao.daointerfaces.*;
 import by.epam.site.dao.transaction.SqlTransaction;
 import by.epam.site.exception.ConstantException;
 import org.apache.logging.log4j.LogManager;
@@ -30,7 +30,7 @@ public class SqlTransactionImpl implements SqlTransaction {
     }
     private Connection connection;
 
-    public SqlTransactionImpl(Connection connection) {
+    SqlTransactionImpl(Connection connection) {
         this.connection = connection;
     }
 
@@ -68,5 +68,9 @@ public class SqlTransactionImpl implements SqlTransaction {
             LOGGER.error("It is impossible to rollback transaction", e);
             throw new ConstantException(e);
         }
+    }
+
+    public Connection getConnection() {
+        return connection;
     }
 }

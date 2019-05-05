@@ -1,5 +1,6 @@
 package by.epam.site.dao.daoimpl;
 
+import by.epam.site.dao.daointerfaces.QuestDAO;
 import by.epam.site.entity.Quest;
 import by.epam.site.exception.ConstantException;
 
@@ -7,7 +8,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class QuestDAOImpl extends AbstractDAOImpl<Quest> {
+public class QuestDAOImpl extends AbstractDAOImpl implements QuestDAO {
 
     private static final String DB_SELECT_ALL = "SELECT `id`, `title`, "
             + "`level`, `max_people` FROM `quest`";
@@ -84,5 +85,10 @@ public class QuestDAOImpl extends AbstractDAOImpl<Quest> {
             throw new ConstantException(e);
         }
         return quest;
+    }
+
+    @Override
+    public void initializeAuthorQuest(Quest quest) throws ConstantException, ClassNotFoundException {
+
     }
 }

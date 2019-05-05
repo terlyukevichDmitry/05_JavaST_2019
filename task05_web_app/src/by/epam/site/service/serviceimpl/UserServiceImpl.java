@@ -1,7 +1,6 @@
 package by.epam.site.service.serviceimpl;
 
-import by.epam.site.dao.daoimpl.AbstractDAOImpl;
-import by.epam.site.dao.daoimpl.UserDAOImpl;
+import by.epam.site.dao.daointerfaces.UserDAO;
 import by.epam.site.entity.User;
 import by.epam.site.exception.ConstantException;
 import by.epam.site.service.interfaces.UserService;
@@ -11,8 +10,6 @@ import org.apache.logging.log4j.Logger;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.sql.SQLException;
-import java.util.List;
 
 public class UserServiceImpl extends ServiceImpl implements UserService {
     private static Logger logger
@@ -20,16 +17,9 @@ public class UserServiceImpl extends ServiceImpl implements UserService {
 
     @Override
     public User findByLoginAndPassword(String login, String password)
-            throws ConstantException, SQLException, ClassNotFoundException {
-        AbstractDAOImpl<User> user  = new UserDAOImpl();
-        List<User> list = user.readAll();
-        for (User ur :list) {
-            if (ur.getLogin().equals(login)
-                    && ur.getPassword().equals(password)) {
-                return ur;
-            }
-        }
-        return null;
+            throws ConstantException {
+        UserDAO dao = transaction.createDaoImpl(UserDAO.class);
+        return dao.read(login, password);
     }
 
     @Override

@@ -19,9 +19,9 @@ public class ClientServiceImpl extends ServiceImpl implements ClientService {
     public void save(Client client) throws ConstantException, ClassNotFoundException {
         ClientDAO dao = transaction.createDaoImpl(ClientDAO.class);
         if(client.getId() != null) {
-            dao.update(client);
+            dao.update(client, transaction);
         } else {
-            client.setId(dao.create(client));
+            client.setId(dao.create(client, transaction));
         }
     }
 

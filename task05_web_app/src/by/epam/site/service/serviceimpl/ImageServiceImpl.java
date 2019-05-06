@@ -19,9 +19,9 @@ public class ImageServiceImpl extends ServiceImpl implements ImageService {
     public void save(Image image) throws ConstantException, ClassNotFoundException {
         ImageDAO dao = transaction.createDaoImpl(ImageDAO.class);
         if(image.getId() != null) {
-            dao.update(image);
+            dao.update(image, transaction);
         } else {
-            image.setId(dao.create(image));
+            image.setId(dao.create(image, transaction));
         }
     }
 

@@ -20,9 +20,9 @@ public class QuestServiceImpl extends ServiceImpl implements QuestService {
             throws ConstantException, ClassNotFoundException {
         QuestDAO dao = transaction.createDaoImpl(QuestDAO.class);
         if(quest.getId() != null) {
-            dao.update(quest);
+            dao.update(quest, transaction);
         } else {
-            quest.setId(dao.create(quest));
+            quest.setId(dao.create(quest, transaction));
         }
     }
 

@@ -9,4 +9,8 @@ public class ServiceImpl implements Service {
     public void setTransaction(SqlTransaction transaction) {
         this.transaction = transaction;
     }
+
+    public SqlTransaction getTransaction() {
+        return transaction;
+    }
 }

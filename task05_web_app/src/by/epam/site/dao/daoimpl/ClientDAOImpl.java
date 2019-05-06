@@ -1,6 +1,7 @@
 package by.epam.site.dao.daoimpl;
 
 import by.epam.site.dao.daointerfaces.ClientDAO;
+import by.epam.site.dao.transaction.SqlTransaction;
 import by.epam.site.entity.Client;
 import by.epam.site.exception.ConstantException;
 import org.apache.logging.log4j.LogManager;
@@ -68,12 +69,13 @@ public class ClientDAOImpl extends AbstractDAOImpl implements ClientDAO {
     }
 
     @Override
-    public Integer create(Client client) throws ConstantException {
-        ResultSet resultSet = null;
+    public Integer create(Client client, final SqlTransaction transaction)
+            throws ConstantException {
         try(Connection connection = getConnection();
             PreparedStatement statement
                     = connection.prepareStatement(DB_CLIENT_CREATE,
                     Statement.RETURN_GENERATED_KEYS)) {
+            connection.setAutoCommit(false);
             statement.setString(1, client.getName());
             statement.setString(2, client.getSurname());
             statement.setString(3, client.getPatronymic());
@@ -81,24 +83,32 @@ public class ClientDAOImpl extends AbstractDAOImpl implements ClientDAO {
             statement.setString(5, client.getEmail());
             statement.setString(6, client.getPhone());
             statement.executeUpdate();
-            resultSet = statement.getGeneratedKeys();
+            transaction.commit();
+            ResultSet resultSet = statement.getGeneratedKeys();
             if(resultSet.next()) {
                 return resultSet.getInt(1);
             } else {
-                LOGGER.error("There is no autoincremented index after trying to add record into table `users`");
+                transaction.rollback();
+                LOGGER.error("There is no autoincremented index after "
+                        + "trying to add record into table `client`");
                 throw new ConstantException();
             }
         } catch (SQLException e) {
+            transaction.rollback();
+            LOGGER.error("It is impossible to turn off " +
+                    "autocommiting for database connection", e);
             throw new ConstantException(e);
         }
     }
 
     @Override
-    public Client update(Client client) throws ConstantException {
+    public Client update(final Client client, final SqlTransaction transaction)
+            throws ConstantException {
         try(Connection connection = getConnection();
             PreparedStatement statement
                     = connection.prepareStatement(DB_CLIENT_UPDATE,
                     Statement.RETURN_GENERATED_KEYS)) {
+            connection.setAutoCommit(false);
             statement.setString(1, client.getName());
             statement.setString(2, client.getSurname());
             statement.setString(3, client.getPatronymic());
@@ -107,7 +117,11 @@ public class ClientDAOImpl extends AbstractDAOImpl implements ClientDAO {
             statement.setString(6, client.getPhone());
             statement.setInt(7, client.getId());
             statement.executeUpdate();
+            transaction.commit();
         } catch (SQLException e) {
+            transaction.rollback();
+            LOGGER.error("It is impossible to turn off " +
+                    "autocommiting for database connection", e);
             throw new ConstantException(e);
         }
         return client;

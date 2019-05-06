@@ -1,6 +1,7 @@
 package by.epam.site.dao.daoimpl;
 
 import by.epam.site.dao.daointerfaces.QuestDAO;
+import by.epam.site.dao.transaction.SqlTransaction;
 import by.epam.site.entity.Quest;
 import by.epam.site.exception.ConstantException;
 import org.apache.logging.log4j.LogManager;
@@ -30,7 +31,7 @@ public class QuestDAOImpl extends AbstractDAOImpl implements QuestDAO {
 
     @Override
     public List<Quest> readAll()
-            throws ConstantException, ClassNotFoundException {
+            throws ConstantException {
 
         try(Connection connection = getConnection();
             PreparedStatement statement = connection.prepareStatement(DB_SELECT_ALL);
@@ -52,7 +53,7 @@ public class QuestDAOImpl extends AbstractDAOImpl implements QuestDAO {
     }
 
     @Override
-    public void delete(Integer id) throws ConstantException, ClassNotFoundException {
+    public void delete(Integer id) throws ConstantException {
         try (Connection connection = getConnection();
              PreparedStatement statement
                      = connection.prepareStatement(DB_DELETE)) {
@@ -64,47 +65,60 @@ public class QuestDAOImpl extends AbstractDAOImpl implements QuestDAO {
     }
 
     @Override
-    public Integer create(Quest quest) throws ConstantException {
-        ResultSet resultSet = null;
+    public Integer create(final Quest quest, final SqlTransaction transaction)
+            throws ConstantException {
         try (Connection connection = getConnection();
              PreparedStatement statement
                      = connection.prepareStatement(DB_QUEST_CREATE,
                      Statement.RETURN_GENERATED_KEYS)) {
+            connection.setAutoCommit(false);
             statement.setString(1, quest.getTitle());
             statement.setInt(2, quest.getLevel());
             statement.setInt(3, quest.getMaxPeople());
             statement.executeUpdate();
-            resultSet = statement.getGeneratedKeys();
+            transaction.commit();
+            ResultSet resultSet = statement.getGeneratedKeys();
             if(resultSet.next()) {
                 return resultSet.getInt(1);
             } else {
-                LOGGER.error("There is no autoincremented index after trying to add record into table `users`");
+                transaction.rollback();
+                LOGGER.error("There is no autoincremented index after "
+                        + "trying to add record into table `quest`");
                 throw new ConstantException();
             }
         } catch (SQLException e) {
+            transaction.rollback();
+            LOGGER.error("It is impossible to turn off " +
+                    "autocommiting for database connection", e);
             throw new ConstantException(e);
         }
     }
 
     @Override
-    public Quest update(Quest quest) throws ConstantException, ClassNotFoundException {
+    public Quest update(Quest quest, SqlTransaction transaction)
+            throws ConstantException {
         try (Connection connection = getConnection();
              PreparedStatement statement
                      = connection.prepareStatement(DB_QUEST_UPDATE,
                      Statement.RETURN_GENERATED_KEYS)) {
+            connection.setAutoCommit(false);
             statement.setInt(1, quest.getMaxPeople());
             statement.setInt(2, quest.getLevel());
             statement.setString(3, quest.getTitle());
             statement.setInt(4, quest.getId());
             statement.executeUpdate();
+            transaction.commit();
         } catch (SQLException e) {
+            transaction.rollback();
+            LOGGER.error("It is impossible to turn off " +
+                    "autocommiting for database connection", e);
             throw new ConstantException(e);
         }
         return quest;
     }
 
     @Override
-    public void initializeAuthorQuest(Quest quest) throws ConstantException, ClassNotFoundException {
+    public void initializeAuthorQuest(Quest quest) {
 
     }
 }

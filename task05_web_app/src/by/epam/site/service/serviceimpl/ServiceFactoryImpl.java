@@ -2,7 +2,6 @@ package by.epam.site.service.serviceimpl;
 
 import by.epam.site.dao.transaction.SqlTransaction;
 import by.epam.site.dao.transaction.SqlTransactionFactory;
-import by.epam.site.entity.QuestPlace;
 import by.epam.site.service.interfaces.*;
 
 import java.util.Map;
@@ -10,7 +9,8 @@ import java.util.concurrent.ConcurrentHashMap;
 
 public class ServiceFactoryImpl implements ServiceFactory {
 
-    private static final Map<Class<? extends Service>, Class<? extends ServiceImpl>> serviceContainer = new ConcurrentHashMap<>();
+    private static final Map<Class<? extends Service>, Class<?
+            extends ServiceImpl>> serviceContainer = new ConcurrentHashMap<>();
 
     static {
         serviceContainer.put(UserService.class, UserServiceImpl.class);

@@ -1,6 +1,7 @@
 package by.epam.site.dao.daoimpl;
 
 import by.epam.site.dao.daointerfaces.UserDAO;
+import by.epam.site.dao.transaction.SqlTransaction;
 import by.epam.site.entity.Role;
 import by.epam.site.entity.User;
 import by.epam.site.exception.ConstantException;
@@ -83,42 +84,54 @@ public class UserDAOImpl extends AbstractDAOImpl implements UserDAO {
     }
 
     @Override
-    public Integer create(final User user)
+    public Integer create(final User user, final SqlTransaction transaction)
             throws ConstantException {
         ResultSet resultSet = null;
         try(Connection connection = getConnection();
             PreparedStatement statement
                     = connection.prepareStatement(DB_USER_CREATE,
                     Statement.RETURN_GENERATED_KEYS)) {
+            connection.setAutoCommit(false);
             statement.setString(1, user.getLogin());
             statement.setString(2, user.getPassword());
             statement.setInt(3, user.getRole().getIdentity());
             statement.executeUpdate();
+            transaction.commit();
             resultSet = statement.getGeneratedKeys();
             if(resultSet.next()) {
                 return resultSet.getInt(1);
             } else {
-                LOGGER.error("There is no autoincremented index after trying to add record into table `users`");
+                transaction.rollback();
+                LOGGER.error("There is no autoincremented index after trying"
+                        + "to add record into table `user`");
                 throw new ConstantException();
             }
         } catch (SQLException e) {
+            transaction.rollback();
+            LOGGER.error("It is impossible to turn off " +
+                    "autocommiting for database connection", e);
             throw new ConstantException(e);
         }
     }
 
     @Override
-    public User update(final User user)
+    public User update(final User user, final SqlTransaction transaction)
             throws ConstantException {
         try(Connection connection = getConnection();
             PreparedStatement statement
                     = connection.prepareStatement(DB_USER_UPDATE,
                     Statement.RETURN_GENERATED_KEYS)) {
+            connection.setAutoCommit(false);
             statement.setString(1, user.getLogin());
             statement.setString(2, user.getPassword());
             statement.setInt(3, user.getRole().getIdentity());
             statement.setInt(4, user.getId());
             statement.executeUpdate();
+            transaction.commit();
         } catch (SQLException e) {
+            transaction.rollback();
+            LOGGER.error("It is impossible to turn off " +
+                    "autocommiting for database connection", e);
             throw new ConstantException(e);
         }
         return user;

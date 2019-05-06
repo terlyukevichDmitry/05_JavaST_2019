@@ -44,10 +44,10 @@ public class UserServiceImpl extends ServiceImpl implements UserService {
                 User oldUser = dao.read(user.getId());
                 user.setPassword(mdFiveMethod(oldUser.getPassword()));
             }
-            dao.update(user);
+            dao.update(user, transaction);
         } else {
             user.setPassword(mdFiveMethod(""));
-            user.setId(dao.create(user));
+            user.setId(dao.create(user, transaction));
         }
     }
 

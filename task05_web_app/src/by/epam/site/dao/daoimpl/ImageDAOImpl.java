@@ -1,6 +1,7 @@
 package by.epam.site.dao.daoimpl;
 
 import by.epam.site.dao.daointerfaces.ImageDAO;
+import by.epam.site.dao.transaction.SqlTransaction;
 import by.epam.site.entity.Image;
 import by.epam.site.exception.ConstantException;
 import org.apache.logging.log4j.LogManager;
@@ -57,36 +58,49 @@ public class ImageDAOImpl extends AbstractDAOImpl implements ImageDAO {
     }
 
     @Override
-    public Integer create(Image image) throws ConstantException {
-        ResultSet resultSet = null;
+    public Integer create(Image image, final SqlTransaction transaction)
+            throws ConstantException {
         try(Connection connection = getConnection();
             PreparedStatement statement
                     = connection.prepareStatement(DB_IMAGE_CREATE,
                     Statement.RETURN_GENERATED_KEYS)) {
+            connection.setAutoCommit(false);
             statement.setString(1, image.getFilePath());
             statement.executeUpdate();
-            resultSet = statement.getGeneratedKeys();
+            transaction.commit();
+            ResultSet resultSet = statement.getGeneratedKeys();
             if(resultSet.next()) {
                 return resultSet.getInt(1);
             } else {
-                LOGGER.error("There is no autoincremented index after trying to add record into table `users`");
+                transaction.rollback();
+                LOGGER.error("There is no autoincremented index after "
+                        + "trying to add record into table `image`");
                 throw new ConstantException();
             }
         } catch (SQLException e) {
+            transaction.rollback();
+            LOGGER.error("It is impossible to turn off " +
+                    "autocommiting for database connection", e);
             throw new ConstantException(e);
         }
     }
 
     @Override
-    public Image update(Image image) throws ConstantException {
+    public Image update(final Image image, final SqlTransaction transaction)
+            throws ConstantException {
         try(Connection connection = getConnection();
             PreparedStatement statement
                     = connection.prepareStatement(DB_IMAGE_UPDATE,
                     Statement.RETURN_GENERATED_KEYS)) {
+            connection.setAutoCommit(false);
             statement.setString(1, image.getFilePath());
             statement.setInt(2, image.getId());
             statement.executeUpdate();
+            transaction.commit();
         } catch (SQLException e) {
+            transaction.rollback();
+            LOGGER.error("It is impossible to turn off " +
+                    "autocommiting for database connection", e);
             throw new ConstantException(e);
         }
         return image;

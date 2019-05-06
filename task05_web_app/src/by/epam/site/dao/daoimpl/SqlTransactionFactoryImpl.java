@@ -35,24 +35,14 @@ public class SqlTransactionFactoryImpl implements SqlTransactionFactory {
             throw new ConstantException();
         }
 
-        initConnection();
-    }
-
-    private void initConnection() throws ConstantException {
         connection = ConnectionPool.getInstance().getConnection();
-        try {
-            connection.setAutoCommit(false);
-        } catch(SQLException e) {
-            LOGGER.error("It is impossible to turn off " +
-                    "autocommiting for database connection", e);
-            throw new ConstantException(e);
-        }
     }
 
     @Override
     public void close() {
         try {
             connection.close();
+            System.out.println("Me Close");
         } catch(SQLException ignored) {}
     }
 

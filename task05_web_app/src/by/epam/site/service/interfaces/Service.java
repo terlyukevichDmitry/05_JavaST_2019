@@ -1,3 +1,7 @@
 package by.epam.site.service.interfaces;
 
-public interface Service {}
+import by.epam.site.dao.transaction.SqlTransaction;
+
+public interface Service {
+    SqlTransaction getTransaction();
+}

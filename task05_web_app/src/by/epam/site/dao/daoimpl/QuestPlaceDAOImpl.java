@@ -1,6 +1,7 @@
 package by.epam.site.dao.daoimpl;
 
 import by.epam.site.dao.daointerfaces.QuestPlaceDAO;
+import by.epam.site.dao.transaction.SqlTransaction;
 import by.epam.site.entity.Image;
 import by.epam.site.entity.Quest;
 import by.epam.site.entity.QuestPlace;
@@ -75,36 +76,47 @@ public class QuestPlaceDAOImpl
     }
 
     @Override
-    public Integer create(QuestPlace questPlace) throws ConstantException {
-        ResultSet resultSet = null;
+    public Integer create(final QuestPlace questPlace,
+                          final SqlTransaction transaction)
+            throws ConstantException {
         try(Connection connection = getConnection();
             PreparedStatement statement
                     = connection.prepareStatement(DB_QUEST_PLACE_CREATE,
                     Statement.RETURN_GENERATED_KEYS)) {
+            connection.setAutoCommit(false);
             statement.setString(1, questPlace.getName());
             statement.setString(2, questPlace.getAddress());
             statement.setString(3, questPlace.getPhone());
             statement.setInt(4, questPlace.getQuest().getId());
             statement.setInt(5, questPlace.getImage().getId());
             statement.executeUpdate();
-            resultSet = statement.getGeneratedKeys();
+            transaction.commit();
+            ResultSet resultSet = statement.getGeneratedKeys();
             if(resultSet.next()) {
                 return resultSet.getInt(1);
             } else {
-                LOGGER.error("There is no autoincremented index after trying to add record into table `users`");
+                transaction.rollback();
+                LOGGER.error("There is no autoincremented index after" +
+                        "trying to add record into table `quest_place`");
                 throw new ConstantException();
             }
         } catch (SQLException e) {
+            transaction.rollback();
+            LOGGER.error("It is impossible to turn off " +
+                    "autocommiting for database connection", e);
             throw new ConstantException(e);
         }
     }
 
     @Override
-    public QuestPlace update(QuestPlace questPlace) throws ConstantException {
+    public QuestPlace update(final QuestPlace questPlace,
+                             final SqlTransaction transaction)
+            throws ConstantException {
         try(Connection connection = getConnection();
             PreparedStatement statement
                     = connection.prepareStatement(DB_QUEST_PLACE_UPDATE,
                     Statement.RETURN_GENERATED_KEYS)) {
+            connection.setAutoCommit(false);
             statement.setString(1, questPlace.getName());
             statement.setString(2, questPlace.getAddress());
             statement.setString(3, questPlace.getPhone());
@@ -112,8 +124,12 @@ public class QuestPlaceDAOImpl
             statement.setInt(5, questPlace.getQuest().getId());
             statement.setInt(6, questPlace.getId());
             statement.executeUpdate();
+            transaction.commit();
             return questPlace;
         } catch (SQLException e) {
+            transaction.rollback();
+            LOGGER.error("It is impossible to turn off " +
+                    "autocommiting for database connection", e);
             throw new ConstantException(e);
         }
     }

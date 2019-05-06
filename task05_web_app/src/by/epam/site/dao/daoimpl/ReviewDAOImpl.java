@@ -1,6 +1,7 @@
 package by.epam.site.dao.daoimpl;
 
 import by.epam.site.dao.daointerfaces.ReviewDAO;
+import by.epam.site.dao.transaction.SqlTransaction;
 import by.epam.site.entity.Client;
 import by.epam.site.entity.Review;
 import by.epam.site.exception.ConstantException;
@@ -29,7 +30,7 @@ public class ReviewDAOImpl extends AbstractDAOImpl implements ReviewDAO {
     private static final String DB_REVIEW_UPDATE = "UPDATE `review` SET `message` "
             + "= ?, `date` = ?, `client_id` = ? WHERE `id` = ?";
     @Override
-    public List<Review> readAll() throws SQLException, ConstantException, ClassNotFoundException {
+    public List<Review> readAll() throws ConstantException {
         try(Connection connection = getConnection();
             PreparedStatement statement = connection.prepareStatement(DB_SELECT_ALL);
             ResultSet resultSet = statement.executeQuery(DB_SELECT_ALL)) {
@@ -54,7 +55,7 @@ public class ReviewDAOImpl extends AbstractDAOImpl implements ReviewDAO {
     }
 
     @Override
-    public void delete(Integer id) throws ConstantException, ClassNotFoundException {
+    public void delete(Integer id) throws ConstantException {
         try (Connection connection = getConnection();
              PreparedStatement statement
                      = connection.prepareStatement(DB_DELETE)) {
@@ -66,40 +67,53 @@ public class ReviewDAOImpl extends AbstractDAOImpl implements ReviewDAO {
     }
 
     @Override
-    public Integer create(final Review review) throws ConstantException, ClassNotFoundException {
-        ResultSet resultSet = null;
+    public Integer create(final Review review, final SqlTransaction transaction)
+            throws ConstantException {
         try (Connection connection = getConnection();
              PreparedStatement statement
                      = connection.prepareStatement(DB_REVIEW_CREATE,
                      Statement.RETURN_GENERATED_KEYS)) {
+            connection.setAutoCommit(false);
             statement.setString(1, review.getMessage());
             statement.setDate(2, (java.sql.Date) review.getDate());
             statement.setInt(3, review.getClient().getId());
             statement.executeUpdate();
-            resultSet = statement.getGeneratedKeys();
+            transaction.commit();
+            ResultSet resultSet = statement.getGeneratedKeys();
             if(resultSet.next()) {
                 return resultSet.getInt(1);
             } else {
-                LOGGER.error("There is no autoincremented index after trying to add record into table `users`");
+                transaction.rollback();
+                LOGGER.error("There is no autoincremented index after "
+                        + "trying to add record into table `review`");
                 throw new ConstantException();
             }
         } catch (SQLException e) {
+            transaction.rollback();
+            LOGGER.error("It is impossible to turn off " +
+                    "autocommiting for database connection", e);
             throw new ConstantException(e);
         }
     }
 
     @Override
-    public Review update(final Review review) throws ConstantException, ClassNotFoundException {
+    public Review update(final Review review, final SqlTransaction transaction)
+            throws ConstantException {
         try (Connection connection = getConnection();
              PreparedStatement statement
                      = connection.prepareStatement(DB_REVIEW_UPDATE,
                      Statement.RETURN_GENERATED_KEYS)) {
+            connection.setAutoCommit(false);
             statement.setString(1, review.getMessage());
             statement.setDate(2, (java.sql.Date) review.getDate());
             statement.setInt(3, review.getClient().getId());
             statement.setInt(4, review.getId());
             statement.executeUpdate();
+            transaction.commit();
         } catch (SQLException e) {
+            transaction.rollback();
+            LOGGER.error("It is impossible to turn off " +
+                    "autocommiting for database connection", e);
             throw new ConstantException(e);
         }
         return review;

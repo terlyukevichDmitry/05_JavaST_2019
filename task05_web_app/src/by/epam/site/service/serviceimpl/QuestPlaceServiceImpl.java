@@ -11,18 +11,27 @@ import java.util.List;
 public class QuestPlaceServiceImpl
         extends ServiceImpl implements QuestPlaceService {
     @Override
-    public List<QuestPlace> findAll() throws ConstantException, SQLException, ClassNotFoundException {
+    public List<QuestPlace> findAll() throws ConstantException,
+            SQLException, ClassNotFoundException {
         QuestPlaceDAO dao = transaction.createDaoImpl(QuestPlaceDAO.class);
         return dao.readAll();
     }
 
     @Override
-    public void save(QuestPlace user) throws ConstantException, ClassNotFoundException {
-
+    public void save(QuestPlace questPlace) throws ConstantException,
+            ClassNotFoundException {
+        QuestPlaceDAO dao = transaction.createDaoImpl(QuestPlaceDAO.class);
+        if(questPlace.getId() != null) {
+            dao.update(questPlace, transaction);
+        } else {
+            questPlace.setId(dao.create(questPlace, transaction));
+        }
     }
 
     @Override
-    public void delete(Integer id) throws ClassNotFoundException, ConstantException {
-
+    public void delete(Integer id) throws ClassNotFoundException,
+            ConstantException {
+        QuestPlaceDAO dao = transaction.createDaoImpl(QuestPlaceDAO.class);
+        dao.delete(id);
     }
 }

@@ -1,5 +1,6 @@
 package by.epam.site.dao.daointerfaces;
 
+import by.epam.site.dao.transaction.SqlTransaction;
 import by.epam.site.entity.Entity;
 import by.epam.site.exception.ConstantException;
 
@@ -11,8 +12,8 @@ public interface DaoPattern<T extends Entity> {
             throws SQLException, ConstantException, ClassNotFoundException;
     void delete(Integer id)
             throws ConstantException, ClassNotFoundException;
-    Integer create(T entity)
+    Integer create(T entity, SqlTransaction transaction)
             throws ConstantException, ClassNotFoundException;
-    T update(T entity)
+    T update(T entity, SqlTransaction transaction)
             throws ConstantException, ClassNotFoundException;
 }

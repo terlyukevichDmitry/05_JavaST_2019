@@ -19,9 +19,9 @@ public class ReviewServiceImpl extends ServiceImpl implements ReviewService {
     public void save(Review review) throws ConstantException, ClassNotFoundException {
         ReviewDAO dao = transaction.createDaoImpl(ReviewDAO.class);
         if(review.getId() != null) {
-            dao.update(review);
+            dao.update(review, transaction);
         } else {
-            review.setId(dao.create(review));
+            review.setId(dao.create(review, transaction));
         }
     }
 

@@ -4,14 +4,14 @@
 <!DOCTYPE html>
 <html lang="en_US">
 <head>
-    <name>JukeBox Quest</name>
+    <title>JukeBox Quest</title>
     <meta charset="utf-8">
     <link rel="stylesheet" href="http://localhost:8080/sigIn/css/home/header.css" type="text/css"/>
     <link rel="stylesheet" href="http://localhost:8080/sigIn/css/home/base.css" type="text/css"/>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
           integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf"
           crossorigin="anonymous">
-    <link rel="shortcut icon" href="images/image-icon.png" type="image/x-icon">
+    <link rel="shortcut icon" href="images/image-icon.ico" type="image/x-icon">
     <style>
         .mainmenubtn {
             background-color: red;
@@ -42,7 +42,6 @@
     </style>
 </head>
 <body>
-<form method="post">
 <div class="header">
         <div class="header_texture"></div>
         <div class="header_mask">
@@ -66,14 +65,34 @@
                                 <button class="mainmenubtn">Main Menu</button>
                                 <div class="dropdown-child">
                                     <a href="http://localhost:8080/sigIn/jsp/profile.jsp">Profile</a>
-                                    <a href="http://www.вашдомен.ru/page2.html">Used Quest</a>
+                                    <a href="http://www.вашдомен.ru/page2.html">Users</a>
                                     <input type="hidden" name="command" value="logout" />
-                                    <a><input type="submit" value="Log out">Exit</a>
+                                    <c:url value="/logout.html" var="logout"/>
+                                    <form action="${logout}" method="post">
+                                    <a><input type="submit" value="Log out"></a>
+                                    </form>
+                                </div>
+                            </div>
+                        </c:when>
+                        <c:when test="${user.equals('client')}">
+                            <div class="dropdown">
+                                <button class="mainmenubtn">Main Menu</button>
+                                <div class="dropdown-child">
+                                    <a href="http://localhost:8080/sigIn/jsp/profile.jsp">Profile</a>
+                                    <a href="http://www.вашдомен.ru/page2.html">Users</a>
+                                    <input type="hidden" name="command" value="logout" />
+                                    <c:url value="/logout.html" var="logout"/>
+                                    <form action="${logout}" method="post">
+                                        <a><input type="submit" value="Log out"></a>
+                                    </form>
                                 </div>
                             </div>
                         </c:when>
                         <c:otherwise>
-                            <a href="http://localhost:8080/sigIn/jsp/sigIn.jsp" class="menu_link"><i class="fas fa-sign-in-alt"></i>&nbsp; Sign In</a>
+                                <c:url value="/signIn.html" var="signInURL"/>
+                                <form action="${signInURL}" method="post">
+                                    <a><input type="submit" value="Log in" class="menu_link"></a>
+                                </form>
                         </c:otherwise>
                     </c:choose>
                 </div>
@@ -83,6 +102,7 @@
                 <a href="#" class="h_slogan_btn">Best Quests</a>
             </div>
         </div>
+
     <%--<br>--%>
     <%--<br><br>--%>
     <%--<br><br>--%>
@@ -90,9 +110,9 @@
     <%--<br><br>--%>
     <%--<br><br>--%>
 
-    <%--<div>--%>
-        <%--${hollo}--%>
-    <%--</div>--%>
+    <div>
+        ${hollo}
+    </div>
 
 </div>
 </form>

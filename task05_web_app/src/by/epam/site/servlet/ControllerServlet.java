@@ -1,9 +1,10 @@
 package by.epam.site.servlet;
 
-import by.epam.site.action.factory.ActionFactory;
-import by.epam.site.action.login.ActionCommand;
-import by.epam.site.action.login.ConfigurationManager;
-import by.epam.site.action.login.MessageManager;
+import by.epam.site.action.Action;
+import by.epam.site.action.command.ActionCommand;
+import by.epam.site.action.command.ActionManager;
+import by.epam.site.action.factory.CommandEnum;
+import by.epam.site.action.factory.PageEnum;
 import by.epam.site.exception.ConstantException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -50,24 +51,36 @@ public class ControllerServlet extends HttpServlet {
     private void processRequest(final HttpServletRequest request,
                                 final HttpServletResponse response)
             throws ServletException, IOException, ConstantException, SQLException, ClassNotFoundException {
-        response.setContentType("text/html");
-        String page = null;
-        ActionFactory client = new ActionFactory();
-        ActionCommand command = client.defineCommand(request);
+        request.setCharacterEncoding("UTF-8");
 
-//        AbstractDAOImpl<Image> abstractDAO = new ImageDAOImpl();
-//        List<Image> list = abstractDAO.readAll();
-        page = command.execute(request);
+        Action action = new Action();
+        ActionCommand actionCommand
+                = new ActionManager().getActionCommand(action, request);
+        String page = actionCommand.execute(request);
+        String requestedUri = request.getRequestURI() + page;
         if (page != null) {
-//            request.setAttribute("lst", list);
+            String redirectedUri = request.getContextPath() + page;
+            LOGGER.debug(String.format("Request for URI \"%s\" id redirected "
+                    + "to URI \"%s\"", requestedUri, redirectedUri));
+            response.sendRedirect(redirectedUri);
+            //response.sendRedirect(redirectedUri);
+            //            request.setAttribute("lst", list);
 //            request.getRequestDispatcher("jsp/profile.jsp").forward(request, response);
 //            request.getSession().setAttribute("hollo", "asdasd");
-            request.getRequestDispatcher(page).forward(request, response);
+            //request.getRequestDispatcher(page).forward(request, response);
         } else {
-            page = ConfigurationManager.getProperty("home");
-            request.getSession().setAttribute("nullPage",
-                    MessageManager.getProperty("nullpage"));
-            response.sendRedirect(request.getContextPath() + page);
+            PageEnum pageEnum = PageEnum.getEnum(action.getForward());
+            assert pageEnum != null;
+            String jspPage = pageEnum.getValue();
+            LOGGER.debug(String.format("Request for URI \"%s\" is forwarded "
+                    + "to JSP \"%s\"", requestedUri, jspPage));
+            getServletContext().getRequestDispatcher(jspPage).forward(request,
+                    response);
+//
+//            page = ConfigurationManager.getProperty("home");
+//            request.getSession().setAttribute("nullPage",
+//                    MessageManager.getProperty("nullpage"));
+//            response.sendRedirect(request.getContextPath() + page);
         }
     }
 }

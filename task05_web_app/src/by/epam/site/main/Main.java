@@ -7,6 +7,9 @@ import by.epam.site.exception.ConstantException;
 import by.epam.site.service.interfaces.*;
 import by.epam.site.service.serviceimpl.ServiceFactoryImpl;
 
+import java.math.BigInteger;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.sql.*;
 
 public class Main {
@@ -25,17 +28,6 @@ public class Main {
 //        for (Quest l :list) {
 //            System.out.println(l);
 //        }
-
-        ServiceFactory factory = new ServiceFactoryImpl(new SqlTransactionFactoryImpl());
-        QuestService service = factory.getService(QuestService.class);
-        Quest quest = new Quest();
-        quest.setMaxPeople(7);
-        quest.setLevel(12);
-        quest.setTitle("Hello, it's checking process");
-        service.save(quest);
-        for (Quest q : service.findAll()) {
-            System.out.println(q);
-        }
 
 
     }

@@ -1,4 +1,7 @@
-package by.epam.site.action.login;
+package by.epam.site.action.command;
+
+import by.epam.site.action.command.ActionCommand;
+import by.epam.site.action.command.ConfigurationManager;
 
 import javax.servlet.http.HttpServletRequest;
 

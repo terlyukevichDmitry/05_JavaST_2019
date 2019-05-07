@@ -1,14 +1,14 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" isELIgnored="false" %>
 <!DOCTYPE html>
 <html>
 <head>
-    <name>My super project!</name>
+    <title>My super project!</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <link rel="stylesheet" href="http://localhost:8080/sigIn/css/signup.css" type="text/css"/>
     <link href="https://fonts.googleapis.com/css?family=Play" rel="stylesheet"/>
-    <link rel="shortcut icon" href="images/image-icon.png" type="image/x-icon">
-
+    <link rel="shortcut icon" href="images/image-icon.ico" type="image/x-icon">
     <style>
         #msg {
             visibility: hidden;
@@ -56,12 +56,13 @@
 </head>
 <body>
     <div class="signUp">
-        <form action="http://localhost:8080/sigIn/controller" method="post">
+        <c:url value="/signup.html" var="signupURL"/>
+        <form action="${signupURL}" method="post">
             <h2 style="color: #ffffff;">Sign Up</h2>
-            <input type="text" name="username" placeholder="Username" required><br><br>
+            <input type="text" name="login" placeholder="Username" required><br><br>
             <input type="password" name="password" placeholder="Password" required><br><br>
-            <input type="password" name="password" placeholder="Confirm Password" required><br><br>
-            <input type="button" value="Sign Up" onclick="myFunction()"><br><br>
+            <input type="password" name="confirm" placeholder="Confirm Password" required><br><br>
+            <a><input type="submit" value="Sign Up" onclick="myFunction()"></a><br><br>
             <div id="msg">
                 Congratulations!!! You sign up successfully!!!
             </div><br><br>
@@ -75,7 +76,14 @@
                 }
             </script>
         </form>
-        Already have account? <a href="http://localhost:8080/sigIn/jsp/sigIn.jsp" style="text-decoration: blink; font-family: 'Play', sans-serif; color: yellow;">&nbsp;Log in</a>
+        <div style="color:#60c9a8; font-size: 18px;">
+            ${textMessage}
+        </div>
+        <p style="text-align: center">Already have account?</p>
+        <c:url value="/signIn.html" var="signInURL"/>
+        <form action="${signInURL}" method="post">
+            <a><input type="submit" value="Sign In"></a>
+        </form>
     </div>
 </body>
 </html>

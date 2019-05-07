@@ -1,4 +1,4 @@
-package by.epam.site.action.login;
+package by.epam.site.action.command;
 
 import java.util.ResourceBundle;
 

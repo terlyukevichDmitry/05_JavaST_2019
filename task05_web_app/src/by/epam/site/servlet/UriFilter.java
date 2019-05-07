@@ -1,32 +1,41 @@
 package by.epam.site.servlet;
 
-import by.epam.site.action.calculator.Cl;
-import by.epam.site.action.login.LoginCommand;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 
 public class UriFilter implements Filter {
+    /**
+     * Logger for recording a program state.
+     */
+    private static final Logger LOGGER
+            = LogManager.getLogger(UriFilter.class);
 
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
         if (request instanceof HttpServletRequest) {
-            HttpServletRequest httpRequest = (HttpServletRequest)request;
-            String contextPath = httpRequest.getContextPath();
-            String uri = httpRequest.getRequestURI();
+            HttpServletRequest httpServletRequest
+                    = (HttpServletRequest) request;
+            String contextPath = httpServletRequest.getContextPath();
+            String url = httpServletRequest.getRequestURI();
+            LOGGER.debug(String.format("Starting of processing of request for URI \"%s\"", url));
             int beginAction = contextPath.length();
-            int endAction = uri.lastIndexOf('.');
+            int endAction = url.lastIndexOf('.');
             String actionName;
             if(endAction >= 0) {
-                actionName = uri.substring(beginAction, endAction);
+                actionName = url.substring(beginAction, endAction);
             } else {
-                actionName = uri.substring(beginAction);
+                actionName = url.substring(beginAction);
             }
-            httpRequest.setAttribute("action", actionName);
+            if (actionName.isEmpty()) {
+                actionName += '/';
+            }
+            httpServletRequest.setAttribute("action", actionName);
             chain.doFilter(request, response);
+        } else {
         }
     }
 

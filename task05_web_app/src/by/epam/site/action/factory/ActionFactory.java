@@ -1,24 +1,27 @@
 package by.epam.site.action.factory;
 
-import by.epam.site.action.login.ActionCommand;
-import by.epam.site.action.login.EmptyCommand;
-import by.epam.site.action.login.MessageManager;
+import by.epam.site.action.Action;
+import by.epam.site.action.command.ActionCommand;
+import by.epam.site.action.command.EmptyCommand;
+import by.epam.site.action.command.MessageManager;
 
 import javax.servlet.http.HttpServletRequest;
 
 public class ActionFactory {
-    public ActionCommand defineCommand(HttpServletRequest request) {
+    public ActionCommand defineCommand(final Action action,
+                                       final HttpServletRequest request) {
         ActionCommand current = new EmptyCommand();
-        String action = request.getParameter("command");
-        System.out.println(action);
-        if (action == null || action.isEmpty()) {
+        String actionValue = String.valueOf(request.getAttribute("action"));
+        action.setForward(actionValue);
+        if (actionValue == null || actionValue.isEmpty()) {
             return current;
         }
         try {
-            CommandEnum currentEnum = CommandEnum.valueOf(action.toUpperCase());
+            CommandEnum currentEnum = CommandEnum.getEnum(actionValue);
+            assert currentEnum != null;
             current = currentEnum.getCurrentCommand();
         } catch (IllegalArgumentException e) {
-            request.setAttribute("wrongAction", action
+            request.setAttribute("wrongAction", actionValue
                     + MessageManager.getProperty("wrongaction"));
         }
         return current;

@@ -1,16 +1,15 @@
-package by.epam.site.action.loginout;
+package by.epam.site.action.command;
 
-import by.epam.site.action.login.ActionCommand;
-import by.epam.site.action.login.ConfigurationManager;
+import by.epam.site.action.command.ActionCommand;
+import by.epam.site.action.command.ConfigurationManager;
 
 import javax.servlet.http.HttpServletRequest;
 
 public class LogoutCommand implements ActionCommand {
     @Override
     public String execute(HttpServletRequest request) {
-        String page = ConfigurationManager.getProperty("home");
         request.setAttribute("user", "");
         request.getSession(false).invalidate();
-        return page;
+        return ConfigurationManager.getProperty("home");
     }
 }

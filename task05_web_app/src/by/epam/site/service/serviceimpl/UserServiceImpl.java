@@ -23,7 +23,8 @@ public class UserServiceImpl extends ServiceImpl implements UserService {
     }
 
     @Override
-    public User findByLoginAndPassword(String login, String password)
+    public User findByLoginAndPassword(final String login,
+                                       final String password)
             throws ConstantException {
         UserDAO dao = transaction.createDaoImpl(UserDAO.class);
         return dao.read(login, mdFiveMethod(password));
@@ -46,7 +47,7 @@ public class UserServiceImpl extends ServiceImpl implements UserService {
             }
             dao.update(user, transaction);
         } else {
-            user.setPassword(mdFiveMethod(""));
+            user.setPassword(mdFiveMethod(user.getPassword()));
             user.setId(dao.create(user, transaction));
         }
     }

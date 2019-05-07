@@ -1,29 +1,56 @@
 package by.epam.site.action.factory;
 
-import by.epam.site.action.login.ActionCommand;
-import by.epam.site.action.login.LoginCommand;
-import by.epam.site.action.loginout.LogoutCommand;
-import by.epam.site.action.signup.SignUpCommand;
+import by.epam.site.action.command.*;
 
 public enum CommandEnum {
-    LOGIN {
+    LOGIN("/login") {
         {
             this.command = new LoginCommand();
         }
     },
-    LOGOUT {
+    LOGOUT("/logout") {
         {
             this.command = new LogoutCommand();
         }
     },
-    SIGNUP {
+    HOME("/home") {
+        {
+            this.command = new HomeCommand();
+        }
+    },
+    SIGNIN("/signIn") {
+        {
+            this.command = new SignInPathCommand();
+        }
+    },
+    SIGNUP_PATH("/signupPath") {
+        {
+            this.command = new SignUpPathCommand();
+        }
+    },
+    SIGNUP("/signup") {
         {
             this.command = new SignUpCommand();
         }
     };
 
+    String name;
+
     ActionCommand command;
     public ActionCommand getCurrentCommand() {
         return command;
+    }
+
+    CommandEnum(String name) {
+        this.name = name;
+    }
+
+    public static CommandEnum getEnum(final String string) {
+        for (CommandEnum c: CommandEnum.values()) {
+            if (c.name.equals(string)) {
+                return c;
+            }
+        }
+        return null;
     }
 }

@@ -3,6 +3,8 @@ package by.epam.site.dao.daoimpl;
 import by.epam.site.dao.daointerfaces.QuestDAO;
 import by.epam.site.dao.transaction.SqlTransaction;
 import by.epam.site.entity.Quest;
+import by.epam.site.entity.Role;
+import by.epam.site.entity.User;
 import by.epam.site.exception.ConstantException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -21,13 +23,19 @@ public class QuestDAOImpl extends AbstractDAOImpl implements QuestDAO {
 
     private static final String DB_SELECT_ALL = "SELECT `id`, `title`, "
             + "`level`, `max_people` FROM `quest`";
+
     private static final String DB_DELETE = "DELETE FROM `quest` WHERE `id`"
             + " = ?";
+
     private static final String DB_QUEST_CREATE = "INSERT INTO `quest` "
-            + "(`title`, `level`, `max_people`)"
+            + "(`name`, `level`, `max_people`)"
             + " VALUES (?, ?, ?)";
+
     private static final String DB_QUEST_UPDATE = "UPDATE `quest` SET `title` "
             + "= ?, `level` = ?, `max_people` = ? WHERE `id` = ?";
+
+    private static final String DB_FIND_BY_ID
+            = "SELECT `title`, `level`, `max_people` FROM `quest` WHERE `id` = ?";
 
     @Override
     public List<Quest> readAll()
@@ -41,7 +49,7 @@ public class QuestDAOImpl extends AbstractDAOImpl implements QuestDAO {
             while (resultSet.next()) {
                 Quest quest = new Quest();
                 quest.setId(resultSet.getInt("id"));
-                quest.setTitle(resultSet.getString("title"));
+                quest.setTitle(resultSet.getString("name"));
                 quest.setLevel(resultSet.getInt("level"));
                 quest.setMaxPeople(resultSet.getInt("max_people"));
                 quests.add(quest);
@@ -118,7 +126,21 @@ public class QuestDAOImpl extends AbstractDAOImpl implements QuestDAO {
     }
 
     @Override
-    public void initializeAuthorQuest(Quest quest) {
-
+    public void read(final Quest quest)
+            throws ConstantException {
+        try(PreparedStatement statement
+                    = getConnection().prepareStatement(DB_FIND_BY_ID)) {
+            statement.setInt(1, quest.getId());
+            ResultSet resultSet = statement.executeQuery();
+            if(resultSet.next()) {
+                quest.setTitle(resultSet.getString("title"));
+                quest.setLevel(resultSet.getInt("level"));
+                quest.setMaxPeople(resultSet.getInt("max_people"));
+            }
+        } catch(SQLException e) {
+            LOGGER.error("It is impossible to turn off " +
+                    "autocommiting for database connection", e);
+            throw new ConstantException(e);
+        }
     }
 }

@@ -52,7 +52,6 @@ public class ControllerServlet extends HttpServlet {
                                 final HttpServletResponse response)
             throws ServletException, IOException, ConstantException, SQLException, ClassNotFoundException {
         request.setCharacterEncoding("UTF-8");
-
         Action action = new Action();
         ActionCommand actionCommand
                 = new ActionManager().getActionCommand(action, request);
@@ -63,11 +62,6 @@ public class ControllerServlet extends HttpServlet {
             LOGGER.debug(String.format("Request for URI \"%s\" id redirected "
                     + "to URI \"%s\"", requestedUri, redirectedUri));
             response.sendRedirect(redirectedUri);
-            //response.sendRedirect(redirectedUri);
-            //            request.setAttribute("lst", list);
-//            request.getRequestDispatcher("jsp/profile.jsp").forward(request, response);
-//            request.getSession().setAttribute("hollo", "asdasd");
-            //request.getRequestDispatcher(page).forward(request, response);
         } else {
             PageEnum pageEnum = PageEnum.getEnum(action.getForward());
             assert pageEnum != null;
@@ -76,11 +70,6 @@ public class ControllerServlet extends HttpServlet {
                     + "to JSP \"%s\"", requestedUri, jspPage));
             getServletContext().getRequestDispatcher(jspPage).forward(request,
                     response);
-//
-//            page = ConfigurationManager.getProperty("home");
-//            request.getSession().setAttribute("nullPage",
-//                    MessageManager.getProperty("nullpage"));
-//            response.sendRedirect(request.getContextPath() + page);
         }
     }
 }

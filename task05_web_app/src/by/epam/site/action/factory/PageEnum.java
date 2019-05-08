@@ -8,6 +8,11 @@ public enum PageEnum {
             value = ConfigurationManager.getProperty("signin");
         }
     },
+    REMOVE("/removeUser") {
+        {
+            value = ConfigurationManager.getProperty("removeUser");
+        }
+    },
     SIGNUP("/signup") {
         {
             value = ConfigurationManager.getProperty("signUp");

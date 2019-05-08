@@ -2,9 +2,7 @@ package by.epam.site.dao.daoimpl;
 
 import by.epam.site.dao.daointerfaces.QuestPlaceDAO;
 import by.epam.site.dao.transaction.SqlTransaction;
-import by.epam.site.entity.Image;
-import by.epam.site.entity.Quest;
-import by.epam.site.entity.QuestPlace;
+import by.epam.site.entity.*;
 import by.epam.site.exception.ConstantException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -30,6 +28,7 @@ public class QuestPlaceDAOImpl
     private static final String DB_QUEST_PLACE_UPDATE = "UPDATE `quest_place` "
             + "SET `name` " + "= ?, `address` = ?, `phone` = ?, `image_id` = "
             + "?, `quest_id` = ? WHERE `id` = ?";
+    private static final String DB_SEARCH_BY_TITLE = "SELECT `id`, `address`, `phone`, `image_id`, `quest_id` FROM `quest_place` WHERE `name` = ?";
 
     @Override
     public List<QuestPlace> readAll() throws ConstantException {
@@ -131,6 +130,39 @@ public class QuestPlaceDAOImpl
             LOGGER.error("It is impossible to turn off " +
                     "autocommiting for database connection", e);
             throw new ConstantException(e);
+        }
+    }
+
+    @Override
+    public List<QuestPlace> read(String title) throws ConstantException {
+        try(PreparedStatement statement
+                    = getConnection().prepareStatement(DB_SEARCH_BY_TITLE)) {
+            statement.setString(1, title.trim());
+            ResultSet resultSet = statement.executeQuery();
+            List<QuestPlace> questPlaceList = new ArrayList<>();
+            while (resultSet.next()) {
+                QuestPlace questPlace = new QuestPlace();
+                questPlace.setId(resultSet.getInt("id"));
+                questPlace.setName(title);
+                questPlace.setAddress(resultSet.getString("address"));
+                questPlace.setPhone(resultSet.getString("phone"));
+                int imageId = resultSet.getInt("image_id");
+                if(!resultSet.wasNull()) {
+                    Image image = new Image();
+                    image.setId(imageId);
+                    questPlace.setImage(image);
+                }
+                int questId = resultSet.getInt("quest_id");
+                if(!resultSet.wasNull()) {
+                    Quest quest = new Quest();
+                    quest.setId(questId);
+                    questPlace.setQuest(quest);
+                }
+                questPlaceList.add(questPlace);
+            }
+            return questPlaceList;
+        } catch (SQLException exception) {
+            throw new ConstantException(exception);
         }
     }
 }

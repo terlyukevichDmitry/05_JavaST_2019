@@ -25,4 +25,5 @@ public class Action {
     public void setActionFactory(ActionFactory actionFactory) {
         this.actionFactory = actionFactory;
     }
+
 }

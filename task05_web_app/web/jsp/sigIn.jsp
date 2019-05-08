@@ -15,11 +15,10 @@
         <c:url value="/login.html" var="loginURL"/>
         <form action="${loginURL}" method="post">
             <h2 style="color:white">Log In</h2>
-            <input type="hidden" name="command" value="login" />
             <input type="text" name="login" placeholder="Username" required><br><br>
             <input type="password" name="password" placeholder="Password" required><br><br>
             <input type="reset" value="Reset"><br><br>
-            <a><input type="submit" value="Log in"></a><br>
+            <input type="submit" value="Log in"><br>
             <div style="color:#60c9a8; font-size: 18px;">
                 ${errorLoginPassMessage}
                 ${wrongAction}
@@ -30,11 +29,8 @@
                 <a href="#" style="margin-right: 0; font-size: 13px; font-family: Tahoma, Geneva, sans-serif;">Resent password</a>
             </div><br>
         </form>
-        <p style="text-align: center">Don't have account?</p>
         <c:url value="/signupPath.html" var="signupPathURL"/>
-        <form action="${signupPathURL}" method="post">
-            <a><input type="submit" value="Sign Up"></a>
-        </form>
+        Don't have account?<a href="${signupPathURL}"> Sign Up</a>
     </div>
 </body>
 </html>

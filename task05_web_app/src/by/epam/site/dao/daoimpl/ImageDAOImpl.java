@@ -3,6 +3,7 @@ package by.epam.site.dao.daoimpl;
 import by.epam.site.dao.daointerfaces.ImageDAO;
 import by.epam.site.dao.transaction.SqlTransaction;
 import by.epam.site.entity.Image;
+import by.epam.site.entity.Quest;
 import by.epam.site.exception.ConstantException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -26,6 +27,8 @@ public class ImageDAOImpl extends AbstractDAOImpl implements ImageDAO {
             + " VALUES (?)";
     private static final String DB_IMAGE_UPDATE = "UPDATE `image` SET " +
             "`filePath` = ? WHERE `id` = ?";
+    private static final String DB_FIND_BY_ID
+            = "SELECT `imageAddress` FROM `image` WHERE `id` = ?";
     @Override
     public List<Image> readAll() throws ConstantException {
         try(Connection connection = getConnection();
@@ -104,5 +107,24 @@ public class ImageDAOImpl extends AbstractDAOImpl implements ImageDAO {
             throw new ConstantException(e);
         }
         return image;
+    }
+
+    @Override
+    public void read(final Image image)
+            throws ConstantException {
+        try(PreparedStatement statement
+                    = getConnection().prepareStatement(DB_FIND_BY_ID)) {
+            statement.setInt(1, image.getId());
+            ResultSet resultSet = statement.executeQuery();
+            if(resultSet.next()) {
+                image.setFilePath(
+                        resultSet.getString("imageAddress"));
+            }
+            System.out.println("image.getFilePath() = " + image.getFilePath());
+        } catch(SQLException e) {
+            LOGGER.error("It is impossible to turn off " +
+                    "autocommiting for database connection", e);
+            throw new ConstantException(e);
+        }
     }
 }

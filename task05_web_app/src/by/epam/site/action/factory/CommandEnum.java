@@ -1,5 +1,8 @@
 package by.epam.site.action.factory;
 
+import by.epam.site.action.admin.PersonShowAction;
+import by.epam.site.action.admin.RemovePersonAction;
+import by.epam.site.action.admin.RemovePersonPathCommand;
 import by.epam.site.action.command.*;
 
 public enum CommandEnum {
@@ -28,12 +31,36 @@ public enum CommandEnum {
             this.command = new SignUpPathCommand();
         }
     },
+    SHOW_USERS("/showUsers") {
+        {
+            this.command = new PersonShowAction();
+        }
+    },
+    REMOVE("/removeUser") {
+        {
+            this.command = new RemovePersonAction();
+        }
+    },
+    SEARCH_BY_PARAMETER("/searchByParameter") {
+        {
+            this.command = new SearchByParameterCommand();
+        }
+    },
+    QUEST_PLACES_PATH("/questPlaces") {
+        {
+            this.command = new QuestPlaceCommand();
+        }
+    },
+    REMOVE_PATH("/removePath") {
+        {
+            this.command = new RemovePersonPathCommand();
+        }
+    },
     SIGNUP("/signup") {
         {
             this.command = new SignUpCommand();
         }
     };
-
     String name;
 
     ActionCommand command;

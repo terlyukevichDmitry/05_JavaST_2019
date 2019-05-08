@@ -11,4 +11,6 @@ public interface QuestPlaceService extends Service {
             SQLException, ClassNotFoundException;
     void save(QuestPlace user) throws ConstantException, ClassNotFoundException;
     void delete(Integer id) throws ClassNotFoundException, ConstantException;
+    void initData(List<QuestPlace> questPlaces) throws ConstantException, SQLException, ClassNotFoundException;
+    List<QuestPlace> findByName(String title) throws ConstantException;
 }

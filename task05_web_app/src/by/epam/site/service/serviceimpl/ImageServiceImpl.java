@@ -1,6 +1,7 @@
 package by.epam.site.service.serviceimpl;
 
 import by.epam.site.dao.daointerfaces.ImageDAO;
+import by.epam.site.dao.daointerfaces.QuestDAO;
 import by.epam.site.entity.Image;
 import by.epam.site.exception.ConstantException;
 import by.epam.site.service.interfaces.ImageService;
@@ -29,5 +30,11 @@ public class ImageServiceImpl extends ServiceImpl implements ImageService {
     public void delete(Integer id) throws ClassNotFoundException, ConstantException {
         ImageDAO dao = transaction.createDaoImpl(ImageDAO.class);
         dao.delete(id);
+    }
+
+    @Override
+    public void read(Image image) throws ConstantException {
+        ImageDAO dao = transaction.createDaoImpl(ImageDAO.class);
+        dao.read(image);
     }
 }

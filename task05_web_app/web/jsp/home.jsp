@@ -59,62 +59,50 @@
                     <a href="#" class="menu_link"><i class="fas fa-home"></i> Home</a>
                     <a href="#" class="menu_link"><i class="fas fa-newspaper"></i> About</a>
                     <a href="#" class="menu_link"><i class="fas fa-phone"></i> Contact</a>
-                    <c:choose>
-                        <c:when test="${user.equals('administrator')}">
-                            <div class="dropdown">
-                                <button class="mainmenubtn">Main Menu</button>
-                                <div class="dropdown-child">
-                                    <a href="http://localhost:8080/sigIn/jsp/profile.jsp">Profile</a>
-                                    <a href="http://www.вашдомен.ru/page2.html">Users</a>
-                                    <input type="hidden" name="command" value="logout" />
-                                    <c:url value="/logout.html" var="logout"/>
-                                    <form action="${logout}" method="post">
-                                    <a><input type="submit" value="Log out"></a>
-                                    </form>
-                                </div>
-                            </div>
-                        </c:when>
-                        <c:when test="${user.equals('client')}">
-                            <div class="dropdown">
-                                <button class="mainmenubtn">Main Menu</button>
-                                <div class="dropdown-child">
-                                    <a href="http://localhost:8080/sigIn/jsp/profile.jsp">Profile</a>
-                                    <a href="http://www.вашдомен.ru/page2.html">Users</a>
-                                    <input type="hidden" name="command" value="logout" />
-                                    <c:url value="/logout.html" var="logout"/>
-                                    <form action="${logout}" method="post">
-                                        <a><input type="submit" value="Log out"></a>
-                                    </form>
-                                </div>
-                            </div>
-                        </c:when>
-                        <c:otherwise>
-                                <c:url value="/signIn.html" var="signInURL"/>
-                                <form action="${signInURL}" method="post">
-                                    <a><input type="submit" value="Log in" class="menu_link"></a>
-                                </form>
-                        </c:otherwise>
-                    </c:choose>
                 </div>
+                <c:choose>
+                    <c:when test="${user.equals('administrator')}">
+                        <div class="dropdown">
+                            <button class="mainmenubtn">Main Menu</button>
+                            <div class="dropdown-child">
+                                <form>
+                                    <a href="http://localhost:8080/sigIn/jsp/profile.jsp">Profile</a>
+                                </form>
+                                <c:url value="/showUsers.html" var="searchUserURL"/>
+                                <a href="${searchUserURL}">Users</a>
+                                <c:url value="/removePath.html" var="removeUserURL"/>
+                                <a href="${removeUserURL}">Remove User</a>
+                                <c:url value="/logout.html" var="logout"/>
+                                <a href="${logout}">Log out</a>
+                            </div>
+                        </div>
+                    </c:when>
+                    <c:when test="${user.equals('client')}">
+                        <div class="dropdown">
+                            <button class="mainmenubtn">Main Menu</button>
+                            <div class="dropdown-child">
+                                <a href="http://localhost:8080/sigIn/jsp/profile.jsp">Profile</a>
+                                <a href="http://www.вашдомен.ru/page2.html">Users</a>
+                                <input type="hidden" name="command" value="logout" />
+                                <c:url value="/logout.html" var="logout"/>
+                                <form action="${logout}" method="post">
+                                    <a><input type="submit" value="Log out"></a>
+                                </form>
+                            </div>
+                        </div>
+                    </c:when>
+                    <c:otherwise>
+                        <c:url value="/signIn.html" var="signInURL"/>
+                        <a href="${signInURL}" class="menu_link"><i class="fas fa-sign-in-alt"></i> Log in</a>
+                    </c:otherwise>
+                </c:choose>
             </div>
             <div class="header_slogan">
-                <h1 class="h_slogan">Here you can find the best quests.</h1>
-                <a href="#" class="h_slogan_btn">Best Quests</a>
+                <h1 class="h_slogan">Here you can find the best quests.</h1><br>
+                <c:url value="/questPlaces.html" var="questsURL"/>
+                <a href="${questsURL}" class="h_slogan_btn">Best Quests</a>
             </div>
         </div>
-
-    <%--<br>--%>
-    <%--<br><br>--%>
-    <%--<br><br>--%>
-    <%--<br><br>--%>
-    <%--<br><br>--%>
-    <%--<br><br>--%>
-
-    <div>
-        ${hollo}
-    </div>
-
 </div>
-</form>
 </body>
 </html>

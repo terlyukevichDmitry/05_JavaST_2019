@@ -1,6 +1,7 @@
 package by.epam.site.service.serviceimpl;
 
 import by.epam.site.dao.daointerfaces.QuestDAO;
+import by.epam.site.dao.transaction.SqlTransaction;
 import by.epam.site.entity.Quest;
 import by.epam.site.exception.ConstantException;
 import by.epam.site.service.interfaces.QuestService;
@@ -13,7 +14,14 @@ public class QuestServiceImpl extends ServiceImpl implements QuestService {
     public List<Quest> findAll()
             throws ConstantException, SQLException, ClassNotFoundException {
         QuestDAO dao = transaction.createDaoImpl(QuestDAO.class);
-        return dao.readAll();    }
+        return dao.readAll();
+    }
+
+    @Override
+    public void read(Quest quest) throws ConstantException {
+        QuestDAO dao = transaction.createDaoImpl(QuestDAO.class);
+        dao.read(quest);
+    }
 
     @Override
     public void save(Quest quest)

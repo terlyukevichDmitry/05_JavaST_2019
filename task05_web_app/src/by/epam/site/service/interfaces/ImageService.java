@@ -12,4 +12,6 @@ public interface ImageService extends Service {
     void save(Image usedQuest)
             throws ConstantException, ClassNotFoundException;
     void delete(Integer id) throws ClassNotFoundException, ConstantException;
+    void read(final Image image)
+            throws ConstantException;
 }

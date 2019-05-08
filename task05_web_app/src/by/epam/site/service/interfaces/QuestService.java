@@ -1,5 +1,6 @@
 package by.epam.site.service.interfaces;
 
+import by.epam.site.dao.transaction.SqlTransaction;
 import by.epam.site.entity.Quest;
 import by.epam.site.exception.ConstantException;
 
@@ -11,4 +12,6 @@ public interface QuestService extends Service {
             SQLException, ClassNotFoundException;
     void save(Quest entity) throws ConstantException, ClassNotFoundException;
     void delete(Integer id) throws ClassNotFoundException, ConstantException;
+    void read(final Quest quest)
+            throws ConstantException;
 }

@@ -14,4 +14,5 @@ public interface UserService extends Service {
     User findById(Integer id) throws ConstantException;
     void save(User user) throws ConstantException, ClassNotFoundException;
     void delete(Integer id) throws ClassNotFoundException, ConstantException;
+    User findByLogin(String login) throws ConstantException;
 }

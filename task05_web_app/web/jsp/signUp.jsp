@@ -7,6 +7,7 @@
     <title>My super project!</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <link rel="stylesheet" href="http://localhost:8080/sigIn/css/signup.css" type="text/css"/>
+    <link rel="stylesheet" href="http://localhost:8080/sigIn/css/signin.css" type="text/css"/>
     <link href="https://fonts.googleapis.com/css?family=Play" rel="stylesheet"/>
     <link rel="shortcut icon" href="images/image-icon.ico" type="image/x-icon">
     <style>
@@ -62,7 +63,7 @@
             <input type="text" name="login" placeholder="Username" required><br><br>
             <input type="password" name="password" placeholder="Password" required><br><br>
             <input type="password" name="confirm" placeholder="Confirm Password" required><br><br>
-            <a><input type="submit" value="Sign Up" onclick="myFunction()"></a><br><br>
+            <input type="submit" value="Sign Up" onclick="myFunction()"><br>
             <div id="msg">
                 Congratulations!!! You sign up successfully!!!
             </div><br><br>
@@ -79,11 +80,8 @@
         <div style="color:#60c9a8; font-size: 18px;">
             ${textMessage}
         </div>
-        <p style="text-align: center">Already have account?</p>
         <c:url value="/signIn.html" var="signInURL"/>
-        <form action="${signInURL}" method="post">
-            <a><input type="submit" value="Sign In"></a>
-        </form>
+        Already have account?<a href="${signInURL}"> Sign In</a>
     </div>
 </body>
 </html>

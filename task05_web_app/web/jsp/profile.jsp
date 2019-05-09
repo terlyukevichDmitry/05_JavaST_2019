@@ -104,9 +104,9 @@
                             <small class="label label-warning">Republic of Belarus</small>
                             <p>Put on a happy face!</p>
                             <p class="sosmed-author">
-                                <a href="https://www.instagram.com/dimaterlyuke/"><i style="font-size: 30px;" class="fab fa-instagram" title="Instagram"></i></a>
-                                <a href="https://ask.fm/dterlyukevich?utm_source=vk_share_pr"><i style="font-size: 30px;" class="far fa-question-circle" title="Ask"></i></a>
-                                <a href="https://vk.com/mtpji1ons"><i style="font-size: 30px;" class="fab fa-vk" title="VK"></i></a>
+                                <a href=""><i style="font-size: 30px;" class="fab fa-instagram" title="Instagram"></i></a>
+                                <a href=""><i style="font-size: 30px;" class="far fa-question-circle" title="Ask"></i></a>
+                                <a href=""><i style="font-size: 30px;" class="fab fa-vk" title="VK"></i></a>
                             </p>
                         </div>
                     </div>
@@ -167,7 +167,6 @@
                                     </div>
                                 </form>
                             </div>
-                            </form>
                         </div>
                     </div>
                 </div>

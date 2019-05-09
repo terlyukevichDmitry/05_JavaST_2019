@@ -32,28 +32,29 @@ public class ChangeParameterAction implements ActionCommand {
         ServiceFactory factory = new ServiceFactoryImpl(new SqlTransactionFactoryImpl());
         ClientService service = factory.getService(ClientService.class);
         Client client = service.findById(user.getId());
-        if (phone != null) {
-            client.setPhone(phone);
-        }
-        if (email != null) {
+//        if (!phone.equals("")) {
+//            client.setPhone(phone);
+//        }
+//        if (!phone.equals("")) {
             client.setEmail(email);
-        }
-        if (patronymic != null) {
-            client.setPatronymic(patronymic);
-        }
-        if (surname != null) {
-            client.setSurname(surname);
-        }
-        if (name != null) {
-            client.setName(name);
-        }
-        if (dateOfBirth != null) {
-            Date date = Date.valueOf(dateOfBirth);
-            LocalDate localDate
-                    = new java.sql.Date(date.getTime()).toLocalDate();
-            client.setDateOfBirth(localDate);
-        }
+//        }
+//        if (!phone.equals("")) {
+//            client.setPatronymic(patronymic);
+//        }
+//        if (!phone.equals("")) {
+//            client.setSurname(surname);
+//        }
+//        if (!phone.equals("")) {
+//            client.setName(name);
+//        }
+//        if (!phone.equals("")) {
+//            Date date = Date.valueOf(dateOfBirth);
+//            LocalDate localDate
+//                    = new java.sql.Date(date.getTime()).toLocalDate();
+//            client.setDateOfBirth(localDate);
+//        }
         service.save(client);
+        request.getSession().setAttribute("client", service.findById(client.getId()));
         return ConfigurationManager.getProperty("profilePath");
     }
 }

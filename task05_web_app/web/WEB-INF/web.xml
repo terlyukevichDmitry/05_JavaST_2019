@@ -69,5 +69,4 @@
         <url-pattern>/removeUser</url-pattern>
         <url-pattern>/changeValue</url-pattern>
     </filter-mapping>
-
 </web-app>

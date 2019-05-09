@@ -16,7 +16,7 @@ public class UsedQuestServiceImpl extends ServiceImpl implements UsedQuestServic
     }
 
     @Override
-    public void save(UsedQuest usedQuest) throws ConstantException, ClassNotFoundException {
+    public void save(UsedQuest usedQuest) throws ConstantException, ClassNotFoundException, SQLException {
         UsedQuestDAO dao = transaction.createDaoImpl(UsedQuestDAO.class);
         if(usedQuest.getId() != null) {
             dao.update(usedQuest, transaction);

@@ -11,6 +11,6 @@ public interface UserDAO extends DaoPattern<User> {
 
     User read(String login, String password) throws ConstantException;
     User read(Integer id) throws ConstantException;
-    User read(String login, SqlTransaction transaction)
+    User read(String login)
             throws ConstantException;
 }

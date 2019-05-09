@@ -25,7 +25,7 @@ public class QuestServiceImpl extends ServiceImpl implements QuestService {
 
     @Override
     public void save(Quest quest)
-            throws ConstantException, ClassNotFoundException {
+            throws ConstantException, ClassNotFoundException, SQLException {
         QuestDAO dao = transaction.createDaoImpl(QuestDAO.class);
         if(quest.getId() != null) {
             dao.update(quest, transaction);

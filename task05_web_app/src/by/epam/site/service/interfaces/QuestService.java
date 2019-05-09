@@ -10,7 +10,7 @@ import java.util.List;
 public interface QuestService extends Service {
     List<Quest> findAll() throws ConstantException,
             SQLException, ClassNotFoundException;
-    void save(Quest entity) throws ConstantException, ClassNotFoundException;
+    void save(Quest entity) throws ConstantException, ClassNotFoundException, SQLException;
     void delete(Integer id) throws ClassNotFoundException, ConstantException;
     void read(final Quest quest)
             throws ConstantException;

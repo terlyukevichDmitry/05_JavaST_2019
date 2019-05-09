@@ -7,7 +7,6 @@
     <title>My super project!</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <link rel="stylesheet" href="http://localhost:8080/sigIn/css/signup.css" type="text/css"/>
-    <link rel="stylesheet" href="http://localhost:8080/sigIn/css/signin.css" type="text/css"/>
     <link href="https://fonts.googleapis.com/css?family=Play" rel="stylesheet"/>
     <link rel="shortcut icon" href="images/image-icon.ico" type="image/x-icon">
     <style>
@@ -57,12 +56,24 @@
 </head>
 <body>
     <div class="signUp">
-        <c:url value="/signup.html" var="signupURL"/>
+        <c:url value="/signup" var="signupURL"/>
         <form action="${signupURL}" method="post">
             <h2 style="color: #ffffff;">Sign Up</h2>
-            <input type="text" name="login" placeholder="Username" required><br><br>
-            <input type="password" name="password" placeholder="Password" required><br><br>
-            <input type="password" name="confirm" placeholder="Confirm Password" required><br><br>
+            <div class="block-left">
+                <input type="text" name="name" placeholder="First name" required><br><br><br>
+                <input type="text" name="email" placeholder="@mail" required><br><br><br>
+                <input type="text" name="login" placeholder="Username" required>
+            </div>
+            <div class="block-right">
+                <input type="text" name="surname" placeholder="Second name" required><br><br><br>
+                <input type="date" name="dateOfBirth" placeholder="Write date of birth" required><br><br><br>
+                <input type="password" name="password" placeholder="Password" required>
+            </div>
+            <div class="block-op">
+                <input type="text" name="patronymic" placeholder="Patronymic" required><br><br><br>
+                <input type="text" name="phone" placeholder="Phone number" required><br><br><br>
+                <input type="password" name="confirm" placeholder="Confirm Password" required>
+            </div>
             <input type="submit" value="Sign Up" onclick="myFunction()"><br>
             <div id="msg">
                 Congratulations!!! You sign up successfully!!!
@@ -76,12 +87,13 @@
                     }, 3000);
                 }
             </script>
+            <div style="color:#60c9a8; font-size: 18px;">
+                ${textMessage}
+            </div>
+            <c:url value="/signIn" var="signInURL"/>
+            Already have account?<a href="${signInURL}"> Sign In</a>
         </form>
-        <div style="color:#60c9a8; font-size: 18px;">
-            ${textMessage}
-        </div>
-        <c:url value="/signIn.html" var="signInURL"/>
-        Already have account?<a href="${signInURL}"> Sign In</a>
+
     </div>
 </body>
 </html>

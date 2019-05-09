@@ -34,8 +34,7 @@ public class UserDAOImpl extends AbstractDAOImpl implements UserDAO {
             "WHERE `login` = ? AND `password` = ?";
     private static final String DB_FIND_BY_ID = "SELECT `login`, `password`, " +
             "`role` FROM `user` WHERE `id` = ?";
-    private static final String DB_FIND_BY_LOGIN = "SELECT `id`, `password`, " +
-            "`role` FROM `user` WHERE `login` = ?";
+    private static final String DB_FIND_BY_LOGIN = "SELECT id FROM user WHERE login = ?";
 
     @Override
     public List<User> readAll()
@@ -61,8 +60,7 @@ public class UserDAOImpl extends AbstractDAOImpl implements UserDAO {
     @Override
     public void delete(Integer id)
             throws ConstantException {
-        try (Connection connection = getConnection();
-             PreparedStatement statement
+        try (PreparedStatement statement
                      = connection.prepareStatement(DB_DELETE_WITH_ONE_PARAM)) {
             statement.setInt(1, id);
             statement.executeUpdate();
@@ -74,8 +72,7 @@ public class UserDAOImpl extends AbstractDAOImpl implements UserDAO {
     @Override
     public void deleteByRole(final Integer id, final Role role)
             throws ConstantException {
-        try (Connection connection = getConnection();
-             PreparedStatement statement
+        try (PreparedStatement statement
                 = connection.prepareStatement(DB_DELETE)) {
             statement.setInt(1, id);
             statement.setInt(2, role.getIdentity());
@@ -87,13 +84,13 @@ public class UserDAOImpl extends AbstractDAOImpl implements UserDAO {
 
     @Override
     public Integer create(final User user, final SqlTransaction transaction)
-            throws ConstantException {
+            throws ConstantException, SQLException {
         ResultSet resultSet = null;
-        try(Connection connection = getConnection();
-            PreparedStatement statement
+        connection.setAutoCommit(false);
+
+        try(PreparedStatement statement
                     = connection.prepareStatement(DB_USER_CREATE,
                     Statement.RETURN_GENERATED_KEYS)) {
-            connection.setAutoCommit(false);
             statement.setString(1, user.getLogin());
             statement.setString(2, user.getPassword());
             statement.setInt(3, user.getRole().getIdentity());
@@ -118,12 +115,12 @@ public class UserDAOImpl extends AbstractDAOImpl implements UserDAO {
 
     @Override
     public User update(final User user, final SqlTransaction transaction)
-            throws ConstantException {
+            throws ConstantException, SQLException {
+        connection.setAutoCommit(false);
         try(Connection connection = getConnection();
             PreparedStatement statement
                     = connection.prepareStatement(DB_USER_UPDATE,
                     Statement.RETURN_GENERATED_KEYS)) {
-            connection.setAutoCommit(false);
             statement.setString(1, user.getLogin());
             statement.setString(2, user.getPassword());
             statement.setInt(3, user.getRole().getIdentity());
@@ -199,11 +196,9 @@ public class UserDAOImpl extends AbstractDAOImpl implements UserDAO {
     }
 
     @Override
-    public User read(final String login,
-                     final SqlTransaction transaction) throws ConstantException {
+    public User read(final String login) throws ConstantException {
         try(PreparedStatement statement
                     = getConnection().prepareStatement(DB_FIND_BY_LOGIN)) {
-            connection.setAutoCommit(false);
             statement.setString(1, login);
             ResultSet resultSet = statement.executeQuery();
             User user = null;
@@ -211,15 +206,10 @@ public class UserDAOImpl extends AbstractDAOImpl implements UserDAO {
                 user = new User();
                 user.setId(resultSet.getInt("id"));
                 user.setLogin(login);
-                user.setPassword(resultSet.getString("password"));
-                user.setRole(Role.getByIdentity(
-                        resultSet.getInt("role")));
             }
             resultSet.close();
-            transaction.commit();
             return user;
         } catch(SQLException e) {
-            transaction.rollback();
             LOGGER.error("It is impossible to turn off " +
                     "autocommiting for database connection", e);
             throw new ConstantException(e);

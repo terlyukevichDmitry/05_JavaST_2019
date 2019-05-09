@@ -12,7 +12,7 @@
 </head>
 <body>
 <div class="signIn">
-    <c:url value="/removeUser.html" var="removeURL"/>
+    <c:url value="/removeUser" var="removeURL"/>
     <form action="${removeURL}" method="post">
         <h2 style="color:white">Remove Person</h2>
         <input type="text" name="login" placeholder="Username" required><br><br>
@@ -25,7 +25,7 @@
         </div>
         <br>
     </form>
-    <c:url value="/home.html" var="homeURL"/>
+    <c:url value="/home" var="homeURL"/>
     <a href="${homeURL}" style="text-align: center">Go on home page</a>
 </div>
 </body>

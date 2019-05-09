@@ -121,29 +121,29 @@ public class ReviewDAOImpl extends AbstractDAOImpl implements ReviewDAO {
 
     @Override
     public void initializeClient(Review review) throws ConstantException, ClassNotFoundException {
-        final String DB_CLIENT_SELECT = "SELECT `name`, `surname`, `patronymic`, `years`, `email`, `phone` FROM `client` "
-                + "WHERE `id` = " + review.getClient().getId();
-        try {
-            Connection connection = getConnection();
-            PreparedStatement statement = connection.prepareStatement(DB_CLIENT_SELECT);
-            ResultSet resultSet = statement.executeQuery(DB_CLIENT_SELECT);
-
-            if(resultSet.next()) {
-                review.getClient().setName(resultSet.getString(
-                        "name"));
-                review.getClient().setSurname(resultSet.getString(
-                        "surname"));
-                review.getClient().setPatronymic(resultSet.getString(
-                        "patronymic"));
-                review.getClient().setDate_of_birth(resultSet.getDate(
-                        "date_of_birth"));
-                review.getClient().setEmail(resultSet.getString(
-                        "email"));
-                review.getClient().setPhone(resultSet.getString(
-                        "phone"));
-            }
-        } catch (SQLException e) {
-            throw new ConstantException(e);
-        }
+//        final String DB_CLIENT_SELECT = "SELECT `name`, `surname`, `patronymic`, `years`, `email`, `phone` FROM `client` "
+//                + "WHERE `id` = " + review.getClient().getId();
+//        try {
+//            Connection connection = getConnection();
+//            PreparedStatement statement = connection.prepareStatement(DB_CLIENT_SELECT);
+//            ResultSet resultSet = statement.executeQuery(DB_CLIENT_SELECT);
+//
+//            if(resultSet.next()) {
+//                review.getClient().setName(resultSet.getString(
+//                        "name"));
+//                review.getClient().setSurname(resultSet.getString(
+//                        "surname"));
+//                review.getClient().setPatronymic(resultSet.getString(
+//                        "patronymic"));
+//                review.getClient().setDateOfBirth(resultSet.getDate(
+//                        "date_of_birth"));
+//                review.getClient().setEmail(resultSet.getString(
+//                        "email"));
+//                review.getClient().setPhone(resultSet.getString(
+//                        "phone"));
+//            }
+//        } catch (SQLException e) {
+//            throw new ConstantException(e);
+//        }
     }
 }

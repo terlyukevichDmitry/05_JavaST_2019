@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.text.ParseException;
 
 public class ControllerServlet extends HttpServlet {
     /**
@@ -32,6 +33,8 @@ public class ControllerServlet extends HttpServlet {
             e.printStackTrace();
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
+        } catch (ParseException e) {
+            e.printStackTrace();
         }
     }
 
@@ -45,12 +48,14 @@ public class ControllerServlet extends HttpServlet {
             e.printStackTrace();
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
+        } catch (ParseException e) {
+            e.printStackTrace();
         }
     }
 
     private void processRequest(final HttpServletRequest request,
                                 final HttpServletResponse response)
-            throws ServletException, IOException, ConstantException, SQLException, ClassNotFoundException {
+            throws ServletException, IOException, ConstantException, SQLException, ClassNotFoundException, ParseException {
         request.setCharacterEncoding("UTF-8");
         Action action = new Action();
         ActionCommand actionCommand
@@ -61,7 +66,7 @@ public class ControllerServlet extends HttpServlet {
             String redirectedUri = request.getContextPath() + page;
             LOGGER.debug(String.format("Request for URI \"%s\" id redirected "
                     + "to URI \"%s\"", requestedUri, redirectedUri));
-            response.sendRedirect(redirectedUri);
+            request.getRequestDispatcher(page).forward(request ,response);
         } else {
             PageEnum pageEnum = PageEnum.getEnum(action.getForward());
             assert pageEnum != null;

@@ -13,7 +13,7 @@ public interface DaoPattern<T extends Entity> {
     void delete(Integer id)
             throws ConstantException, ClassNotFoundException;
     Integer create(T entity, SqlTransaction transaction)
-            throws ConstantException, ClassNotFoundException;
+            throws ConstantException, ClassNotFoundException, SQLException;
     T update(T entity, SqlTransaction transaction)
-            throws ConstantException, ClassNotFoundException;
+            throws ConstantException, ClassNotFoundException, SQLException;
 }

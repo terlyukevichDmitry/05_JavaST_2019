@@ -7,31 +7,38 @@
         Sig In!
     </description>
     <display-name>log in</display-name>
-    <welcome-file-list>
-        <welcome-file>/jsp/home.jsp</welcome-file>
-    </welcome-file-list>
     <jsp-config>
         <taglib>
             <taglib-uri>customtags</taglib-uri>
             <taglib-location>/WEB-INF/tld/custom.tld</taglib-location>
         </taglib>
     </jsp-config>
+
     <servlet>
         <servlet-name>ControllerServlet</servlet-name>
         <servlet-class>by.epam.site.servlet.ControllerServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>ControllerServlet</servlet-name>
-        <url-pattern>*.html</url-pattern>
+        <url-pattern>/home</url-pattern>
+        <url-pattern>/signIn</url-pattern>
+        <url-pattern>/questPlaces</url-pattern>
+        <url-pattern>/removePath</url-pattern>
+        <url-pattern>/logout</url-pattern>
+        <url-pattern>/showUsers</url-pattern>
+        <url-pattern>/searchByParameter</url-pattern>
+        <url-pattern>/bookQuest</url-pattern>
+        <url-pattern>/showQuests</url-pattern>
+        <url-pattern>/profile</url-pattern>
+        <url-pattern>/login</url-pattern>
+        <url-pattern>/signupPath</url-pattern>
+        <url-pattern>/signup</url-pattern>
+        <url-pattern>/removeUser</url-pattern>
+        <url-pattern>/changeValue</url-pattern>
     </servlet-mapping>
 
     <error-page>
         <error-code>404</error-code>
-        <location>/jsp/error.jsp</location>
-    </error-page>
-
-    <error-page>
-        <error-code>505</error-code>
         <location>/jsp/error.jsp</location>
     </error-page>
 
@@ -46,7 +53,21 @@
     </filter>
     <filter-mapping>
         <filter-name>UriFilter</filter-name>
-        <url-pattern>/*</url-pattern>
+        <url-pattern>/home</url-pattern>
+        <url-pattern>/signIn</url-pattern>
+        <url-pattern>/questPlaces</url-pattern>
+        <url-pattern>/removePath</url-pattern>
+        <url-pattern>/logout</url-pattern>
+        <url-pattern>/showUsers</url-pattern>
+        <url-pattern>/searchByParameter</url-pattern>
+        <url-pattern>/bookQuest</url-pattern>
+        <url-pattern>/showQuests</url-pattern>
+        <url-pattern>/profile</url-pattern>
+        <url-pattern>/login</url-pattern>
+        <url-pattern>/signupPath</url-pattern>
+        <url-pattern>/signup</url-pattern>
+        <url-pattern>/removeUser</url-pattern>
+        <url-pattern>/changeValue</url-pattern>
     </filter-mapping>
 
 </web-app>

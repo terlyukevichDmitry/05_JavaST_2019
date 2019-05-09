@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="http://localhost:8080/sigIn/css/home/header.css" type="text/css"/>
     <link rel="stylesheet" href="http://localhost:8080/sigIn/css/quest/quest.css" type="text/css"/>
     <link rel="stylesheet" href="http://localhost:8080/sigIn/css/home/base.css" type="text/css"/>
+    <link rel="stylesheet" href="http://bootstraptema.ru/plugins/2015/bootstrap3/bootstrap.min.css" />
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
           integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf"
           crossorigin="anonymous">
@@ -58,34 +59,33 @@
                 <h1 class="logo_title">JukeBOX</h1>
             </div>
             <div class="header_menu">
-                <c:url value="/home.html" var="homeURL"/>
+                <c:url value="/home" var="homeURL"/>
                 <a href="${homeURL}" class="menu_link"><i class="fas fa-home"></i> Home</a>
             </div>
             <c:choose>
-                <c:when test="${user.equals('administrator')}">
+                <c:when test="${user.role.name.equals('administrator')}">
                     <div class="dropdown">
                         <button class="mainmenubtn">Main Menu</button>
                         <div class="dropdown-child">
-                            <c:url value="/profile.html" var="homeURL"/>
+                            <c:url value="/profile" var="homeURL"/>
                             <a href="${homeURL}">Profile</a>
-                            <c:url value="/showUsers.html" var="searchUserURL"/>
+                            <c:url value="/showUsers" var="searchUserURL"/>
                             <a href="${searchUserURL}">Users</a>
-                            <c:url value="/removePath.html" var="removeUserURL"/>
+                            <c:url value="/removePath" var="removeUserURL"/>
                             <a href="${removeUserURL}">Remove User</a>
-                            <c:url value="/showQuests.html" var="showQuestsURL"/>
-                            <a href="${showQuestsURL}">Quests</a>
-                            <c:url value="/logout.html" var="logout"/>
+                            <c:url value="/logout" var="logout"/>
                             <a href="${logout}">Log out</a>
                         </div>
                     </div>
                 </c:when>
-                <c:when test="${user.equals('client')}">
+                <c:when test="${user.role.name.equals('client')}">
                     <div class="dropdown">
                         <button class="mainmenubtn">Main Menu</button>
                         <div class="dropdown-child">
-                            <a href="http://localhost:8080/sigIn/jsp/profile.jsp">Profile</a>
+                            <c:url value="/profile" var="profileURL"/>
+                            <a href="${profileURL}">Profile</a>
                             <input type="hidden" name="command" value="logout" />
-                            <c:url value="/logout.html" var="logout"/>
+                            <c:url value="/logout" var="logout"/>
                             <form action="${logout}" method="post">
                                 <a><input type="submit" value="Log out"></a>
                             </form>
@@ -93,7 +93,7 @@
                     </div>
                 </c:when>
                 <c:otherwise>
-                    <c:url value="/signIn.html" var="signInURL"/>
+                    <c:url value="/signIn" var="signInURL"/>
                     <a href="${signInURL}" class="menu_link"><i class="fas fa-sign-in-alt"></i> Log in</a>
                 </c:otherwise>
             </c:choose>
@@ -113,7 +113,7 @@
                 </div>
                 <div style="text-align: center;">
                     <div class="col-2-3">
-                        <c:url value="/searchByParameter.html" var="searchByParameterURL"/>
+                        <c:url value="/searchByParameter" var="searchByParameterURL"/>
                         <form action="${searchByParameterURL}" method="post">
                         <input type="text" name="searchName" placeholder="Input parameter">
                         <input type="submit" value="Search">
@@ -142,7 +142,7 @@
                 Quest name: <td><c:out value="${ elem.quest.title }"/> </td><br><br>
                 Quest level: <td><c:out value="${ elem.quest.level }"/> </td><br><br>
                 Maximum number of people in this quest: <td><c:out value="${ elem.quest.maxPeople }"/> </td><br><br>
-                <c:url value="/bookQuest.html" var="bookQuestURL"/>
+                <c:url value="/bookQuest" var="bookQuestURL"/>
                 <form action="${bookQuestURL}" method="post">
                 <td><input type="submit" value="Book a quest"></td>
                 </form>

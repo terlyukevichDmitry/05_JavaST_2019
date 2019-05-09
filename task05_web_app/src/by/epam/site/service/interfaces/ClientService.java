@@ -9,7 +9,7 @@ import java.util.List;
 public interface ClientService extends Service {
     List<Client> findAll() throws ConstantException,
             SQLException, ClassNotFoundException;
-    void save(Client user) throws ConstantException, ClassNotFoundException;
+    void save(Client user) throws ConstantException, ClassNotFoundException, SQLException;
     void delete(Integer id) throws ClassNotFoundException, ConstantException;
-
+    Client findById(Integer id) throws ConstantException;
 }

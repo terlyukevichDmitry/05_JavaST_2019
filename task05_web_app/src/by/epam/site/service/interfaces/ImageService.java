@@ -10,7 +10,7 @@ public interface ImageService extends Service {
     List<Image> findAll() throws ConstantException,
             SQLException, ClassNotFoundException;
     void save(Image usedQuest)
-            throws ConstantException, ClassNotFoundException;
+            throws ConstantException, ClassNotFoundException, SQLException;
     void delete(Integer id) throws ClassNotFoundException, ConstantException;
     void read(final Image image)
             throws ConstantException;

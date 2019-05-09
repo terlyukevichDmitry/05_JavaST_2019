@@ -9,14 +9,14 @@ body {
     background: rgba(44, 62, 80, 0.7);
     opacity: 0.75;
     padding: 40px;
-    width: 250px;
+    width: 800px;
     margin: 0 auto;
     margin-top: 90px;
     height: 400px;
 }
 
 form {
-    width: 240px;
+    width: 800px;
     text-align: center;
 }
 
@@ -67,6 +67,30 @@ a:hover {
 ::placeholder {
     color:aliceblue;
     opacity: 0.8;
+}
+
+.block-left {
+    width:33.3%;
+    height:220px;
+    overflow:auto;
+    float:left;
+    margin-bottom: 5px;
+}
+.block-right {
+    width:33.3%;
+    height:220px;
+    overflow:auto;
+    float: left;
+    margin-bottom: 5px;
+
+}
+
+.block-op {
+    width:33.3%;
+    height:220px;
+    overflow:auto;
+    margin-bottom: 5px;
+
 }
 
 

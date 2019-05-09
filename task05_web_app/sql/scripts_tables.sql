@@ -1,6 +1,6 @@
-SELECT `id`, `name`, `surname`, `patronymic`, `date_of_birth`, `email`, `phone` FROM client;
+SELECT `id`, `name`, `surname`, `patronymic`, `dateOfBirth`, `email`, `phone` FROM client;
 
-INSERT INTO `client` (`name`, `surname`, `patronymic`, `date_of_birth`, `email`, `phone`) VALUES (?, ?, ?, ?, ?, ?);
+INSERT INTO `client` (`name`, `surname`, `patronymic`, `dateOfBirth`, `email`, `phone`) VALUES (?, ?, ?, ?, ?, ?);
 
 SELECT `id`, `name`, `level`, `max_people` FROM quest;
 

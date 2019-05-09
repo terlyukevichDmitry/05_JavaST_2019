@@ -12,7 +12,7 @@ public interface UserService extends Service {
     User findByLoginAndPassword(String login, String password)
             throws ConstantException, SQLException, ClassNotFoundException;
     User findById(Integer id) throws ConstantException;
-    void save(User user) throws ConstantException, ClassNotFoundException;
+    void save(User user) throws ConstantException, ClassNotFoundException, SQLException;
     void delete(Integer id) throws ClassNotFoundException, ConstantException;
     User findByLogin(String login) throws ConstantException;
 }

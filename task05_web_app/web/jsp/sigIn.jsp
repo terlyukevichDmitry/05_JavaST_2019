@@ -12,7 +12,7 @@
 </head>
 <body>
     <div class="signIn">
-        <c:url value="/login.html" var="loginURL"/>
+        <c:url value="/login" var="loginURL"/>
         <form action="${loginURL}" method="post">
             <h2 style="color:white">Log In</h2>
             <input type="text" name="login" placeholder="Username" required><br><br>
@@ -29,7 +29,7 @@
                 <a href="#" style="margin-right: 0; font-size: 13px; font-family: Tahoma, Geneva, sans-serif;">Resent password</a>
             </div><br>
         </form>
-        <c:url value="/signupPath.html" var="signupPathURL"/>
+        <c:url value="/signupPath" var="signupPathURL"/>
         Don't have account?<a href="${signupPathURL}"> Sign Up</a>
     </div>
 </body>

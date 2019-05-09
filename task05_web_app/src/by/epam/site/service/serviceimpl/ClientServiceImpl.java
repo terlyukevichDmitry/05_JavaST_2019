@@ -16,7 +16,7 @@ public class ClientServiceImpl extends ServiceImpl implements ClientService {
     }
 
     @Override
-    public void save(Client client) throws ConstantException, ClassNotFoundException {
+    public void save(Client client) throws ConstantException, ClassNotFoundException, SQLException {
         ClientDAO dao = transaction.createDaoImpl(ClientDAO.class);
         if(client.getId() != null) {
             dao.update(client, transaction);
@@ -29,5 +29,11 @@ public class ClientServiceImpl extends ServiceImpl implements ClientService {
     public void delete(Integer id) throws ClassNotFoundException, ConstantException {
         ClientDAO dao = transaction.createDaoImpl(ClientDAO.class);
         dao.delete(id);
+    }
+
+    @Override
+    public Client findById(final Integer id) throws ConstantException {
+        ClientDAO dao = transaction.createDaoImpl(ClientDAO.class);
+        return dao.read(id);
     }
 }

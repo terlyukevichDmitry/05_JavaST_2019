@@ -9,7 +9,7 @@ import java.util.List;
 public interface QuestPlaceService extends Service {
     List<QuestPlace> findAll() throws ConstantException,
             SQLException, ClassNotFoundException;
-    void save(QuestPlace user) throws ConstantException, ClassNotFoundException;
+    void save(QuestPlace user) throws ConstantException, ClassNotFoundException, SQLException;
     void delete(Integer id) throws ClassNotFoundException, ConstantException;
     void initData(List<QuestPlace> questPlaces) throws ConstantException, SQLException, ClassNotFoundException;
     List<QuestPlace> findByName(String title) throws ConstantException;

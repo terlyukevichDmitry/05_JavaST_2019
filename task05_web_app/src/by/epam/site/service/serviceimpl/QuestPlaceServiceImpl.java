@@ -21,7 +21,7 @@ public class QuestPlaceServiceImpl
 
     @Override
     public void save(QuestPlace questPlace) throws ConstantException,
-            ClassNotFoundException {
+            ClassNotFoundException, SQLException {
         QuestPlaceDAO dao = transaction.createDaoImpl(QuestPlaceDAO.class);
         if(questPlace.getId() != null) {
             dao.update(questPlace, transaction);

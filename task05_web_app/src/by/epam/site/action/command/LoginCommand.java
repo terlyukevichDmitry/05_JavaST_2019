@@ -32,8 +32,7 @@ public class LoginCommand implements ActionCommand {
             User user = service.findByLoginAndPassword(login, password);
             if (user != null) {
                 HttpSession httpSession = request.getSession();
-                httpSession.setAttribute("user", login);
-                httpSession.setAttribute("user", user.getRole().getName());
+                httpSession.setAttribute("user", user);
                 return ConfigurationManager.getProperty("home");
             } else {
                 request.setAttribute("errorLoginPassMessage",

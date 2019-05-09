@@ -3,6 +3,7 @@ package by.epam.site.action.factory;
 import by.epam.site.action.admin.PersonShowAction;
 import by.epam.site.action.admin.RemovePersonAction;
 import by.epam.site.action.admin.RemovePersonPathCommand;
+import by.epam.site.action.client.ChangeParameterAction;
 import by.epam.site.action.command.*;
 
 public enum CommandEnum {
@@ -16,6 +17,11 @@ public enum CommandEnum {
             this.command = new LogoutCommand();
         }
     },
+    PROFILE("/profile") {
+        {
+            this.command = new ProfileCommand();
+        }
+    },
     HOME("/home") {
         {
             this.command = new HomeCommand();
@@ -24,6 +30,11 @@ public enum CommandEnum {
     SIGNIN("/signIn") {
         {
             this.command = new SignInPathCommand();
+        }
+    },
+    CHANGE_VALUE("/changeValue") {
+        {
+            this.command = new ChangeParameterAction();
         }
     },
     SIGNUP_PATH("/signupPath") {
@@ -54,6 +65,11 @@ public enum CommandEnum {
     REMOVE_PATH("/removePath") {
         {
             this.command = new RemovePersonPathCommand();
+        }
+    },
+    SLESH("/") {
+        {
+            this.command = new HomeCommand();
         }
     },
     SIGNUP("/signup") {

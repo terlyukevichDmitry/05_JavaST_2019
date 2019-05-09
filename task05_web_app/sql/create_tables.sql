@@ -18,17 +18,24 @@ CREATE TABLE IF NOT EXISTS `client` (
 	`name` varchar(32) NOT NULL ,
 	`surname` varchar(32) NOT NULL ,
 	`patronymic` varchar(64) NOT NULL,
-	`date_of_birth` DATE NOT NULL,
+	`dateOfBirth` DATE NOT NULL,
 	`email` varchar(129) NOT NULL ,
 	`phone` varchar(25) NOT NULL ,
+	`imageAddress` VARCHAR(255) NOT NULL,
 	PRIMARY KEY (`id`)
 );
 
 CREATE TABLE IF NOT EXISTS `quest` (
 	`id` INT(11) NOT NULL AUTO_INCREMENT,
-	`name` varchar(255) NOT NULL ,
+	`title` varchar(255) NOT NULL ,
 	`level` INT(1) NOT NULL ,
 	`max_people` INT(1) NOT NULL ,
+	PRIMARY KEY (`id`)
+);
+
+CREATE TABLE `image` (
+	`id` INT(11) NOT NULL AUTO_INCREMENT,
+	`imageAddress` VARCHAR(255) NOT NULL,
 	PRIMARY KEY (`id`)
 );
 
@@ -59,13 +66,8 @@ CREATE TABLE IF NOT EXISTS `review` (
 	PRIMARY KEY (`id`)
 );
 
-CREATE TABLE `image` (
-	`id` INT(11) NOT NULL AUTO_INCREMENT,
-	`imageAddress` VARCHAR(255) NOT NULL,
-	PRIMARY KEY (`id`)
-);
 
-ALTER TABLE `client` ADD CONSTRAINT `client_fk0` FOREIGN KEY (`id`) REFERENCES `user`(`id`);
+# ALTER TABLE `client` ADD CONSTRAINT `client_fk0` FOREIGN KEY (`id`) REFERENCES `user`(`id`);
 
 ALTER TABLE `quest_place` ADD CONSTRAINT `quest_place_fk0` FOREIGN KEY (`image_id`) REFERENCES `image`(`id`);
 

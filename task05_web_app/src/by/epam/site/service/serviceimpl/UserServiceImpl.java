@@ -36,7 +36,7 @@ public class UserServiceImpl extends ServiceImpl implements UserService {
         return dao.read(identity);
     }
     @Override
-    public void save(User user) throws ConstantException, ClassNotFoundException {
+    public void save(User user) throws ConstantException, ClassNotFoundException, SQLException {
         UserDAO dao = transaction.createDaoImpl(UserDAO.class);
         if(user.getId() != null) {
             if(user.getPassword() != null) {
@@ -55,7 +55,7 @@ public class UserServiceImpl extends ServiceImpl implements UserService {
     @Override
     public User findByLogin(String login) throws ConstantException {
         UserDAO dao = transaction.createDaoImpl(UserDAO.class);
-        return dao.read(login, transaction);
+        return dao.read(login);
     }
 
     @Override

@@ -6,15 +6,15 @@ VALUES
 			 (4, "user3", "HELLOWORLD180420ABCGDEHIMANWHATA", 2);
 
 INSERT INTO `client`
-		(`id`, `name`, `surname`, `patronymic`, `date_of_birth`, `email`, `phone`)
+		(`id`, `name`, `surname`, `patronymic`, `dateOfBirth`, `email`, `phone`, `imageAddress`)
 VALUES
-			 (1, "Dmitry", "Terlyukevich", "Sergeevich", "2005-09-10", "lanselot_2000@mail.ru", "+375298619783"),
-			 (2, "Eugene", "Dragun", "Dmitrievich", "1999-09-10", "zheka@mail.ru", "+375337681345"),
-			 (3, "Ivan", "Ivanov", "Ivanovich", "2001-09-10", "ivan@mail.ru", "+375337431986"),
-			 (4, "Petr", "Petrov", "Petrovich", "2010-09-10", "petrov_forever@mail.ru", "+80295673521");
+			 (1, "Dmitry", "Terlyukevich", "Sergeevich", "2005-09-10", "lanselot_2000@mail.ru", "+375298619783", "images/1.jpg"),
+			 (2, "Eugene", "Dragun", "Dmitrievich", "1999-09-10", "zheka@mail.ru", "+375337681345", "images/1.jpg"),
+			 (3, "Ivan", "Ivanov", "Ivanovich", "2001-09-10", "ivan@mail.ru", "+375337431986", "images/1.jpg"),
+			 (4, "Petr", "Petrov", "Petrovich", "2010-09-10", "petrov_forever@mail.ru", "+80295673521", "images/1.jpg");
 
 INSERT INTO `quest`
-		(`id`, `name`, `level`, `max_people`)
+		(`id`, `title`, `level`, `max_people`)
 VALUES
 			 (1, "first quest", 5, 9),
 			 (2, "second quest", 5, 3),

@@ -10,6 +10,6 @@ import java.util.List;
 public interface ReviewService extends Service {
     List<Review> findAll() throws ConstantException,
             SQLException, ClassNotFoundException;
-    void save(Review entity) throws ConstantException, ClassNotFoundException;
+    void save(Review entity) throws ConstantException, ClassNotFoundException, SQLException;
     void delete(Integer id) throws ClassNotFoundException, ConstantException;
 }

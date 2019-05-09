@@ -12,7 +12,7 @@ public enum Role {
 	}
 
 	public String getName() {
-		return name;
+		return name.toLowerCase();
 	}
 
 	public Integer getIdentity() {

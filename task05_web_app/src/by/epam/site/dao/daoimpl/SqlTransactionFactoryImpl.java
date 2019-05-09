@@ -42,7 +42,6 @@ public class SqlTransactionFactoryImpl implements SqlTransactionFactory {
     public void close() {
         try {
             connection.close();
-            System.out.println("Me Close");
         } catch(SQLException ignored) {}
     }
 

@@ -12,6 +12,7 @@
           integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf"
           crossorigin="anonymous">
     <link rel="shortcut icon" href="images/image-icon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="http://bootstraptema.ru/plugins/2015/bootstrap3/bootstrap.min.css" />
     <style>
         .mainmenubtn {
             background-color: red;
@@ -61,30 +62,29 @@
                     <a href="#" class="menu_link"><i class="fas fa-phone"></i> Contact</a>
                 </div>
                 <c:choose>
-                    <c:when test="${user.equals('administrator')}">
+                    <c:when test="${user.role.name.equals('administrator')}">
                         <div class="dropdown">
                             <button class="mainmenubtn">Main Menu</button>
                             <div class="dropdown-child">
-                                <form>
-                                    <a href="http://localhost:8080/sigIn/jsp/profile.jsp">Profile</a>
-                                </form>
-                                <c:url value="/showUsers.html" var="searchUserURL"/>
+                                <c:url value="/profile" var="profileURL"/>
+                                <a href="${profileURL}">Profile</a>
+                                <c:url value="/showUsers" var="searchUserURL"/>
                                 <a href="${searchUserURL}">Users</a>
-                                <c:url value="/removePath.html" var="removeUserURL"/>
+                                <c:url value="/removePath" var="removeUserURL"/>
                                 <a href="${removeUserURL}">Remove User</a>
-                                <c:url value="/logout.html" var="logout"/>
+                                <c:url value="/logout" var="logout"/>
                                 <a href="${logout}">Log out</a>
                             </div>
                         </div>
                     </c:when>
-                    <c:when test="${user.equals('client')}">
+                    <c:when test="${user.role.name.equals('client')}">
                         <div class="dropdown">
                             <button class="mainmenubtn">Main Menu</button>
                             <div class="dropdown-child">
-                                <a href="http://localhost:8080/sigIn/jsp/profile.jsp">Profile</a>
-                                <a href="http://www.вашдомен.ru/page2.html">Users</a>
+                                <c:url value="/profile" var="profileURL"/>
+                                <a href="${profileURL}">Profile</a>
                                 <input type="hidden" name="command" value="logout" />
-                                <c:url value="/logout.html" var="logout"/>
+                                <c:url value="/logout" var="logout"/>
                                 <form action="${logout}" method="post">
                                     <a><input type="submit" value="Log out"></a>
                                 </form>
@@ -92,14 +92,14 @@
                         </div>
                     </c:when>
                     <c:otherwise>
-                        <c:url value="/signIn.html" var="signInURL"/>
+                        <c:url value="/signIn" var="signInURL"/>
                         <a href="${signInURL}" class="menu_link"><i class="fas fa-sign-in-alt"></i> Log in</a>
                     </c:otherwise>
                 </c:choose>
             </div>
             <div class="header_slogan">
                 <h1 class="h_slogan">Here you can find the best quests.</h1><br>
-                <c:url value="/questPlaces.html" var="questsURL"/>
+                <c:url value="/questPlaces" var="questsURL"/>
                 <a href="${questsURL}" class="h_slogan_btn">Best Quests</a>
             </div>
         </div>

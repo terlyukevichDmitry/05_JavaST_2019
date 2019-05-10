@@ -85,9 +85,7 @@
                                 <a href="${profileURL}">Profile</a>
                                 <input type="hidden" name="command" value="logout" />
                                 <c:url value="/logout" var="logout"/>
-                                <form action="${logout}" method="post">
-                                    <a><input type="submit" value="Log out"></a>
-                                </form>
+                                <a href="${logout}">Log out</a>
                             </div>
                         </div>
                     </c:when>

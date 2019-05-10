@@ -115,12 +115,11 @@ public class ClientDAOImpl extends AbstractDAOImpl implements ClientDAO {
 
     @Override
     public Client update(final Client client, final SqlTransaction transaction)
-            throws ConstantException {
-        try(Connection connection = getConnection();
-            PreparedStatement statement
+            throws ConstantException, SQLException {
+        connection.setAutoCommit(false);
+        try(PreparedStatement statement
                     = connection.prepareStatement(DB_CLIENT_UPDATE,
                     Statement.RETURN_GENERATED_KEYS)) {
-            connection.setAutoCommit(false);
             statement.setString(1, client.getName());
             statement.setString(2, client.getSurname());
             statement.setString(3, client.getPatronymic());

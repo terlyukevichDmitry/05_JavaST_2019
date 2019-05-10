@@ -37,6 +37,11 @@ public enum CommandEnum {
             this.command = new ChangeParameterAction();
         }
     },
+    CHANGE_PASSWORD("/changePassword") {
+        {
+            this.command = new ChangePasswordAction();
+        }
+    },
     SIGNUP_PATH("/signupPath") {
         {
             this.command = new SignUpPathCommand();

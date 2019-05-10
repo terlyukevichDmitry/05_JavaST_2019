@@ -35,6 +35,7 @@
         <url-pattern>/signup</url-pattern>
         <url-pattern>/removeUser</url-pattern>
         <url-pattern>/changeValue</url-pattern>
+        <url-pattern>/changePassword</url-pattern>
     </servlet-mapping>
 
     <error-page>
@@ -68,5 +69,6 @@
         <url-pattern>/signup</url-pattern>
         <url-pattern>/removeUser</url-pattern>
         <url-pattern>/changeValue</url-pattern>
+        <url-pattern>/changePassword</url-pattern>
     </filter-mapping>
 </web-app>

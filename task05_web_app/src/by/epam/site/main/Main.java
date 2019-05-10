@@ -36,10 +36,10 @@ public class Main {
         ServiceFactory factory = new ServiceFactoryImpl(new SqlTransactionFactoryImpl());
         UserService service = factory.getService(UserService.class);
         User user = new User();
-        user.setId(1);
-        user.setLogin("admin");
-        user.setRole(Role.ADMINISTRATOR);
-        user.setPassword("D4842D5376778C931DF35D6D4074442D");
+        user.setId(3);
+        user.setLogin("user2");
+        user.setRole(Role.CLIENT);
+        user.setPassword("BB7FF6177EE612EF9DC6ACD3A9EA7EA9");
         service.save(user);
 
         String st = "BB7FF6177EE612EF9DC6ACD3A9EA7EA9";

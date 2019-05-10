@@ -22,6 +22,38 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
           integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf"
           crossorigin="anonymous">
+    <script type="javascript">
+        $("#elem").show('slow');
+        setTimeout(function() { $("#elem").hide('slow'); }, 2000);
+    </script>
+    <style>
+        .mainmenubtn {
+            background-color: red;
+            color: white;
+            border: none;
+            cursor: pointer;
+            padding:20px;
+            margin-top:20px;
+        }
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+        .dropdown-child {
+            display: none;
+            background-color: black;
+            min-width: 200px;
+        }
+        .dropdown-child a {
+            color: white;
+            padding: 20px;
+            text-decoration: none;
+            display: block;
+        }
+        .dropdown:hover .dropdown-child {
+            display: block;
+        }
+    </style>
 </head>
 <body>
 <div class="header">
@@ -118,6 +150,7 @@
                         <ul id="myTab" class="nav nav-pills">
                             <li class="active"><a href="#detail" data-toggle="tab">About Person</a></li>
                             <li class=""><a href="#contact" data-toggle="tab">Change information about person</a></li>
+                            <li class=""><a href="#data"  data-toggle="tab">Change password</a></li>
                         </ul>
                         <div id="myTabContent" class="tab-content">
                             <hr>
@@ -132,6 +165,7 @@
                                     <tr><td class="active">Person email:</td><td><c:out value="${ elem.email }"/></td></tr>
                                     <tr><td class="active">Person phone number:</td><td><c:out value="${ elem.phone }"/></td></tr>
                                     </tbody>
+                                    <p style="background:#000; color:#fff;" id="elem">Result</p>
                                 </table>
                             </div>
                             <div class="tab-pane fade" id="contact">
@@ -164,6 +198,26 @@
                                     </div>
                                     <div class="form-group">
                                         <input type="submit" class="btn btn-success" data-original-title="" title="" value="Change">
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="tab-pane fade" id="data">
+                                <p></p>
+                                <c:url value="/changePassword" var="changePasswordURL"/>
+                                <form action="${changePasswordURL}" role="form" method="post">
+                                    <div class="form-group">
+                                        <label>Password</label>
+                                        <input type="password" name="changePassword" class="form-control rounded" placeholder="Write new name" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Confirm Password</label>
+                                        <input type="password" name="changeConfirm" class="form-control rounded" placeholder="Write new surname" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="submit" class="btn btn-success" data-original-title="" title="" value="Change">
+                                    </div>
+                                    <div style="color:#60c9a8; font-size: 18px;">
+                                        ${textMessage}
                                     </div>
                                 </form>
                             </div>

@@ -6,6 +6,6 @@ INSERT INTO `user` (
 ) VALUES (
 	1,
 	"admin",
-	"D4842D5376778C931DF35D6D4074442D", /* MD5 хэш пароля "admin" */
+	"BB7FF6177EE612EF9DC6ACD3A9EA7EA9", /* MD5 хэш пароля "admin" */
 	0
 );

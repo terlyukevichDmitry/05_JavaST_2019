@@ -1,6 +1,7 @@
 package by.epam.site.action.command;
 
 import by.epam.site.action.Action;
+import by.epam.site.action.command.commandaction.EmptyCommand;
 
 import javax.servlet.http.HttpServletRequest;
 

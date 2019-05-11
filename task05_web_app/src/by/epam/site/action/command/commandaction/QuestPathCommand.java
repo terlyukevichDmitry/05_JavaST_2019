@@ -1,5 +1,7 @@
-package by.epam.site.action.command;
+package by.epam.site.action.command.commandaction;
 
+import by.epam.site.action.command.ActionCommand;
+import by.epam.site.action.command.ConfigurationManager;
 import by.epam.site.action.factory.JspPage;
 
 import javax.servlet.http.HttpServletRequest;

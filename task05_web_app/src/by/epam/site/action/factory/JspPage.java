@@ -1,7 +1,5 @@
 package by.epam.site.action.factory;
 
-import by.epam.site.action.command.MessageManager;
-
 import javax.servlet.http.HttpServletRequest;
 
 public class JspPage {

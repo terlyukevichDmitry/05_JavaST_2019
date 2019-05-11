@@ -3,6 +3,7 @@ package by.epam.site.servlet;
 import by.epam.site.action.Action;
 import by.epam.site.action.command.ActionCommand;
 import by.epam.site.action.command.ActionManager;
+import by.epam.site.action.command.ConfigurationManager;
 import by.epam.site.action.factory.JspPage;
 import by.epam.site.exception.ConstantException;
 import org.apache.logging.log4j.LogManager;
@@ -28,9 +29,15 @@ public class ControllerServlet extends HttpServlet {
             request.setCharacterEncoding("UTF-8");
             ActionCommand actionCommand = new ActionManager().getPostCommand();
             JspPage jspPage = actionCommand.execute(request);
-            response.addHeader("Expires", "-1");
-            response.addHeader("Pragma", "no-cache");
-            request.getRequestDispatcher(jspPage.getPage()).forward(request, response);
+            if (jspPage.getPage().equals("/logout")) {
+                response.sendRedirect(request.getContextPath()
+                        + "/home");
+                response.addHeader("Expires", "-1");
+                response.addHeader("Pragma", "no-cache");
+            } else {
+                getServletContext().getRequestDispatcher(
+                        jspPage.getPage()).forward(request, response);
+            }
         } catch (ServletException | IOException ignored) { } catch (ConstantException e) {
             e.printStackTrace();
         } catch (SQLException e) {

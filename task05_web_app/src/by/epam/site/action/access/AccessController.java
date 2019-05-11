@@ -2,8 +2,7 @@ package by.epam.site.action.access;
 
 import by.epam.site.entity.Role;
 
-public class Lol {
-
+public class AccessController {
     public Access getAccess(final Role role) {
         Access access;
         switch (role) {

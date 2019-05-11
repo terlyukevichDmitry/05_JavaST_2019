@@ -1,7 +1,7 @@
 package by.epam.site.servlet;
 
 
-import by.epam.site.action.access.Lol;
+import by.epam.site.action.access.AccessController;
 import by.epam.site.action.command.MessageManager;
 import by.epam.site.entity.Role;
 import by.epam.site.entity.User;
@@ -33,7 +33,7 @@ public class SecurityFilter implements Filter {
             user = (User) session.getAttribute("user");
         }
 
-        Lol lol = new Lol();
+        AccessController lol = new AccessController();
         if (lol.getAccess(user.getRole()).checkAccess(path)) {
             chain.doFilter(request, response);
         } else {

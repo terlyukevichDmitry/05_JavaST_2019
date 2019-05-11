@@ -48,7 +48,7 @@
 
     <filter>
         <filter-name>UriFilter</filter-name>
-        <filter-class>by.epam.site.servlet.UrlFilter</filter-class>
+        <filter-class>by.epam.site.servlet.UriFilter</filter-class>
     </filter>
     <filter-mapping>
         <filter-name>UriFilter</filter-name>

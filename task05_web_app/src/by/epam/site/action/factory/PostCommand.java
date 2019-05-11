@@ -1,7 +1,7 @@
 package by.epam.site.action.factory;
 
 import by.epam.site.action.admin.RemovePersonAction;
-import by.epam.site.action.client.ChangeParameterAction;
+import by.epam.site.action.command.commandaction.*;
 import by.epam.site.action.command.*;
 
 public enum PostCommand {

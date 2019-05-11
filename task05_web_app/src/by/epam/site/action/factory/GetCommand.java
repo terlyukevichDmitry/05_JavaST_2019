@@ -2,6 +2,10 @@ package by.epam.site.action.factory;
 
 import by.epam.site.action.admin.PersonShowAction;
 import by.epam.site.action.command.*;
+import by.epam.site.action.command.commandaction.CreatePersonCommand;
+import by.epam.site.action.command.commandaction.LogoutCommand;
+import by.epam.site.action.command.commandaction.ProfileCommand;
+import by.epam.site.action.command.commandaction.QuestsCommand;
 import by.epam.site.action.command.direction.*;
 
 public enum GetCommand {

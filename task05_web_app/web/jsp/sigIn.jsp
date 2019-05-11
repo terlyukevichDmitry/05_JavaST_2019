@@ -24,15 +24,12 @@
             <input type="password" name="password" placeholder="Password" required><br><br>
             <input type="reset" value="Reset"><br><br>
             <input type="submit" value="Log in"><br>
-            <div style="color:#60c9a8; font-size: 18px;">
+            <div style="color:red; font-size: 18px;">
                 ${errorLoginPassMessage}
                 ${wrongAction}
                 ${nullPage}
             </div>
             <br>
-            <div class="container">
-                <a href="#" style="margin-right: 0; font-size: 13px; font-family: Tahoma, Geneva, sans-serif;">Resent password</a>
-            </div><br>
         </form>
         <c:url value="/signup" var="signupURL"/>
         Don't have account?<a href="${signupURL}"> Sign Up</a>

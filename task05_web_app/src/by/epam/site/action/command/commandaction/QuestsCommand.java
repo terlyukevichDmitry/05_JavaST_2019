@@ -1,6 +1,8 @@
-package by.epam.site.action.command;
+package by.epam.site.action.command.commandaction;
 
 import by.epam.site.action.admin.RemovePersonAction;
+import by.epam.site.action.command.ActionCommand;
+import by.epam.site.action.command.ConfigurationManager;
 import by.epam.site.action.factory.JspPage;
 import by.epam.site.dao.daoimpl.SqlTransactionFactoryImpl;
 import by.epam.site.entity.QuestPlace;

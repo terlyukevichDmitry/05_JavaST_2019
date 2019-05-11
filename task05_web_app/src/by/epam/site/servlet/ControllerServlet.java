@@ -52,7 +52,6 @@ public class ControllerServlet extends HttpServlet {
             JspPage jspPage = actionCommand.execute(request);
             response.sendRedirect(request.getContextPath()
                     + jspPage.getPage());
-
         } catch (IOException ignored) { } catch (ConstantException e) {
             e.printStackTrace();
         } catch (ParseException e) {

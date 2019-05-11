@@ -1,6 +1,8 @@
 package by.epam.site.servlet;
 
 
+import by.epam.site.action.access.Lol;
+import by.epam.site.action.command.MessageManager;
 import by.epam.site.entity.Role;
 import by.epam.site.entity.User;
 
@@ -18,20 +20,28 @@ public class SecurityFilter implements Filter {
 
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-//        HttpServletRequest httpRequest = (HttpServletRequest)request;
-//        HttpServletResponse httpResponse = (HttpServletResponse)response;
-//        HttpSession session = httpRequest.getSession(false);
-//
-//
-//        User user = null;
-//        if(session != null) {
-//            user = (User)session.getAttribute("user");
-//        } else {
-//            user = new User();
-//            user.setRole(Role.UNAUTHORIZED);
-//        }
-//        System.out.println(user.getRole());
-        chain.doFilter(request, response);
+        HttpServletRequest httpRequest = (HttpServletRequest)request;
+        HttpServletResponse httpResponse = (HttpServletResponse)response;
+        String path = (String) request.getAttribute("action");
+
+        HttpSession session = httpRequest.getSession(false);
+        User user = null;
+        if (session == null || session.getAttribute("user") == null) {
+            user = new User();
+            user.setRole(Role.UNAUTHORIZED);
+        } else {
+            user = (User) session.getAttribute("user");
+        }
+
+        Lol lol = new Lol();
+        if (lol.getAccess(user.getRole()).checkAccess(path)) {
+            chain.doFilter(request, response);
+        } else {
+            httpRequest.getSession().setAttribute("errorLoginPassMessage",
+                    MessageManager.getProperty("access"));
+            httpResponse.sendRedirect(httpRequest.getContextPath()
+                    + "/login");
+        }
     }
 
     @Override

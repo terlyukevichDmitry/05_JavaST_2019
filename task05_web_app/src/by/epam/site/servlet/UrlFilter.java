@@ -7,12 +7,12 @@ import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 
-public class UriFilter implements Filter {
+public class UrlFilter implements Filter {
     /**
      * Logger for recording a program state.
      */
     private static final Logger LOGGER
-            = LogManager.getLogger(UriFilter.class);
+            = LogManager.getLogger(UrlFilter.class);
 
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {

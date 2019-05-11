@@ -1,6 +1,7 @@
 package by.epam.site.action.command;
 
 import by.epam.site.action.admin.RemovePersonAction;
+import by.epam.site.action.factory.JspPage;
 import by.epam.site.dao.daoimpl.SqlTransactionFactoryImpl;
 import by.epam.site.entity.QuestPlace;
 import by.epam.site.exception.ConstantException;
@@ -15,7 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.sql.SQLException;
 import java.util.List;
 
-public class QuestPlaceCommand implements ActionCommand {
+public class QuestsCommand implements ActionCommand {
     /**
      * Logger for recording a program state.
      */
@@ -23,8 +24,9 @@ public class QuestPlaceCommand implements ActionCommand {
             = LogManager.getLogger(RemovePersonAction.class);
 
     @Override
-    public String execute(HttpServletRequest request) throws ConstantException,
+    public JspPage execute(HttpServletRequest request) throws ConstantException,
             ClassNotFoundException, SQLException {
+        JspPage jspPage = new JspPage();
         ServiceFactory factory = new ServiceFactoryImpl(
                 new SqlTransactionFactoryImpl());
         QuestPlaceService service
@@ -35,6 +37,8 @@ public class QuestPlaceCommand implements ActionCommand {
             request.getSession().setAttribute(
                     "questPlaces", questPlaces);
         }
-        return ConfigurationManager.getProperty("questPath");
+        jspPage.setPage(
+                ConfigurationManager.getProperty("questPath"));
+        return jspPage;
     }
 }

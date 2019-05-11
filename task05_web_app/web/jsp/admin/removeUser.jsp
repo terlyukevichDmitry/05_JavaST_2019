@@ -1,12 +1,17 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" isELIgnored="false" %>
+<c:set var="url">${pageContext.request.requestURL}</c:set>
+<c:set var="ctx"
+       value="${fn:substring(url, 0, fn:length(url) - fn:length(pageContext.request.requestURI))}${pageContext.request.contextPath}"/>
+
 <!DOCTYPE html>
 <html>
 <head>
     <title>My super project!</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <link rel="stylesheet" href="http://localhost:8080/sigIn/css/signin.css" type="text/css"/>
+    <link rel="stylesheet" href="${ctx}/css/signin.css" type="text/css"/>
     <link href="https://fonts.googleapis.com/css?family=Play" rel="stylesheet"/>
     <link rel="shortcut icon" href="images/image-icon.ico" type="image/x-icon">
 </head>
@@ -19,9 +24,7 @@
         <input type="reset" value="Reset"><br><br>
         <a><input type="submit" value="Remove"></a><br>
         <div style="color:#60c9a8; font-size: 18px;">
-            ${errorLoginPassMessage}
-            ${wrongAction}
-            ${nullPage}
+            ${textMessage}
         </div>
         <br>
     </form>

@@ -1,14 +1,19 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" isELIgnored="false" %>
+<c:set var="url">${pageContext.request.requestURL}</c:set>
+<c:set var="ctx"
+       value="${fn:substring(url, 0, fn:length(url) - fn:length(pageContext.request.requestURI))}${pageContext.request.contextPath}"/>
 <!DOCTYPE html>
 <html>
 <head>
     <title>My super project!</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <link rel="stylesheet" href="http://localhost:8080/sigIn/css/signin.css" type="text/css"/>
+    <link rel="stylesheet" href="${ctx}/css/signin.css" type="text/css"/>
     <link href="https://fonts.googleapis.com/css?family=Play" rel="stylesheet"/>
     <link rel="shortcut icon" href="images/image-icon.ico" type="image/x-icon">
+
 </head>
 <body>
     <div class="signIn">
@@ -29,8 +34,8 @@
                 <a href="#" style="margin-right: 0; font-size: 13px; font-family: Tahoma, Geneva, sans-serif;">Resent password</a>
             </div><br>
         </form>
-        <c:url value="/signupPath" var="signupPathURL"/>
-        Don't have account?<a href="${signupPathURL}"> Sign Up</a>
+        <c:url value="/signup" var="signupURL"/>
+        Don't have account?<a href="${signupURL}"> Sign Up</a>
     </div>
 </body>
 </html>

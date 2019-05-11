@@ -1,15 +1,19 @@
 <%@ taglib prefix="ctg" uri="customtags" %>
 <%@ taglib prefix="m" uri="customMenu" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core_1_1" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@page isELIgnored="false" %>
+<c:set var="url">${pageContext.request.requestURL}</c:set>
+<c:set var="ctx"
+       value="${fn:substring(url, 0, fn:length(url) - fn:length(pageContext.request.requestURI))}${pageContext.request.contextPath}"/>
 <!DOCTYPE html>
 <html lang="en_US">
 <head>
     <title>JukeBox Quest</title>
     <meta charset="utf-8">
-    <link rel="stylesheet" href="http://localhost:8080/sigIn/css/home/header.css" type="text/css"/>
-    <link rel="stylesheet" href="http://localhost:8080/sigIn/css/quest/quest.css" type="text/css"/>
-    <link rel="stylesheet" href="http://localhost:8080/sigIn/css/home/base.css" type="text/css"/>
+    <link rel="stylesheet" href="${ctx}/css/home/header.css" type="text/css"/>
+    <link rel="stylesheet" href="${ctx}/css/quest/quest.css" type="text/css"/>
+    <link rel="stylesheet" href="${ctx}/css/home/base.css" type="text/css"/>
     <link rel="stylesheet" href="http://bootstraptema.ru/plugins/2015/bootstrap3/bootstrap.min.css" />
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
           integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf"
@@ -71,10 +75,10 @@
                             <a href="${homeURL}">Profile</a>
                             <c:url value="/showUsers" var="searchUserURL"/>
                             <a href="${searchUserURL}">Users</a>
-                            <c:url value="/removePath" var="removeUserURL"/>
+                            <c:url value="/removeUser" var="removeUserURL"/>
                             <a href="${removeUserURL}">Remove User</a>
-                            <c:url value="/logout" var="logout"/>
-                            <a href="${logout}">Log out</a>
+                            <c:url value="/logout" var="logoutURL"/>
+                            <a href="${logoutURL}">Log out</a>
                         </div>
                     </div>
                 </c:when>
@@ -84,17 +88,14 @@
                         <div class="dropdown-child">
                             <c:url value="/profile" var="profileURL"/>
                             <a href="${profileURL}">Profile</a>
-                            <input type="hidden" name="command" value="logout" />
-                            <c:url value="/logout" var="logout"/>
-                            <form action="${logout}" method="post">
-                                <a><input type="submit" value="Log out"></a>
-                            </form>
+                            <c:url value="/logout" var="logoutURL"/>
+                            <a href="${logoutURL}">Log out</a>
                         </div>
                     </div>
                 </c:when>
                 <c:otherwise>
-                    <c:url value="/signIn" var="signInURL"/>
-                    <a href="${signInURL}" class="menu_link"><i class="fas fa-sign-in-alt"></i> Log in</a>
+                    <c:url value="/login" var="loginURL"/>
+                    <a href="${loginURL}" class="menu_link"><i class="fas fa-sign-in-alt"></i> Log in</a>
                 </c:otherwise>
             </c:choose>
         </div>
@@ -115,7 +116,7 @@
                     <div class="col-2-3">
                         <c:url value="/searchByParameter" var="searchByParameterURL"/>
                         <form action="${searchByParameterURL}" method="post">
-                        <input type="text" name="searchName" placeholder="Input parameter">
+                        <input type="text" name="searchName" placeholder="Input parameter" required>
                         <input type="submit" value="Search">
                         </form>
                     </div>
@@ -138,7 +139,7 @@
             <div class="col-2-3">
                 Quest place name: <td><c:out value="${ elem.name }"/> </td><br><br>
                 Phone number: <td><c:out value="${ elem.phone }"/> </td><br><br>
-                Quest address: <td><c:out value="${ elem.address }"/> </td><br><br>
+                Quest address: <td> <c:out value="${ elem.address }"/> </td><br><br>
                 Quest name: <td><c:out value="${ elem.quest.title }"/> </td><br><br>
                 Quest level: <td><c:out value="${ elem.quest.level }"/> </td><br><br>
                 Maximum number of people in this quest: <td><c:out value="${ elem.quest.maxPeople }"/> </td><br><br>

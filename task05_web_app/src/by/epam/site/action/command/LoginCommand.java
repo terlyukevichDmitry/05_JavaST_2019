@@ -1,5 +1,6 @@
 package by.epam.site.action.command;
 
+import by.epam.site.action.factory.JspPage;
 import by.epam.site.dao.daoimpl.SqlTransactionFactoryImpl;
 import by.epam.site.entity.User;
 import by.epam.site.exception.ConstantException;
@@ -22,26 +23,26 @@ public class LoginCommand implements ActionCommand {
     private static final Logger LOGGER =
             LogManager.getLogger(LoginCommand.class);
     @Override
-    public String execute(HttpServletRequest request)
+    public JspPage execute(HttpServletRequest request)
             throws ConstantException, SQLException, ClassNotFoundException {
+        JspPage jspPage = new JspPage();
         String login = request.getParameter(PARAM_NAME_LOGIN);
         String password = request.getParameter(PARAM_NAME_PASSWORD);
         if (login != null && password != null) {
-            ServiceFactory factory = new ServiceFactoryImpl(new SqlTransactionFactoryImpl());
+            ServiceFactory factory = new ServiceFactoryImpl(
+                    new SqlTransactionFactoryImpl());
             UserService service = factory.getService(UserService.class);
             User user = service.findByLoginAndPassword(login, password);
             if (user != null) {
                 HttpSession httpSession = request.getSession();
                 httpSession.setAttribute("user", user);
-                return ConfigurationManager.getProperty("home");
+                jspPage.setPage("/home");
             } else {
-                request.setAttribute("errorLoginPassMessage",
+                jspPage.setPage("/login?a=b");
+                request.getSession().setAttribute("errorLoginPassMessage",
                         MessageManager.getProperty("loginerror"));
-                LOGGER.info(String.format("user \"%s\" unsuccessfully "
-                                + "tried to log in from %s (%s:%s)", login,
-                        request.getRemoteAddr(), request.getRemoteHost(),
-                        request.getRemotePort()));
             }
+            return jspPage;
         }
         return null;
     }

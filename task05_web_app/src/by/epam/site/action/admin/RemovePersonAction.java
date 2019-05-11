@@ -3,6 +3,7 @@ package by.epam.site.action.admin;
 import by.epam.site.action.command.ActionCommand;
 import by.epam.site.action.command.ConfigurationManager;
 import by.epam.site.action.command.MessageManager;
+import by.epam.site.action.factory.JspPage;
 import by.epam.site.dao.daoimpl.SqlTransactionFactoryImpl;
 import by.epam.site.entity.User;
 import by.epam.site.exception.ConstantException;
@@ -25,28 +26,32 @@ public class RemovePersonAction implements ActionCommand {
 
     private static final String PARAM_NAME_LOGIN = "login";
     @Override
-    public String execute(HttpServletRequest request)
+    public JspPage execute(HttpServletRequest request)
             throws ConstantException, ClassNotFoundException {
+        JspPage jspPage = new JspPage();
+        jspPage.setTagName("errorLoginPassMessage");
         String login = request.getParameter(PARAM_NAME_LOGIN);
-        if (login != null) {
+         if (login != null) {
             ServiceFactory factory = new ServiceFactoryImpl(
                     new SqlTransactionFactoryImpl());
             UserService service = factory.getService(UserService.class);
             User user = service.findByLogin(login);
             if (user != null) {
                 service.delete(user.getId());
-                request.getSession().setAttribute("errorLoginPassMessage",
+                request.getSession().setAttribute("textMessage",
                         MessageManager.getProperty("removeTrue"));
-                return ConfigurationManager.getProperty("removeUser");
+                jspPage.setPage(ConfigurationManager.getProperty("removeUser"));
+                jspPage.setPage("/removeUser");
+                return jspPage;
             } else {
-                request.getSession().setAttribute("errorLoginPassMessage",
+                request.getSession().setAttribute("textMessage",
                         MessageManager.getProperty("loginErrr"));
-                LOGGER.info(String.format("user \"%s\" unsuccessfully "
-                                + "tried to log in from %s (%s:%s)", login,
-                        request.getRemoteAddr(), request.getRemoteHost(),
-                        request.getRemotePort()));
+                jspPage.setPage("/removeUser?a=b");
+                return jspPage;
             }
-        }
-        return null;
+        } else {
+             jspPage.setPage(ConfigurationManager.getProperty("removeUser"));
+             return jspPage;
+         }
     }
 }

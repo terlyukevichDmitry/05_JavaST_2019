@@ -1,12 +1,16 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" isELIgnored="false" %>
+<c:set var="url">${pageContext.request.requestURL}</c:set>
+<c:set var="ctx"
+       value="${fn:substring(url, 0, fn:length(url) - fn:length(pageContext.request.requestURI))}${pageContext.request.contextPath}"/>
 <!DOCTYPE html>
 <html>
 <head>
     <title>My super project!</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <link rel="stylesheet" href="http://localhost:8080/sigIn/css/signup.css" type="text/css"/>
+    <link rel="stylesheet" href="${ctx}/css/signup.css" type="text/css"/>
     <link href="https://fonts.googleapis.com/css?family=Play" rel="stylesheet"/>
     <link rel="shortcut icon" href="images/image-icon.ico" type="image/x-icon">
     <style>
@@ -56,8 +60,8 @@
 </head>
 <body>
     <div class="signUp">
-        <c:url value="/signup" var="signupURL"/>
-        <form action="${signupURL}" method="post">
+        <c:url value="/signup" var="createURL"/>
+        <form action="${createURL}" method="post">
             <h2 style="color: #ffffff;">Sign Up</h2>
             <div class="block-left">
                 <input type="text" name="name" placeholder="First name" required><br><br><br>
@@ -88,10 +92,10 @@
                 }
             </script>
             <div style="color:#60c9a8; font-size: 18px;">
-                ${textMessage}
+                ${createInfo}
             </div>
-            <c:url value="/signIn" var="signInURL"/>
-            Already have account?<a href="${signInURL}"> Sign In</a>
+            <c:url value="/login" var="loginURL"/>
+            Already have account?<a href="${loginURL}"> Sign In</a>
         </form>
 
     </div>

@@ -2,6 +2,7 @@ package by.epam.site.action.admin;
 
 import by.epam.site.action.command.ActionCommand;
 import by.epam.site.action.command.ConfigurationManager;
+import by.epam.site.action.factory.JspPage;
 import by.epam.site.dao.daoimpl.SqlTransactionFactoryImpl;
 import by.epam.site.entity.User;
 import by.epam.site.exception.ConstantException;
@@ -16,13 +17,15 @@ import java.util.List;
 public class PersonShowAction implements ActionCommand {
 
     @Override
-    public String execute(HttpServletRequest request)
+    public JspPage execute(HttpServletRequest request)
             throws ConstantException, SQLException, ClassNotFoundException {
+        JspPage jspPage = new JspPage();
         ServiceFactory factory = new ServiceFactoryImpl(
                 new SqlTransactionFactoryImpl());
         UserService service = factory.getService(UserService.class);
         List<User> users = service.findAll();
         request.getSession().setAttribute("userList", users);
-        return ConfigurationManager.getProperty("showUsers");
+        jspPage.setPage(ConfigurationManager.getProperty("showUsers"));
+        return jspPage;
     }
 }

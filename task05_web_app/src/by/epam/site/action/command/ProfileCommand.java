@@ -1,5 +1,6 @@
 package by.epam.site.action.command;
 
+import by.epam.site.action.factory.JspPage;
 import by.epam.site.dao.daoimpl.SqlTransactionFactoryImpl;
 import by.epam.site.entity.Client;
 import by.epam.site.entity.User;
@@ -12,9 +13,11 @@ import javax.servlet.http.HttpServletRequest;
 
 public class ProfileCommand implements ActionCommand {
     @Override
-    public String execute(HttpServletRequest request) throws ConstantException {
+    public JspPage execute(HttpServletRequest request) throws ConstantException {
 
-        ServiceFactory factory = new ServiceFactoryImpl(new SqlTransactionFactoryImpl());
+        JspPage jspPage = new JspPage();
+        ServiceFactory factory = new ServiceFactoryImpl(
+                new SqlTransactionFactoryImpl());
         ClientService service = factory.getService(ClientService.class);
         User user = (User) request.getSession().getAttribute("user");
         Client client = service.findById(user.getId());
@@ -22,6 +25,8 @@ public class ProfileCommand implements ActionCommand {
             request.getSession().setAttribute(
                     "client", client);
         }
-        return ConfigurationManager.getProperty("profilePath");
+        jspPage.setPage(
+                ConfigurationManager.getProperty("profilePath"));
+        return jspPage;
     }
 }

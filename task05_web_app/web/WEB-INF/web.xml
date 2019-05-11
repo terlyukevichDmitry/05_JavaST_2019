@@ -22,7 +22,7 @@
         <servlet-name>ControllerServlet</servlet-name>
         <url-pattern>/home</url-pattern>
         <url-pattern>/signIn</url-pattern>
-        <url-pattern>/questPlaces</url-pattern>
+        <url-pattern>/quests</url-pattern>
         <url-pattern>/removePath</url-pattern>
         <url-pattern>/logout</url-pattern>
         <url-pattern>/showUsers</url-pattern>
@@ -31,7 +31,7 @@
         <url-pattern>/showQuests</url-pattern>
         <url-pattern>/profile</url-pattern>
         <url-pattern>/login</url-pattern>
-        <url-pattern>/signupPath</url-pattern>
+        <url-pattern>/create</url-pattern>
         <url-pattern>/signup</url-pattern>
         <url-pattern>/removeUser</url-pattern>
         <url-pattern>/changeValue</url-pattern>
@@ -56,7 +56,7 @@
         <filter-name>UriFilter</filter-name>
         <url-pattern>/home</url-pattern>
         <url-pattern>/signIn</url-pattern>
-        <url-pattern>/questPlaces</url-pattern>
+        <url-pattern>/quests</url-pattern>
         <url-pattern>/removePath</url-pattern>
         <url-pattern>/logout</url-pattern>
         <url-pattern>/showUsers</url-pattern>
@@ -65,7 +65,30 @@
         <url-pattern>/showQuests</url-pattern>
         <url-pattern>/profile</url-pattern>
         <url-pattern>/login</url-pattern>
-        <url-pattern>/signupPath</url-pattern>
+        <url-pattern>/create</url-pattern>
+        <url-pattern>/signup</url-pattern>
+        <url-pattern>/removeUser</url-pattern>
+        <url-pattern>/changeValue</url-pattern>
+        <url-pattern>/changePassword</url-pattern>
+    </filter-mapping>
+    <filter>
+        <filter-name>SecurityFilter</filter-name>
+        <filter-class>by.epam.site.servlet.SecurityFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>SecurityFilter</filter-name>
+        <url-pattern>/home</url-pattern>
+        <url-pattern>/signIn</url-pattern>
+        <url-pattern>/quests</url-pattern>
+        <url-pattern>/removePath</url-pattern>
+        <url-pattern>/logout</url-pattern>
+        <url-pattern>/showUsers</url-pattern>
+        <url-pattern>/searchByParameter</url-pattern>
+        <url-pattern>/bookQuest</url-pattern>
+        <url-pattern>/showQuests</url-pattern>
+        <url-pattern>/profile</url-pattern>
+        <url-pattern>/login</url-pattern>
+        <url-pattern>/create</url-pattern>
         <url-pattern>/signup</url-pattern>
         <url-pattern>/removeUser</url-pattern>
         <url-pattern>/changeValue</url-pattern>

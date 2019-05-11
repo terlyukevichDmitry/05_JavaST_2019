@@ -2,6 +2,7 @@ package by.epam.site.action.client;
 
 import by.epam.site.action.command.ActionCommand;
 import by.epam.site.action.command.ConfigurationManager;
+import by.epam.site.action.factory.JspPage;
 import by.epam.site.dao.daoimpl.SqlTransactionFactoryImpl;
 import by.epam.site.entity.Client;
 import by.epam.site.entity.User;
@@ -18,7 +19,7 @@ import java.time.LocalDate;
 
 public class ChangeParameterAction implements ActionCommand {
     @Override
-    public String execute(HttpServletRequest request) throws ConstantException, SQLException, ClassNotFoundException, ParseException {
+    public JspPage execute(HttpServletRequest request) throws ConstantException, SQLException, ClassNotFoundException {
         String name = request.getParameter("changeName");
         String surname = request.getParameter("changeSurname");
         String patronymic = request.getParameter("changePatronymic");
@@ -26,6 +27,7 @@ public class ChangeParameterAction implements ActionCommand {
         String phone = request.getParameter("changePhone");
         String email = request.getParameter("changeEmail");
         User user = (User) request.getSession().getAttribute("user");
+        JspPage jspPage = new JspPage();
 
         ServiceFactory factory = new ServiceFactoryImpl(new SqlTransactionFactoryImpl());
         ClientService service = factory.getService(ClientService.class);
@@ -52,7 +54,9 @@ public class ChangeParameterAction implements ActionCommand {
             client.setDateOfBirth(localDate);
         }
         service.save(client);
-        request.getSession().setAttribute("client", service.findById(client.getId()));
-        return ConfigurationManager.getProperty("profilePath");
+        request.getSession().setAttribute("client",
+                service.findById(client.getId()));
+        jspPage.setPage("/profile");
+        return jspPage;
     }
 }

@@ -19,9 +19,9 @@ CREATE TABLE IF NOT EXISTS `client` (
 	`surname` varchar(32) NOT NULL ,
 	`patronymic` varchar(64) NOT NULL,
 	`dateOfBirth` DATE NOT NULL,
-	`email` varchar(129) NOT NULL ,
+	`email` varchar(254) NOT NULL ,
 	`phone` varchar(25) NOT NULL ,
-	`imageAddress` VARCHAR(255) NOT NULL,
+	`imageAddress` VARCHAR(254) NOT NULL,
 	PRIMARY KEY (`id`)
 );
 
@@ -35,7 +35,7 @@ CREATE TABLE IF NOT EXISTS `quest` (
 
 CREATE TABLE `image` (
 	`id` INT(11) NOT NULL AUTO_INCREMENT,
-	`imageAddress` VARCHAR(255) NOT NULL,
+	`imageAddress` VARCHAR(254) NOT NULL,
 	PRIMARY KEY (`id`)
 );
 

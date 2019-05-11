@@ -6,7 +6,10 @@ import javax.servlet.http.HttpServletRequest;
 
 public class ActionManager {
     public ActionCommand getActionCommand(final Action action,
-                                           final HttpServletRequest request) {
-        return action.getActionFactory().defineCommand(action, request);
+                                          final HttpServletRequest request) {
+        return action.getActionFactory().defineActionCommand(action, request);
+    }
+    public ActionCommand getPostCommand() {
+        return new EmptyCommand();
     }
 }

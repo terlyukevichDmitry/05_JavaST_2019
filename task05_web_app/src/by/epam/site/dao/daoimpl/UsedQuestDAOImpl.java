@@ -8,6 +8,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.sql.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,26 +25,34 @@ public class UsedQuestDAOImpl extends AbstractDAOImpl implements UsedQuestDAO {
 
     private static final String DB_DELETE = "DELETE FROM `used_quest`"
             + " WHERE `id` = ?";
+    private static final String DB_DELETE_BY_PARAMETERS = "DELETE FROM `used_quest`"
+            + " WHERE `id` = ? AND `client_id` = ?";
 
     private static final String DB_USED_QUEST_CREATE = "INSERT INTO "
-            + "`used_quest` (`date`, `client_id`, `used_quest_id`) "
+            + "`used_quest` (`date`, `client_id`, `quest_place_id`) "
             + "VALUES (?, ?, ?)";
 
     private static final String DB_USED_QUEST_UPDATE = "UPDATE `used_quest` "
-            + "SET `date` " + "= ?, `client_id` = ?, `used_quest_id` = ? "
+            + "SET `date` " + "= ?, `client_id` = ?, `quest_place_id` = ? "
             + "WHERE `id` = ?";
+
+    private static final String DB_FIND_BY_CLIENT_ID =
+            "SELECT `id`, `date`, `quest_place_id` FROM `used_quest` WHERE `client_id` = ?";
 
 
     @Override
     public List<UsedQuest> readAll() throws ConstantException {
-        try(Connection connection = getConnection();
-            PreparedStatement statement = connection.prepareStatement(DB_SELECT_ALL);
+        try(PreparedStatement statement
+                    = connection.prepareStatement(DB_SELECT_ALL);
             ResultSet resultSet = statement.executeQuery(DB_SELECT_ALL)) {
             List<UsedQuest> usedQuestList = new ArrayList<>();
             while (resultSet.next()) {
                 UsedQuest usedQuest = new UsedQuest();
                 usedQuest.setId(resultSet.getInt("id"));
-                usedQuest.setDate(resultSet.getDate("date"));
+                Date date = resultSet.getDate("date");
+                LocalDate localDate
+                        = new java.sql.Date(date.getTime()).toLocalDate();
+                usedQuest.setDate(localDate);
                 int clientId = resultSet.getInt("client_id");
                 if(!resultSet.wasNull()) {
                     Client client = new Client();
@@ -79,20 +88,23 @@ public class UsedQuestDAOImpl extends AbstractDAOImpl implements UsedQuestDAO {
     @Override
     public Integer create(final UsedQuest usedQuest,
                           final SqlTransaction transaction)
-            throws ConstantException {
-        try(Connection connection = getConnection();
-            PreparedStatement statement
+            throws ConstantException, SQLException {
+        connection.setAutoCommit(false);
+        try(PreparedStatement statement
                     = connection.prepareStatement(DB_USED_QUEST_CREATE,
                     Statement.RETURN_GENERATED_KEYS)) {
-            statement.setDate(1, (Date) usedQuest.getDate());
+            Date date = java.sql.Date.valueOf(usedQuest.getDate());
+            statement.setDate(1, date);
             statement.setInt(2, usedQuest.getClient().getId());
             statement.setInt(3,
                     usedQuest.getQuestPlace().getQuest().getId());
             statement.executeUpdate();
             ResultSet resultSet = statement.getGeneratedKeys();
             if(resultSet.next()) {
+                transaction.commit();
                 return resultSet.getInt(1);
             } else {
+                transaction.rollback();
                 LOGGER.error("There is no autoincremented "
                         + "index after trying to add record into table "
                         + "`used_quest`");
@@ -115,7 +127,8 @@ public class UsedQuestDAOImpl extends AbstractDAOImpl implements UsedQuestDAO {
                     = connection.prepareStatement(DB_USED_QUEST_UPDATE,
                     Statement.RETURN_GENERATED_KEYS)) {
             connection.setAutoCommit(false);
-            statement.setDate(1, (Date) usedQuest.getDate());
+            Date date = java.sql.Date.valueOf(usedQuest.getDate());
+            statement.setDate(1, date);
             statement.setInt(2, usedQuest.getClient().getId());
             statement.setInt(3, usedQuest.getQuestPlace().getId());
             statement.setInt(4, usedQuest.getId());
@@ -126,6 +139,54 @@ public class UsedQuestDAOImpl extends AbstractDAOImpl implements UsedQuestDAO {
             transaction.rollback();
             LOGGER.error("It is impossible to turn off " +
                     "autocommiting for database connection", e);
+            throw new ConstantException(e);
+        }
+    }
+
+    @Override
+    public List<UsedQuest> read(final Integer id) throws ConstantException {
+        try(PreparedStatement statement
+                    = connection.prepareStatement(DB_FIND_BY_CLIENT_ID)) {
+            statement.setInt(1, id);
+            ResultSet resultSet = statement.executeQuery();
+            List<UsedQuest> usedQuestList = new ArrayList<>();
+            UsedQuest usedQuest = null;
+            while (resultSet.next()) {
+                usedQuest = new UsedQuest();
+                usedQuest.setId(resultSet.getInt("id"));
+                Date date = resultSet.getDate("date");
+                LocalDate localDate
+                        = new java.sql.Date(date.getTime()).toLocalDate();
+                usedQuest.setDate(localDate);
+                if(!resultSet.wasNull()) {
+                    Client client = new Client();
+                    client.setId(id);
+                    usedQuest.setClient(client);
+                }
+                int questPlaceId = resultSet.getInt("quest_place_id");
+                if(!resultSet.wasNull()) {
+                    QuestPlace questPlace = new QuestPlace();
+                    questPlace.setId(questPlaceId);
+                    usedQuest.setQuestPlace(questPlace);
+                }
+                usedQuestList.add(usedQuest);
+            }
+            return usedQuestList;
+        } catch (SQLException exception) {
+            throw new ConstantException(exception);
+        }
+    }
+
+    @Override
+    public void delete(Integer clientId, Integer usedQuestId)
+            throws ConstantException {
+        try (Connection connection = getConnection();
+             PreparedStatement statement
+                     = connection.prepareStatement(DB_DELETE_BY_PARAMETERS)) {
+            statement.setInt(1, usedQuestId);
+            statement.setInt(2, clientId);
+            statement.executeUpdate();
+        } catch (SQLException e) {
             throw new ConstantException(e);
         }
     }

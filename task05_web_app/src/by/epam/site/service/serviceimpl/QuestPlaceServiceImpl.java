@@ -58,4 +58,10 @@ public class QuestPlaceServiceImpl
         initData(questPlaces);
         return questPlaces;
     }
+
+    @Override
+    public QuestPlace findById(final Integer id) throws ConstantException {
+        QuestPlaceDAO dao = transaction.createDaoImpl(QuestPlaceDAO.class);
+        return dao.read(id);
+    }
 }

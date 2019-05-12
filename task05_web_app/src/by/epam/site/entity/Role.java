@@ -3,8 +3,8 @@ package by.epam.site.entity;
 public enum Role {
 	ADMINISTRATOR("administrator"),
 	MANAGER("manager"),
-	UNAUTHORIZED("UNAUTHORIZED"),
-	CLIENT("client");
+	CLIENT("client"),
+	UNAUTHORIZED("unauthorized");
 
 	private String name;
 

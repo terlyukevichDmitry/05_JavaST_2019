@@ -51,8 +51,8 @@ public class QuestPlace extends Entity {
 
     @Override
     public String toString() {
-        return "QuestPlace{" +
-                "name='" + name + '\'' +
+        return "QuestPlace{" + "id=" + getId() +
+                ", name='" + name + '\'' +
                 ", address='" + address + '\'' +
                 ", phone='" + phone + '\'' +
                 ", quest=" + quest +

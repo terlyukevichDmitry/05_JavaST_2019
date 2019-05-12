@@ -30,17 +30,19 @@ public class UserDAOImpl extends AbstractDAOImpl implements UserDAO {
             + "(`login`, `password`, `role`) VALUES (?, ?, ?)";
     private static final String DB_USER_UPDATE = "UPDATE `user` SET `login` "
             + "= ?, `password` = ?, `role` = ? WHERE `id` = ?";
-    private static final String DB_USER = "SELECT `id`, `role` FROM `user` " +
-            "WHERE `login` = ? AND `password` = ?";
-    private static final String DB_FIND_BY_ID = "SELECT `login`, `password`, " +
-            "`role` FROM `user` WHERE `id` = ?";
-    private static final String DB_FIND_BY_LOGIN = "SELECT id FROM user WHERE login = ?";
+    private static final String DB_USER = "SELECT `id`, `role` FROM `user` "
+            + "WHERE `login` = ? AND `password` = ?";
+    private static final String DB_FIND_BY_ID = "SELECT `login`, `password`, "
+            + "`role` FROM `user` WHERE `id` = ?";
+    private static final String DB_FIND_BY_LOGIN
+            = "SELECT id FROM user WHERE login = ?";
 
     @Override
     public List<User> readAll()
             throws ConstantException {
         try(Connection connection = getConnection();
-            PreparedStatement statement = connection.prepareStatement(DB_SELECT_ALL);
+            PreparedStatement statement
+                    = connection.prepareStatement(DB_SELECT_ALL);
             ResultSet resultSet = statement.executeQuery(DB_SELECT_ALL)) {
             List<User> userList = new ArrayList<>();
             while (resultSet.next()) {
@@ -48,7 +50,8 @@ public class UserDAOImpl extends AbstractDAOImpl implements UserDAO {
                 user.setId(resultSet.getInt("id"));
                 user.setLogin(resultSet.getString("login"));
                 user.setPassword(resultSet.getString("password"));
-                user.setRole(Role.getByIdentity(resultSet.getInt("role")));
+                user.setRole(Role.getByIdentity(resultSet.getInt(
+                        "role")));
                 userList.add(user);
             }
             return userList;
@@ -151,7 +154,8 @@ public class UserDAOImpl extends AbstractDAOImpl implements UserDAO {
                 user.setId(resultSet.getInt("id"));
                 user.setLogin(login);
                 user.setPassword(password);
-                user.setRole(Role.getByIdentity(resultSet.getInt("role")));
+                user.setRole(Role.getByIdentity(resultSet.getInt(
+                        "role")));
             }
             return user;
         } catch(SQLException e) {
@@ -168,30 +172,22 @@ public class UserDAOImpl extends AbstractDAOImpl implements UserDAO {
 
     @Override
     public User read(Integer id) throws ConstantException {
-        PreparedStatement statement = null;
-        ResultSet resultSet = null;
-        try {
-            statement = getConnection().prepareStatement(DB_FIND_BY_ID);
+        try( PreparedStatement statement
+                     = connection.prepareStatement(DB_FIND_BY_ID)) {
             statement.setInt(1, id);
-            resultSet = statement.executeQuery();
+            ResultSet resultSet = statement.executeQuery();
             User user = null;
             if(resultSet.next()) {
                 user = new User();
                 user.setId(id);
                 user.setLogin(resultSet.getString("login"));
                 user.setPassword(resultSet.getString("password"));
-                user.setRole(Role.getByIdentity(resultSet.getInt("role")));
+                user.setRole(Role.getByIdentity(resultSet.getInt(
+                        "role")));
             }
             return user;
         } catch(SQLException e) {
             throw new ConstantException(e);
-        } finally {
-            try {
-                resultSet.close();
-            } catch(SQLException | NullPointerException e) {}
-            try {
-                statement.close();
-            } catch(SQLException | NullPointerException e) {}
         }
     }
 

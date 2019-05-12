@@ -85,6 +85,8 @@
                         <div class="dropdown-child">
                             <c:url value="/profile" var="homeURL"/>
                             <a href="${homeURL}">Profile</a>
+                            <c:url value="/myQuests" var="myQuestsURL"/>
+                            <a href="${myQuestsURL}">My quests</a>
                             <c:url value="/showUsers" var="searchUserURL"/>
                             <a href="${searchUserURL}">Users</a>
                             <c:url value="/removeUser" var="removeUserURL"/>
@@ -100,6 +102,8 @@
                         <div class="dropdown-child">
                             <c:url value="/profile" var="homeURL"/>
                             <a href="${homeURL}">Profile</a>
+                            <c:url value="/myQuests" var="myQuestsURL"/>
+                            <a href="${myQuestsURL}">My quests</a>
                             <c:url value="/logout" var="logout"/>
                             <a href="${logout}">Log out</a>
                         </div>

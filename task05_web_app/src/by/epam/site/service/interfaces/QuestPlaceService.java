@@ -13,4 +13,5 @@ public interface QuestPlaceService extends Service {
     void delete(Integer id) throws ClassNotFoundException, ConstantException;
     void initData(List<QuestPlace> questPlaces) throws ConstantException, SQLException, ClassNotFoundException;
     List<QuestPlace> findByName(String title) throws ConstantException;
+    QuestPlace findById(Integer id) throws ConstantException;
 }

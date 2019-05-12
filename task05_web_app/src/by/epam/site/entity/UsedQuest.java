@@ -2,18 +2,19 @@ package by.epam.site.entity;
 
 import com.sun.istack.internal.NotNull;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 public class UsedQuest extends Entity {
-    @NotNull private Date date;
+    @NotNull private LocalDate date;
     @NotNull private Client client;
     @NotNull private QuestPlace questPlace;
 
-    public Date getDate() {
+    public LocalDate getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(LocalDate date) {
         this.date = date;
     }
 
@@ -35,10 +36,7 @@ public class UsedQuest extends Entity {
 
     @Override
     public String toString() {
-        return "UsedQuest{" +
-                "date=" + date +
-                ", client=" + client +
-                ", questPlace=" + questPlace +
-                '}';
+        return "UsedQuest{" + "id=" + getId() + ", date=" + date + ", client="
+                + client + ", questPlace=" + questPlace + '}';
     }
 }

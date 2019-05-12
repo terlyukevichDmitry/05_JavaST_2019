@@ -18,7 +18,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.sql.SQLException;
 import java.util.List;
 
-public class QuestsCommand implements ActionCommand {
+public class QuestShowCommand implements ActionCommand {
     /**
      * Logger for recording a program state.
      */

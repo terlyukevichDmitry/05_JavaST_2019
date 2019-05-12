@@ -31,6 +31,16 @@ public enum PostCommand {
             this.command = new SearchByParameterCommand();
         }
     },
+    BOOK_QUEST("/bookQuest") {
+        {
+            this.command = new BookQuestCommand();
+        }
+    },
+    REMOVE_ORDER("/removeOrder") {
+        {
+            this.command = new RemoveOrderCommand();
+        }
+    },
     SIGNUP("/signup") {
         {
             this.command = new CreatePersonCommand();

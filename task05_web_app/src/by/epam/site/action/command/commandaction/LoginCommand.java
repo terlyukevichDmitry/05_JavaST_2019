@@ -4,6 +4,7 @@ import by.epam.site.action.command.ActionCommand;
 import by.epam.site.action.command.MessageManager;
 import by.epam.site.action.factory.JspPage;
 import by.epam.site.dao.daoimpl.SqlTransactionFactoryImpl;
+import by.epam.site.entity.Role;
 import by.epam.site.entity.User;
 import by.epam.site.exception.ConstantException;
 import by.epam.site.service.interfaces.ServiceFactory;

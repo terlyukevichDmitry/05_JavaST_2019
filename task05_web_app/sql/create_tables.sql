@@ -51,7 +51,7 @@ CREATE TABLE IF NOT EXISTS `quest_place` (
 
 CREATE TABLE IF NOT EXISTS `used_quest` (
 	`id` INT(11) NOT NULL AUTO_INCREMENT,
-	`date` DATE NOT NULL ,
+	`date` DATE NOT NULL,
 	`client_id` INT(11) NOT NULL ,
 	`quest_place_id` INT(11) NOT NULL ,
 	PRIMARY KEY (`id`)

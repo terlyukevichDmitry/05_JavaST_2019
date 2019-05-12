@@ -35,8 +35,10 @@
     <c:forEach var="elem" items="${userList}" varStatus="status">
         <span>
                 <tr bgcolor="#faebd7">
+                    <input type="hidden" value="${elem.id}">
                     <td><c:out value="${ elem.id }" /></td>
-                    <td><c:out value="${ elem.login }"/> </td>
+                    <c:url value="/goToProfile" var="goToProfileURL"/>
+                    <td><a href="${goToProfileURL}" ><c:out value="${ elem.login }"/></a> </td>
                     <td><c:out value="${ elem.password }"/> </td>
                     <td><c:out value="${ elem.role }"/> </td>
                     <br>

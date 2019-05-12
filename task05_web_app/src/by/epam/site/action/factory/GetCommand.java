@@ -5,7 +5,7 @@ import by.epam.site.action.command.*;
 import by.epam.site.action.command.commandaction.CreatePersonCommand;
 import by.epam.site.action.command.commandaction.LogoutCommand;
 import by.epam.site.action.command.commandaction.ProfileCommand;
-import by.epam.site.action.command.commandaction.QuestsCommand;
+import by.epam.site.action.command.commandaction.QuestShowCommand;
 import by.epam.site.action.command.direction.*;
 
 public enum GetCommand {
@@ -56,7 +56,12 @@ public enum GetCommand {
     },
     QUEST_PLACES_PATH("/quests") {
         {
-            this.command = new QuestsCommand();
+            this.command = new QuestShowCommand();
+        }
+    },
+    MY_QUESTS("/myQuests") {
+        {
+            this.command = new MyQuestsDirection();
         }
     },
     SIGNUP("/signup") {

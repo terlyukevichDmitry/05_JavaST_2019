@@ -73,8 +73,8 @@ public class Client extends Entity {
 
     @Override
     public String toString() {
-        return "Client{" +
-                "name='" + name + '\'' +
+        return "Client{" + "id='" + getId() +
+                ", name='" + name + '\'' +
                 ", surname='" + surname + '\'' +
                 ", patronymic='" + patronymic + '\'' +
                 ", dateOfBirth=" + dateOfBirth +

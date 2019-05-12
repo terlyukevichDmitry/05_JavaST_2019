@@ -13,7 +13,6 @@
     <link rel="stylesheet" href="${ctx}/css/signin.css" type="text/css"/>
     <link href="https://fonts.googleapis.com/css?family=Play" rel="stylesheet"/>
     <link rel="shortcut icon" href="images/image-icon.ico" type="image/x-icon">
-
 </head>
 <body>
     <div class="signIn">
@@ -27,7 +26,7 @@
             <div style="color:red; font-size: 18px;">
                 ${errorLoginPassMessage}
                 ${wrongAction}
-                ${nullPage}
+                ${notAccess}
             </div>
             <br>
         </form>

@@ -3,7 +3,6 @@ package by.epam.site.servlet;
 import by.epam.site.action.Action;
 import by.epam.site.action.command.ActionCommand;
 import by.epam.site.action.command.ActionManager;
-import by.epam.site.action.command.ConfigurationManager;
 import by.epam.site.action.factory.JspPage;
 import by.epam.site.exception.ConstantException;
 import org.apache.logging.log4j.LogManager;
@@ -14,6 +13,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.sql.SQLException;
 import java.text.ParseException;
 
@@ -24,7 +24,8 @@ public class ControllerServlet extends HttpServlet {
     private static final Logger LOGGER =
             LogManager.getLogger(ControllerServlet.class);
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) {
+    protected void doGet(final HttpServletRequest request,
+                         final HttpServletResponse response) {
         try {
             request.setCharacterEncoding("UTF-8");
             ActionCommand actionCommand = new ActionManager().getPostCommand();
@@ -38,20 +39,26 @@ public class ControllerServlet extends HttpServlet {
                 getServletContext().getRequestDispatcher(
                         jspPage.getPage()).forward(request, response);
             }
-        } catch (ServletException | IOException ignored) { } catch (ConstantException e) {
-            e.printStackTrace();
+        } catch (ConstantException e) {
+            LOGGER.warn("Constant exception");
+        } catch (ServletException e) {
+            LOGGER.warn("ServletException exception");
         } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
+            LOGGER.warn("SQLException exception");
         } catch (ParseException e) {
-            e.printStackTrace();
+            LOGGER.warn("ParseException exception");
+        } catch (UnsupportedEncodingException e) {
+            LOGGER.warn("UnsupportedEncodingException exception");
+        } catch (IOException e) {
+            LOGGER.warn("IOException exception");
+        } catch (ClassNotFoundException e) {
+            LOGGER.warn("ClassNotFoundException exception");
         }
     }
 
     @Override
-    protected void doPost(HttpServletRequest request,
-                          HttpServletResponse response) {
+    protected void doPost(final HttpServletRequest request,
+                          final HttpServletResponse response) {
         try {
             Action action = new Action();
             ActionCommand actionCommand
@@ -59,14 +66,18 @@ public class ControllerServlet extends HttpServlet {
             JspPage jspPage = actionCommand.execute(request);
             response.sendRedirect(request.getContextPath()
                     + jspPage.getPage());
-        } catch (IOException ignored) { } catch (ConstantException e) {
-            e.printStackTrace();
-        } catch (ParseException e) {
-            e.printStackTrace();
+        } catch (ConstantException e) {
+            LOGGER.warn("Constant exception");
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOGGER.warn("SQLException exception");
+        } catch (ParseException e) {
+            LOGGER.warn("ParseException exception");
+        } catch (UnsupportedEncodingException e) {
+            LOGGER.warn("UnsupportedEncodingException exception");
+        } catch (IOException e) {
+            LOGGER.warn("IOException exception");
         } catch (ClassNotFoundException e) {
-            e.printStackTrace();
+            LOGGER.warn("ClassNotFoundException exception");
         }
     }
 }

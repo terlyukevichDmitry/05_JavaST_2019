@@ -15,11 +15,14 @@ import java.io.IOException;
 public class SecurityFilter implements Filter {
 
     @Override
-    public void init(FilterConfig filterConfig) throws ServletException {
+    public void init(FilterConfig filterConfig) {
     }
 
     @Override
-    public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
+    public void doFilter(final ServletRequest request,
+                         final ServletResponse response,
+                         final FilterChain chain)
+            throws IOException, ServletException {
         HttpServletRequest httpRequest = (HttpServletRequest)request;
         HttpServletResponse httpResponse = (HttpServletResponse)response;
         String path = (String) request.getAttribute("action");
@@ -33,19 +36,18 @@ public class SecurityFilter implements Filter {
             user = (User) session.getAttribute("user");
         }
 
-        AccessController lol = new AccessController();
-        if (lol.getAccess(user.getRole()).checkAccess(path)) {
+        AccessController controller = new AccessController();
+        if (controller.getAccess(user.getRole()).checkAccess(path)) {
             chain.doFilter(request, response);
         } else {
-            httpRequest.getSession().setAttribute("errorLoginPassMessage",
+            httpRequest.getSession().setAttribute("notAccess",
                     MessageManager.getProperty("access"));
             httpResponse.sendRedirect(httpRequest.getContextPath()
-                    + "/login");
+                    + "/login?a=problemWithYourAccess");
         }
     }
 
     @Override
     public void destroy() {
-
     }
 }

@@ -28,7 +28,13 @@ public class QuestPlaceDAOImpl
     private static final String DB_QUEST_PLACE_UPDATE = "UPDATE `quest_place` "
             + "SET `name` " + "= ?, `address` = ?, `phone` = ?, `image_id` = "
             + "?, `quest_id` = ? WHERE `id` = ?";
-    private static final String DB_SEARCH_BY_TITLE = "SELECT `id`, `address`, `phone`, `image_id`, `quest_id` FROM `quest_place` WHERE `name` = ?";
+    private static final String DB_SEARCH_BY_TITLE = "SELECT `id`, `address`, "
+            + "`phone`, `image_id`, `quest_id` FROM `quest_place` "
+            + "WHERE `name` = ?";
+
+    private static final String DB_FIND_BY_ID
+            = "SELECT `name`, `address`, `phone`, `image_id`, `quest_id` FROM `quest_place` "
+            + "WHERE `id` = ?";
 
     @Override
     public List<QuestPlace> readAll() throws ConstantException {
@@ -161,6 +167,70 @@ public class QuestPlaceDAOImpl
                 questPlaceList.add(questPlace);
             }
             return questPlaceList;
+        } catch (SQLException exception) {
+            throw new ConstantException(exception);
+        }
+    }
+
+    @Override
+    public void read(final QuestPlace questPlace)
+            throws ConstantException {
+        try(PreparedStatement statement
+                    = getConnection().prepareStatement(DB_FIND_BY_ID)) {
+            statement.setInt(1, questPlace.getId());
+            ResultSet resultSet = statement.executeQuery();
+            if(resultSet.next()) {
+                questPlace.setPhone(resultSet.getString("phone"));
+                questPlace.setAddress(resultSet.getString(
+                        "address"));
+                questPlace.setName(resultSet.getString("name"));
+                int imageId = resultSet.getInt("image_id");
+                if(!resultSet.wasNull()) {
+                    Image image = new Image();
+                    image.setId(imageId);
+                    questPlace.setImage(image);
+                }
+                int questId = resultSet.getInt("quest_id");
+                if(!resultSet.wasNull()) {
+                    Quest quest = new Quest();
+                    quest.setId(questId);
+                    questPlace.setQuest(quest);
+                }
+            }
+        } catch(SQLException e) {
+            LOGGER.error("It is impossible to turn off " +
+                    "autocommiting for database connection", e);
+            throw new ConstantException(e);
+        }
+    }
+
+    @Override
+    public QuestPlace read(Integer id) throws ConstantException {
+        try(PreparedStatement statement
+                    = getConnection().prepareStatement(DB_FIND_BY_ID)) {
+            statement.setInt(1, id);
+            ResultSet resultSet = statement.executeQuery();
+            QuestPlace questPlace = null;
+            while (resultSet.next()) {
+                questPlace = new QuestPlace();
+                questPlace.setId(id);
+                questPlace.setName(resultSet.getString("name"));
+                questPlace.setAddress(resultSet.getString("address"));
+                questPlace.setPhone(resultSet.getString("phone"));
+                int imageId = resultSet.getInt("image_id");
+                if(!resultSet.wasNull()) {
+                    Image image = new Image();
+                    image.setId(imageId);
+                    questPlace.setImage(image);
+                }
+                int questId = resultSet.getInt("quest_id");
+                if(!resultSet.wasNull()) {
+                    Quest quest = new Quest();
+                    quest.setId(questId);
+                    questPlace.setQuest(quest);
+                }
+            }
+            return questPlace;
         } catch (SQLException exception) {
             throw new ConstantException(exception);
         }

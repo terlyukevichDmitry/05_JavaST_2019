@@ -5,8 +5,10 @@ import by.epam.site.action.command.ConfigurationManager;
 import by.epam.site.action.command.MessageManager;
 import by.epam.site.action.factory.JspPage;
 import by.epam.site.dao.daoimpl.SqlTransactionFactoryImpl;
+import by.epam.site.entity.Client;
 import by.epam.site.entity.User;
 import by.epam.site.exception.ConstantException;
+import by.epam.site.service.interfaces.ClientService;
 import by.epam.site.service.interfaces.ServiceFactory;
 import by.epam.site.service.interfaces.UserService;
 import by.epam.site.service.serviceimpl.ServiceFactoryImpl;
@@ -38,6 +40,8 @@ public class RemovePersonAction implements ActionCommand {
             User user = service.findByLogin(login);
             if (user != null) {
                 service.delete(user.getId());
+                ClientService clientService = factory.getService(ClientService.class);
+                clientService.delete(user.getId());
                 request.getSession().setAttribute("textMessage",
                         MessageManager.getProperty("removeTrue"));
                 jspPage.setPage(ConfigurationManager.getProperty("removeUser"));

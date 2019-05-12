@@ -1,10 +1,8 @@
-package by.epam.site.action.command.direction;
+package by.epam.site.action.admin;
 
 import by.epam.site.action.command.ActionCommand;
-import by.epam.site.action.command.ConfigurationManager;
 import by.epam.site.action.factory.JspPage;
 import by.epam.site.dao.daoimpl.SqlTransactionFactoryImpl;
-import by.epam.site.entity.UsedQuest;
 import by.epam.site.entity.User;
 import by.epam.site.exception.ConstantException;
 import by.epam.site.service.interfaces.ServiceFactory;
@@ -13,22 +11,24 @@ import by.epam.site.service.serviceimpl.ServiceFactoryImpl;
 
 import javax.servlet.http.HttpServletRequest;
 import java.sql.SQLException;
-import java.util.List;
+import java.text.ParseException;
 
-public class MyQuestsDirection implements ActionCommand {
+public class RemoveOrderByAdminCommand implements ActionCommand {
     @Override
     public JspPage execute(HttpServletRequest request)
-            throws ConstantException, SQLException, ClassNotFoundException {
+            throws ConstantException, SQLException, ClassNotFoundException, ParseException {
         JspPage jspPage = new JspPage();
-        User user = (User) request.getSession().getAttribute("user");
+        String idPerson = (String)request.getSession().getAttribute("alloo");
+        System.out.println("idPerson = " + idPerson);
+        String id = request.getParameter("idToRemove");
         ServiceFactory factory = new ServiceFactoryImpl(
                 new SqlTransactionFactoryImpl());
-        UsedQuestService service = factory.getService(UsedQuestService.class);
-        List<UsedQuest> usedQuests = service.findByClientId(user.getId());
-        assert usedQuests != null;
-        request.getSession().setAttribute(
-                "userQuests", usedQuests);
-        jspPage.setPage(ConfigurationManager.getProperty("myQuests"));
+        UsedQuestService usedQuestService
+                = factory.getService(UsedQuestService.class);
+        if (idPerson != null) {
+            usedQuestService.delete(Integer.parseInt(idPerson), Integer.parseInt(id));
+        }
+        jspPage.setPage("/myQuests");
         return jspPage;
     }
 }

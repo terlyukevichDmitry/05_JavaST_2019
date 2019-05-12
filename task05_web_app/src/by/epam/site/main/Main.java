@@ -7,9 +7,6 @@ import by.epam.site.exception.ConstantException;
 import by.epam.site.service.interfaces.*;
 import by.epam.site.service.serviceimpl.ServiceFactoryImpl;
 
-import java.math.BigInteger;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.sql.*;
 import java.util.List;
 
@@ -25,7 +22,7 @@ public class Main {
 
         ServiceFactory factory = new ServiceFactoryImpl(new SqlTransactionFactoryImpl());
         UsedQuestService service = factory.getService(UsedQuestService.class);
-        List<UsedQuest> list = service.findById(1);
+        List<UsedQuest> list = service.findByClientId(1);
         for (UsedQuest l :list) {
             System.out.println(l);
         }

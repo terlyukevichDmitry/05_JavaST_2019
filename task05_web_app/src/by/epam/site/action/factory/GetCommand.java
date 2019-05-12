@@ -1,6 +1,7 @@
 package by.epam.site.action.factory;
 
 import by.epam.site.action.admin.PersonShowAction;
+import by.epam.site.action.admin.UserProfileDirection;
 import by.epam.site.action.command.*;
 import by.epam.site.action.command.commandaction.CreatePersonCommand;
 import by.epam.site.action.command.commandaction.LogoutCommand;
@@ -62,6 +63,11 @@ public enum GetCommand {
     MY_QUESTS("/myQuests") {
         {
             this.command = new MyQuestsDirection();
+        }
+    },
+    GO_TO_PROFILE("/goToProfile") {
+        {
+            this.command = new UserProfileDirection();
         }
     },
     SIGNUP("/signup") {

@@ -1,8 +1,11 @@
 package by.epam.site.action.factory;
 
+import by.epam.site.action.admin.RemoveOrderByAdminCommand;
 import by.epam.site.action.admin.RemovePersonAction;
+import by.epam.site.action.admin.UserProfileDirection;
 import by.epam.site.action.command.commandaction.*;
 import by.epam.site.action.command.*;
+import by.epam.site.action.command.direction.UserProfilePathCommand;
 
 public enum PostCommand {
 
@@ -39,6 +42,16 @@ public enum PostCommand {
     REMOVE_ORDER("/removeOrder") {
         {
             this.command = new RemoveOrderCommand();
+        }
+    },
+    GO_TO_USER_PROFILE("/goToProfile") {
+        {
+            this.command = new UserProfileDirection();
+        }
+    },
+    REMOVE_BY_ADMIN("/removeOrderByAdmin") {
+        {
+            this.command = new RemoveOrderByAdminCommand();
         }
     },
     SIGNUP("/signup") {

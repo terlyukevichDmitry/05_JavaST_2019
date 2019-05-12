@@ -53,7 +53,7 @@ public class UsedQuestServiceImpl extends ServiceImpl implements UsedQuestServic
     }
 
     @Override
-    public List<UsedQuest> findById(final Integer id)
+    public List<UsedQuest> findByClientId(final Integer id)
             throws ConstantException, SQLException, ClassNotFoundException {
         UsedQuestDAO dao = transaction.createDaoImpl(UsedQuestDAO.class);
         List<UsedQuest> usedQuests = dao.read(id);

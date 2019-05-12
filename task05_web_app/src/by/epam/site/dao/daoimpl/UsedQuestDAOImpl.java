@@ -178,7 +178,7 @@ public class UsedQuestDAOImpl extends AbstractDAOImpl implements UsedQuestDAO {
     }
 
     @Override
-    public void delete(Integer clientId, Integer usedQuestId)
+    public void delete(final Integer clientId, final Integer usedQuestId)
             throws ConstantException {
         try (Connection connection = getConnection();
              PreparedStatement statement

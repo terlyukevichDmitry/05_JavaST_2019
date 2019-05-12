@@ -24,8 +24,8 @@ public class AdminAccess implements Access {
         stringList.add("/myQuests");
         stringList.add("/removeOrder");
         stringList.add("/goToProfile");
+        stringList.add("/removeOrderByAdmin");
     }
-
     @Override
     public boolean checkAccess(final String checkString) {
         for (String string : stringList) {

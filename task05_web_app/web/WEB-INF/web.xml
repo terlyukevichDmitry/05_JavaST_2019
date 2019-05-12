@@ -37,7 +37,7 @@
         <url-pattern>/myQuests</url-pattern>
         <url-pattern>/removeOrder</url-pattern>
         <url-pattern>/goToProfile</url-pattern>
-
+        <url-pattern>/removeOrderByAdmin</url-pattern>
     </servlet-mapping>
 
     <error-page>
@@ -57,7 +57,6 @@
     <filter-mapping>
         <filter-name>UriFilter</filter-name>
         <url-pattern>/goToProfile</url-pattern>
-
         <url-pattern>/home</url-pattern>
         <url-pattern>/quests</url-pattern>
         <url-pattern>/removePath</url-pattern>
@@ -74,7 +73,7 @@
         <url-pattern>/changePassword</url-pattern>
         <url-pattern>/myQuests</url-pattern>
         <url-pattern>/removeOrder</url-pattern>
-
+        <url-pattern>/removeOrderByAdmin</url-pattern>
     </filter-mapping>
     <filter>
         <filter-name>SecurityFilter</filter-name>
@@ -99,6 +98,6 @@
         <url-pattern>/myQuests</url-pattern>
         <url-pattern>/removeOrder</url-pattern>
         <url-pattern>/goToProfile</url-pattern>
-
+        <url-pattern>/removeOrderByAdmin</url-pattern>
     </filter-mapping>
 </web-app>

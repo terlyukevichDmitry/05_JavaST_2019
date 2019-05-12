@@ -31,36 +31,6 @@ hr {
     height: 2px; /* Толщина линии */
 }
 
-input[type=submit] {
-    border:none;
-    width: 190px;
-    background: skyblue;
-    color:#000;
-    font-size: 16px;
-    line-height: 25px;
-    padding: 10px 0;
-    border-radius: 15px;
-    cursor: pointer;
-}
-input[type=submit]:hover {
-    color:#fff;
-    background-color: black;
-}
-
-input {
-    width: 240px;
-    text-align: center;
-    background: skyblue;
-    border: none;
-    font-family: 'Play', sans-serif;
-    font-size: 16px;
-    padding: 10px 0;
-    transition: border 0.5s;
-    outline: none;
-    color: black;
-    border-radius: 15px;
-}
-
 ::placeholder {
     color: black;
     opacity: 0.8;

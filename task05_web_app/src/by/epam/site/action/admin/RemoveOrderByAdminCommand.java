@@ -9,9 +9,10 @@ import by.epam.site.service.interfaces.UsedQuestService;
 import by.epam.site.service.serviceimpl.ServiceFactoryImpl;
 
 import javax.servlet.http.HttpServletRequest;
+
 public class RemoveOrderByAdminCommand implements ActionCommand {
     @Override
-    public JspPage execute(HttpServletRequest request)
+    public JspPage execute(final HttpServletRequest request)
             throws ConstantException {
         JspPage jspPage = new JspPage();
         String idPerson = (String)request.getSession().getAttribute("alloo");
@@ -22,7 +23,8 @@ public class RemoveOrderByAdminCommand implements ActionCommand {
         UsedQuestService usedQuestService
                 = factory.getService(UsedQuestService.class);
         if (idPerson != null) {
-            usedQuestService.delete(Integer.parseInt(idPerson), Integer.parseInt(id));
+            usedQuestService.delete(
+                    Integer.parseInt(idPerson), Integer.parseInt(id));
         }
         jspPage.setPage("/showUsers");
         return jspPage;

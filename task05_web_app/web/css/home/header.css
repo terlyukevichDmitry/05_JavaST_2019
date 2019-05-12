@@ -46,11 +46,6 @@
     text-decoration: none;
 }
 
-.menu_link:hover {
-    margin-top: 2px;
-    border-bottom: 2px solid #e67e22;
-}
-
 .header_slogan {
     text-align: center;
     margin-top: 120px;

@@ -36,6 +36,7 @@ public class BookQuestCommand implements ActionCommand {
         client.setId(user.getId());
         usedQuest.setClient(client);
         usedQuest.setDate(LocalDate.now());
+        usedQuest.setControl(true);
         usedQuestService.save(usedQuest);
         jspPage.setPage("/quests");
         return jspPage;

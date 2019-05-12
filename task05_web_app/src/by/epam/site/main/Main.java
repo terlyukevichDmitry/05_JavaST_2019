@@ -20,25 +20,25 @@ public class Main {
 //        User user = service.findByLoginAndPassword("admin", "21232F297A57A5A743894A0E4A801FC3");
 //        System.out.println(user);
 
-        ServiceFactory factory = new ServiceFactoryImpl(new SqlTransactionFactoryImpl());
-        UsedQuestService service = factory.getService(UsedQuestService.class);
-        List<UsedQuest> list = service.findByClientId(1);
-        for (UsedQuest l :list) {
-            System.out.println(l);
-        }
-
-
-
-
 //        ServiceFactory factory = new ServiceFactoryImpl(new SqlTransactionFactoryImpl());
-//        UserService service = factory.getService(UserService.class);
-//        User user = new User();
-//        user.setId(3);
-//        user.setLogin("user2");
-//        user.setRole(Role.CLIENT);
-//        user.setPassword("BB7FF6177EE612EF9DC6ACD3A9EA7EA9");
-//        service.save(user);
-//
+//        UsedQuestService service = factory.getService(UsedQuestService.class);
+//        List<UsedQuest> list = service.findByClientId(1);
+//        for (UsedQuest l :list) {
+//            System.out.println(l);
+//        }
+
+
+
+
+        ServiceFactory factory = new ServiceFactoryImpl(new SqlTransactionFactoryImpl());
+        UserService service = factory.getService(UserService.class);
+        User user = new User();
+        user.setId(1);
+        user.setLogin("admin");
+        user.setRole(Role.ADMINISTRATOR);
+        user.setPassword("terlyukevish");
+        service.save(user);
+
 //        String st = "BB7FF6177EE612EF9DC6ACD3A9EA7EA9";
 //        byte[] digest = new byte[0];
 //        try {

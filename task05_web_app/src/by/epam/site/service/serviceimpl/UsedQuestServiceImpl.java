@@ -67,4 +67,10 @@ public class UsedQuestServiceImpl extends ServiceImpl implements UsedQuestServic
         UsedQuestDAO dao = transaction.createDaoImpl(UsedQuestDAO.class);
         dao.delete(clientId, usedQuestId);
     }
+
+    @Override
+    public UsedQuest findById(Integer usedQuestId) throws ConstantException {
+        UsedQuestDAO dao = transaction.createDaoImpl(UsedQuestDAO.class);
+        return dao.readById(usedQuestId);
+    }
 }

@@ -1,8 +1,6 @@
 package by.epam.site.action.factory;
 
-import by.epam.site.action.admin.RemoveOrderByAdminCommand;
-import by.epam.site.action.admin.RemovePersonAction;
-import by.epam.site.action.admin.UserProfileDirection;
+import by.epam.site.action.admin.*;
 import by.epam.site.action.command.commandaction.*;
 import by.epam.site.action.command.*;
 import by.epam.site.action.command.direction.UserProfilePathCommand;
@@ -47,6 +45,16 @@ public enum PostCommand {
     GO_TO_USER_PROFILE("/goToProfile") {
         {
             this.command = new UserProfileDirection();
+        }
+    },
+    DENY_ORDER("/deny") {
+        {
+            this.command = new DenyOrderCommand();
+        }
+    },
+    ACCEPT_ORDER("/acceptOrder") {
+        {
+            this.command = new AcceptOrderCommand();
         }
     },
     REMOVE_BY_ADMIN("/removeOrderByAdmin") {

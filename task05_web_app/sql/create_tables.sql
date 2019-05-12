@@ -54,6 +54,7 @@ CREATE TABLE IF NOT EXISTS `used_quest` (
 	`date` DATE NOT NULL,
 	`client_id` INT(11) NOT NULL ,
 	`quest_place_id` INT(11) NOT NULL ,
+	`control` BOOLEAN NOT NULL,
 	PRIMARY KEY (`id`)
 );
 

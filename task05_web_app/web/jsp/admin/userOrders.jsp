@@ -105,7 +105,8 @@
                             <%--<td ><img width="100%" height="100%" src="${pageContext.request.contextPath}/${elem.image.filePath}"/></td>--%>
                     </div>
                     <div style="text-align: center;">
-                        <div class="col-2-3" <c:if test="${user.role.name.equals('client')}">style="background-color: coral"</c:if> >
+                        <div class="col-2-3" <c:if test="${elem.control}">style="background-color: lightgreen"</c:if>
+                             <c:if test="${!elem.control}">style="background-color: red"</c:if> >
                             DATE place name: <td><c:out value="${ elem.date }"/> </td><br><br>
                             CLIENT place name: <td><c:out value="${ elem.client }"/> </td><br><br>
                             QUEST_PLACE place name: <td><c:out value="${ elem.questPlace }"/> </td><br><br>
@@ -114,9 +115,15 @@
                                 <input type="hidden" name="idToRemove" value="${elem.getId()}">
                                 <input type="submit" value="Remove quest">
                             </form>
-                            <c:url value="/nope" var="nopeURL"/>
-                            <form action="${nopeURL}" method="post">
-                                <input type="submit" value="NOPE">
+                            <c:url value="/deny" var="denyURL"/>
+                            <form action="${denyURL}" method="post">
+                                <input type="hidden" name="idToDeny" value="${elem.getId()}">
+                                <input type="submit" value="Deny quest">
+                            </form>
+                            <c:url value="/acceptOrder" var="acceptOrderURL"/>
+                            <form action="${acceptOrderURL}" method="post">
+                                <input type="hidden" name="idToAcceptOrder" value="${elem.getId()}">
+                                <input type="submit" value="Accept quest">
                             </form>
                         </div>
                     </div>

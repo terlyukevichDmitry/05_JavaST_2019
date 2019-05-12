@@ -9,6 +9,7 @@ public class UsedQuest extends Entity {
     @NotNull private LocalDate date;
     @NotNull private Client client;
     @NotNull private QuestPlace questPlace;
+    @NotNull private Boolean control;
 
     public LocalDate getDate() {
         return date;
@@ -34,9 +35,21 @@ public class UsedQuest extends Entity {
         this.questPlace = questPlace;
     }
 
+    public Boolean getControl() {
+        return control;
+    }
+
+    public void setControl(Boolean control) {
+        this.control = control;
+    }
+
     @Override
     public String toString() {
-        return "UsedQuest{" + "id=" + getId() + ", date=" + date + ", client="
-                + client + ", questPlace=" + questPlace + '}';
+        return "UsedQuest{" + "id=" + getId() +
+                ", date=" + date +
+                ", client=" + client +
+                ", questPlace=" + questPlace +
+                ", control=" + control +
+                '}';
     }
 }

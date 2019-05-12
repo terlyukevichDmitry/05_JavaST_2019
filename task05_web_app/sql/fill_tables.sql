@@ -42,11 +42,11 @@ VALUES
 			 (3, "third", "2014-09-11", 2, 3);
 
 INSERT INTO `used_quest`
-		(`id`, `date`, `client_id`, `quest_place_id`)
+		(`id`, `date`, `client_id`, `quest_place_id`, `control`)
 VALUES
-			 (1, "2019-05-12", 1, 1),
-			 (2, "2019-05-12", 1, 2),
-			 (3, "2019-05-11", 1, 2);
+			 (1, "2019-05-12", 1, 1, false),
+			 (2, "2019-05-12", 1, 2, false),
+			 (3, "2019-05-11", 1, 2, false);
 
 
 

@@ -38,6 +38,9 @@
         <url-pattern>/removeOrder</url-pattern>
         <url-pattern>/goToProfile</url-pattern>
         <url-pattern>/removeOrderByAdmin</url-pattern>
+        <url-pattern>/deny</url-pattern>
+        <url-pattern>/acceptOrder</url-pattern>
+
     </servlet-mapping>
 
     <error-page>
@@ -74,6 +77,10 @@
         <url-pattern>/myQuests</url-pattern>
         <url-pattern>/removeOrder</url-pattern>
         <url-pattern>/removeOrderByAdmin</url-pattern>
+        <url-pattern>/deny</url-pattern>
+        <url-pattern>/acceptOrder</url-pattern>
+
+
     </filter-mapping>
     <filter>
         <filter-name>SecurityFilter</filter-name>
@@ -99,5 +106,7 @@
         <url-pattern>/removeOrder</url-pattern>
         <url-pattern>/goToProfile</url-pattern>
         <url-pattern>/removeOrderByAdmin</url-pattern>
+        <url-pattern>/deny</url-pattern>
+        <url-pattern>/acceptOrder</url-pattern>
     </filter-mapping>
 </web-app>

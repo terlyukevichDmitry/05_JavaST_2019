@@ -5,6 +5,7 @@ import by.epam.site.dao.daointerfaces.UsedQuestDAO;
 import by.epam.site.entity.QuestPlace;
 import by.epam.site.entity.UsedQuest;
 import by.epam.site.exception.ConstantException;
+import by.epam.site.service.interfaces.ClientService;
 import by.epam.site.service.interfaces.QuestPlaceService;
 import by.epam.site.service.interfaces.ServiceFactory;
 import by.epam.site.service.interfaces.UsedQuestService;
@@ -40,15 +41,17 @@ public class UsedQuestServiceImpl extends ServiceImpl implements UsedQuestServic
     public void initData(List<UsedQuest> usedQuests)
             throws ConstantException, SQLException, ClassNotFoundException {
         for (UsedQuest element : usedQuests) {
-            System.out.println(element.getQuestPlace().getId());
-//            ServiceFactory factory = new ServiceFactoryImpl(
-//                    new SqlTransactionFactoryImpl());
-//            QuestPlaceService service
-//                    = factory.getService(QuestPlaceService.class);
-//            List<QuestPlace> questPlaces = new ArrayList<>();
-//            questPlaces.add(element.getQuestPlace());
-//            service.initData(questPlaces);
-
+            System.out.println("element.getQuestPlace().getId() =" + element.getQuestPlace().getId());
+            System.out.println("element.getClient().getId() = " + element.getClient().getId());
+            ServiceFactory factory = new ServiceFactoryImpl(
+                    new SqlTransactionFactoryImpl());
+            QuestPlaceService service
+                    = factory.getService(QuestPlaceService.class);
+            element.setQuestPlace(service.findById(element.getQuestPlace().getId()));
+            List<QuestPlace> questPlaces = new ArrayList<>();
+            questPlaces.add(element.getQuestPlace());
+            service.initData(questPlaces);
+            ClientService clientService = factory.getService(ClientService.class);
         }
     }
 

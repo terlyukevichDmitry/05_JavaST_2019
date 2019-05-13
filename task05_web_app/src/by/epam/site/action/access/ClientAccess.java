@@ -20,6 +20,7 @@ public class ClientAccess implements Access {
         stringList.add("/changePassword");
         stringList.add("/myQuests");
         stringList.add("/removeOrder");
+        stringList.add("/addReview");
     }
 
     @Override

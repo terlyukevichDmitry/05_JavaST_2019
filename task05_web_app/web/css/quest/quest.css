@@ -24,14 +24,17 @@
     margin-bottom: 15px;
 }
 
-hr {
-    border: none; /* Убираем границу */
-    background-color: #3bf8db; /* Цвет линии */
-    color: #3bf8db; /* Цвет линии для IE6-7 */
-    height: 2px; /* Толщина линии */
-}
-
 ::placeholder {
     color: black;
     opacity: 0.8;
+}
+
+.hr-primary{
+    background-image: -webkit-linear-gradient(left, rgba(66,133,244,.8), rgba(66, 133, 244,.6), rgba(0,0,0,0));
+}
+
+hr {
+    height: 4px;
+    margin-left: 15px;
+    margin-bottom:-3px;
 }

@@ -18,11 +18,7 @@ public class ReviewServiceImpl extends ServiceImpl implements ReviewService {
     @Override
     public void save(Review review) throws ConstantException, ClassNotFoundException, SQLException {
         ReviewDAO dao = transaction.createDaoImpl(ReviewDAO.class);
-        if(review.getId() != null) {
-            dao.update(review, transaction);
-        } else {
-            review.setId(dao.create(review, transaction));
-        }
+        review.setId(dao.create(review, transaction));
     }
 
     @Override

@@ -27,6 +27,8 @@ public class AdminAccess implements Access {
         stringList.add("/removeOrderByAdmin");
         stringList.add("/deny");
         stringList.add("/acceptOrder");
+        stringList.add("/removePerson");
+        stringList.add("/addReview");
     }
     @Override
     public boolean checkAccess(final String checkString) {

@@ -96,41 +96,38 @@
 
 <%--@elvariable id="userQuests" type="java.util.List"--%>
 <c:forEach var="elem" items="${userQuests}" varStatus="status">
-    <div class="main">
-        <div class="container">
-            <div class="row">
-                <tr>
-                    <div class="col-1-3">
-                            <%--<td ><img width="100%" height="100%" src="${pageContext.request.contextPath}/${elem.image.filePath}"/></td>--%>
-                    </div>
-                    <div style="text-align: center;">
-                        <div class="col-2-3" <c:if test="${elem.control}">style="background-color: lightgreen"</c:if>
-                             <c:if test="${!elem.control}">style="background-color: red"</c:if> >
-                            DATE place name: <td><c:out value="${ elem.date }"/> </td><br><br>
-                            CLIENT place name: <td><c:out value="${ elem.client }"/> </td><br><br>
-                            QUEST_PLACE place name: <td><c:out value="${ elem.questPlace }"/> </td><br><br>
-                            <c:url value="/removeOrderByAdmin" var="removeOrderByAdminURL"/>
-                            <form action="${removeOrderByAdminURL}" method="post">
-                                <input type="hidden" name="idToRemove" value="${elem.getId()}">
-                                <input type="submit" value="Remove quest">
-                            </form>
-                            <c:url value="/deny" var="denyURL"/>
-                            <form action="${denyURL}" method="post">
-                                <input type="hidden" name="idToDeny" value="${elem.getId()}">
-                                <input type="submit" value="Deny quest">
-                            </form>
-                            <c:url value="/acceptOrder" var="acceptOrderURL"/>
-                            <form action="${acceptOrderURL}" method="post">
-                                <input type="hidden" name="idToAcceptOrder" value="${elem.getId()}">
-                                <input type="submit" value="Accept quest">
-                            </form>
-                        </div>
-                    </div>
-                </tr>
+    <div class="container">
+        <div class="row">
+            <div class="col" <c:if test="${elem.control}">style="background-color: lightgreen; border-radius: 15px;"</c:if>
+                 <c:if test="${!elem.control}">style="background-color: #ffcece; border-radius: 15px;"</c:if>>
+                <tr><img width="75%" height="80%" class="img-fluid rounded" src="${pageContext.request.contextPath}/${elem.questPlace.image.filePath}"/></tr>
+            </div>
+            <div class="col-md-auto"  <c:if test="${elem.control}">style="background-color: lightgreen; border-radius: 15px;"</c:if>
+                 <c:if test="${!elem.control}">style="background-color: #ffcece; border-radius: 15px;"</c:if>>
+                DATE place name: <td><c:out value="${ elem.date }"/> </td><br><br>
+                QUEST_PLACE place name: <td><c:out value="${ elem.questPlace.name }"/> </td><br><br>
+                QUEST_PLACE place name: <td><c:out value="${ elem.questPlace.address }"/> </td><br><br>
+            </div>
+            <div class="col col-lg-2">
+                <c:url value="/removeOrder" var="removeOrderURL"/>
+                <form action="${removeOrderURL}" method="post">
+                    <input type="hidden" name="idToRemove" value="${elem.getId()}">
+                    <input type="submit" value="Remove quest" class="btn btn-danger">
+                </form><br><br>
+                <c:url value="/deny" var="denyURL"/>
+                <form action="${denyURL}" method="post">
+                    <input type="hidden" name="idToDeny" value="${elem.getId()}">
+                    <input type="submit" value="Deny quest" class="btn btn-warning">
+                </form><br><br>
+                <c:url value="/acceptOrder" var="acceptOrderURL"/>
+                <form action="${acceptOrderURL}" method="post">
+                    <input type="hidden" name="idToAcceptOrder" value="${elem.getId()}">
+                    <input type="submit" value="Accept quest" class="btn btn-success">
+                </form><br><br>
             </div>
         </div>
     </div>
-    <hr/>
+    <hr class="hr-primary" />
 </c:forEach>
 </body>
 </html>

@@ -19,15 +19,8 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="css/style.css" type="text/css"/>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 </head>
-<script>
-    function goBack() {
-        window.history.back()
-    }
-</script>
 <body>
 <div class="header">
     <div class="header_texture"></div>
@@ -97,6 +90,7 @@
         </div>
     </div>
 </div>
+
 <table class="table table-bordered table-inverse">
     <thead>
     <tr>
@@ -104,26 +98,33 @@
         <th><fmt:message key="login"/></th>
         <th><fmt:message key="password"/></th>
         <th><fmt:message key="role"/></th>
+        <th><fmt:message key="removeUser"/></th>
     </tr>
     </thead>
     <tbody>
         <%--@elvariable id="userList" type="java.util.List"--%>
         <c:forEach var="elem" items="${userList}" varStatus="status">
         <tr class="info">
-        <td><c:out value="${ elem.id }" />
-        <c:url value="/goToProfile" var="goToProfileURL"/>
-        <td>
-            <form action="${goToProfileURL}" method="get">
-                <input type="hidden" name="personId" value="${elem.id}">
-                <input type="submit" value="${ elem.login }">
-            </form>
-        </td>
-        <td><c:out value="${ elem.password }"/> </td>
-        <td><c:out value="${ elem.role }"/> </td>
+        <th><c:out value="${ elem.id }" />
+            <th>
+                <c:url value="/goToProfile" var="goToProfileURL"/>
+                    <form action="${goToProfileURL}" method="get">
+                        <input type="hidden" name="personId" value="${elem.id}">
+                        <input type="submit" value="${ elem.login }" class="btn btn-info">
+                    </form>
+            </th>
+            <th><c:out value="${ elem.password }"/> </th>
+            <th><c:out value="${ elem.role }"/> </th>
+            <th>
+                <c:url value="/removePerson" var="removePersonURL"/>
+                    <form action="${removePersonURL}" method="post">
+                        <input type="hidden" name="idToRemovePerson" value="${elem.id}">
+                        <input type="submit" value="  Remove  " class="btn btn-danger">
+                    </form>
+            </th>
         </tr>
         </c:forEach>
     </tbody>
-</table><br><br>
-<a href="#" class="btn btn-warning btn-lg" onclick="goBack()"><fmt:message key="button"/></a><br><br>
+</table>
 </body>
 </html>

@@ -124,6 +124,15 @@
                     <form action="${bookQuestURL}" method="post">
                         <input type="hidden" name="getId" value="${elem.getId()}">
                         <td><input type="submit" value="Book a quest" class="btn btn-info"></td>
+                    </form><br><br>
+                    <c:url value="/addReview" var="addReviewURL"/>
+                    <form action="${addReviewURL}" method="post">
+                        <div class="form-group">
+                            <textarea class="form-control" name="review" id="exampleFormControlTextarea1" rows="3"></textarea>
+                        </div>
+                        <input type="hidden" name="idQuestPlace" value="${elem.getId()}"/>
+                        <input type="submit" class="btn btn-info" value="Send review">
+                        <br>
                     </form>
                 </tr>
             </div>

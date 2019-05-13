@@ -16,7 +16,6 @@ public class RemoveOrderByAdminCommand implements ActionCommand {
             throws ConstantException {
         JspPage jspPage = new JspPage();
         String idPerson = (String)request.getSession().getAttribute("alloo");
-        System.out.println("idPerson = " + idPerson);
         String id = request.getParameter("idToRemove");
         ServiceFactory factory = new ServiceFactoryImpl(
                 new SqlTransactionFactoryImpl());

@@ -12,6 +12,7 @@
     <meta charset="utf-8">
     <link rel="stylesheet" href="${ctx}/css/home/header.css" type="text/css"/>
     <link rel="stylesheet" href="${ctx}/css/home/base.css" type="text/css"/>
+    <link rel="stylesheet" href="${ctx}/css/quest/quest.css" type="text/css"/>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
           integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf"
           crossorigin="anonymous">
@@ -96,38 +97,33 @@
 
 <%--@elvariable id="userQuests" type="java.util.List"--%>
 <c:forEach var="elem" items="${userQuests}" varStatus="status">
-    <div class="main">
-        <div class="container">
-            <div class="row">
-                <tr>
-                    <div class="col-1-3">
-                        <%--<td ><img width="100%" height="100%" src="${pageContext.request.contextPath}/${elem.image.filePath}"/></td>--%>
+    <div class="container">
+        <div class="row">
+            <div class="col" <c:if test="${elem.control}">style="background-color: lightgreen; border-radius: 15px;"</c:if>
+                 <c:if test="${!elem.control}">style="background-color: #ffcece; border-radius: 15px;"</c:if>>
+                <tr><img width="75%" height="80%" class="img-fluid rounded" src="${pageContext.request.contextPath}/${elem.questPlace.image.filePath}"/></tr>
+            </div>
+            <div class="col-md-auto"  <c:if test="${elem.control}">style="background-color: lightgreen; border-radius: 15px;"</c:if>
+                 <c:if test="${!elem.control}">style="background-color: #ffcece; border-radius: 15px;"</c:if>>
+                DATE place name: <td><c:out value="${ elem.date }"/> </td><br><br>
+                QUEST_PLACE place name: <td><c:out value="${ elem.questPlace.name }"/> </td><br><br>
+                QUEST_PLACE place name: <td><c:out value="${ elem.questPlace.address }"/> </td><br><br>
+            </div>
+            <div class="col col-lg-2">
+                <c:url value="/removeOrder" var="removeOrderURL"/>
+                <form action="${removeOrderURL}" method="post">
+                    <input type="hidden" name="idToRemove" value="${elem.getId()}">
+                    <input type="submit" value="Remove quest" class="btn btn-danger">
+                </form><br>
+                <c:if test="${!elem.control}">
+                    <div style="color: #ff7b7b">
+                        <p>Your order denied, please call the police. Phone number: +375298619783</p>
                     </div>
-                    <div style="text-align: center;">
-                        <div class="col-2-3" <c:if test="${elem.control}">style="background-color: lightgreen"</c:if>
-                             <c:if test="${!elem.control}">style="background-color: red"</c:if> >
-                            DATE place name: <td><c:out value="${ elem.date }"/> </td><br><br>
-                            CLIENT place name: <td><c:out value="${ elem.client }"/> </td><br><br>
-                            QUEST_PLACE place name: <td><c:out value="${ elem.questPlace }"/> </td><br><br>
-                            <c:url value="/removeOrder" var="removeOrderURL"/>
-                            <form action="${removeOrderURL}" method="post">
-                                <input type="hidden" name="idToRemove" value="${elem.getId()}">
-                                <input type="submit" value="Remove quest">
-                            </form>
-                        </div>
-                    </div>
-                </tr>
+                </c:if>
             </div>
         </div>
     </div>
-    <hr/>
+    <hr class="hr-primary" />
 </c:forEach>
-
-
-
-
-<div>
-    SUKAAAAaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-</div>
 </body>
 </html>

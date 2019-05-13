@@ -2,6 +2,7 @@ package by.epam.site.entity;
 
 import com.sun.istack.internal.NotNull;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.Objects;
 
@@ -9,8 +10,16 @@ public class Review extends Entity {
 
     @NotNull private String message;
     @NotNull private Client client;
-    @NotNull private Date date;
+    @NotNull private LocalDate date;
+    @NotNull private QuestPlace questPlace;
 
+    public QuestPlace getQuestPlace() {
+        return questPlace;
+    }
+
+    public void setQuestPlace(QuestPlace questPlace) {
+        this.questPlace = questPlace;
+    }
     public String getMessage() {
         return message;
     }
@@ -27,11 +36,11 @@ public class Review extends Entity {
         this.client = client;
     }
 
-    public Date getDate() {
+    public LocalDate getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(LocalDate date) {
         this.date = date;
     }
 
@@ -53,7 +62,11 @@ public class Review extends Entity {
 
     @Override
     public String toString() {
-        return "Review{" + "message='" + message + '\'' + ", client=" + client
-                + ", date=" + date + '}';
+        return "Review{" +
+                "message='" + message + '\'' +
+                ", client=" + client +
+                ", date=" + date +
+                ", questPlace=" + questPlace +
+                '}';
     }
 }

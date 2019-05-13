@@ -17,7 +17,7 @@ public class AcceptOrderCommand implements ActionCommand {
     public JspPage execute(HttpServletRequest request)
             throws ConstantException, SQLException, ClassNotFoundException {
         JspPage jspPage = new JspPage();
-        String idPerson = (String)request.getSession().getAttribute("alloo");
+        String idPerson = (String) request.getSession().getAttribute("alloo");
         String id = request.getParameter("idToAcceptOrder");
         ServiceFactory factory = new ServiceFactoryImpl(
                 new SqlTransactionFactoryImpl());

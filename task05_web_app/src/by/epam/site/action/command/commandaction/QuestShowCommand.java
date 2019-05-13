@@ -1,6 +1,5 @@
 package by.epam.site.action.command.commandaction;
 
-import by.epam.site.action.admin.RemovePersonAction;
 import by.epam.site.action.command.ActionCommand;
 import by.epam.site.action.command.ConfigurationManager;
 import by.epam.site.action.factory.JspPage;
@@ -11,20 +10,11 @@ import by.epam.site.service.interfaces.QuestPlaceService;
 import by.epam.site.service.interfaces.ServiceFactory;
 import by.epam.site.service.serviceimpl.ServiceFactoryImpl;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
 import javax.servlet.http.HttpServletRequest;
 import java.sql.SQLException;
 import java.util.List;
 
 public class QuestShowCommand implements ActionCommand {
-    /**
-     * Logger for recording a program state.
-     */
-    private static final Logger LOGGER
-            = LogManager.getLogger(RemovePersonAction.class);
-
     @Override
     public JspPage execute(HttpServletRequest request) throws ConstantException,
             ClassNotFoundException, SQLException {

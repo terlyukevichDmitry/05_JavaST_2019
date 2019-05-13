@@ -3,12 +3,14 @@ package by.epam.site.dao.daoimpl;
 import by.epam.site.dao.daointerfaces.ReviewDAO;
 import by.epam.site.dao.transaction.SqlTransaction;
 import by.epam.site.entity.Client;
+import by.epam.site.entity.QuestPlace;
 import by.epam.site.entity.Review;
 import by.epam.site.exception.ConstantException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.sql.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,30 +23,40 @@ public class ReviewDAOImpl extends AbstractDAOImpl implements ReviewDAO {
             = LogManager.getLogger(ReviewDAOImpl.class);
 
     private static final String DB_SELECT_ALL = "SELECT `id`, `message`, "
-            + "`date`, `client_id` FROM `review`";
+            + "`date`, `client_id`, `quest_place_id` FROM `review`";
     private static final String DB_DELETE = "DELETE FROM `review` WHERE `id`"
             + " = ?";
     private static final String DB_REVIEW_CREATE = "INSERT INTO `review` "
-            + "(`message`, `date`, `client_id`)"
-            + " VALUES (?, ?, ?)";
+            + "(`message`, `date`, `client_id`, `quest_place_id`)"
+            + " VALUES (?, ?, ?, ?)";
     private static final String DB_REVIEW_UPDATE = "UPDATE `review` SET `message` "
-            + "= ?, `date` = ?, `client_id` = ? WHERE `id` = ?";
+            + "= ?, `date` = ?, `client_id` = ?, `quest_place_id` = ? WHERE `id` = ?";
     @Override
     public List<Review> readAll() throws ConstantException {
-        try(Connection connection = getConnection();
-            PreparedStatement statement = connection.prepareStatement(DB_SELECT_ALL);
+        try(PreparedStatement statement
+                    = connection.prepareStatement(DB_SELECT_ALL);
             ResultSet resultSet = statement.executeQuery(DB_SELECT_ALL)) {
-
             List<Review> reviews = new ArrayList<>();
             while (resultSet.next()) {
                 Review review = new Review();
                 review.setId(resultSet.getInt("id"));
                 review.setMessage(resultSet.getString("message"));
-                review.setDate(resultSet.getDate("date"));
-                Client client = new Client();
-                client.setId(resultSet.getInt("client_id"));
+                Date date = resultSet.getDate("date");
+                LocalDate localDate
+                        = new java.sql.Date(date.getTime()).toLocalDate();
+                review.setDate(localDate);
+                int clientId = resultSet.getInt("client_id");
                 if(!resultSet.wasNull()) {
+                    Client client = new Client();
+                    client.setId(clientId);
                     review.setClient(client);
+                }
+                int questPlaceId
+                        = resultSet.getInt("quest_place_id");
+                if(!resultSet.wasNull()) {
+                    QuestPlace questPlace = new QuestPlace();
+                    questPlace.setId(questPlaceId);
+                    review.setQuestPlace(questPlace);
                 }
                 reviews.add(review);
             }
@@ -56,8 +68,7 @@ public class ReviewDAOImpl extends AbstractDAOImpl implements ReviewDAO {
 
     @Override
     public void delete(Integer id) throws ConstantException {
-        try (Connection connection = getConnection();
-             PreparedStatement statement
+        try (PreparedStatement statement
                      = connection.prepareStatement(DB_DELETE)) {
             statement.setInt(1, id);
             statement.executeUpdate();
@@ -68,15 +79,16 @@ public class ReviewDAOImpl extends AbstractDAOImpl implements ReviewDAO {
 
     @Override
     public Integer create(final Review review, final SqlTransaction transaction)
-            throws ConstantException {
-        try (Connection connection = getConnection();
-             PreparedStatement statement
+            throws ConstantException, SQLException {
+        connection.setAutoCommit(false);
+        try (PreparedStatement statement
                      = connection.prepareStatement(DB_REVIEW_CREATE,
                      Statement.RETURN_GENERATED_KEYS)) {
-            connection.setAutoCommit(false);
             statement.setString(1, review.getMessage());
-            statement.setDate(2, (java.sql.Date) review.getDate());
+            Date date = java.sql.Date.valueOf(review.getDate());
+            statement.setDate(2, date);
             statement.setInt(3, review.getClient().getId());
+            statement.setInt(4, review.getQuestPlace().getId());
             statement.executeUpdate();
             transaction.commit();
             ResultSet resultSet = statement.getGeneratedKeys();
@@ -98,16 +110,17 @@ public class ReviewDAOImpl extends AbstractDAOImpl implements ReviewDAO {
 
     @Override
     public Review update(final Review review, final SqlTransaction transaction)
-            throws ConstantException {
-        try (Connection connection = getConnection();
-             PreparedStatement statement
+            throws ConstantException, SQLException {
+        connection.setAutoCommit(false);
+        try (PreparedStatement statement
                      = connection.prepareStatement(DB_REVIEW_UPDATE,
                      Statement.RETURN_GENERATED_KEYS)) {
-            connection.setAutoCommit(false);
             statement.setString(1, review.getMessage());
-            statement.setDate(2, (java.sql.Date) review.getDate());
+            Date date = java.sql.Date.valueOf(review.getDate());
+            statement.setDate(2, date);
             statement.setInt(3, review.getClient().getId());
-            statement.setInt(4, review.getId());
+            statement.setInt(4, review.getQuestPlace().getId());
+            statement.setInt(5, review.getId());
             statement.executeUpdate();
             transaction.commit();
         } catch (SQLException e) {
@@ -117,33 +130,5 @@ public class ReviewDAOImpl extends AbstractDAOImpl implements ReviewDAO {
             throw new ConstantException(e);
         }
         return review;
-    }
-
-    @Override
-    public void initializeClient(Review review) throws ConstantException, ClassNotFoundException {
-//        final String DB_CLIENT_SELECT = "SELECT `name`, `surname`, `patronymic`, `years`, `email`, `phone` FROM `client` "
-//                + "WHERE `id` = " + review.getClient().getId();
-//        try {
-//            Connection connection = getConnection();
-//            PreparedStatement statement = connection.prepareStatement(DB_CLIENT_SELECT);
-//            ResultSet resultSet = statement.executeQuery(DB_CLIENT_SELECT);
-//
-//            if(resultSet.next()) {
-//                review.getClient().setName(resultSet.getString(
-//                        "name"));
-//                review.getClient().setSurname(resultSet.getString(
-//                        "surname"));
-//                review.getClient().setPatronymic(resultSet.getString(
-//                        "patronymic"));
-//                review.getClient().setDateOfBirth(resultSet.getDate(
-//                        "date_of_birth"));
-//                review.getClient().setEmail(resultSet.getString(
-//                        "email"));
-//                review.getClient().setPhone(resultSet.getString(
-//                        "phone"));
-//            }
-//        } catch (SQLException e) {
-//            throw new ConstantException(e);
-//        }
     }
 }

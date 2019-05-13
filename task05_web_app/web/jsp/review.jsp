@@ -57,6 +57,8 @@
                             <a href="${profileURL}" class="dropdown-item">Profile</a>
                             <c:url value="/myQuests" var="myQuestsURL"/>
                             <a href="${myQuestsURL}" class="dropdown-item">My quests</a>
+                            <c:url value="/createQuest" var="createQuestURL"/>
+                            <a href="${createQuestURL}" class="dropdown-item">Create Quest</a>
                             <c:url value="/showUsers" var="searchUserURL"/>
                             <a href="${searchUserURL}" class="dropdown-item">Users</a>
                             <c:url value="/removeUser" var="removeUserURL"/>

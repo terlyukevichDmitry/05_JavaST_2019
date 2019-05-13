@@ -40,4 +40,10 @@ public class QuestServiceImpl extends ServiceImpl implements QuestService {
         QuestDAO dao = transaction.createDaoImpl(QuestDAO.class);
         dao.delete(id);
     }
+
+    @Override
+    public Quest read(String title) throws ConstantException {
+        QuestDAO dao = transaction.createDaoImpl(QuestDAO.class);
+        return dao.read(title);
+    }
 }

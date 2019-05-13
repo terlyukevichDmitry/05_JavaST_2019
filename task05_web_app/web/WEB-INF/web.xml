@@ -44,7 +44,8 @@
         <url-pattern>/addReview</url-pattern>
         <url-pattern>/review</url-pattern>
         <url-pattern>/removeReview</url-pattern>
-
+        <url-pattern>/createQuest</url-pattern>
+        <url-pattern>/createNewQuest</url-pattern>
     </servlet-mapping>
 
     <error-page>
@@ -87,6 +88,8 @@
         <url-pattern>/addReview</url-pattern>
         <url-pattern>/review</url-pattern>
         <url-pattern>/removeReview</url-pattern>
+        <url-pattern>/createQuest</url-pattern>
+        <url-pattern>/createNewQuest</url-pattern>
 
     </filter-mapping>
     <filter>
@@ -119,6 +122,8 @@
         <url-pattern>/addReview</url-pattern>
         <url-pattern>/review</url-pattern>
         <url-pattern>/removeReview</url-pattern>
+        <url-pattern>/createQuest</url-pattern>
+        <url-pattern>/createNewQuest</url-pattern>
 
     </filter-mapping>
 </web-app>

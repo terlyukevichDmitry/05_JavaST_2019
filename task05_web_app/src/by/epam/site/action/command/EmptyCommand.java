@@ -6,7 +6,9 @@ import by.epam.site.action.factory.GetCommand;
 import by.epam.site.action.factory.JspPage;
 import by.epam.site.exception.ConstantException;
 
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
+import java.io.IOException;
 import java.sql.SQLException;
 import java.text.ParseException;
 
@@ -31,6 +33,10 @@ public class EmptyCommand implements ActionCommand {
         } catch (SQLException e) {
             e.printStackTrace();
         } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (ServletException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
             e.printStackTrace();
         }
         return jspPage;

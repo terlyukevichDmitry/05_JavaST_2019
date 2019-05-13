@@ -97,5 +97,36 @@
         </div>
     </div>
 </div>
+<c:url value="/createNewQuest" var="createQuestURL"/>
+<form action="${createQuestURL}" method="post" enctype="multipart/form-data">
+    <div class="form-row">
+        <div class="col-md-6 mb-3">
+            <label for="validationServer03">Title</label>
+            <input type="text" name="title" class="form-control is-invalid" id="validationServer03" placeholder="Title" required>
+            <div class="valid-feedback">
+                Please provide a valid title.
+            </div>
+        </div>
+        <div class="col-md-3 mb-3">
+            <label for="validationServer04">Level</label>
+            <input type="number" name="level" class="form-control is-invalid" id="validationServer04" placeholder="Level" required>
+            <div class="valid-feedback">
+                Please provide a valid level.
+            </div>
+        </div>
+        <div class="col-md-3 mb-3">
+            <label for="validationServer05">Max number of people</label>
+            <input type="number" name="maxOfPeople" class="form-control is-invalid" id="validationServer05" placeholder="Max number of people" required>
+            <div class="valid-feedback">
+                Please provide a valid number of people.
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="exampleFormControlFile1">Example file input</label>
+        <input name="fileLoader" accept=".jpg" type="file" class="form-control-file" id="exampleFormControlFile1" required>
+    </div>
+    <button class="btn btn-primary" type="submit">Create quest</button>
+</form>
 </body>
 </html>

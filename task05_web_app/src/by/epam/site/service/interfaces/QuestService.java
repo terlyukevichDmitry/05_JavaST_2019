@@ -14,4 +14,5 @@ public interface QuestService extends Service {
     void delete(Integer id) throws ClassNotFoundException, ConstantException;
     void read(final Quest quest)
             throws ConstantException;
+    Quest read(String title) throws ConstantException;
 }

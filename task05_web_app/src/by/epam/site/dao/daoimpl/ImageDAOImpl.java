@@ -23,10 +23,10 @@ public class ImageDAOImpl extends AbstractDAOImpl implements ImageDAO {
     private static final String DB_DELETE = "DELETE FROM `image` WHERE `id`"
             + " = ?";
     private static final String DB_IMAGE_CREATE = "INSERT INTO `image` "
-            + "(`filePath`)"
+            + "(`imageAddress`)"
             + " VALUES (?)";
     private static final String DB_IMAGE_UPDATE = "UPDATE `image` SET " +
-            "`filePath` = ? WHERE `id` = ?";
+            "`imageAddress` = ? WHERE `id` = ?";
     private static final String DB_FIND_BY_ID
             = "SELECT `imageAddress` FROM `image` WHERE `id` = ?";
     @Override
@@ -62,16 +62,16 @@ public class ImageDAOImpl extends AbstractDAOImpl implements ImageDAO {
 
     @Override
     public Integer create(Image image, final SqlTransaction transaction)
-            throws ConstantException {
-        try(Connection connection = getConnection();
-            PreparedStatement statement
+            throws ConstantException, SQLException {
+        ResultSet resultSet = null;
+        connection.setAutoCommit(false);
+        try(PreparedStatement statement
                     = connection.prepareStatement(DB_IMAGE_CREATE,
-                    Statement.RETURN_GENERATED_KEYS)) {
-            connection.setAutoCommit(false);
+                Statement.RETURN_GENERATED_KEYS)) {
             statement.setString(1, image.getFilePath());
             statement.executeUpdate();
             transaction.commit();
-            ResultSet resultSet = statement.getGeneratedKeys();
+            resultSet = statement.getGeneratedKeys();
             if(resultSet.next()) {
                 return resultSet.getInt(1);
             } else {
@@ -87,7 +87,6 @@ public class ImageDAOImpl extends AbstractDAOImpl implements ImageDAO {
             throw new ConstantException(e);
         }
     }
-
     @Override
     public Image update(final Image image, final SqlTransaction transaction)
             throws ConstantException {

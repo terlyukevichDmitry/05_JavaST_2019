@@ -28,7 +28,7 @@ public class QuestDAOImpl extends AbstractDAOImpl implements QuestDAO {
             + " = ?";
 
     private static final String DB_QUEST_CREATE = "INSERT INTO `quest` "
-            + "(`name`, `level`, `max_people`)"
+            + "(`title`, `level`, `max_people`)"
             + " VALUES (?, ?, ?)";
 
     private static final String DB_QUEST_UPDATE = "UPDATE `quest` SET `title` "
@@ -36,6 +36,8 @@ public class QuestDAOImpl extends AbstractDAOImpl implements QuestDAO {
 
     private static final String DB_FIND_BY_ID
             = "SELECT `title`, `level`, `max_people` FROM `quest` WHERE `id` = ?";
+    private static final String DB_FIND_BY_TITLE
+            = "SELECT `id`, `level`, `max_people` FROM `quest` WHERE `title` = ?";
 
     @Override
     public List<Quest> readAll()
@@ -49,7 +51,7 @@ public class QuestDAOImpl extends AbstractDAOImpl implements QuestDAO {
             while (resultSet.next()) {
                 Quest quest = new Quest();
                 quest.setId(resultSet.getInt("id"));
-                quest.setTitle(resultSet.getString("name"));
+                quest.setTitle(resultSet.getString("title"));
                 quest.setLevel(resultSet.getInt("level"));
                 quest.setMaxPeople(resultSet.getInt("max_people"));
                 quests.add(quest);
@@ -137,6 +139,28 @@ public class QuestDAOImpl extends AbstractDAOImpl implements QuestDAO {
                 quest.setLevel(resultSet.getInt("level"));
                 quest.setMaxPeople(resultSet.getInt("max_people"));
             }
+        } catch(SQLException e) {
+            LOGGER.error("It is impossible to turn off " +
+                    "autocommiting for database connection", e);
+            throw new ConstantException(e);
+        }
+    }
+
+    @Override
+    public Quest read(final String title) throws ConstantException {
+        try(PreparedStatement statement
+                    = connection.prepareStatement(DB_FIND_BY_TITLE)) {
+            statement.setString(1, title);
+            ResultSet resultSet = statement.executeQuery();
+            Quest quest = null;
+            if(resultSet.next()) {
+                quest = new Quest();
+                quest.setId(resultSet.getInt("id"));
+                quest.setTitle(title);
+                quest.setLevel(resultSet.getInt("level"));
+                quest.setMaxPeople(resultSet.getInt("max_people"));
+            }
+            return quest;
         } catch(SQLException e) {
             LOGGER.error("It is impossible to turn off " +
                     "autocommiting for database connection", e);

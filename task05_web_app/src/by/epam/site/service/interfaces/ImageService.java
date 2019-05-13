@@ -9,9 +9,10 @@ import java.util.List;
 public interface ImageService extends Service {
     List<Image> findAll() throws ConstantException,
             SQLException, ClassNotFoundException;
-    void save(Image usedQuest)
+    void save(Image image)
             throws ConstantException, ClassNotFoundException, SQLException;
     void delete(Integer id) throws ClassNotFoundException, ConstantException;
     void read(final Image image)
             throws ConstantException;
+    void create(Image image) throws ConstantException, SQLException, ClassNotFoundException;
 }

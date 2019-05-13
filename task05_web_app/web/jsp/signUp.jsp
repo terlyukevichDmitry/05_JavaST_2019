@@ -60,8 +60,8 @@
 </head>
 <body>
     <div class="signUp">
-        <c:url value="/signup" var="createURL"/>
-        <form action="${createURL}" method="post">
+        <c:url value="/signup" var="signupURL"/>
+        <form action="${signupURL}" method="post">
             <h2 style="color: #ffffff;">Sign Up</h2>
             <div class="block-left">
                 <input type="text" name="name" placeholder="First name" required><br><br><br>

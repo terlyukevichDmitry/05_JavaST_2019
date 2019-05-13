@@ -12,6 +12,8 @@ public class UnauthorizedAccess implements Access {
         stringList.add("/signup");
         stringList.add("/quests");
         stringList.add("/searchByParameter");
+        stringList.add("/review");
+
     }
 
     @Override

@@ -21,6 +21,8 @@ public class ClientAccess implements Access {
         stringList.add("/myQuests");
         stringList.add("/removeOrder");
         stringList.add("/addReview");
+        stringList.add("/review");
+
     }
 
     @Override

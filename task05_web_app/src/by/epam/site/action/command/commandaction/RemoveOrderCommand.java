@@ -22,6 +22,7 @@ public class RemoveOrderCommand implements ActionCommand {
         UsedQuestService usedQuestService
                 = factory.getService(UsedQuestService.class);
         usedQuestService.delete(user.getId(), Integer.parseInt(id));
+        factory.close();
         jspPage.setPage("/myQuests");
         return jspPage;
     }

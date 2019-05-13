@@ -1,4 +1,4 @@
-package by.epam.site.action.command.commandaction;
+package by.epam.site.action.command;
 
 import by.epam.site.action.command.ActionCommand;
 import by.epam.site.action.command.MessageManager;

@@ -56,6 +56,7 @@ public class ChangeParameterAction implements ActionCommand {
         service.save(client);
         request.getSession().setAttribute("client",
                 service.findById(client.getId()));
+        factory.close();
         jspPage.setPage("/profile");
         return jspPage;
     }

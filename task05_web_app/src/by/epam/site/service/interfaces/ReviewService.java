@@ -12,4 +12,6 @@ public interface ReviewService extends Service {
             SQLException, ClassNotFoundException;
     void save(Review entity) throws ConstantException, ClassNotFoundException, SQLException;
     void delete(Integer id) throws ClassNotFoundException, ConstantException;
+    void initDate(List<Review> reviews) throws ConstantException;
+    void deleteByClientId(Integer clientId) throws ConstantException;
 }

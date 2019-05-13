@@ -25,6 +25,7 @@ public class RemoveOrderByAdminCommand implements ActionCommand {
             usedQuestService.delete(
                     Integer.parseInt(idPerson), Integer.parseInt(id));
         }
+        factory.close();
         jspPage.setPage("/showUsers");
         return jspPage;
     }

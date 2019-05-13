@@ -2,7 +2,7 @@ package by.epam.site.action.factory;
 
 import by.epam.site.action.Action;
 import by.epam.site.action.command.ActionCommand;
-import by.epam.site.action.command.commandaction.EmptyCommand;
+import by.epam.site.action.command.EmptyCommand;
 import by.epam.site.action.command.MessageManager;
 
 import javax.servlet.http.HttpServletRequest;

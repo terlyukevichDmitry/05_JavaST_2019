@@ -72,6 +72,11 @@ public enum PostCommand {
             this.command = new AddReviewCommand();
         }
     },
+    REMOVE_REVIEW("/removeReview") {
+        {
+            this.command = new RemoveReviewCommand();
+        }
+    },
     SIGNUP("/signup") {
         {
             this.command = new CreatePersonCommand();

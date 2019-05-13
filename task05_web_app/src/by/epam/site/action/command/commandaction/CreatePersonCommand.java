@@ -20,14 +20,10 @@ import javax.servlet.http.HttpServletRequest;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 import java.util.Objects;
 
 public class CreatePersonCommand implements ActionCommand {
-    /**
-     * Logger for recording a program state.
-     */
-    private static final Logger LOGGER =
-            LogManager.getLogger(CreatePersonCommand.class);
     private static final String PARAM_NAME_LOGIN = "login";
     private static final String PARAM_NAME_PASSWORD = "password";
     private static final String PARAM_NAME_CONFIRM_PASSWORD = "confirm";
@@ -38,7 +34,6 @@ public class CreatePersonCommand implements ActionCommand {
     private static final String PARAM_PHONE = "phone";
     private static final String PARAM_DATE_OF_BIRTH = "dateOfBirth";
 
-
     @Override
     public JspPage execute(HttpServletRequest request)
             throws ConstantException, ClassNotFoundException, SQLException {
@@ -47,16 +42,17 @@ public class CreatePersonCommand implements ActionCommand {
         String password = request.getParameter(PARAM_NAME_PASSWORD);
         String confirmPassword
                 = request.getParameter(PARAM_NAME_CONFIRM_PASSWORD);
-        if (login != null) {
-            if (Objects.equals(password, confirmPassword)
-                    && password.length() >= 4) {
+        ServiceFactory factory
+                = new ServiceFactoryImpl(new SqlTransactionFactoryImpl());
+        UserService service = factory.getService(UserService.class);
+        List<User> userList = service.findAll();
+        if (!checkLogin(userList, login)) {
+            if(Objects.equals(password, confirmPassword) && password.length() >= 4) {
                 User user = new User();
                 user.setLogin(login);
                 user.setPassword(password);
                 user.setRole(Role.CLIENT);
-                ServiceFactory factory
-                        = new ServiceFactoryImpl(new SqlTransactionFactoryImpl());
-                UserService service = factory.getService(UserService.class);
+
                 service.save(user);
                 ClientService clientService
                         = factory.getService(ClientService.class);
@@ -72,7 +68,9 @@ public class CreatePersonCommand implements ActionCommand {
                 LocalDate localDate = LocalDate.from(newYorkDateFormatter.parse(
                         request.getParameter(PARAM_DATE_OF_BIRTH)));
                 client.setDateOfBirth(localDate);
+
                 clientService.save(client);
+
                 jspPage.setPage("/signup");
                 request.getSession().setAttribute("createInfo",
                         MessageManager.getProperty("correctMessage"));
@@ -80,11 +78,21 @@ public class CreatePersonCommand implements ActionCommand {
                 jspPage.setPage("/signup?a=b");
                 request.getSession().setAttribute("createInfo",
                         MessageManager.getProperty("incorrectData"));
-
             }
-            return jspPage;
+        } else {
+            jspPage.setPage("/signup?a=incorrectLogin");
+            request.getSession().setAttribute("createInfo",
+                    MessageManager.getProperty("equalsLogin"));
         }
-        jspPage.setPage(ConfigurationManager.getProperty("signUp"));
         return jspPage;
+    }
+
+    private boolean checkLogin(final List<User> users, final String login) {
+        for (User user :users) {
+            if (login.equals(user.getLogin())) {
+                return true;
+            }
+        }
+        return false;
     }
 }

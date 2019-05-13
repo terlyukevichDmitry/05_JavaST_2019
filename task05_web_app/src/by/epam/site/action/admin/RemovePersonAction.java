@@ -46,11 +46,13 @@ public class RemovePersonAction implements ActionCommand {
                         MessageManager.getProperty("removeTrue"));
                 jspPage.setPage(ConfigurationManager.getProperty("removeUser"));
                 jspPage.setPage("/removeUser");
+                factory.close();
                 return jspPage;
             } else {
                 request.getSession().setAttribute("textMessage",
                         MessageManager.getProperty("loginErrr"));
                 jspPage.setPage("/removeUser?a=b");
+                factory.close();
                 return jspPage;
             }
         } else {

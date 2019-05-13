@@ -4,10 +4,7 @@ import by.epam.site.action.admin.AcceptOrderCommand;
 import by.epam.site.action.admin.PersonShowAction;
 import by.epam.site.action.admin.UserProfileDirection;
 import by.epam.site.action.command.*;
-import by.epam.site.action.command.commandaction.CreatePersonCommand;
-import by.epam.site.action.command.commandaction.LogoutCommand;
-import by.epam.site.action.command.commandaction.ProfileCommand;
-import by.epam.site.action.command.commandaction.QuestShowCommand;
+import by.epam.site.action.command.commandaction.*;
 import by.epam.site.action.command.direction.*;
 
 public enum GetCommand {
@@ -71,9 +68,14 @@ public enum GetCommand {
             this.command = new UserProfileDirection();
         }
     },
+    SHOW_REVIEW("/review") {
+        {
+            this.command = new ShowReviewCommand();
+        }
+    },
     SIGNUP("/signup") {
         {
-            this.command = new CreatePersonCommand();
+            this.command = new SignUpDirection();
         }
     };
     String name;

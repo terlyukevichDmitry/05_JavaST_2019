@@ -58,6 +58,8 @@
                 <a href="${homeURL}" class="menu_link"><i class="fas fa-home"></i> Home</a>
                 <a href="#" class="menu_link"><i class="fas fa-newspaper"></i> About</a>
                 <a href="#" class="menu_link"><i class="fas fa-phone"></i> Contact</a>
+                <c:url value="/review" var="reviewURL"/>
+                <a href="${reviewURL}" class="menu_link"><i class="fas fa-list"></i> Review</a>
             </div>
             <c:choose>
                 <c:when test="${user.role.name.equals('administrator')}">

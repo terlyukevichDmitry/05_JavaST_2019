@@ -42,6 +42,8 @@
         <url-pattern>/acceptOrder</url-pattern>
         <url-pattern>/removePerson</url-pattern>
         <url-pattern>/addReview</url-pattern>
+        <url-pattern>/review</url-pattern>
+        <url-pattern>/removeReview</url-pattern>
 
     </servlet-mapping>
 
@@ -83,6 +85,8 @@
         <url-pattern>/acceptOrder</url-pattern>
         <url-pattern>/removePerson</url-pattern>
         <url-pattern>/addReview</url-pattern>
+        <url-pattern>/review</url-pattern>
+        <url-pattern>/removeReview</url-pattern>
 
     </filter-mapping>
     <filter>
@@ -113,6 +117,8 @@
         <url-pattern>/acceptOrder</url-pattern>
         <url-pattern>/removePerson</url-pattern>
         <url-pattern>/addReview</url-pattern>
+        <url-pattern>/review</url-pattern>
+        <url-pattern>/removeReview</url-pattern>
 
     </filter-mapping>
 </web-app>

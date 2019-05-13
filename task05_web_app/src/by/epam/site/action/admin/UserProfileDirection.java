@@ -29,6 +29,7 @@ public class UserProfileDirection implements ActionCommand {
             request.getSession().setAttribute("alloo", personId);
             request.getSession().setAttribute("userQuests", usedQuests);
         }
+        factory.close();
         jspPage.setPage(
                 ConfigurationManager.getProperty("goToUserProfile"));
         return jspPage;

@@ -28,6 +28,7 @@ public class ControllerServlet extends HttpServlet {
                          final HttpServletResponse response) {
         try {
             request.setCharacterEncoding("UTF-8");
+            response.setContentType("text/html;charset=UTF-8");
             ActionCommand actionCommand = new ActionManager().getPostCommand();
             JspPage jspPage = actionCommand.execute(request);
             if (jspPage.getPage().equals("/logout")) {
@@ -60,6 +61,8 @@ public class ControllerServlet extends HttpServlet {
     protected void doPost(final HttpServletRequest request,
                           final HttpServletResponse response) {
         try {
+            request.setCharacterEncoding("UTF-8");
+            response.setContentType("text/html;charset=UTF-8");
             Action action = new Action();
             ActionCommand actionCommand
                     = new ActionManager().getActionCommand(action, request);

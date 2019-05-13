@@ -29,6 +29,7 @@ public class QuestShowCommand implements ActionCommand {
             request.getSession().setAttribute(
                     "questPlaces", questPlaces);
         }
+        factory.close();
         jspPage.setPage(
                 ConfigurationManager.getProperty("questPath"));
         return jspPage;

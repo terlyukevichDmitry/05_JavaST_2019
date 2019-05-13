@@ -93,7 +93,7 @@ public class ClientDAOImpl extends AbstractDAOImpl implements ClientDAO {
             statement.setDate(4, date);
             statement.setString(5, client.getEmail());
             statement.setString(6, client.getPhone());
-            statement.setString(7, "images/first.image");
+            statement.setString(7, "nope");
             statement.executeUpdate();
             transaction.commit();
             ResultSet resultSet = statement.getGeneratedKeys();

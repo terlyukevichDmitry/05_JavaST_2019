@@ -38,6 +38,7 @@ public class AddReviewCommand implements ActionCommand {
         questPlace.setId(Integer.parseInt(idQuestPlace));
         review.setQuestPlace(questPlace);
         service.save(review);
+        factory.close();
         jspPage.setPage("/quests");
         return jspPage;
     }

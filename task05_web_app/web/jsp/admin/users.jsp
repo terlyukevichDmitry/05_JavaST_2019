@@ -36,9 +36,12 @@
                 <h1 class="logo_title">JukeBOX</h1>
             </div>
             <div class="header_menu">
-                <a href="#" class="menu_link"><i class="fas fa-home"></i> Home</a>
+                <c:url value="/home" var="homeURL"/>
+                <a href="${homeURL}" class="menu_link"><i class="fas fa-home"></i> Home</a>
                 <a href="#" class="menu_link"><i class="fas fa-newspaper"></i> About</a>
                 <a href="#" class="menu_link"><i class="fas fa-phone"></i> Contact</a>
+                <c:url value="/review" var="reviewURL"/>
+                <a href="${reviewURL}" class="menu_link"><i class="fas fa-list"></i> Review</a>
             </div>
             <c:choose>
                 <c:when test="${user.role.name.equals('administrator')}">

@@ -25,6 +25,7 @@ public class PersonShowAction implements ActionCommand {
         UserService service = factory.getService(UserService.class);
         List<User> users = service.findAll();
         request.getSession().setAttribute("userList", users);
+        factory.close();
         jspPage.setPage(ConfigurationManager.getProperty("showUsers"));
         return jspPage;
     }

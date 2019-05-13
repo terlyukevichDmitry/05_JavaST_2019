@@ -27,6 +27,7 @@ public class ProfileCommand implements ActionCommand {
             request.getSession().setAttribute(
                     "client", client);
         }
+        factory.close();
         jspPage.setPage(
                 ConfigurationManager.getProperty("profilePath"));
         return jspPage;

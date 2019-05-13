@@ -32,6 +32,7 @@ public class ChangePasswordAction implements ActionCommand {
             request.getSession().setAttribute("user", user);
             request.getSession().setAttribute("errorPassword",
                     MessageManager.getProperty("completed"));
+            factory.close();
             jspPage.setPage("/profile");
         } else {
             request.getSession().setAttribute("errorPassword",

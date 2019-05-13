@@ -31,6 +31,8 @@ public class ReviewDAOImpl extends AbstractDAOImpl implements ReviewDAO {
             + " VALUES (?, ?, ?, ?)";
     private static final String DB_REVIEW_UPDATE = "UPDATE `review` SET `message` "
             + "= ?, `date` = ?, `client_id` = ?, `quest_place_id` = ? WHERE `id` = ?";
+    private static final String DB_DELETE_BY_CLIENT_ID = "DELETE FROM `review` WHERE `client_id`"
+            + " = ?";
     @Override
     public List<Review> readAll() throws ConstantException {
         try(PreparedStatement statement
@@ -130,5 +132,16 @@ public class ReviewDAOImpl extends AbstractDAOImpl implements ReviewDAO {
             throw new ConstantException(e);
         }
         return review;
+    }
+
+    @Override
+    public void deleteByClientId(Integer clientId) throws ConstantException {
+        try (PreparedStatement statement
+                     = connection.prepareStatement(DB_DELETE_BY_CLIENT_ID)) {
+            statement.setInt(1, clientId);
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            throw new ConstantException(e);
+        }
     }
 }

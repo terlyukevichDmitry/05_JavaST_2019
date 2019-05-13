@@ -36,6 +36,7 @@ public class SearchByParameterCommand implements ActionCommand {
             jspPage.setPage(
                     ConfigurationManager.getProperty("questPath"));
         }
+        factory.close();
         return jspPage;
     }
 }

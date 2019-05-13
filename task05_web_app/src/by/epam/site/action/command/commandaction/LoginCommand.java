@@ -45,6 +45,7 @@ public class LoginCommand implements ActionCommand {
                 request.getSession().setAttribute("errorLoginPassMessage",
                         MessageManager.getProperty("loginerror"));
             }
+            factory.close();
             return jspPage;
         }
         return null;

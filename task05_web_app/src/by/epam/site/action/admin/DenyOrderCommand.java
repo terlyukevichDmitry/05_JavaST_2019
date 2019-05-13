@@ -28,6 +28,7 @@ public class DenyOrderCommand implements ActionCommand {
         if (idPerson != null) {
             usedQuestService.save(usedQuest);
         }
+        factory.close();
         jspPage.setPage("/showUsers");
         return jspPage;
     }

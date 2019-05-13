@@ -44,6 +44,8 @@
                 <a href="${homeURL}" class="menu_link"><i class="fas fa-home"></i> Home</a>
                 <a href="#" class="menu_link"><i class="fas fa-newspaper"></i> About</a>
                 <a href="#" class="menu_link"><i class="fas fa-phone"></i> Contact</a>
+                <c:url value="/review" var="reviewURL"/>
+                <a href="${reviewURL}" class="menu_link"><i class="fas fa-list"></i> Review</a>
             </div>
             <c:choose>
                 <c:when test="${user.role.name.equals('administrator')}">
@@ -114,11 +116,11 @@
             </div>
             <div class="col-md-6">
                 <tr>
-                    Quest place name: <th><c:out value="${ elem.name }"/> </th><br><br>
-                    Phone number: <th><c:out value="${ elem.phone }"/> </th><br><br>
-                    Quest address: <th> <c:out value="${ elem.address }"/> </th><br><br>
-                    Quest name: <th><c:out value="${ elem.quest.title }"/> </th><br><br>
-                    Quest level: <th><c:out value="${ elem.quest.level }"/> </th><br><br>
+                    Quest place name: <th><c:out value="${ elem.name }"/> </th><br>
+                    Phone number: <th><c:out value="${ elem.phone }"/> </th><br>
+                    Quest address: <th> <c:out value="${ elem.address }"/> </th><br>
+                    Quest name: <th><c:out value="${ elem.quest.title }"/> </th><br>
+                    Quest level: <th><c:out value="${ elem.quest.level }"/> </th><br>
                     Maximum number of people in this quest: <th><c:out value="${ elem.quest.maxPeople }"/> </th><br><br>
                     <c:url value="/bookQuest" var="bookQuestURL"/>
                     <form action="${bookQuestURL}" method="post">

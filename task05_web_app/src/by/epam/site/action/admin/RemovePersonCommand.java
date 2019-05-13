@@ -23,14 +23,15 @@ public class RemovePersonCommand implements ActionCommand {
         UserService service = factory.getService(UserService.class);
         User user = service.findById(Integer.parseInt(removeId));
         if (user != null) {
-            service.delete(user.getId());
-            ClientService clientService = factory.getService(ClientService.class);
+            ClientService clientService
+                    = factory.getService(ClientService.class);
             clientService.delete(user.getId());
+            service.delete(user.getId());
             jspPage.setPage("/showUsers");
         } else {
             jspPage.setPage("/showUsers?a=nopeMotherFacker");
         }
-
+        factory.close();
         return jspPage;
     }
 }

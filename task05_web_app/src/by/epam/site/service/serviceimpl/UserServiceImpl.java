@@ -1,9 +1,12 @@
 package by.epam.site.service.serviceimpl;
 
+import by.epam.site.dao.daoimpl.UserDAOImpl;
 import by.epam.site.dao.daointerfaces.UserDAO;
 import by.epam.site.entity.User;
 import by.epam.site.exception.ConstantException;
 import by.epam.site.service.interfaces.UserService;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.math.BigInteger;
 
@@ -14,6 +17,12 @@ import java.sql.SQLException;
 import java.util.List;
 
 public class UserServiceImpl extends ServiceImpl implements UserService {
+
+    /**
+     * Logger for recording a program state.
+     */
+    private static final Logger LOGGER
+            = LogManager.getLogger(UserServiceImpl.class);
 
     @Override
     public List<User> findAll() throws ConstantException,
@@ -36,19 +45,24 @@ public class UserServiceImpl extends ServiceImpl implements UserService {
         return dao.read(identity);
     }
     @Override
-    public void save(User user) throws ConstantException, ClassNotFoundException, SQLException {
+    public void save(User user) throws ConstantException {
         UserDAO dao = transaction.createDaoImpl(UserDAO.class);
-        if(user.getId() != null) {
-            if(user.getPassword() != null) {
-                user.setPassword(mdFiveMethod(user.getPassword()));
+        try {
+            if (user.getId() != null) {
+                if (user.getPassword() != null) {
+                    user.setPassword(mdFiveMethod(user.getPassword()));
+                } else {
+                    User oldUser = dao.read(user.getId());
+                    user.setPassword(mdFiveMethod(oldUser.getPassword()));
+                }
+                dao.update(user, transaction);
             } else {
-                User oldUser = dao.read(user.getId());
-                user.setPassword(mdFiveMethod(oldUser.getPassword()));
+                user.setPassword(mdFiveMethod(user.getPassword()));
+                user.setId(dao.create(user, transaction));
             }
-            dao.update(user, transaction);
-        } else {
-            user.setPassword(mdFiveMethod(user.getPassword()));
-            user.setId(dao.create(user, transaction));
+        } catch (SQLException | ClassNotFoundException e) {
+            LOGGER.error("It is impossible to turn off " +
+                    "autocommiting for database connection", e);
         }
     }
 

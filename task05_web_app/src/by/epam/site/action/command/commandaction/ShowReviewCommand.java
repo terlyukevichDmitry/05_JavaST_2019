@@ -11,6 +11,7 @@ import by.epam.site.service.interfaces.ServiceFactory;
 import by.epam.site.service.serviceimpl.ServiceFactoryImpl;
 
 import javax.servlet.http.HttpServletRequest;
+import java.net.URLEncoder;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -42,6 +43,7 @@ public class ShowReviewCommand implements ActionCommand {
         request.setAttribute("review", list);
         request.setAttribute("num_of_pages", nOfPages);
         request.setAttribute("current_page", currentPageInt);
+
 
         jspPage.setPage(ConfigurationManager.getProperty("review"));
         factory.close();

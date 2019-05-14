@@ -5,11 +5,13 @@ import by.epam.site.action.factory.JspPage;
 import by.epam.site.dao.daoimpl.SqlTransactionFactoryImpl;
 import by.epam.site.entity.Image;
 import by.epam.site.entity.Quest;
+import by.epam.site.entity.QuestPlace;
 import by.epam.site.exception.ConstantException;
 
 import java.io.*;
 
 import by.epam.site.service.interfaces.ImageService;
+import by.epam.site.service.interfaces.QuestPlaceService;
 import by.epam.site.service.interfaces.QuestService;
 import by.epam.site.service.interfaces.ServiceFactory;
 import by.epam.site.service.serviceimpl.ServiceFactoryImpl;
@@ -35,23 +37,13 @@ public class CreateQuestCommand implements ActionCommand {
             ClassNotFoundException, IOException, ServletException {
 
         JspPage jspPage = new JspPage();
+        int id = Integer.parseInt(request.getParameter("options"));
         String title = request.getParameter("title");
         int level = Integer.parseInt(request.getParameter("level"));
         int maxOfPeople
                 = Integer.parseInt(request.getParameter("maxOfPeople"));
         Part part = request.getPart("fileLoader");
-        String fileName = Paths.get(part.getSubmittedFileName()).getFileName().toString();
-        String newFilePath = "C:\\05_JavaST_2019\\task05_web_app\\web\\images\\" + fileName;
-        InputStream inputStream = part.getInputStream();
-        OutputStream outputStream = new FileOutputStream(newFilePath);
-        Objects.requireNonNull(outputStream, "out");
-        byte[] buffer = new byte[8192];
-        int read;
-        while ((read = inputStream.read(buffer, 0, 8192)) >= 0) {
-            outputStream.write(buffer, 0, read);
-        }
-        inputStream.close();
-        outputStream.close();
+        String fileName = transferTo(part);
         ServiceFactory factory
                 = new ServiceFactoryImpl(new SqlTransactionFactoryImpl());
         QuestService service = factory.getService(QuestService.class);
@@ -67,10 +59,34 @@ public class CreateQuestCommand implements ActionCommand {
         image.setId(quest1.getId());
         image.setFilePath("images/" + fileName);
         imageService.create(image);
+
+        QuestPlaceService questPlaceService = factory.getService(QuestPlaceService.class);
+        QuestPlace questPlace = questPlaceService.findById(id);
+        questPlace.setId(null);
+        questPlace.setQuest(quest1);
+        questPlace.setImage(image);
+        questPlaceService.save(questPlace);
+
         jspPage.setPage("/createQuest");
         factory.close();
         return jspPage;
     }
 
-
+    private String transferTo(final Part part) throws IOException {
+        String fileName= Paths.get(
+                part.getSubmittedFileName()).getFileName().toString();
+        String newFilePath = "C:\\05_JavaST_2019\\"
+                + "task05_web_app\\web\\images\\" + fileName;
+        InputStream inputStream = part.getInputStream();
+        OutputStream outputStream = new FileOutputStream(newFilePath);
+        Objects.requireNonNull(outputStream, "out");
+        byte[] buffer = new byte[8192];
+        int read;
+        while ((read = inputStream.read(buffer, 0, 8192)) >= 0) {
+            outputStream.write(buffer, 0, read);
+        }
+        inputStream.close();
+        outputStream.close();
+        return fileName;
+    }
 }

@@ -1,7 +1,5 @@
 package by.epam.site.action.command;
 
-import by.epam.site.action.command.ActionCommand;
-import by.epam.site.action.command.MessageManager;
 import by.epam.site.action.factory.GetCommand;
 import by.epam.site.action.factory.JspPage;
 import by.epam.site.exception.ConstantException;

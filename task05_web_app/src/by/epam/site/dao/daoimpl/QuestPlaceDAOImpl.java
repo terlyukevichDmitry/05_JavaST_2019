@@ -20,8 +20,8 @@ public class QuestPlaceDAOImpl
             = LogManager.getLogger(QuestPlaceDAOImpl.class);
     private static final String DB_SELECT_ALL = "SELECT `id`, `name`,"
             + " `address`, `phone`, `image_id`, `quest_id` FROM `quest_place`";
-    private static final String DB_DELETE = "DELETE FROM `quest_place`"
-            + " WHERE `id` = ?";
+    private static final String DB_DELETE = "DELETE FROM `quest_place` "
+            + "WHERE `id` = ?";
     private static final String DB_QUEST_PLACE_CREATE = "INSERT INTO "
             + "`quest_place` (`name`, `address`, `phone`, `image_id`, `quest_id`) "
             + "VALUES (?, ?, ?, ?, ?)";
@@ -70,8 +70,7 @@ public class QuestPlaceDAOImpl
 
     @Override
     public void delete(Integer id) throws ConstantException {
-        try (Connection connection = getConnection();
-             PreparedStatement statement
+        try (PreparedStatement statement
                      = connection.prepareStatement(DB_DELETE)) {
             statement.setInt(1, id);
             statement.executeUpdate();
@@ -83,12 +82,11 @@ public class QuestPlaceDAOImpl
     @Override
     public Integer create(final QuestPlace questPlace,
                           final SqlTransaction transaction)
-            throws ConstantException {
-        try(Connection connection = getConnection();
-            PreparedStatement statement
+            throws ConstantException, SQLException {
+        connection.setAutoCommit(false);
+        try(PreparedStatement statement
                     = connection.prepareStatement(DB_QUEST_PLACE_CREATE,
                     Statement.RETURN_GENERATED_KEYS)) {
-            connection.setAutoCommit(false);
             statement.setString(1, questPlace.getName());
             statement.setString(2, questPlace.getAddress());
             statement.setString(3, questPlace.getPhone());
@@ -101,14 +99,10 @@ public class QuestPlaceDAOImpl
                 return resultSet.getInt(1);
             } else {
                 transaction.rollback();
-                LOGGER.error("There is no autoincremented index after" +
-                        "trying to add record into table `quest_place`");
                 throw new ConstantException();
             }
         } catch (SQLException e) {
             transaction.rollback();
-            LOGGER.error("It is impossible to turn off " +
-                    "autocommiting for database connection", e);
             throw new ConstantException(e);
         }
     }
@@ -116,12 +110,11 @@ public class QuestPlaceDAOImpl
     @Override
     public QuestPlace update(final QuestPlace questPlace,
                              final SqlTransaction transaction)
-            throws ConstantException {
-        try(Connection connection = getConnection();
-            PreparedStatement statement
+            throws ConstantException, SQLException {
+        connection.setAutoCommit(false);
+        try(PreparedStatement statement
                     = connection.prepareStatement(DB_QUEST_PLACE_UPDATE,
                     Statement.RETURN_GENERATED_KEYS)) {
-            connection.setAutoCommit(false);
             statement.setString(1, questPlace.getName());
             statement.setString(2, questPlace.getAddress());
             statement.setString(3, questPlace.getPhone());

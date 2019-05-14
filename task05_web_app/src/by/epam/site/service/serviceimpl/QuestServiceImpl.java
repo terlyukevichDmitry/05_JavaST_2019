@@ -5,11 +5,20 @@ import by.epam.site.dao.transaction.SqlTransaction;
 import by.epam.site.entity.Quest;
 import by.epam.site.exception.ConstantException;
 import by.epam.site.service.interfaces.QuestService;
+import by.epam.site.servlet.ControllerServlet;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.sql.SQLException;
 import java.util.List;
 
 public class QuestServiceImpl extends ServiceImpl implements QuestService {
+
+    /**
+     * Logger for recording a program state.
+     */
+    private static final Logger LOGGER =
+            LogManager.getLogger(QuestServiceImpl.class);
     @Override
     public List<Quest> findAll()
             throws ConstantException, SQLException, ClassNotFoundException {
@@ -25,12 +34,19 @@ public class QuestServiceImpl extends ServiceImpl implements QuestService {
 
     @Override
     public void save(Quest quest)
-            throws ConstantException, ClassNotFoundException, SQLException {
+            throws ConstantException {
         QuestDAO dao = transaction.createDaoImpl(QuestDAO.class);
-        if(quest.getId() != null) {
-            dao.update(quest, transaction);
-        } else {
-            quest.setId(dao.create(quest, transaction));
+        try {
+            if (quest.getId() != null) {
+                dao.update(quest, transaction);
+            } else {
+                quest.setId(dao.create(quest, transaction));
+            }
+            transaction.commit();
+        } catch (SQLException | ClassNotFoundException e) {
+            transaction.rollback();
+            LOGGER.error("It is impossible to turn off " +
+                    "autocommiting for database connection", e);
         }
     }
 

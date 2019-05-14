@@ -82,6 +82,16 @@ public enum PostCommand {
             this.command = new CreateQuestCommand();
         }
     },
+    CHANGE_PHOTO("/changePhoto") {
+        {
+            this.command = new ChangePhotoCommand();
+        }
+    },
+    REMOVE_QUEST("/removeQuest") {
+        {
+            this.command = new RemoveQuestCommand();
+        }
+    },
     SIGNUP("/signup") {
         {
             this.command = new CreatePersonCommand();

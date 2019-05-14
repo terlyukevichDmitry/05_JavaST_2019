@@ -76,12 +76,11 @@ public class QuestDAOImpl extends AbstractDAOImpl implements QuestDAO {
 
     @Override
     public Integer create(final Quest quest, final SqlTransaction transaction)
-            throws ConstantException {
-        try (Connection connection = getConnection();
-             PreparedStatement statement
+            throws ConstantException, SQLException {
+        connection.setAutoCommit(false);
+        try (PreparedStatement statement
                      = connection.prepareStatement(DB_QUEST_CREATE,
                      Statement.RETURN_GENERATED_KEYS)) {
-            connection.setAutoCommit(false);
             statement.setString(1, quest.getTitle());
             statement.setInt(2, quest.getLevel());
             statement.setInt(3, quest.getMaxPeople());
@@ -92,26 +91,21 @@ public class QuestDAOImpl extends AbstractDAOImpl implements QuestDAO {
                 return resultSet.getInt(1);
             } else {
                 transaction.rollback();
-                LOGGER.error("There is no autoincremented index after "
-                        + "trying to add record into table `quest`");
                 throw new ConstantException();
             }
         } catch (SQLException e) {
             transaction.rollback();
-            LOGGER.error("It is impossible to turn off " +
-                    "autocommiting for database connection", e);
             throw new ConstantException(e);
         }
     }
 
     @Override
     public Quest update(Quest quest, SqlTransaction transaction)
-            throws ConstantException {
-        try (Connection connection = getConnection();
-             PreparedStatement statement
+            throws ConstantException, SQLException {
+        connection.setAutoCommit(false);
+        try (PreparedStatement statement
                      = connection.prepareStatement(DB_QUEST_UPDATE,
                      Statement.RETURN_GENERATED_KEYS)) {
-            connection.setAutoCommit(false);
             statement.setInt(1, quest.getMaxPeople());
             statement.setInt(2, quest.getLevel());
             statement.setString(3, quest.getTitle());
@@ -120,8 +114,6 @@ public class QuestDAOImpl extends AbstractDAOImpl implements QuestDAO {
             transaction.commit();
         } catch (SQLException e) {
             transaction.rollback();
-            LOGGER.error("It is impossible to turn off " +
-                    "autocommiting for database connection", e);
             throw new ConstantException(e);
         }
         return quest;

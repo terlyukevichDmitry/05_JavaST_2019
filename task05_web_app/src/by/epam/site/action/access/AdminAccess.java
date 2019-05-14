@@ -33,6 +33,8 @@ public class AdminAccess implements Access {
         stringList.add("/removeReview");
         stringList.add("/createQuest");
         stringList.add("/createNewQuest");
+        stringList.add("/changePhoto");
+        stringList.add("/removeQuest");
     }
     @Override
     public boolean checkAccess(final String checkString) {

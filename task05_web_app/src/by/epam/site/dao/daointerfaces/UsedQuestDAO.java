@@ -10,4 +10,5 @@ public interface UsedQuestDAO extends DaoPattern<UsedQuest> {
     List<UsedQuest> read(Integer id) throws ConstantException;
     void delete(Integer clientId, Integer usedQuestId) throws ConstantException;
     UsedQuest readById(Integer usedQuestId) throws ConstantException;
+    void deleteByQuestPlaceId(Integer questPlaceId) throws ConstantException;
 }

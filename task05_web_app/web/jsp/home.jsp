@@ -97,5 +97,10 @@
         </div>
     </div>
 </div>
+
+<span id="myMessage">
+    ${param.message}
+</span>
+
 </body>
 </html>

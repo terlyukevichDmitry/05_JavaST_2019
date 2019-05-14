@@ -1,6 +1,7 @@
 package by.epam.site.service.serviceimpl;
 
 import by.epam.site.dao.daoimpl.SqlTransactionFactoryImpl;
+import by.epam.site.dao.daoimpl.UsedQuestDAOImpl;
 import by.epam.site.dao.daointerfaces.UsedQuestDAO;
 import by.epam.site.entity.QuestPlace;
 import by.epam.site.entity.UsedQuest;
@@ -9,12 +10,20 @@ import by.epam.site.service.interfaces.ClientService;
 import by.epam.site.service.interfaces.QuestPlaceService;
 import by.epam.site.service.interfaces.ServiceFactory;
 import by.epam.site.service.interfaces.UsedQuestService;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class UsedQuestServiceImpl extends ServiceImpl implements UsedQuestService {
+
+    /**
+     * Logger for recording a program state.
+     */
+    private static final Logger LOGGER
+            = LogManager.getLogger(UsedQuestServiceImpl.class);
     @Override
     public List<UsedQuest> findAll() throws ConstantException, SQLException, ClassNotFoundException {
         UsedQuestDAO dao = transaction.createDaoImpl(UsedQuestDAO.class);
@@ -22,12 +31,20 @@ public class UsedQuestServiceImpl extends ServiceImpl implements UsedQuestServic
     }
 
     @Override
-    public void save(UsedQuest usedQuest) throws ConstantException, ClassNotFoundException, SQLException {
+    public void save(UsedQuest usedQuest) throws ConstantException {
         UsedQuestDAO dao = transaction.createDaoImpl(UsedQuestDAO.class);
-        if(usedQuest.getId() != null) {
-            dao.update(usedQuest, transaction);
-        } else {
-            usedQuest.setId(dao.create(usedQuest, transaction));
+        try {
+            if (usedQuest.getId() != null) {
+                dao.update(usedQuest, transaction);
+            } else {
+                usedQuest.setId(dao.create(usedQuest, transaction));
+            }
+            transaction.commit();
+        } catch (SQLException | ClassNotFoundException e) {
+            transaction.rollback();
+            LOGGER.error("There is no autoincremented "
+                    + "index after trying to add record into table "
+                    + "`used_quest`");
         }
     }
 
@@ -51,7 +68,7 @@ public class UsedQuestServiceImpl extends ServiceImpl implements UsedQuestServic
             List<QuestPlace> questPlaces = new ArrayList<>();
             questPlaces.add(element.getQuestPlace());
             service.initData(questPlaces);
-            ClientService clientService = factory.getService(ClientService.class);
+            factory.close();
         }
     }
 
@@ -75,5 +92,12 @@ public class UsedQuestServiceImpl extends ServiceImpl implements UsedQuestServic
     public UsedQuest findById(Integer usedQuestId) throws ConstantException {
         UsedQuestDAO dao = transaction.createDaoImpl(UsedQuestDAO.class);
         return dao.readById(usedQuestId);
+    }
+
+    @Override
+    public void deleteByQuestPlaceId(Integer questPlaceId)
+            throws ConstantException {
+        UsedQuestDAO dao = transaction.createDaoImpl(UsedQuestDAO.class);
+        dao.deleteByQuestPlaceId(questPlaceId);
     }
 }

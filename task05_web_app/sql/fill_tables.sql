@@ -2,16 +2,14 @@ INSERT INTO `user` (
 	`id`,`login`,`password`,`role`)
 VALUES
 			 (2, "user1", "HELLOGUYSHOWAREYOUTODAYAMANWHATA", 1),
-			 (3, "user2", "EE11CBB19052E40B07AAC0CA060C23EE", 2),
-			 (4, "user3", "HELLOWORLD180420ABCGDEHIMANWHATA", 2);
+			 (3, "user2", "EE11CBB19052E40B07AAC0CA060C23EE", 1);
 
 INSERT INTO `client`
 		(`id`, `name`, `surname`, `patronymic`, `dateOfBirth`, `email`, `phone`, `imageAddress`)
 VALUES
 			 (1, "Dmitry", "Terlyukevich", "Sergeevich", "2005-09-10", "lanselot_2000@mail.ru", "+375298619783", "images/1.jpg"),
 			 (2, "Eugene", "Dragun", "Dmitrievich", "1999-09-10", "zheka@mail.ru", "+375337681345", "images/1.jpg"),
-			 (3, "Ivan", "Ivanov", "Ivanovich", "2001-09-10", "ivan@mail.ru", "+375337431986", "images/1.jpg"),
-			 (4, "Petr", "Petrov", "Petrovich", "2010-09-10", "petrov_forever@mail.ru", "+80295673521", "images/1.jpg");
+			 (3, "Ivan", "Ivanov", "Ivanovich", "2001-09-10", "ivan@mail.ru", "+375337431986", "images/1.jpg");
 
 INSERT INTO `quest`
 		(`id`, `title`, `level`, `max_people`)
@@ -30,8 +28,8 @@ VALUES
 INSERT INTO `quest_place`
 		(`id`, `name`, `phone`, `address`, `image_id`, `quest_id`)
 VALUES
-			 (1, "Halloween", "+375298619783", "ulicaPushkina Dom Kolotushkina", 1, 1),
-			 (2, "New York", "+375294345583", "ulicaPushkina Dom Kolotushkina", 3, 2),
+			 (1, "Halloween", "+375298619783", "first place", 1, 1),
+			 (2, "New York", "+375294345583", "second place", 3, 2),
 			 (3, "New Day", "+375293453456", "ulicaPushkina Dom Kolotushkina", 2, 2);
 
 INSERT INTO `review`

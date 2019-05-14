@@ -42,6 +42,8 @@ public class UsedQuestDAOImpl extends AbstractDAOImpl implements UsedQuestDAO {
     private static final String DB_FIND_BY_ID =
             "SELECT `client_id`, `date`, `quest_place_id`, `control` FROM "
                     + "`used_quest` WHERE `id` = ?";
+    private static final String DB_DELETE_BY_QUEST_PLACE_ID
+            = "DELETE FROM `used_quest` WHERE `quest_place_id` = ?";
 
 
     @Override
@@ -107,21 +109,16 @@ public class UsedQuestDAOImpl extends AbstractDAOImpl implements UsedQuestDAO {
                     usedQuest.getQuestPlace().getQuest().getId());
             statement.setBoolean(4, usedQuest.getControl());
             statement.executeUpdate();
+            transaction.commit();
             ResultSet resultSet = statement.getGeneratedKeys();
             if(resultSet.next()) {
-                transaction.commit();
                 return resultSet.getInt(1);
             } else {
                 transaction.rollback();
-                LOGGER.error("There is no autoincremented "
-                        + "index after trying to add record into table "
-                        + "`used_quest`");
                 throw new ConstantException();
             }
         } catch (SQLException e) {
             transaction.rollback();
-            LOGGER.error("It is impossible to turn off " +
-                    "autocommiting for database connection", e);
             throw new ConstantException(e);
         }
     }
@@ -129,11 +126,11 @@ public class UsedQuestDAOImpl extends AbstractDAOImpl implements UsedQuestDAO {
     @Override
     public UsedQuest update(final UsedQuest usedQuest,
                             final SqlTransaction transaction)
-            throws ConstantException {
+            throws ConstantException, SQLException {
+        connection.setAutoCommit(false);
         try(PreparedStatement statement
                     = connection.prepareStatement(DB_USED_QUEST_UPDATE,
                     Statement.RETURN_GENERATED_KEYS)) {
-            connection.setAutoCommit(false);
             Date date = java.sql.Date.valueOf(usedQuest.getDate());
             statement.setDate(1, date);
             statement.setInt(2, usedQuest.getClient().getId());
@@ -141,12 +138,8 @@ public class UsedQuestDAOImpl extends AbstractDAOImpl implements UsedQuestDAO {
             statement.setBoolean(4, usedQuest.getControl());
             statement.setInt(5, usedQuest.getId());
             statement.executeUpdate();
-            transaction.commit();
             return usedQuest;
         } catch (SQLException e) {
-            transaction.rollback();
-            LOGGER.error("It is impossible to turn off " +
-                    "autocommiting for database connection", e);
             throw new ConstantException(e);
         }
     }
@@ -191,11 +184,23 @@ public class UsedQuestDAOImpl extends AbstractDAOImpl implements UsedQuestDAO {
     @Override
     public void delete(final Integer clientId, final Integer usedQuestId)
             throws ConstantException {
-        try (Connection connection = getConnection();
-             PreparedStatement statement
+        try (PreparedStatement statement
                      = connection.prepareStatement(DB_DELETE_BY_PARAMETERS)) {
             statement.setInt(1, usedQuestId);
             statement.setInt(2, clientId);
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            throw new ConstantException(e);
+        }
+    }
+
+    @Override
+    public void deleteByQuestPlaceId(final Integer questPlaceId)
+            throws ConstantException {
+        try (PreparedStatement statement
+                     = connection.prepareStatement(
+                             DB_DELETE_BY_QUEST_PLACE_ID)) {
+            statement.setInt(1, questPlaceId);
             statement.executeUpdate();
         } catch (SQLException e) {
             throw new ConstantException(e);

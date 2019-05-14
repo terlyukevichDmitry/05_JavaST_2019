@@ -43,7 +43,7 @@ CREATE TABLE IF NOT EXISTS `quest_place` (
 	`id` INT(11) NOT NULL AUTO_INCREMENT,
 	`name` varchar(32) NOT NULL ,
 	`phone` varchar(52) NOT NULL ,
-	`address` varchar(129) NOT NULL ,
+	`address` varchar(254) NOT NULL ,
 	`image_id` INT(11) NOT NULL ,
 	`quest_id` INT(11) NOT NULL ,
 	PRIMARY KEY (`id`)

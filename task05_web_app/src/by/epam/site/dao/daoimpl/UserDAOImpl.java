@@ -54,6 +54,7 @@ public class UserDAOImpl extends AbstractDAOImpl implements UserDAO {
                         "role")));
                 userList.add(user);
             }
+            resultSet.close();
             return userList;
         } catch (SQLException exception) {
             throw new ConstantException(exception);
@@ -88,9 +89,7 @@ public class UserDAOImpl extends AbstractDAOImpl implements UserDAO {
     @Override
     public Integer create(final User user, final SqlTransaction transaction)
             throws ConstantException, SQLException {
-        ResultSet resultSet = null;
         connection.setAutoCommit(false);
-
         try(PreparedStatement statement
                     = connection.prepareStatement(DB_USER_CREATE,
                     Statement.RETURN_GENERATED_KEYS)) {
@@ -98,20 +97,16 @@ public class UserDAOImpl extends AbstractDAOImpl implements UserDAO {
             statement.setString(2, user.getPassword());
             statement.setInt(3, user.getRole().getIdentity());
             statement.executeUpdate();
+            ResultSet resultSet = statement.getGeneratedKeys();
             transaction.commit();
-            resultSet = statement.getGeneratedKeys();
             if(resultSet.next()) {
                 return resultSet.getInt(1);
             } else {
                 transaction.rollback();
-                LOGGER.error("There is no autoincremented index after trying"
-                        + "to add record into table `user`");
                 throw new ConstantException();
             }
         } catch (SQLException e) {
             transaction.rollback();
-            LOGGER.error("It is impossible to turn off " +
-                    "autocommiting for database connection", e);
             throw new ConstantException(e);
         }
     }
@@ -120,8 +115,7 @@ public class UserDAOImpl extends AbstractDAOImpl implements UserDAO {
     public User update(final User user, final SqlTransaction transaction)
             throws ConstantException, SQLException {
         connection.setAutoCommit(false);
-        try(Connection connection = getConnection();
-            PreparedStatement statement
+        try(PreparedStatement statement
                     = connection.prepareStatement(DB_USER_UPDATE,
                     Statement.RETURN_GENERATED_KEYS)) {
             statement.setString(1, user.getLogin());
@@ -132,8 +126,6 @@ public class UserDAOImpl extends AbstractDAOImpl implements UserDAO {
             transaction.commit();
         } catch (SQLException e) {
             transaction.rollback();
-            LOGGER.error("It is impossible to turn off " +
-                    "autocommiting for database connection", e);
             throw new ConstantException(e);
         }
         return user;
@@ -141,13 +133,11 @@ public class UserDAOImpl extends AbstractDAOImpl implements UserDAO {
 
     @Override
     public User read(String login, String password) throws ConstantException {
-        PreparedStatement statement = null;
-        ResultSet resultSet = null;
-        try {
-            statement = getConnection().prepareStatement(DB_USER);
+        try(PreparedStatement statement
+                    = getConnection().prepareStatement(DB_USER)) {
             statement.setString(1, login);
             statement.setString(2, password);
-            resultSet = statement.executeQuery();
+            ResultSet resultSet = statement.executeQuery();
             User user = null;
             if(resultSet.next()) {
                 user = new User();
@@ -157,16 +147,10 @@ public class UserDAOImpl extends AbstractDAOImpl implements UserDAO {
                 user.setRole(Role.getByIdentity(resultSet.getInt(
                         "role")));
             }
+            resultSet.close();
             return user;
         } catch(SQLException e) {
             throw new ConstantException(e);
-        } finally {
-            try {
-                resultSet.close();
-            } catch(SQLException | NullPointerException e) {}
-            try {
-                statement.close();
-            } catch(SQLException | NullPointerException e) {}
         }
     }
 
@@ -185,6 +169,7 @@ public class UserDAOImpl extends AbstractDAOImpl implements UserDAO {
                 user.setRole(Role.getByIdentity(resultSet.getInt(
                         "role")));
             }
+            resultSet.close();
             return user;
         } catch(SQLException e) {
             throw new ConstantException(e);

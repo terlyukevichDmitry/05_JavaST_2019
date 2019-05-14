@@ -69,8 +69,7 @@ public class ClientDAOImpl extends AbstractDAOImpl implements ClientDAO {
 
     @Override
     public void delete(final Integer id) throws ConstantException {
-        try (Connection connection = getConnection();
-             PreparedStatement statement
+        try (PreparedStatement statement
                      = connection.prepareStatement(DB_DELETE)) {
             statement.setInt(1, id);
             statement.executeUpdate();
@@ -101,14 +100,10 @@ public class ClientDAOImpl extends AbstractDAOImpl implements ClientDAO {
                 return resultSet.getInt(1);
             } else {
                 transaction.rollback();
-                LOGGER.error("There is no autoincremented index after "
-                        + "trying to add record into table `client`");
                 throw new ConstantException();
             }
         } catch (SQLException e) {
             transaction.rollback();
-            LOGGER.error("It is impossible to turn off " +
-                    "autocommiting for database connection", e);
             throw new ConstantException(e);
         }
     }
@@ -133,8 +128,6 @@ public class ClientDAOImpl extends AbstractDAOImpl implements ClientDAO {
             transaction.commit();
         } catch (SQLException e) {
             transaction.rollback();
-            LOGGER.error("It is impossible to turn off " +
-                    "autocommiting for database connection", e);
             throw new ConstantException(e);
         }
         return client;

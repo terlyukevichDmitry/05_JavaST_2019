@@ -131,15 +131,17 @@
                     </div>
                     <div class="panel-body">
                         <div class="text-center" id="author">
-                            <img width="80%" height="80%" src="${pageContext.request.contextPath}/${elem.filePath}"/>
+                            <img alt="Avatar" width="80%" height="80%" src="${pageContext.request.contextPath}/${elem.filePath}"/>
                             <h3><c:out value="${ elem.name }"/> <c:out value="${ elem.surname }"/></h3>
                             <small class="label label-warning">Republic of Belarus</small>
                             <p>Put on a happy face!</p>
-                            <p class="sosmed-author">
-                                <a href=""><i style="font-size: 30px;" class="fab fa-instagram" title="Instagram"></i></a>
-                                <a href=""><i style="font-size: 30px;" class="far fa-question-circle" title="Ask"></i></a>
-                                <a href=""><i style="font-size: 30px;" class="fab fa-vk" title="VK"></i></a>
-                            </p>
+                            <c:url value="/changePhoto" var="changePhotoURL"/>
+                            <form action="${changePhotoURL}" method="post" enctype="multipart/form-data">
+                            <div class="form-group">
+                                <input name="imgLoader" accept=".jpg" type="file" class="form-control-file" placeholder="Input file" id="exampleFormControlFile1" required>
+                            </div>
+                            <button class="btn btn-primary" type="submit">Change photo</button>
+                            </form>
                         </div>
                     </div>
                 </div>

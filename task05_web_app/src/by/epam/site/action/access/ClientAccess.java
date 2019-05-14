@@ -22,7 +22,7 @@ public class ClientAccess implements Access {
         stringList.add("/removeOrder");
         stringList.add("/addReview");
         stringList.add("/review");
-
+        stringList.add("/changePhoto");
     }
 
     @Override

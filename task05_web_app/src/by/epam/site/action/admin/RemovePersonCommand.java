@@ -11,6 +11,7 @@ import by.epam.site.service.interfaces.UserService;
 import by.epam.site.service.serviceimpl.ServiceFactoryImpl;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.swing.*;
 
 public class RemovePersonCommand implements ActionCommand {
     @Override
@@ -23,9 +24,9 @@ public class RemovePersonCommand implements ActionCommand {
         UserService service = factory.getService(UserService.class);
         User user = service.findById(Integer.parseInt(removeId));
         if (user != null) {
-            ClientService clientService
-                    = factory.getService(ClientService.class);
-            clientService.delete(user.getId());
+//            ClientService clientService
+//                    = factory.getService(ClientService.class);
+//            clientService.delete(user.getId());
             service.delete(user.getId());
             jspPage.setPage("/showUsers");
         } else {

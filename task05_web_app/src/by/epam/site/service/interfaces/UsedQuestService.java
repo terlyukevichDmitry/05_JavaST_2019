@@ -18,4 +18,5 @@ public interface UsedQuestService extends Service {
             throws ConstantException, SQLException, ClassNotFoundException;
     void delete(Integer clientId, Integer usedQuestId) throws ConstantException;
     UsedQuest findById(Integer usedQuestId) throws ConstantException;
+    void deleteByQuestPlaceId(Integer questPlaceId) throws ConstantException;
 }

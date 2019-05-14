@@ -6,12 +6,20 @@ import by.epam.site.entity.QuestPlace;
 import by.epam.site.entity.User;
 import by.epam.site.exception.ConstantException;
 import by.epam.site.service.interfaces.*;
+import by.epam.site.servlet.ControllerServlet;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.sql.SQLException;
 import java.util.List;
 
 public class QuestPlaceServiceImpl
         extends ServiceImpl implements QuestPlaceService {
+    /**
+     * Logger for recording a program state.
+     */
+    private static final Logger LOGGER =
+            LogManager.getLogger(QuestPlaceServiceImpl.class);
     @Override
     public List<QuestPlace> findAll() throws ConstantException,
             SQLException, ClassNotFoundException {
@@ -20,13 +28,18 @@ public class QuestPlaceServiceImpl
     }
 
     @Override
-    public void save(QuestPlace questPlace) throws ConstantException,
-            ClassNotFoundException, SQLException {
+    public void save(QuestPlace questPlace) throws ConstantException {
         QuestPlaceDAO dao = transaction.createDaoImpl(QuestPlaceDAO.class);
-        if(questPlace.getId() != null) {
-            dao.update(questPlace, transaction);
-        } else {
-            questPlace.setId(dao.create(questPlace, transaction));
+        try {
+            if (questPlace.getId() != null) {
+                dao.update(questPlace, transaction);
+            } else {
+                questPlace.setId(dao.create(questPlace, transaction));
+            }
+        } catch (ConstantException | SQLException | ClassNotFoundException e) {
+
+            LOGGER.error("It is impossible to be turn off "
+                    + "autocommiting for our database connection", e);
         }
     }
 

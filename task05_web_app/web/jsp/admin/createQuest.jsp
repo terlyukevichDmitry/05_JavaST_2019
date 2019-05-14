@@ -96,37 +96,58 @@
             <a href="${questsURL}" class="btn btn-warning btn-lg">Best Quests</a>
         </div>
     </div>
-</div>
+</div><br><br>
+
 <c:url value="/createNewQuest" var="createQuestURL"/>
 <form action="${createQuestURL}" method="post" enctype="multipart/form-data">
-    <div class="form-row">
-        <div class="col-md-6 mb-3">
-            <label for="validationServer03">Title</label>
-            <input type="text" name="title" class="form-control is-invalid" id="validationServer03" placeholder="Title" required>
-            <div class="valid-feedback">
-                Please provide a valid title.
-            </div>
-        </div>
-        <div class="col-md-3 mb-3">
-            <label for="validationServer04">Level</label>
-            <input type="number" name="level" class="form-control is-invalid" id="validationServer04" placeholder="Level" required>
-            <div class="valid-feedback">
-                Please provide a valid level.
-            </div>
-        </div>
-        <div class="col-md-3 mb-3">
-            <label for="validationServer05">Max number of people</label>
-            <input type="number" name="maxOfPeople" class="form-control is-invalid" id="validationServer05" placeholder="Max number of people" required>
-            <div class="valid-feedback">
-                Please provide a valid number of people.
-            </div>
+    <div class="container h-100">
+        <div class="col-6 mx-auto">
+            <label>Choose the address to create new quest in this place</label>
+            <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                        <%--@elvariable id="questPlace" type="java.util.List"--%>
+                        <c:forEach var="elem" items="${questPlace}" varStatus="status">
+                            <label class="btn btn-secondary">
+                                <input type="radio" name="options" id="${elem.getId()}" autocomplete="off" value="${elem.getId()}">${elem.address}
+                            </label>
+                        </c:forEach>
+                    </div>
+            <br><br>
         </div>
     </div>
-    <div class="form-group">
-        <label for="exampleFormControlFile1">Example file input</label>
-        <input name="fileLoader" accept=".jpg" type="file" class="form-control-file" id="exampleFormControlFile1" required>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-5">
+                <label for="validationServer03">Title</label>
+                <input type="text" name="title" class="form-control is-invalid" id="validationServer03" placeholder="Title" required>            </div>
+            <div class="col">
+                <label for="validationServer04">Level</label>
+                <input type="number" name="level" class="form-control is-invalid" id="validationServer04" placeholder="Level" required>            </div>
+            <div class="col">
+                <label for="validationServer05">Max number of people</label>
+                <input type="number" name="maxOfPeople" class="form-control is-invalid" id="validationServer05" placeholder="Max number of people" required>
+            </div>
+        </div>
+    </div><br>
+    <div class="container h-80">
+        <div class="col-4 mx-auto">
+                <div class="form-group">
+                    <label for="exampleFormControlFile1">Input photo</label><br>
+                    <input name="fileLoader" accept=".jpg" type="file" class="btn btn-dark" id="exampleFormControlFile1" required>
+                </div>
+            <br>
+        </div>
     </div>
-    <button class="btn btn-primary" type="submit">Create quest</button>
+    <div class="container h-80">
+        <div class="col-2 mx-auto">
+            <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                <div class="form-group">
+                    <button class="btn btn-primary" type="submit">   Create quest   </button>
+                </div>
+            </div>
+            <br><br>
+        </div>
+    </div>
 </form>
 </body>
 </html>

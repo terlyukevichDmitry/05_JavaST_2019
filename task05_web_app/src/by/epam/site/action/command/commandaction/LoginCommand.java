@@ -15,6 +15,8 @@ import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.sql.SQLException;
 
 public class LoginCommand implements ActionCommand {
@@ -27,7 +29,7 @@ public class LoginCommand implements ActionCommand {
             LogManager.getLogger(LoginCommand.class);
     @Override
     public JspPage execute(HttpServletRequest request)
-            throws ConstantException, SQLException, ClassNotFoundException {
+            throws ConstantException, SQLException, ClassNotFoundException, UnsupportedEncodingException {
         JspPage jspPage = new JspPage();
         String login = request.getParameter(PARAM_NAME_LOGIN);
         String password = request.getParameter(PARAM_NAME_PASSWORD);
@@ -39,7 +41,8 @@ public class LoginCommand implements ActionCommand {
             if (user != null) {
                 HttpSession httpSession = request.getSession();
                 httpSession.setAttribute("user", user);
-                jspPage.setPage("/home");
+                String message = "logged out successfully";
+                jspPage.setPage("/home?message=" + URLEncoder.encode(message, "UTF-8"));
             } else {
                 jspPage.setPage("/login?a=b");
                 request.getSession().setAttribute("errorLoginPassMessage",

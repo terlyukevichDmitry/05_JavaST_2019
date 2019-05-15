@@ -116,12 +116,12 @@
                 <form action="${removeOrderURL}" method="post">
                     <input type="hidden" name="idToRemove" value="${elem.getId()}">
                     <input type="submit" value="Remove quest" class="btn btn-danger">
-                </form><br><br>
+                </form><br>
                 <c:url value="/deny" var="denyURL"/>
                 <form action="${denyURL}" method="post">
                     <input type="hidden" name="idToDeny" value="${elem.getId()}">
                     <input type="submit" value="Deny quest" class="btn btn-warning">
-                </form><br><br>
+                </form><br>
                 <c:url value="/acceptOrder" var="acceptOrderURL"/>
                 <form action="${acceptOrderURL}" method="post">
                     <input type="hidden" name="idToAcceptOrder" value="${elem.getId()}">

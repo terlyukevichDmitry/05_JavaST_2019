@@ -2,6 +2,7 @@ package by.epam.site.action.command.commandaction;
 
 import by.epam.site.action.command.ActionCommand;
 import by.epam.site.action.command.ConfigurationManager;
+import by.epam.site.action.command.MessageManager;
 import by.epam.site.action.factory.JspPage;
 import by.epam.site.dao.daoimpl.SqlTransactionFactoryImpl;
 import by.epam.site.entity.Client;
@@ -19,7 +20,8 @@ import java.time.LocalDate;
 
 public class ChangeParameterAction implements ActionCommand {
     @Override
-    public JspPage execute(HttpServletRequest request) throws ConstantException, SQLException, ClassNotFoundException {
+    public JspPage execute(HttpServletRequest request)
+            throws ConstantException, SQLException, ClassNotFoundException {
         String name = request.getParameter("changeName");
         String surname = request.getParameter("changeSurname");
         String patronymic = request.getParameter("changePatronymic");
@@ -27,9 +29,11 @@ public class ChangeParameterAction implements ActionCommand {
         String phone = request.getParameter("changePhone");
         String email = request.getParameter("changeEmail");
         User user = (User) request.getSession().getAttribute("user");
+
         JspPage jspPage = new JspPage();
 
-        ServiceFactory factory = new ServiceFactoryImpl(new SqlTransactionFactoryImpl());
+        ServiceFactory factory
+                = new ServiceFactoryImpl(new SqlTransactionFactoryImpl());
         ClientService service = factory.getService(ClientService.class);
         Client client = service.findById(user.getId());
         if (phone != null && !("").equals(phone)) {
@@ -53,11 +57,17 @@ public class ChangeParameterAction implements ActionCommand {
                     = new java.sql.Date(date.getTime()).toLocalDate();
             client.setDateOfBirth(localDate);
         }
+
         service.save(client);
         request.getSession().setAttribute("client",
                 service.findById(client.getId()));
+        String encoded
+                = jspPage.encode(MessageManager.getProperty("changedParam"));
+        request.getSession().setAttribute("changedParameters",
+                MessageManager.getProperty("changedParam"));
+
         factory.close();
-        jspPage.setPage("/profile");
+        jspPage.setPage("/profile?message=" + encoded);
         return jspPage;
     }
 }

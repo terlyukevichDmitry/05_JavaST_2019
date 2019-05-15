@@ -23,9 +23,11 @@
             <input type="password" name="password" placeholder="Password" required><br><br>
             <input type="reset" value="Reset"><br><br>
             <input type="submit" value="Log in"><br>
+            <div style="font-size: 18px; color: #60c9a8;">
+                ${signUpMessage}
+            </div>
             <div style="color:red; font-size: 18px;">
                 ${errorLoginPassMessage}
-                ${wrongAction}
                 ${notAccess}
             </div>
             <br>

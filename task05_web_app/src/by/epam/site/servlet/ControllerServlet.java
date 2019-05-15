@@ -34,10 +34,10 @@ public class ControllerServlet extends HttpServlet {
             ActionCommand actionCommand = new ActionManager().getPostCommand();
             JspPage jspPage = actionCommand.execute(request);
             if (jspPage.getPage().equals("/logout")) {
-                response.sendRedirect(request.getContextPath()
-                        + "/home");
                 response.addHeader("Expires", "-1");
                 response.addHeader("Pragma", "no-cache");
+                response.sendRedirect(request.getContextPath()
+                        + "/home");
             } else {
                 getServletContext().getRequestDispatcher(
                         jspPage.getPage()).forward(request, response);

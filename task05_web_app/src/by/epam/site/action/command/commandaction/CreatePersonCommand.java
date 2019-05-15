@@ -71,17 +71,21 @@ public class CreatePersonCommand implements ActionCommand {
 
                 clientService.save(client);
 
-                jspPage.setPage("/signup");
-                request.getSession().setAttribute("createInfo",
+                jspPage.setPage("/login");
+                request.getSession().setAttribute("signUpMessage",
                         MessageManager.getProperty("correctMessage"));
             } else {
-                jspPage.setPage("/signup?a=b");
-                request.getSession().setAttribute("createInfo",
+                String encoded = jspPage.encode(
+                        MessageManager.getProperty("incorrectData"));
+                jspPage.setPage("/signup?message=" + encoded);
+                request.getSession().setAttribute("errorInfo",
                         MessageManager.getProperty("incorrectData"));
             }
         } else {
-            jspPage.setPage("/signup?a=incorrectLogin");
-            request.getSession().setAttribute("createInfo",
+            String encoded = jspPage.encode(
+                    MessageManager.getProperty("equalsLogin"));
+            jspPage.setPage("/signup?message=" + encoded);
+            request.getSession().setAttribute("errorInfo",
                     MessageManager.getProperty("equalsLogin"));
         }
         return jspPage;

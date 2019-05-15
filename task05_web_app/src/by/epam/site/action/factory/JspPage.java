@@ -1,6 +1,6 @@
 package by.epam.site.action.factory;
 
-import javax.servlet.http.HttpServletRequest;
+import java.util.Base64;
 
 public class JspPage {
     private String page;
@@ -31,12 +31,12 @@ public class JspPage {
         this.messageManager = messageManager;
     }
 
-    public void checkMistake(HttpServletRequest request) {
-        if (tagName != null && messageManager != null) {
-            if (request.getParameter("a") != null && request.getParameter("a").equals("b")) {
-                request.setAttribute(tagName, messageManager);
-            }
-        }
+    public String encode(final String encodeMessage) {
+        return Base64.getEncoder().encodeToString(encodeMessage.getBytes());
+    }
+
+    public String decode(final String encodedMessage) {
+        return new String(Base64.getDecoder().decode(encodedMessage));
     }
 
 }

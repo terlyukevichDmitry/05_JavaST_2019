@@ -33,11 +33,6 @@
           crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-
-    <script type="javascript">
-        $("#elem").show('slow');
-        setTimeout(function() { $("#elem").hide('slow'); }, 2000);
-    </script>
 </head>
 <body>
 <div class="header">
@@ -201,6 +196,9 @@
                                     <div class="form-group">
                                         <input type="submit" class="btn btn-success" data-original-title="" title="" value="Change">
                                     </div>
+                                    <div style="color:#60c9a8; font-size: 18px;">
+                                        ${changedParameters}
+                                    </div>
                                 </form>
                             </div>
                             <div class="tab-pane fade" id="data">
@@ -208,19 +206,27 @@
                                 <c:url value="/changePassword" var="changePasswordURL"/>
                                 <form action="${changePasswordURL}" role="form" method="post">
                                     <div class="form-group">
+                                        <label>Old Password</label>
+                                        <input type="password" name="oldPassword" class="form-control rounded" placeholder="Write new name" required>
+                                    </div>
+                                    <div class="form-group">
                                         <label>Password</label>
-                                        <input type="password" name="changePassword" class="form-control rounded" placeholder="Write new name" required>
+                                        <input type="password" name="changePassword" class="form-control rounded" placeholder="Write new password" required>
                                     </div>
                                     <div class="form-group">
                                         <label>Confirm Password</label>
-                                        <input type="password" name="changeConfirm" class="form-control rounded" placeholder="Write new surname" required>
+                                        <input type="password" name="changeConfirm" class="form-control rounded" placeholder="Confirm password" required>
                                     </div>
                                     <div class="form-group">
                                         <input type="submit" class="btn btn-success" data-original-title="" title="" value="Change">
                                     </div>
-                                    <div style="color:#60c9a8; font-size: 18px;">
+                                    <div style="color:red; font-size: 18px;">
                                         ${errorPassword}
                                     </div>
+                                    <div style="color: #60c9a8; font-size: 18px;">
+                                        ${positiveScript}
+                                    </div>
+
                                 </form>
                             </div>
                         </div>

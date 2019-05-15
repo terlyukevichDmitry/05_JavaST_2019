@@ -79,7 +79,8 @@ public class UserServiceImpl extends ServiceImpl implements UserService {
         dao.delete(id);
     }
 
-    private String mdFiveMethod(String st) throws ConstantException {
+    @Override
+    public String mdFiveMethod(String st) throws ConstantException {
         byte[] digest = new byte[0];
         try {
             MessageDigest messageDigest = MessageDigest.getInstance("MD5");

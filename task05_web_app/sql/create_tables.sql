@@ -67,9 +67,6 @@ CREATE TABLE IF NOT EXISTS `review` (
 	PRIMARY KEY (`id`)
 );
 
-
-# ALTER TABLE `client` ADD CONSTRAINT `client_fk0` FOREIGN KEY (`id`) REFERENCES `user`(`id`);
-
 ALTER TABLE `quest_place` ADD CONSTRAINT `quest_place_fk0` FOREIGN KEY (`image_id`) REFERENCES `image`(`id`);
 
 ALTER TABLE `quest_place` ADD CONSTRAINT `quest_place_fk1` FOREIGN KEY (`quest_id`) REFERENCES `quest`(`id`);
@@ -77,7 +74,5 @@ ALTER TABLE `quest_place` ADD CONSTRAINT `quest_place_fk1` FOREIGN KEY (`quest_i
 ALTER TABLE `used_quest` ADD CONSTRAINT `used_quest_fk0` FOREIGN KEY (`client_id`) REFERENCES `client`(`id`);
 
 ALTER TABLE `used_quest` ADD CONSTRAINT `used_quest_fk1` FOREIGN KEY (`quest_place_id`) REFERENCES `quest_place`(`id`);
-
-ALTER TABLE `review` ADD CONSTRAINT `review_fk0` FOREIGN KEY (`quest_place_id`) REFERENCES `quest_place`(`id`);
 
 ALTER TABLE `review` ADD CONSTRAINT `review_fk1` FOREIGN KEY (`client_id`) REFERENCES `client`(`id`);

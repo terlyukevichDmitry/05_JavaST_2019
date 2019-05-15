@@ -107,7 +107,7 @@
                         <%--@elvariable id="questPlace" type="java.util.List"--%>
                         <c:forEach var="elem" items="${questPlace}" varStatus="status">
                             <label class="btn btn-secondary">
-                                <input type="radio" name="options" id="${elem.getId()}" autocomplete="off" value="${elem.getId()}">${elem.address}
+                                <input type="radio" name="options" id="${elem.getId()}" autocomplete="off" value="${elem.getId()}" checked>${elem.address}
                             </label>
                         </c:forEach>
                     </div>
@@ -119,35 +119,24 @@
         <div class="row">
             <div class="col-5">
                 <label for="validationServer03">Title</label>
-                <input type="text" name="title" class="form-control is-invalid" id="validationServer03" placeholder="Title" required>            </div>
+                <input type="text" name="title" class="form-control is-invalid" id="validationServer03" placeholder="Title" required>
+            </div>
             <div class="col">
                 <label for="validationServer04">Level</label>
-                <input type="number" name="level" class="form-control is-invalid" id="validationServer04" placeholder="Level" required>            </div>
+                <input type="number" name="level" class="form-control is-invalid" id="validationServer04" placeholder="Level" required>
+            </div>
             <div class="col">
                 <label for="validationServer05">Max number of people</label>
                 <input type="number" name="maxOfPeople" class="form-control is-invalid" id="validationServer05" placeholder="Max number of people" required>
             </div>
         </div>
     </div><br>
-    <div class="container h-80">
-        <div class="col-4 mx-auto">
-                <div class="form-group">
-                    <label for="exampleFormControlFile1">Input photo</label><br>
-                    <input name="fileLoader" accept=".jpg" type="file" class="btn btn-dark" id="exampleFormControlFile1" required>
-                </div>
-            <br>
-        </div>
-    </div>
-    <div class="container h-80">
-        <div class="col-2 mx-auto">
-            <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                <div class="form-group">
-                    <button class="btn btn-primary" type="submit">   Create quest   </button>
-                </div>
-            </div>
-            <br><br>
-        </div>
-    </div>
+    <label for="exampleFormControlFile1">Input photo</label><br>
+    <input name="fileLoader" accept=".jpg" type="file" class="btn btn-dark" id="exampleFormControlFile1" required>
+
+
+    <button class="btn btn-primary" type="submit">   Create quest   </button>
+
 </form>
 </body>
 </html>

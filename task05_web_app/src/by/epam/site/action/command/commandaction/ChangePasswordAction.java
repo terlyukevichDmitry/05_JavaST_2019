@@ -12,7 +12,7 @@ import by.epam.site.service.serviceimpl.ServiceFactoryImpl;
 
 import javax.servlet.http.HttpServletRequest;
 import java.sql.SQLException;
-import java.util.Objects;
+import java.util.*;
 
 public class ChangePasswordAction implements ActionCommand {
     @Override
@@ -21,24 +21,36 @@ public class ChangePasswordAction implements ActionCommand {
         JspPage jspPage = new JspPage();
         String password = request.getParameter("changePassword");
         String confirm = request.getParameter("changeConfirm");
-        if (Objects.equals(password, confirm)
-                && password.length() >= 4) {
-            ServiceFactory factory
-                    = new ServiceFactoryImpl(new SqlTransactionFactoryImpl());
-            UserService service = factory.getService(UserService.class);
-            User user = (User) request.getSession().getAttribute("user");
-            user.setPassword(password);
-            service.save(user);
-            request.getSession().setAttribute("user", user);
-            request.getSession().setAttribute("errorPassword",
-                    MessageManager.getProperty("completed"));
-            factory.close();
-            jspPage.setPage("/profile");
+        String oldPassword = request.getParameter("oldPassword");
+        ServiceFactory factory
+                = new ServiceFactoryImpl(new SqlTransactionFactoryImpl());
+        UserService service = factory.getService(UserService.class);
+        User user = (User) request.getSession().getAttribute("user");
+        String encoded = null;
+        if (user.getPassword().equals(service.mdFiveMethod(oldPassword))) {
+            if (Objects.equals(password, confirm)
+                    && password.length() >= 4) {
+                user.setPassword(password);
+                service.save(user);
+                request.getSession().setAttribute("user", user);
+                request.getSession().setAttribute("positiveScript",
+                        MessageManager.getProperty("completed"));
+                encoded = jspPage.encode(
+                        MessageManager.getProperty("completed"));
+                factory.close();
+            } else {
+                encoded = jspPage.encode(MessageManager.getProperty(
+                        "incorrectData"));
+                request.getSession().setAttribute("errorPassword",
+                        MessageManager.getProperty("incorrectData"));
+            }
         } else {
+            encoded = jspPage.encode(MessageManager.getProperty(
+                    "incorrectOldPassword"));
             request.getSession().setAttribute("errorPassword",
-                    MessageManager.getProperty("incorrectData"));
-            jspPage.setPage("/profile?a=b");
+                    MessageManager.getProperty("incorrectOldPassword"));
         }
+        jspPage.setPage("/profile?message=" + encoded);
         return jspPage;
     }
 }

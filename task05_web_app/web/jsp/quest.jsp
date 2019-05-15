@@ -26,6 +26,32 @@
 
 </head>
 <body>
+<c:if test="${model}">
+    <div id="myModalBox" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <!-- Заголовок модального окна -->
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+                    <h4 class="modal-title">Modal Window Header</h4>
+                </div>
+                <div class="modal-body">
+                    Hi, you added quest.
+                    You can check it in your profile.
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        $(document).ready(function() {
+            $("#myModalBox").modal('show');
+        });
+    </script>
+</c:if>
 <div class="header">
     <div class="header_texture"></div>
     <div class="header_mask">
@@ -129,11 +155,13 @@
                         <input type="hidden" name="getId" value="${elem.getId()}">
                         <td><input type="submit" value="Book a quest" class="btn btn-info"></td>
                     </form><br><br>
+                    <c:if test="${user.role.name eq 'administrator'}">
                     <c:url value="/removeQuest" var="removeQuestURL"/>
                     <form action="${removeQuestURL}" method="post">
                         <input type="hidden" name="idRemoveQuest" value="${elem.getId()}">
                         <td><input type="submit" value="Remove quest" class="btn btn-danger"></td>
                     </form>
+                    </c:if>
                     <c:url value="/addReview" var="addReviewURL"/>
                     <form action="${addReviewURL}" method="post">
                         <div class="form-group">

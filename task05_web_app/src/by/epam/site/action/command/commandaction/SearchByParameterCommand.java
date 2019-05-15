@@ -12,6 +12,7 @@ import by.epam.site.service.serviceimpl.ServiceFactoryImpl;
 
 import javax.servlet.http.HttpServletRequest;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class SearchByParameterCommand implements ActionCommand {
@@ -25,12 +26,11 @@ public class SearchByParameterCommand implements ActionCommand {
                 = factory.getService(QuestPlaceService.class);
         String title = request.getParameter("searchName");
         if (title != null) {
-            List<QuestPlace> questPlaces = service.findByName(title);
+            List<QuestPlace> questPlaces = service.findAll();
             service.initData(questPlaces);
-            if (questPlaces != null) {
+            questPlaces = findByParameter(questPlaces, title);
                 request.getSession().setAttribute(
                         "questPlaces", questPlaces);
-            }
             jspPage.setPage("/searchByParameter");
         } else {
             jspPage.setPage(
@@ -38,5 +38,28 @@ public class SearchByParameterCommand implements ActionCommand {
         }
         factory.close();
         return jspPage;
+    }
+
+    private List<QuestPlace> findByParameter(final List<QuestPlace> allQuests,
+                                             final String title) {
+        List<QuestPlace> questPlaces = new ArrayList<>();
+        for (QuestPlace questPlace : allQuests) {
+            char[] chars = title.toLowerCase().toCharArray();
+            boolean checker = false;
+            for (int i = 0;
+                 i < questPlace.getQuest().getTitle().length(); i++) {
+                for (char aChar : chars) {
+                    if (questPlace.getQuest().getTitle().toLowerCase().charAt(i)
+                            == aChar) {
+                        checker = true;
+                        break;
+                    }
+                }
+            }
+            if (checker) {
+                questPlaces.add(questPlace);
+            }
+        }
+        return questPlaces;
     }
 }

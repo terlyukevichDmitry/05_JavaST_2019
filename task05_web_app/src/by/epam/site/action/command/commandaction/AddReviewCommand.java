@@ -27,17 +27,21 @@ public class AddReviewCommand implements ActionCommand {
         ServiceFactory factory = new ServiceFactoryImpl(
                 new SqlTransactionFactoryImpl());
         ReviewService service = factory.getService(ReviewService.class);
+
         Review review = new Review();
         review.setId(user.getId());
+
         Client client = new Client();
         client.setId(user.getId());
         review.setDate(LocalDate.now());
         review.setClient(client);
         review.setMessage(reviewMessage);
+
         QuestPlace questPlace = new QuestPlace();
         questPlace.setId(Integer.parseInt(idQuestPlace));
         review.setQuestPlace(questPlace);
         service.save(review);
+
         factory.close();
         jspPage.setPage("/quests");
         return jspPage;

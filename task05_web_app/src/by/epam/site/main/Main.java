@@ -8,7 +8,8 @@ import by.epam.site.service.interfaces.*;
 import by.epam.site.service.serviceimpl.ServiceFactoryImpl;
 
 import java.sql.*;
-import java.util.List;
+import java.time.LocalDateTime;
+import java.util.*;
 
 public class Main {
 
@@ -25,19 +26,28 @@ public class Main {
 //        List<UsedQuest> list = service.findByClientId(1);
 //        for (UsedQuest l :list) {
 //            System.out.println(l);
-//        }
+//        }MTE=
 
 
 
 
-        ServiceFactory factory = new ServiceFactoryImpl(new SqlTransactionFactoryImpl());
-        UserService service = factory.getService(UserService.class);
-        User user = new User();
-        user.setId(1);
-        user.setLogin("admin");
-        user.setRole(Role.ADMINISTRATOR);
-        user.setPassword("terlyukevish");
-        service.save(user);
+        Calendar now = Calendar.getInstance();
+        String minute = String.valueOf(now.get(Calendar.MINUTE));
+        String encoded = Base64.getEncoder().encodeToString(
+                minute.getBytes());
+
+        byte[] decode = Base64.getDecoder().decode("MTE=");
+        String s = new String(decode);
+        System.out.println(s);
+
+
+//        UserService service = factory.getService(UserService.class);
+//        User user = new User();
+//        user.setId(1);
+//        user.setLogin("admin");
+//        user.setRole(Role.ADMINISTRATOR);
+//        user.setPassword("terlyukevish");
+//        service.save(user);
 
 //        String st = "BB7FF6177EE612EF9DC6ACD3A9EA7EA9";
 //        byte[] digest = new byte[0];

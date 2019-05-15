@@ -92,7 +92,7 @@
                 }
             </script>
             <div style="color:#60c9a8; font-size: 18px;">
-                ${createInfo}
+                ${errorInfo}
             </div>
             <c:url value="/login" var="loginURL"/>
             Already have account?<a href="${loginURL}"> Sign In</a>

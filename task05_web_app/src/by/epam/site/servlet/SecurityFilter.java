@@ -3,6 +3,7 @@ package by.epam.site.servlet;
 
 import by.epam.site.action.access.AccessController;
 import by.epam.site.action.command.MessageManager;
+import by.epam.site.action.factory.JspPage;
 import by.epam.site.entity.Role;
 import by.epam.site.entity.User;
 
@@ -35,15 +36,17 @@ public class SecurityFilter implements Filter {
         } else {
             user = (User) session.getAttribute("user");
         }
-
+        JspPage jspPage = new JspPage();
         AccessController controller = new AccessController();
         if (controller.getAccess(user.getRole()).checkAccess(path)) {
             chain.doFilter(request, response);
         } else {
+            String encoded = jspPage.encode(
+                    MessageManager.getProperty("access"));
             httpRequest.getSession().setAttribute("notAccess",
                     MessageManager.getProperty("access"));
             httpResponse.sendRedirect(httpRequest.getContextPath()
-                    + "/login?a=problemWithYourAccess");
+                    + "/login?message=" + encoded);
         }
     }
 

@@ -28,6 +28,7 @@ public class CreateQuestDirection implements ActionCommand {
         QuestPlaceService service = factory.getService(QuestPlaceService.class);
         List<QuestPlace> list = service.findAll();
         request.getSession().setAttribute("questPlace", getPlaces(list));
+        factory.close();
         jspPage.setPage(ConfigurationManager.getProperty("createQuest"));
         return jspPage;
     }

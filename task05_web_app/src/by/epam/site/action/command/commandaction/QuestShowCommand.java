@@ -12,6 +12,7 @@ import by.epam.site.service.serviceimpl.ServiceFactoryImpl;
 
 import javax.servlet.http.HttpServletRequest;
 import java.sql.SQLException;
+import java.util.Calendar;
 import java.util.List;
 
 public class QuestShowCommand implements ActionCommand {
@@ -19,6 +20,19 @@ public class QuestShowCommand implements ActionCommand {
     public JspPage execute(HttpServletRequest request) throws ConstantException,
             ClassNotFoundException, SQLException {
         JspPage jspPage = new JspPage();
+        String encode = request.getParameter("message");
+        if (encode == null) {
+            request.getSession().setAttribute("model", false);
+        } else {
+            int encodedSeconds = Integer.parseInt(jspPage.decode(encode));
+            Calendar calendar = Calendar.getInstance();
+            int secondsNow = calendar.get(Calendar.SECOND);
+            if (encodedSeconds + 10 > secondsNow) {
+                request.getSession().setAttribute("model", true);
+            } else {
+                request.getSession().setAttribute("model", false);
+            }
+        }
         ServiceFactory factory = new ServiceFactoryImpl(
                 new SqlTransactionFactoryImpl());
         QuestPlaceService service

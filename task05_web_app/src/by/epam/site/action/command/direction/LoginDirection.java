@@ -10,6 +10,12 @@ public class LoginDirection implements ActionCommand {
     @Override
     public JspPage execute(HttpServletRequest request) {
         JspPage jspPage = new JspPage();
+        String encoded = request.getParameter("message");
+        if (encoded == null) {
+            request.getSession().setAttribute(
+                    "errorLoginPassMessage", "");
+            request.getSession().setAttribute("notAccess", "");
+        }
         jspPage.setPage(ConfigurationManager.getProperty("signin"));
         return jspPage;
     }

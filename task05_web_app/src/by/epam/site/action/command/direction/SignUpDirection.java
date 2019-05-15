@@ -12,8 +12,13 @@ import java.text.ParseException;
 public class SignUpDirection implements ActionCommand {
     @Override
     public JspPage execute(HttpServletRequest request)
-            throws ConstantException, SQLException, ClassNotFoundException, ParseException {
+            throws ConstantException, SQLException,
+            ClassNotFoundException, ParseException {
         JspPage jspPage = new JspPage();
+        String encoded = request.getParameter("message");
+        if (encoded == null) {
+            request.getSession().setAttribute("errorInfo", "");
+        }
         jspPage.setPage(ConfigurationManager.getProperty("signUp"));
         return jspPage;
     }

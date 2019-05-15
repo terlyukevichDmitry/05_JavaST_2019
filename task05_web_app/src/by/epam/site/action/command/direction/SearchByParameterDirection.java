@@ -11,7 +11,9 @@ import java.text.ParseException;
 
 public class SearchByParameterDirection implements ActionCommand {
     @Override
-    public JspPage execute(HttpServletRequest request) throws ConstantException, SQLException, ClassNotFoundException, ParseException {
+    public JspPage execute(HttpServletRequest request)
+            throws ConstantException, SQLException,
+            ClassNotFoundException, ParseException {
         JspPage jspPage = new JspPage();
         jspPage.setPage(ConfigurationManager.getProperty("questPath"));
         return jspPage;

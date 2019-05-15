@@ -9,6 +9,7 @@ import by.epam.site.service.interfaces.ServiceFactory;
 import by.epam.site.service.serviceimpl.ServiceFactoryImpl;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Calendar;
 
 public class RemoveReviewCommand implements ActionCommand {
     @Override
@@ -21,7 +22,10 @@ public class RemoveReviewCommand implements ActionCommand {
         ReviewService service = factory.getService(ReviewService.class);
         service.delete(Integer.parseInt(idReview));
         factory.close();
-        jspPage.setPage("/review");
+        Calendar calendar = Calendar.getInstance();
+        String encode
+                = jspPage.encode(String.valueOf(calendar.get(Calendar.SECOND)));
+        jspPage.setPage("/review?message=" + encode);
         return jspPage;
     }
 }

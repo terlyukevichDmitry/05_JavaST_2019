@@ -2,6 +2,7 @@ package by.epam.site.action.command.commandaction;
 
 import by.epam.site.action.command.ActionCommand;
 import by.epam.site.action.command.ConfigurationManager;
+import by.epam.site.action.command.MessageManager;
 import by.epam.site.action.factory.JspPage;
 import by.epam.site.dao.daoimpl.SqlTransactionFactoryImpl;
 import by.epam.site.entity.QuestPlace;
@@ -29,9 +30,11 @@ public class SearchByParameterCommand implements ActionCommand {
             List<QuestPlace> questPlaces = service.findAll();
             service.initData(questPlaces);
             questPlaces = findByParameter(questPlaces, title);
-                request.getSession().setAttribute(
-                        "questPlaces", questPlaces);
-            jspPage.setPage("/searchByParameter");
+            request.getSession().setAttribute(
+                    "questPlaces", questPlaces);
+            String encoded = jspPage.encode(
+                    MessageManager.getProperty("searchByParameter"));
+            jspPage.setPage("/searchByParameter?message=" + encoded);
         } else {
             jspPage.setPage(
                     ConfigurationManager.getProperty("questPath"));

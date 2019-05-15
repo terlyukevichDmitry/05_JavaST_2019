@@ -23,7 +23,28 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 </head>
 <body>
-
+<c:if test="${model}">
+    <div id="myModalBox" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Modal Window Header</h4>
+                </div>
+                <div class="modal-body">
+                    Action done. Please continue do something else.
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        $(document).ready(function() {
+            $("#myModalBox").modal('show');
+        });
+    </script>
+</c:if>
 <div class="header">
     <div class="header_texture"></div>
     <div class="header_mask">
@@ -41,7 +62,7 @@
                 <c:url value="/home" var="homeURL"/>
                 <a href="${homeURL}" class="menu_link"><i class="fas fa-home"></i> Home</a>
                 <a href="#" class="menu_link"><i class="fas fa-newspaper"></i> About</a>
-                <a href="#" class="menu_link"><i class="fas fa-phone"></i> Contact</a>
+                <a href="#contact" class="menu_link"><i class="fas fa-phone"></i> Contact</a>
                 <c:url value="/review" var="reviewURL"/>
                 <a href="${reviewURL}" class="menu_link"><i class="fas fa-list"></i> Review</a>
             </div>
@@ -54,8 +75,8 @@
                         <div class="dropdown-menu">
                             <c:url value="/profile" var="profileURL"/>
                             <a href="${profileURL}" class="dropdown-item">Profile</a>
-                            <c:url value="/myQuests" var="myQuestsURL"/>
-                            <a href="${myQuestsURL}" class="dropdown-item">My quests</a>
+                            <%--<c:url value="/myQuests" var="myQuestsURL"/>--%>
+                            <%--<a href="${myQuestsURL}" class="dropdown-item">My quests</a>--%>
                             <c:url value="/createQuest" var="createQuestURL"/>
                             <a href="${createQuestURL}" class="dropdown-item">Create Quest</a>
                             <c:url value="/showUsers" var="searchUserURL"/>
@@ -98,45 +119,92 @@
     </div>
 </div><br><br>
 
+<div class="container">
 <c:url value="/createNewQuest" var="createQuestURL"/>
 <form action="${createQuestURL}" method="post" enctype="multipart/form-data">
-    <div class="container h-100">
-        <div class="col-6 mx-auto">
-            <label>Choose the address to create new quest in this place</label>
-            <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                        <%--@elvariable id="questPlace" type="java.util.List"--%>
-                        <c:forEach var="elem" items="${questPlace}" varStatus="status">
-                            <label class="btn btn-secondary">
-                                <input type="radio" name="options" id="${elem.getId()}" autocomplete="off" value="${elem.getId()}" checked>${elem.address}
-                            </label>
-                        </c:forEach>
-                    </div>
-            <br><br>
+    <h4>New Quest information:</h4>
+    <table class="table table-th-block">
+        <tbody>
+        <label>Choose the address to create new quest in this place.</label><br><br>
+        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+            <%--@elvariable id="questPlace" type="java.util.List"--%>
+            <c:forEach var="elem" items="${questPlace}" varStatus="status">
+                <label class="btn btn-secondary">
+                    <input type="radio" name="options" id="${elem.getId()}" autocomplete="off" value="${elem.getId()}" checked>${elem.address}
+                </label>
+            </c:forEach>
+        </div><br><br>
+        <input type="text" name="title" class="form-control border-valid" placeholder="Enter quest title" required><br>
+        <input type="number" name="level" class="form-control" placeholder="Enter level for quest" required><br>
+        <input type="number" name="maxOfPeople" class="form-control" placeholder="Enter max number of people in this quest" required><br>
+        <label for="exampleFormControlFile1">Input photo</label><br>
+        <input name="fileLoader" accept=".jpg" type="file" class="btn btn-dark" id="exampleFormControlFile1" required><br><br>
+        <button class="btn btn-success" type="submit">   Create quest   </button><br><br>
+        <div style="color: #ff7b7b; font-size: 18px;">
+        ${crashMessage}
+        </div>
+        </tbody>
+    </table>
+
+</form>
+</div>
+<br><br><br>
+<!-- Footer -->
+<footer class="page-footer font-small unique-color-dark">
+
+    <div style="background-color: #6351ce;">
+        <div class="container">
+            <div class="row py-2 d-flex align-items-center">
+
+                <div class="col-md-6 col-lg-5 text-center text-md-left mb-4 mb-md-0">
+                    <h6 class="mb-0">Get connected with us on social networks!</h6>
+                </div>
+
+                <div class="col-md-6 col-lg-7 text-center text-md-right">
+                    <a href="https://vk.com/mtpji1ons" style="color: black;" class="tw-ic"><i class="fab fa-vk white-text mr-4"> </i></a>
+                    <a href="https://www.instagram.com/dimaterlyuke/" style="color: black;" class="ins-ic"><i class="fab fa-instagram white-text"> </i></a>
+                </div>
+            </div>
         </div>
     </div>
 
-    <div class="container">
-        <div class="row">
-            <div class="col-5">
-                <label for="validationServer03">Title</label>
-                <input type="text" name="title" class="form-control is-invalid" id="validationServer03" placeholder="Title" required>
+    <div class="container text-center text-md-left" style="background-color: #83a6ed;">
+        <div class="row mt-3">
+            <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4" style="margin-top: 10px;">
+                <h6 class="text-uppercase font-weight-bold">JukeBox</h6>
+                <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
+                <p>Here you can order a quest. Lorem ipsum
+                    dolor sit amet, consectetur adipisicing elit.</p>
             </div>
-            <div class="col">
-                <label for="validationServer04">Level</label>
-                <input type="number" name="level" class="form-control is-invalid" id="validationServer04" placeholder="Level" required>
+            <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4" style="margin-top: 10px;">
+
+                <h6 class="text-uppercase font-weight-bold">Type of quest</h6>
+                <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
+                <p>Supernatural</p>
+                <p>Gravitation</p>
+                <p>Tower mage</p>
             </div>
-            <div class="col">
-                <label for="validationServer05">Max number of people</label>
-                <input type="number" name="maxOfPeople" class="form-control is-invalid" id="validationServer05" placeholder="Max number of people" required>
+            <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4" style="margin-top: 10px;">
+                <h6 class="text-uppercase font-weight-bold">Useful links</h6>
+                <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
+                <c:url value="/login" var="loginURL"/>
+                <p><a href="${loginURL}}">Your Account</a></p>
+                <p><a href="https://e.mail.ru/messages/inbox/?back=1">Mail</a></p>
+                <p><a href="#">Help</a></p>
+            </div>
+            <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4" style="margin-top: 10px;" id="contact">
+
+                <h6 class="text-uppercase font-weight-bold">Contact</h6>
+                <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
+                <p><i class="fas fa-home mr-3"></i> Belarus, Minsk region, BY</p>
+                <p><i class="fas fa-envelope mr-3"></i> lanselot2000_@mail.ru</p>
+                <p><i class="fas fa-phone mr-3"></i> + 375 29 861 97 83</p>
             </div>
         </div>
-    </div><br>
-    <label for="exampleFormControlFile1">Input photo</label><br>
-    <input name="fileLoader" accept=".jpg" type="file" class="btn btn-dark" id="exampleFormControlFile1" required>
-
-
-    <button class="btn btn-primary" type="submit">   Create quest   </button>
-
-</form>
+    </div>
+    <div class="footer-copyright text-center py-3" style="background-color: #161c27; color: #998d7e">© 2018 Copyright:
+        <a href="https://mdbootstrap.com/education/bootstrap/" style="color: #f7f7f8"> JukeBox.com</a>
+    </div>
+</footer>
 </body>
 </html>

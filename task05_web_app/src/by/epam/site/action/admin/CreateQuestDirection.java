@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 public class CreateQuestDirection implements ActionCommand {
@@ -22,7 +23,8 @@ public class CreateQuestDirection implements ActionCommand {
             throws ConstantException, SQLException,
             ClassNotFoundException {
         JspPage jspPage = new JspPage();
-
+        String encode = request.getParameter("message");
+        jspPage.getModel(jspPage, encode, request);
         ServiceFactory factory
                 = new ServiceFactoryImpl(new SqlTransactionFactoryImpl());
         QuestPlaceService service = factory.getService(QuestPlaceService.class);

@@ -15,13 +15,16 @@ import by.epam.site.service.serviceimpl.ServiceFactoryImpl;
 import javax.servlet.http.HttpServletRequest;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.util.Calendar;
 
 public class AddReviewCommand implements ActionCommand {
+
     @Override
     public JspPage execute(HttpServletRequest request) throws ConstantException, SQLException, ClassNotFoundException {
         JspPage jspPage = new JspPage();
         String reviewMessage = request.getParameter("review");
         String idQuestPlace = request.getParameter("idQuestPlace");
+        request.getSession().setAttribute("getQuestId", Integer.parseInt(idQuestPlace));
         User user = (User) request.getSession().getAttribute("user");
 
         ServiceFactory factory = new ServiceFactoryImpl(
@@ -39,11 +42,15 @@ public class AddReviewCommand implements ActionCommand {
 
         QuestPlace questPlace = new QuestPlace();
         questPlace.setId(Integer.parseInt(idQuestPlace));
+
         review.setQuestPlace(questPlace);
         service.save(review);
 
+        Calendar calendar = Calendar.getInstance();
+        String encoded = jspPage.encode(
+                String.valueOf(calendar.get(Calendar.SECOND)));
         factory.close();
-        jspPage.setPage("/quests");
+        jspPage.setPage("/questInformation?message=" + encoded);
         return jspPage;
     }
 }

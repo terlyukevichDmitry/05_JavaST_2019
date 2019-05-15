@@ -39,7 +39,7 @@
                 <c:url value="/home" var="homeURL"/>
                 <a href="${homeURL}" class="menu_link"><i class="fas fa-home"></i> Home</a>
                 <a href="#" class="menu_link"><i class="fas fa-newspaper"></i> About</a>
-                <a href="#" class="menu_link"><i class="fas fa-phone"></i> Contact</a>
+                <a href="#contact" class="menu_link"><i class="fas fa-phone"></i> Contact</a>
                 <c:url value="/review" var="reviewURL"/>
                 <a href="${reviewURL}" class="menu_link"><i class="fas fa-list"></i> Review</a>
             </div>
@@ -52,8 +52,10 @@
                         <div class="dropdown-menu">
                             <c:url value="/profile" var="profileURL"/>
                             <a href="${profileURL}" class="dropdown-item">Profile</a>
-                            <c:url value="/myQuests" var="myQuestsURL"/>
-                            <a href="${myQuestsURL}" class="dropdown-item">My quests</a>
+                            <%--<c:url value="/myQuests" var="myQuestsURL"/>--%>
+                            <%--<a href="${myQuestsURL}" class="dropdown-item">My quests</a>--%>
+                            <c:url value="/createQuest" var="createQuestURL"/>
+                            <a href="${createQuestURL}" class="dropdown-item">Create Quest</a>
                             <c:url value="/showUsers" var="searchUserURL"/>
                             <a href="${searchUserURL}" class="dropdown-item">Users</a>
                             <c:url value="/removeUser" var="removeUserURL"/>
@@ -129,5 +131,65 @@
         </c:forEach>
     </tbody>
 </table>
+<br><br><br>
+<!-- Footer -->
+<footer class="page-footer font-small unique-color-dark">
+
+    <div style="background-color: #6351ce;">
+        <div class="container">
+            <div class="row py-2 d-flex align-items-center">
+
+                <div class="col-md-6 col-lg-5 text-center text-md-left mb-4 mb-md-0">
+                    <h6 class="mb-0">Get connected with us on social networks!</h6>
+                </div>
+
+                <div class="col-md-6 col-lg-7 text-center text-md-right">
+                    <a href="https://vk.com/mtpji1ons" style="color: black;" class="tw-ic"><i class="fab fa-vk white-text mr-4"> </i></a>
+                    <a href="https://www.instagram.com/dimaterlyuke/" style="color: black;" class="ins-ic"><i class="fab fa-instagram white-text"> </i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container text-center text-md-left" style="background-color: #83a6ed;">
+        <div class="row mt-3">
+            <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4" style="margin-top: 10px;">
+                <h6 class="text-uppercase font-weight-bold">JukeBox</h6>
+                <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
+                <p>Here you can order a quest. Lorem ipsum
+                    dolor sit amet, consectetur adipisicing elit.</p>
+
+            </div>
+            <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4" style="margin-top: 10px;">
+
+                <h6 class="text-uppercase font-weight-bold">Type of quest</h6>
+                <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
+                <p>Supernatural</p>
+                <p>Gravitation</p>
+                <p>Tower mage</p>
+
+            </div>
+            <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4" style="margin-top: 10px;">
+                <h6 class="text-uppercase font-weight-bold">Useful links</h6>
+                <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
+                <c:url value="/login" var="loginURL"/>
+                <p><a href="${loginURL}}">Your Account</a></p>
+                <p><a href="https://e.mail.ru/messages/inbox/?back=1">Mail</a></p>
+                <p><a href="#">Help</a></p>
+            </div>
+            <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4" style="margin-top: 10px;" id="contact">
+
+                <h6 class="text-uppercase font-weight-bold">Contact</h6>
+                <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
+                <p><i class="fas fa-home mr-3"></i> Belarus, Minsk region, BY</p>
+                <p><i class="fas fa-envelope mr-3"></i> lanselot2000_@mail.ru</p>
+                <p><i class="fas fa-phone mr-3"></i> + 375 29 861 97 83</p>
+            </div>
+        </div>
+    </div>
+    <div class="footer-copyright text-center py-3" style="background-color: #161c27; color: #998d7e">© 2018 Copyright:
+        <a href="https://mdbootstrap.com/education/bootstrap/" style="color: #f7f7f8"> JukeBox.com</a>
+    </div>
+</footer>
 </body>
 </html>

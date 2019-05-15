@@ -1,6 +1,7 @@
 package by.epam.site.action.command.commandaction;
 
 import by.epam.site.action.command.ActionCommand;
+import by.epam.site.action.command.MessageManager;
 import by.epam.site.action.factory.JspPage;
 import by.epam.site.dao.daoimpl.SqlTransactionFactoryImpl;
 import by.epam.site.entity.User;
@@ -13,7 +14,8 @@ import javax.servlet.http.HttpServletRequest;
 
 public class RemoveOrderCommand implements ActionCommand {
     @Override
-    public JspPage execute(HttpServletRequest request) throws ConstantException {
+    public JspPage execute(HttpServletRequest request)
+            throws ConstantException {
         JspPage jspPage = new JspPage();
         User user = (User) request.getSession().getAttribute("user");
         String id = request.getParameter("idToRemove");
@@ -23,7 +25,8 @@ public class RemoveOrderCommand implements ActionCommand {
                 = factory.getService(UsedQuestService.class);
         usedQuestService.delete(user.getId(), Integer.parseInt(id));
         factory.close();
-        jspPage.setPage("/myQuests");
+        String encoded = jspPage.encode("action completed");
+        jspPage.setPage("/home?message=" + encoded);
         return jspPage;
     }
 }

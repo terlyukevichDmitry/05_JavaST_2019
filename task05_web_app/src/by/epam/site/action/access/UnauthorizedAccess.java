@@ -13,7 +13,7 @@ public class UnauthorizedAccess implements Access {
         stringList.add("/quests");
         stringList.add("/searchByParameter");
         stringList.add("/review");
-
+        stringList.add("/questInformation");
     }
 
     @Override

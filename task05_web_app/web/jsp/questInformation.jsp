@@ -12,10 +12,10 @@
     <meta charset="utf-8">
     <link rel="stylesheet" href="${ctx}/css/home/header.css" type="text/css"/>
     <link rel="stylesheet" href="${ctx}/css/home/base.css" type="text/css"/>
-    <link rel="stylesheet" href="${ctx}/css/review.css" type="text/css"/>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
           integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf"
           crossorigin="anonymous">
+
     <link rel="shortcut icon" href="images/image-icon.ico" type="image/x-icon">
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
@@ -24,31 +24,28 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 </head>
 <body>
-
 <c:if test="${model}">
-    <div id="myModalBox" class="modal fade">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title">Modal Window Header</h4>
-                </div>
-                <div class="modal-body">
-                    Action done. Please continue do something else.
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                </div>
+<div id="myModalBox" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Modal Window Header</h4>
+            </div>
+            <div class="modal-body">
+                Action done. Please continue do something else.
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
             </div>
         </div>
     </div>
-
-    <script>
-        $(document).ready(function() {
-            $("#myModalBox").modal('show');
-        });
-    </script>
+</div>
+<script>
+    $(document).ready(function() {
+        $("#myModalBox").modal('show');
+    });
+</script>
 </c:if>
-
 <div class="header">
     <div class="header_texture"></div>
     <div class="header_mask">
@@ -79,8 +76,8 @@
                         <div class="dropdown-menu">
                             <c:url value="/profile" var="profileURL"/>
                             <a href="${profileURL}" class="dropdown-item">Profile</a>
-                            <%--<c:url value="/myQuests" var="myQuestsURL"/>--%>
-                            <%--<a href="${myQuestsURL}" class="dropdown-item">My quests</a>--%>
+                                <%--<c:url value="/myQuests" var="myQuestsURL"/>--%>
+                                <%--<a href="${myQuestsURL}" class="dropdown-item">My quests</a>--%>
                             <c:url value="/createQuest" var="createQuestURL"/>
                             <a href="${createQuestURL}" class="dropdown-item">Create Quest</a>
                             <c:url value="/showUsers" var="searchUserURL"/>
@@ -122,49 +119,80 @@
         </div>
     </div>
 </div>
-
-
-<%--@elvariable id="review" type="java.util.List"--%>
-<c:forEach var="elem" items="${review}" varStatus="status">
-        <div class="containerS">
-        <img src="${pageContext.request.contextPath}/${elem.client.filePath}" alt="Avatar" style="width:90px">
-        <p><span><c:out value="${ elem.client.surname }"/> <c:out value="${ elem.client.name }"/></span><c:out value="${ elem.date }"/></p>
-        <tr>
-            <th><c:out value="${ elem.message }"/> </th><br>
-            <c:if test="${user.role.name.equals('administrator')}">
-            <c:url value="/removeReview" var="removeReviewURL"/>
-            <form action="${removeReviewURL}" method="post"><br>
-            <input type="hidden" name="getReviewId" value="${elem.getId()}">
-            <td><input type="submit" value=" Remove review " class="btn btn-info"></td>
+<br><br>
+<%--@elvariable id="questPlace" type="by.epam.site.entity.QuestPlace"--%>
+<c:set var="elem" value="${questPlace}" />
+<div class="container">
+<div class="row">
+    <div class="col-5">
+        <img class="img-fluid rounded" width="100%" height="100%" src="${pageContext.request.contextPath}/${elem.image.filePath}"/>
+        <c:if test="${!user.role.name.equals('administrator')}">
+            <c:url value="/bookQuest" var="bookQuestURL"/>
+            <br><br>
+            <form action="${bookQuestURL}" method="post">
+                <input type="hidden" name="getId" value="${elem.getId()}">
+                <td><input type="submit" value="Book a quest" class="btn btn-info"></td>
+            </form><br>
+        </c:if>
+        <c:if test="${user.role.name eq 'administrator'}">
+            <c:url value="/removeQuest" var="removeQuestURL"/>
+            <br><br>
+            <form action="${removeQuestURL}" method="post">
+                <input type="hidden" name="idRemoveQuest" value="${elem.getId()}">
+                <td><input type="submit" value="Remove quest" class="btn btn-danger"></td>
             </form>
-            </c:if>
-        </div>
-</c:forEach>
-
-<c:url value="/review" var="reviewURL"/>
-<nav aria-label="Статьи по Bootstrap 4">
-    <ul class="pagination justify-content-center">
-        <c:if test="${current_page != 1}">
-        <li class="page-item"><a class="page-link" href="${reviewURL}?page=${current_page - 1}">Previous</a></li>
         </c:if>
-        <c:forEach begin="1" end="${num_of_pages}" var="i" step="1" varStatus="status">
-        <li class="page-item">
-                <c:choose>
-                    <c:when test="${current_page eq i}">
-                        <a class="page-link" href="#">${i}</a>
-                    </c:when>
-                    <c:otherwise>
-                        <a class="page-link" href="${reviewURL}?page=${i}">${i}></a>
-                    </c:otherwise>
-                </c:choose>
-        </li>
-        </c:forEach>
-        <c:if test="${current_page lt num_of_pages}">
-        <li class="page-item"><a class="page-link" href="${reviewURL}?page=${current_page + 1}">Next</a></li>
-        </c:if>
-    </ul>
-</nav>
+    </div>
+    <div class="col-7">
+        <h4>Place information:</h4>
+        <table class="table table-th-block">
+            <tbody>
+            <tr><td class="active">Name quest place:</td><td><c:out value="${ elem.name }"/></td></tr>
+            <tr><td class="active">Quest place address:</td><td><c:out value="${ elem.address }"/></td></tr>
+            <tr><td class="active">Quest place phone number:</td><td><c:out value="${ elem.phone }"/></td></tr>
+            </tbody>
+        </table>
+        <h4>Quest information:</h4>
+        <table class="table table-th-block">
+            <tbody>
+            <tr><td class="active">Quest title:</td><td><c:out value="${ elem.quest.title }"/></td></tr>
+            <tr><td class="active">Quest level:</td><td><c:out value="${ elem.quest.level }"/></td></tr>
+            <tr><td class="active">Max people in our quest:</td><td><c:out value="${ elem.quest.maxPeople }"/></td></tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+    <h4>About quest:</h4>
+    <table class="table table-th-block">
+        <tbody>
+        <tr><td class="active">
+            You travel all over the World, investigating paranormal phenomena,
+            fight against evil creatures: demons and ghosts. Today you ended up
+            in Minsk, in that very room, whose history is shrouded in mystery and
+            darkness. Seventy years have already passed, and no one who entered
+            this room returned back ... You have only 66.6 minutes to unravel the
+            secrets that the room has in it and interrupt the disappearance of innocent people.
+        </tbody>
+    </table>
+</div>
 <br><br><br>
+
+<div class="col-sm">
+    <c:url value="/addReview" var="addReviewURL"/>
+        <form action="${addReviewURL}" method="post">
+            <div class="md-form amber-textarea active-amber-textarea">
+            <i class="fas fa-pencil-alt prefix"></i><label for="form22">&nbsp;&nbsp;Write review:</label>
+            <textarea id="form22" name="review" class="md-textarea form-control" rows="3"></textarea>
+            </div>
+            <div class="form-group">
+            </div>
+            <input type="hidden" name="idQuestPlace" value="${elem.id}"/>
+            <input type="submit" class="btn btn-info" value="Send review">
+        </form>
+</div>
+
+<br><br><br>
+
 <!-- Footer -->
 <footer class="page-footer font-small unique-color-dark">
 
@@ -224,6 +252,5 @@
         <a href="https://mdbootstrap.com/education/bootstrap/" style="color: #f7f7f8"> JukeBox.com</a>
     </div>
 </footer>
-
 </body>
 </html>

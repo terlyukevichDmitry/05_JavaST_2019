@@ -31,5 +31,6 @@
     <c:url value="/home" var="homeURL"/>
     <a href="${homeURL}" style="text-align: center">Go on home page</a>
 </div>
+
 </body>
 </html>

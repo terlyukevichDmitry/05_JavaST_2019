@@ -30,14 +30,11 @@
     <div id="myModalBox" class="modal fade">
         <div class="modal-dialog">
             <div class="modal-content">
-                <!-- Заголовок модального окна -->
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
                     <h4 class="modal-title">Modal Window Header</h4>
                 </div>
                 <div class="modal-body">
-                    Hi, you added quest.
-                    You can check it in your profile.
+                    Action done. Please continue do something else.
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -69,7 +66,7 @@
                 <c:url value="/home" var="homeURL"/>
                 <a href="${homeURL}" class="menu_link"><i class="fas fa-home"></i> Home</a>
                 <a href="#" class="menu_link"><i class="fas fa-newspaper"></i> About</a>
-                <a href="#" class="menu_link"><i class="fas fa-phone"></i> Contact</a>
+                <a href="#contact" class="menu_link"><i class="fas fa-phone"></i> Contact</a>
                 <c:url value="/review" var="reviewURL"/>
                 <a href="${reviewURL}" class="menu_link"><i class="fas fa-list"></i> Review</a>
             </div>
@@ -82,8 +79,8 @@
                         <div class="dropdown-menu">
                             <c:url value="/profile" var="profileURL"/>
                             <a href="${profileURL}" class="dropdown-item">Profile</a>
-                            <c:url value="/myQuests" var="myQuestsURL"/>
-                            <a href="${myQuestsURL}" class="dropdown-item">My quests</a>
+                            <%--<c:url value="/myQuests" var="myQuestsURL"/>--%>
+                            <%--<a href="${myQuestsURL}" class="dropdown-item">My quests</a>--%>
                             <c:url value="/createQuest" var="createQuestURL"/>
                             <a href="${createQuestURL}" class="dropdown-item">Create Quest</a>
                             <c:url value="/showUsers" var="searchUserURL"/>
@@ -134,49 +131,172 @@
         <input type="submit" value="   Search   " class="btn btn-info">
     </div>
 </form><br><br>
+<div class="container" style="display: flex;  justify-content: space-around;">
 
 <%--@elvariable id="questPlaces" type="java.util.List"--%>
 <c:forEach var="elem" items="${questPlaces}" varStatus="status">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-6">
-                <tr><img width="75%" height="80%" class="img-fluid rounded" src="${pageContext.request.contextPath}/${elem.image.filePath}"/></tr>
-            </div>
-            <div class="col-md-6">
-                <tr>
-                    Quest place name: <th><c:out value="${ elem.name }"/> </th><br>
-                    Phone number: <th><c:out value="${ elem.phone }"/> </th><br>
-                    Quest address: <th> <c:out value="${ elem.address }"/> </th><br>
-                    Quest name: <th><c:out value="${ elem.quest.title }"/> </th><br>
-                    Quest level: <th><c:out value="${ elem.quest.level }"/> </th><br>
-                    Maximum number of people in this quest: <th><c:out value="${ elem.quest.maxPeople }"/> </th><br><br>
-                    <c:url value="/bookQuest" var="bookQuestURL"/>
-                    <form action="${bookQuestURL}" method="post">
-                        <input type="hidden" name="getId" value="${elem.getId()}">
-                        <td><input type="submit" value="Book a quest" class="btn btn-info"></td>
-                    </form><br><br>
-                    <c:if test="${user.role.name eq 'administrator'}">
-                    <c:url value="/removeQuest" var="removeQuestURL"/>
-                    <form action="${removeQuestURL}" method="post">
-                        <input type="hidden" name="idRemoveQuest" value="${elem.getId()}">
-                        <td><input type="submit" value="Remove quest" class="btn btn-danger"></td>
-                    </form>
+<div class="row">
+        <div class="col">
+            <div class="card" style="width: 18rem;">
+                <c:url value="/questInformation" var="questInformationURL"/>
+                <form action="${questInformationURL}" method="get">
+                    <input type="hidden" name="getQuestId" value="${elem.id}">
+                    <input type="image" class="img-fluid rounded" width="286px" height="180px" src="${pageContext.request.contextPath}/${elem.image.filePath}" />
+                </form>
+                <div class="card-body">
+                    <h5 class="card-title">${elem.quest.title}</h5>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    <c:if test="${!user.role.name.equals('administrator')}">
+                        <c:url value="/bookQuest" var="bookQuestURL"/>
+                        <form action="${bookQuestURL}" method="post">
+                            <input type="hidden" name="getId" value="${elem.getId()}">
+                            <td><input type="submit" value="Book a quest" class="btn btn-info"></td>
+                        </form><br>
                     </c:if>
-                    <c:url value="/addReview" var="addReviewURL"/>
-                    <form action="${addReviewURL}" method="post">
-                        <div class="form-group">
-                            <label for="exampleFormControlTextarea1"><textarea class="form-control" name="review" id="exampleFormControlTextarea1" rows="3"></textarea></label>
-                        </div>
-                        <input type="hidden" name="idQuestPlace" value="${elem.getId()}"/>
-                        <input type="submit" class="btn btn-info" value="Send review">
-                        <br>
-                    </form>
-                </tr>
+                    <c:if test="${user.role.name eq 'administrator'}">
+                        <c:url value="/removeQuest" var="removeQuestURL"/>
+                        <form action="${removeQuestURL}" method="post">
+                            <input type="hidden" name="idRemoveQuest" value="${elem.getId()}">
+                            <td><input type="submit" value="Remove quest" class="btn btn-danger"></td>
+                        </form>
+                    </c:if>
+                </div>
+            </div>
+        </div>
+</div>
+</c:forEach>
+</div>
+
+
+<%--&lt;%&ndash;@elvariable id="questPlaces" type="java.util.List"&ndash;%&gt;--%>
+<%--<c:forEach var="elem" items="${questPlaces}" varStatus="status">--%>
+<%--<div class="container">--%>
+    <%--<div class="row">--%>
+        <%--<div class="col-sm">--%>
+            <%--<c:url value="/questInformation" var="questInformationURL"/>--%>
+            <%--<form action="${questInformationURL}" method="get">--%>
+                <%--<input type="hidden" name="getQuestId" value="${elem.id}">--%>
+                <%--<input type="image" class="img-fluid rounded" width="75%" height="80%" src="${pageContext.request.contextPath}/${elem.image.filePath}" />--%>
+            <%--</form>--%>
+        <%--</div>--%>
+        <%--<div class="col-sm">--%>
+            <%--Quest name: <th><c:out value="${ elem.quest.title }"/> </th><br>--%>
+            <%--<c:if test="${!user.role.name.equals('administrator')}">--%>
+            <%--<c:url value="/bookQuest" var="bookQuestURL"/>--%>
+            <%--<form action="${bookQuestURL}" method="post">--%>
+                <%--<input type="hidden" name="getId" value="${elem.getId()}">--%>
+                <%--<td><input type="submit" value="Book a quest" class="btn btn-info"></td>--%>
+            <%--</form><br>--%>
+            <%--</c:if>--%>
+            <%--<c:if test="${user.role.name eq 'administrator'}">--%>
+                <%--<c:url value="/removeQuest" var="removeQuestURL"/>--%>
+                <%--<form action="${removeQuestURL}" method="post">--%>
+                    <%--<input type="hidden" name="idRemoveQuest" value="${elem.getId()}">--%>
+                    <%--<td><input type="submit" value="Remove quest" class="btn btn-danger"></td>--%>
+                <%--</form>--%>
+            <%--</c:if>--%>
+        <%--</div>--%>
+        <%--<div class="col-sm">--%>
+            <%--<c:url value="/addReview" var="addReviewURL"/>--%>
+            <%--<form action="${addReviewURL}" method="post">--%>
+                <%--<div class="md-form amber-textarea active-amber-textarea">--%>
+                    <%--<i class="fas fa-pencil-alt prefix"></i><label for="form22">&nbsp;&nbsp;Write review:</label>--%>
+                    <%--<textarea id="form22" name="review" class="md-textarea form-control" rows="3"></textarea>--%>
+                <%--</div>--%>
+                <%--<div class="form-group">--%>
+                <%--</div>--%>
+                <%--<input type="hidden" name="idQuestPlace" value="${elem.getId()}"/>--%>
+                <%--<input type="submit" class="btn btn-info" value="Send review">--%>
+            <%--</form>--%>
+        <%--</div>--%>
+    <%--</div>--%>
+<%--</div>--%>
+    <%--<hr>--%>
+<%--</c:forEach>--%>
+
+<c:url value="/quests" var="questsURL"/>
+<nav aria-label="Статьи по Bootstrap 4">
+    <ul class="pagination justify-content-center">
+        <c:if test="${current_page != 1}">
+            <li class="page-item"><a class="page-link" href="${questsURL}?page=${current_page - 1}">Previous</a></li>
+        </c:if>
+        <c:forEach begin="1" end="${num_of_pages}" var="i" step="1" varStatus="status">
+            <li class="page-item">
+                <c:choose>
+                    <c:when test="${current_page eq i}">
+                        <a class="page-link" href="#">${i}</a>
+                    </c:when>
+                    <c:otherwise>
+                        <a class="page-link" href="${questsURL}?page=${i}">${i}></a>
+                    </c:otherwise>
+                </c:choose>
+            </li>
+        </c:forEach>
+        <c:if test="${current_page lt num_of_pages}">
+            <li class="page-item"><a class="page-link" href="${questsURL}?page=${current_page + 1}">Next</a></li>
+        </c:if>
+    </ul>
+</nav>
+<br><br><br>
+<!-- Footer -->
+<footer class="page-footer font-small unique-color-dark">
+
+    <div style="background-color: #6351ce;">
+        <div class="container">
+            <div class="row py-2 d-flex align-items-center">
+
+                <div class="col-md-6 col-lg-5 text-center text-md-left mb-4 mb-md-0">
+                    <h6 class="mb-0">Get connected with us on social networks!</h6>
+                </div>
+
+                <div class="col-md-6 col-lg-7 text-center text-md-right">
+                    <a href="https://vk.com/mtpji1ons" style="color: black;" class="tw-ic"><i class="fab fa-vk white-text mr-4"> </i></a>
+                    <a href="https://www.instagram.com/dimaterlyuke/" style="color: black;" class="ins-ic"><i class="fab fa-instagram white-text"> </i></a>
+                </div>
             </div>
         </div>
     </div>
-    <hr>
-</c:forEach>
+
+    <div class="container text-center text-md-left" style="background-color: #83a6ed;">
+        <div class="row mt-3">
+            <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4" style="margin-top: 10px;">
+                <h6 class="text-uppercase font-weight-bold">JukeBox</h6>
+                <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
+                <p>Here you can order a quest. Lorem ipsum
+                    dolor sit amet, consectetur adipisicing elit.</p>
+
+            </div>
+            <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4" style="margin-top: 10px;">
+
+                <h6 class="text-uppercase font-weight-bold">Type of quest</h6>
+                <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
+                <p>Supernatural</p>
+                <p>Gravitation</p>
+                <p>Tower mage</p>
+
+            </div>
+            <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4" style="margin-top: 10px;">
+                <h6 class="text-uppercase font-weight-bold">Useful links</h6>
+                <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
+                <c:url value="/login" var="loginURL"/>
+                <p><a href="${loginURL}}">Your Account</a></p>
+                <p><a href="https://e.mail.ru/messages/inbox/?back=1">Mail</a></p>
+                <p><a href="#">Help</a></p>
+            </div>
+            <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4" style="margin-top: 10px;" id="contact">
+
+                <h6 class="text-uppercase font-weight-bold">Contact</h6>
+                <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
+                <p><i class="fas fa-home mr-3"></i> Belarus, Minsk region, BY</p>
+                <p><i class="fas fa-envelope mr-3"></i> lanselot2000_@mail.ru</p>
+                <p><i class="fas fa-phone mr-3"></i> + 375 29 861 97 83</p>
+            </div>
+        </div>
+    </div>
+    <div class="footer-copyright text-center py-3" style="background-color: #161c27; color: #998d7e">© 2018 Copyright:
+        <a href="https://mdbootstrap.com/education/bootstrap/" style="color: #f7f7f8"> JukeBox.com</a>
+    </div>
+</footer>
 
 </body>
 </html>

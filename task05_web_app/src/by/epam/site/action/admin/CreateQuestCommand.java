@@ -1,6 +1,7 @@
 package by.epam.site.action.admin;
 
 import by.epam.site.action.command.ActionCommand;
+import by.epam.site.action.command.MessageManager;
 import by.epam.site.action.factory.JspPage;
 import by.epam.site.dao.daoimpl.SqlTransactionFactoryImpl;
 import by.epam.site.entity.Image;
@@ -23,14 +24,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.Part;
 import java.nio.file.Paths;
 import java.sql.SQLException;
+import java.util.Calendar;
 import java.util.Objects;
 
 public class CreateQuestCommand implements ActionCommand {
-    /**
-     * Logger for recording a program state.
-     */
-    private static final Logger LOGGER =
-            LogManager.getLogger(CreateQuestCommand.class);
+
     @Override
     public JspPage execute(HttpServletRequest request)
             throws ConstantException, SQLException,
@@ -42,6 +40,23 @@ public class CreateQuestCommand implements ActionCommand {
         int level = Integer.parseInt(request.getParameter("level"));
         int maxOfPeople
                 = Integer.parseInt(request.getParameter("maxOfPeople"));
+        if (maxOfPeople > 9) {
+            request.getSession().setAttribute(
+                    "crashMessage",
+                    MessageManager.getProperty("crashMessage"));
+            String encode= jspPage.encode(
+                    MessageManager.getProperty("crashMessage"));
+            jspPage.setPage("/createQuest?message=" + encode);
+            return jspPage;
+        } else if (level > 5) {
+            request.getSession().setAttribute(
+                    "crashMessage",
+                    MessageManager.getProperty("bigLevel"));
+            String encode= jspPage.encode(
+                    MessageManager.getProperty("bigLevel"));
+            jspPage.setPage("/createQuest?message=" + encode);
+            return jspPage;
+        }
         Part part = request.getPart("fileLoader");
         String fileName = transferTo(part);
         ServiceFactory factory
@@ -67,7 +82,11 @@ public class CreateQuestCommand implements ActionCommand {
         questPlace.setImage(image);
         questPlaceService.save(questPlace);
 
-        jspPage.setPage("/createQuest");
+        Calendar calendar = Calendar.getInstance();
+        String encode = jspPage.encode(
+                String.valueOf(calendar.get(Calendar.SECOND)));
+
+        jspPage.setPage("/createQuest?message=" + encode);
         factory.close();
         return jspPage;
     }

@@ -86,6 +86,7 @@
         <url-pattern>/createNewQuest</url-pattern>
         <url-pattern>/changePhoto</url-pattern>
         <url-pattern>/removeQuest</url-pattern>
+        <url-pattern>/questInformation</url-pattern>
 
     </servlet-mapping>
 
@@ -133,6 +134,7 @@
         <url-pattern>/createNewQuest</url-pattern>
         <url-pattern>/changePhoto</url-pattern>
         <url-pattern>/removeQuest</url-pattern>
+        <url-pattern>/questInformation</url-pattern>
 
     </filter-mapping>
     <filter>
@@ -169,6 +171,7 @@
         <url-pattern>/createNewQuest</url-pattern>
         <url-pattern>/changePhoto</url-pattern>
         <url-pattern>/removeQuest</url-pattern>
+        <url-pattern>/questInformation</url-pattern>
 
     </filter-mapping>
 </web-app>

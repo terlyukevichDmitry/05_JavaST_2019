@@ -11,9 +11,9 @@ import by.epam.site.service.interfaces.ServiceFactory;
 import by.epam.site.service.serviceimpl.ServiceFactoryImpl;
 
 import javax.servlet.http.HttpServletRequest;
-import java.net.URLEncoder;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.List;
 
@@ -21,6 +21,7 @@ public class ShowReviewCommand implements ActionCommand {
     @Override
     public JspPage execute(HttpServletRequest request)
             throws ConstantException, SQLException, ClassNotFoundException {
+        JspPage jspPage = new JspPage();
         String currentPage = request.getParameter("page");
         int currentPageInt;
         if (currentPage == null) {
@@ -29,12 +30,14 @@ public class ShowReviewCommand implements ActionCommand {
         } else {
             currentPageInt = Integer.parseInt(currentPage);
         }
-        JspPage jspPage = new JspPage();
+        String encode = request.getParameter("message");
+        jspPage.getModel(jspPage, encode, request);
+
         ServiceFactory factory
                 = new ServiceFactoryImpl(new SqlTransactionFactoryImpl());
         ReviewService service = factory.getService(ReviewService.class);
         List<Review> reviews = service.findAll();
-        int numberOfElement = 2;
+        int numberOfElement = 3;
         int nOfPages = (int)Math.ceil(reviews.size() * 1.0 / numberOfElement);
         service.initDate(reviews);
         Collections.reverse(reviews);
@@ -43,7 +46,6 @@ public class ShowReviewCommand implements ActionCommand {
         request.setAttribute("review", list);
         request.setAttribute("num_of_pages", nOfPages);
         request.setAttribute("current_page", currentPageInt);
-
 
         jspPage.setPage(ConfigurationManager.getProperty("review"));
         factory.close();
@@ -55,13 +57,16 @@ public class ShowReviewCommand implements ActionCommand {
                                       final List<Review> reviews) {
         int counter = currentPageInt * numberOfElement - numberOfElement;
         List<Review> list = new ArrayList<>();
-        if (counter + numberOfElement == reviews.size() + 1) {
-            int index = reviews.size();
-            list.add(reviews.get(index - 1));
+        int mi = reviews.size() - counter;
+        int z = 0;
+        if (mi > numberOfElement) {
+            z = numberOfElement;
         } else {
-            for (int i = counter; i < counter + numberOfElement; i++) {
-                list.add(reviews.get(i));
-            }
+            z = mi;
+        }
+
+        for (int i = counter; i < z + counter; i++) {
+            list.add(reviews.get(i));
         }
         return list;
     }

@@ -21,7 +21,7 @@ public class AdminAccess implements Access {
         stringList.add("/removeUser");
         stringList.add("/changeValue");
         stringList.add("/changePassword");
-        stringList.add("/myQuests");
+        //stringList.add("/myQuests");
         stringList.add("/removeOrder");
         stringList.add("/goToProfile");
         stringList.add("/removeOrderByAdmin");
@@ -35,6 +35,7 @@ public class AdminAccess implements Access {
         stringList.add("/createNewQuest");
         stringList.add("/changePhoto");
         stringList.add("/removeQuest");
+        stringList.add(("/questInformation"));
     }
     @Override
     public boolean checkAccess(final String checkString) {

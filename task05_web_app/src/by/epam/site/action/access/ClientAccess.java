@@ -23,6 +23,7 @@ public class ClientAccess implements Access {
         stringList.add("/addReview");
         stringList.add("/review");
         stringList.add("/changePhoto");
+        stringList.add("/questInformation");
     }
 
     @Override

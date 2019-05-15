@@ -10,6 +10,7 @@ import by.epam.site.service.interfaces.UsedQuestService;
 import by.epam.site.service.serviceimpl.ServiceFactoryImpl;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Calendar;
 
 public class RemoveQuestCommand implements ActionCommand {
     @Override
@@ -25,7 +26,10 @@ public class RemoveQuestCommand implements ActionCommand {
         QuestPlaceService questPlaceService
                 = factory.getService(QuestPlaceService.class);
         questPlaceService.delete(id);
-        jspPage.setPage("/quests");
+        Calendar calendar = Calendar.getInstance();
+        String encoded = jspPage.encode(
+                String.valueOf(calendar.get(Calendar.SECOND)));
+        jspPage.setPage("/quests?message=" + encoded);
         return jspPage;
     }
 }

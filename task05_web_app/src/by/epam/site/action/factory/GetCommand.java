@@ -69,6 +69,11 @@ public enum GetCommand {
             this.command = new UserProfileDirection();
         }
     },
+    QUEST_INFORMATION("/questInformation") {
+        {
+            this.command = new ShowQuestInformationCommand();
+        }
+    },
     SHOW_REVIEW("/review") {
         {
             this.command = new ShowReviewCommand();

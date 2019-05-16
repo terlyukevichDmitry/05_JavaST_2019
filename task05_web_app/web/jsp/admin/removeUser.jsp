@@ -18,7 +18,7 @@
 <body>
 <div class="signIn">
     <c:url value="/removeUser" var="removeURL"/>
-    <form action="${removeURL}" method="post">
+    <form action="${removeURL}" method="post" onsubmit="return confirm('Confirm action')">
         <h2 style="color:white">Remove Person</h2>
         <input type="text" name="login" placeholder="Username" required><br><br>
         <input type="reset" value="Reset"><br><br>

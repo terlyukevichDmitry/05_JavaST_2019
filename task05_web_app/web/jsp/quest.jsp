@@ -155,7 +155,7 @@
                     </c:if>
                     <c:if test="${user.role.name eq 'administrator'}">
                         <c:url value="/removeQuest" var="removeQuestURL"/>
-                        <form action="${removeQuestURL}" method="post">
+                        <form action="${removeQuestURL}" method="post" onsubmit="return confirm('Confirm action')">
                             <input type="hidden" name="idRemoveQuest" value="${elem.getId()}">
                             <td><input type="submit" value="Remove quest" class="btn btn-danger"></td>
                         </form>

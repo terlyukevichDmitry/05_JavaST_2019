@@ -133,7 +133,7 @@
             <th><c:out value="${ elem.message }"/> </th><br>
             <c:if test="${user.role.name.equals('administrator')}">
             <c:url value="/removeReview" var="removeReviewURL"/>
-            <form action="${removeReviewURL}" method="post"><br>
+            <form action="${removeReviewURL}" method="post" onsubmit="return confirm('Confirm action')"><br>
             <input type="hidden" name="getReviewId" value="${elem.getId()}">
             <td><input type="submit" value=" Remove review " class="btn btn-info"></td>
             </form>

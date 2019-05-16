@@ -123,6 +123,7 @@
         <th><fmt:message key="password"/></th>
         <th><fmt:message key="role"/></th>
         <th><fmt:message key="removeUser"/></th>
+        <th> </th>
     </tr>
     </thead>
     <tbody>
@@ -141,10 +142,25 @@
             <th><c:out value="${ elem.role }"/> </th>
             <th>
                 <c:url value="/removePerson" var="removePersonURL"/>
-                    <form action="${removePersonURL}" method="post">
+                    <form action="${removePersonURL}" method="post" onsubmit="return confirm('Confirm action')">
                         <input type="hidden" name="idToRemovePerson" value="${elem.id}">
                         <input type="submit" value="  Remove  " class="btn btn-danger">
                     </form>
+            </th>
+            <th>
+                <c:url value="/doManager" var="doManagerURL"/>
+                <c:if test="${elem.role.name.equals('client')}">
+                <form action="${doManagerURL}" method="post">
+                    <input type="hidden" name="idToAddManager" value="${elem.id}">
+                    <input type="submit" value="Change on Manager" class="btn btn-outline-success">
+                </form>
+                </c:if>
+                <c:if test="${elem.role.name.equals('manager')}">
+                    <form action="${doManagerURL}" method="post">
+                        <input type="hidden" name="idToAddManager" value="${elem.id}">
+                        <input type="submit" value="Change on Client" class="btn btn-outline-success">
+                    </form>
+                </c:if>
             </th>
         </tr>
         </c:forEach>

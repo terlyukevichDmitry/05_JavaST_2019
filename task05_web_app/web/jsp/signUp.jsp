@@ -65,17 +65,17 @@
             <h2 style="color: #ffffff;">Sign Up</h2>
             <div class="block-left">
                 <input type="text" name="name" placeholder="First name" required><br><br><br>
-                <input type="text" name="email" placeholder="@mail" required><br><br><br>
+                <input type="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" name="email" placeholder="@mail" required><br><br><br>
                 <input type="text" name="login" placeholder="Username" required>
             </div>
             <div class="block-right">
                 <input type="text" name="surname" placeholder="Second name" required><br><br><br>
-                <input type="date" name="dateOfBirth" placeholder="Write date of birth" required><br><br><br>
+                <input type="date" name="dateOfBirth" placeholder="Write date of birth(dd-mm-yyyy)" required><br><br><br>
                 <input type="password" name="password" placeholder="Password" required>
             </div>
             <div class="block-op">
                 <input type="text" name="patronymic" placeholder="Patronymic" required><br><br><br>
-                <input type="text" name="phone" placeholder="Phone number" required><br><br><br>
+                <input type="tel" pattern="2-[0-9]{3}-[0-9]{3}" name="phone" placeholder="Phone number(2-xxx-xxx)" required><br><br><br>
                 <input type="password" name="confirm" placeholder="Confirm Password" required>
             </div>
             <input type="submit" value="Sign Up" onclick="myFunction()"><br>

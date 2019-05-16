@@ -67,6 +67,11 @@ public enum PostCommand {
             this.command = new RemovePersonCommand();
         }
     },
+    DO_ADMIN("/doManager") {
+        {
+            this.command = new ChangePersonAccessCommand();
+        }
+    },
     ADD_REVIEW("/addReview") {
         {
             this.command = new AddReviewCommand();

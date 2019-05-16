@@ -115,7 +115,7 @@
             </div>
             <div class="col col-lg-2">
                 <c:url value="/removeOrder" var="removeOrderURL"/>
-                <form action="${removeOrderURL}" method="post">
+                <form action="${removeOrderURL}" method="post" onsubmit="return confirm('Confirm action')">
                     <input type="hidden" name="idToRemove" value="${elem.getId()}">
                     <input type="submit" value="Remove quest" class="btn btn-danger">
                 </form><br>

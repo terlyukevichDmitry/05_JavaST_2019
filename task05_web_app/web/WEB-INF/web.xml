@@ -90,6 +90,7 @@
         <url-pattern>/createPlaceQuest</url-pattern>
         <url-pattern>/searchById</url-pattern>
         <url-pattern>/searchByClientRole</url-pattern>
+        <url-pattern>/doManager</url-pattern>
 
     </servlet-mapping>
 
@@ -141,6 +142,7 @@
         <url-pattern>/createPlaceQuest</url-pattern>
         <url-pattern>/searchById</url-pattern>
         <url-pattern>/searchByClientRole</url-pattern>
+        <url-pattern>/doManager</url-pattern>
 
     </filter-mapping>
     <filter>
@@ -181,5 +183,6 @@
         <url-pattern>/createPlaceQuest</url-pattern>
         <url-pattern>/searchById</url-pattern>
         <url-pattern>/searchByClientRole</url-pattern>
+        <url-pattern>/doManager</url-pattern>
     </filter-mapping>
 </web-app>

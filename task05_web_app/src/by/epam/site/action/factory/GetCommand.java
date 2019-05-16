@@ -56,6 +56,11 @@ public enum GetCommand {
             this.command = new ShowPersonByParameterCommand();
         }
     },
+    DO_ADMIN("/doManager") {
+        {
+            this.command = new ChangeAccessDirection();
+        }
+    },
     SEARCH_BY_CLIENT_ROLE("/searchByClientRole") {
         {
             this.command = new ShowPersonByParameterCommand();

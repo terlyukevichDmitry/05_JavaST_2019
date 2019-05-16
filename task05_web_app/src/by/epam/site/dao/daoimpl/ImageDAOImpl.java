@@ -120,6 +120,7 @@ public class ImageDAOImpl extends AbstractDAOImpl implements ImageDAO {
                         resultSet.getString("imageAddress"));
             }
             System.out.println("image.getFilePath() = " + image.getFilePath());
+            System.out.println("imageId = " + image.getId());
         } catch(SQLException e) {
             LOGGER.error("It is impossible to turn off " +
                     "autocommiting for database connection", e);

@@ -16,8 +16,6 @@ import by.epam.site.service.interfaces.QuestPlaceService;
 import by.epam.site.service.interfaces.QuestService;
 import by.epam.site.service.interfaces.ServiceFactory;
 import by.epam.site.service.serviceimpl.ServiceFactoryImpl;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -25,6 +23,7 @@ import javax.servlet.http.Part;
 import java.nio.file.Paths;
 import java.sql.SQLException;
 import java.util.Calendar;
+import java.util.List;
 import java.util.Objects;
 
 public class CreateQuestCommand implements ActionCommand {
@@ -37,6 +36,23 @@ public class CreateQuestCommand implements ActionCommand {
         JspPage jspPage = new JspPage();
         int id = Integer.parseInt(request.getParameter("options"));
         String title = request.getParameter("title");
+        ServiceFactory factory
+                = new ServiceFactoryImpl(new SqlTransactionFactoryImpl());
+
+        QuestService service = factory.getService(QuestService.class);
+        List<Quest> quests = service.findAll();
+
+        for (Quest quest :quests) {
+            if (quest.getTitle().trim().equalsIgnoreCase(title.trim())) {
+                request.getSession().setAttribute("crashMessage",
+                        MessageManager.getProperty("equalsTitle"));
+                String encode= jspPage.encode(
+                        MessageManager.getProperty("equalsTitle"));
+                jspPage.setPage("/createQuest?message=" + encode);
+                return jspPage;
+            }
+        }
+
         int level = Integer.parseInt(request.getParameter("level"));
         int maxOfPeople
                 = Integer.parseInt(request.getParameter("maxOfPeople"));
@@ -59,26 +75,25 @@ public class CreateQuestCommand implements ActionCommand {
         }
         Part part = request.getPart("fileLoader");
         String fileName = transferTo(part);
-        ServiceFactory factory
-                = new ServiceFactoryImpl(new SqlTransactionFactoryImpl());
-        QuestService service = factory.getService(QuestService.class);
+
         Quest quest = new Quest();
         quest.setTitle(title);
         quest.setLevel(level);
         quest.setMaxPeople(maxOfPeople);
         service.save(quest);
-        Quest quest1 = service.read(title);
+        Quest questHelper = service.read(title);
 
         ImageService imageService = factory.getService(ImageService.class);
         Image image = new Image();
-        image.setId(quest1.getId());
+        image.setId(questHelper.getId());
         image.setFilePath("images/" + fileName);
         imageService.create(image);
 
-        QuestPlaceService questPlaceService = factory.getService(QuestPlaceService.class);
+        QuestPlaceService questPlaceService
+                = factory.getService(QuestPlaceService.class);
         QuestPlace questPlace = questPlaceService.findById(id);
         questPlace.setId(null);
-        questPlace.setQuest(quest1);
+        questPlace.setQuest(questHelper);
         questPlace.setImage(image);
         questPlaceService.save(questPlace);
 

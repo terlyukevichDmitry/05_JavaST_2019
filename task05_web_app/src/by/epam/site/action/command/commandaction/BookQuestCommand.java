@@ -35,18 +35,25 @@ public class BookQuestCommand implements ActionCommand {
                 = factory.getService(UsedQuestService.class);
 
         UsedQuest usedQuest = new UsedQuest();
+
         usedQuest.setQuestPlace(questPlace);
 
         Client client = new Client();
         client.setId(user.getId());
+
         usedQuest.setClient(client);
         usedQuest.setDate(LocalDate.now());
         usedQuest.setControl(true);
         usedQuestService.save(usedQuest);
+
         factory.close();
+
         Calendar calendar = Calendar.getInstance();
         String encoded = jspPage.encode(
                 String.valueOf(calendar.get(Calendar.SECOND)));
+
+        request.getSession().setAttribute("modelTextInfo",
+                MessageManager.getProperty("addedAction"));
 
         jspPage.setPage("/quests?message=" + encoded);
         return jspPage;

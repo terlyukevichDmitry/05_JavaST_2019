@@ -31,7 +31,7 @@
                     <h4 class="modal-title">Modal Window Header</h4>
                 </div>
                 <div class="modal-body">
-                    Action done. Please continue do something else.
+                        ${modelText}Please continue do something else.
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -120,33 +120,74 @@
 </div><br><br>
 
 <div class="container">
-<c:url value="/createNewQuest" var="createQuestURL"/>
-<form action="${createQuestURL}" method="post" enctype="multipart/form-data">
-    <h4>New Quest information:</h4>
-    <table class="table table-th-block">
-        <tbody>
-        <label>Choose the address to create new quest in this place.</label><br><br>
-        <div class="btn-group btn-group-toggle" data-toggle="buttons">
-            <%--@elvariable id="questPlace" type="java.util.List"--%>
-            <c:forEach var="elem" items="${questPlace}" varStatus="status">
-                <label class="btn btn-secondary">
-                    <input type="radio" name="options" id="${elem.getId()}" autocomplete="off" value="${elem.getId()}" checked>${elem.address}
-                </label>
-            </c:forEach>
-        </div><br><br>
-        <input type="text" name="title" class="form-control border-valid" placeholder="Enter quest title" required><br>
-        <input type="number" name="level" class="form-control" placeholder="Enter level for quest" required><br>
-        <input type="number" name="maxOfPeople" class="form-control" placeholder="Enter max number of people in this quest" required><br>
-        <label for="exampleFormControlFile1">Input photo</label><br>
-        <input name="fileLoader" accept=".jpg" type="file" class="btn btn-dark" id="exampleFormControlFile1" required><br><br>
-        <button class="btn btn-success" type="submit">   Create quest   </button><br><br>
-        <div style="color: #ff7b7b; font-size: 18px;">
-        ${crashMessage}
+    <div class="col-lg-8 col-md-8 col-xs-12">
+        <div class="panel">
+            <div class="panel-body">
+                <ul id="myTab" class="nav nav-pills">
+                    <li class="active"><a href="#quest" class="btn btn-secondary" data-toggle="tab">Create new quest</a></li>&nbsp;&nbsp;&nbsp;
+                    <li class=""><a href="#place" class="btn btn-secondary"  data-toggle="tab">Create new place</a></li>
+                </ul>
+                <div id="myTabContent" class="tab-content">
+                    <hr>
+                    <div class="tab-pane fade active in" id="quest">
+                        <table class="table table-th-block">
+                            <c:url value="/createNewQuest" var="createQuestURL"/>
+                            <form action="${createQuestURL}" method="post" enctype="multipart/form-data">
+                                <h4>New Quest information:</h4>
+                                <table class="table table-th-block">
+                                    <tbody>
+                                    <label>Choose the address to create new quest in this place.</label><br><br>
+                                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                        <%--@elvariable id="questPlace" type="java.util.List"--%>
+                                        <c:forEach var="elem" items="${questPlace}" varStatus="status">
+                                            <label class="btn btn-secondary">
+                                                <input type="radio" name="options" id="${elem.getId()}" autocomplete="off" value="${elem.getId()}" checked>${elem.address}
+                                            </label>
+                                        </c:forEach>
+                                    </div><br><br>
+                                    <input type="text" name="title" class="form-control border-valid" placeholder="Enter quest title" required><br>
+                                    <input type="number" name="level" class="form-control" placeholder="Enter level for quest" required><br>
+                                    <input type="number" name="maxOfPeople" class="form-control" placeholder="Enter max number of people in this quest" required><br>
+                                    <label for="exampleFormControlFile1">Input photo</label><br>
+                                    <input name="fileLoader" accept=".jpg" type="file" class="btn btn-dark" id="exampleFormControlFile1" required><br><br>
+                                    <button class="btn btn-success" type="submit">   Create quest   </button><br><br>
+                                    <div style="color: #ff7b7b; font-size: 18px;">
+                                        ${crashMessage}
+                                    </div>
+                                    </tbody>
+                                </table>
+                            </form>
+                        </table>
+                    </div>
+                    <div class="tab-pane fade" id="place">
+                        <p></p>
+                        <c:url value="/createPlaceQuest" var="createPlaceQuestURL"/>
+                        <form action="${createPlaceQuestURL}" role="form" method="post">
+                            <h4>New quest place:</h4>
+                            <div class="form-group">
+                                <label>Enter the name of this place</label>
+                                <input type="text" name="placeName" class="form-control rounded" placeholder="New name" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Enter address of this place</label>
+                                <input type="text" name="addressName" class="form-control rounded" placeholder="New address" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Enter phone number of this place</label>
+                                <input type="text" name="phoneNumber" class="form-control rounded" placeholder="New phone number" required>
+                            </div>
+                            <div class="form-group">
+                                <input type="submit" class="btn btn-success" data-original-title="" title="" value="Create place">
+                            </div>
+                        </form>
+                        <div style="color: #ff7b7b">
+                            ${incorrectDataForQuestPlace}
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-        </tbody>
-    </table>
-
-</form>
+    </div>
 </div>
 <br><br><br>
 <!-- Footer -->

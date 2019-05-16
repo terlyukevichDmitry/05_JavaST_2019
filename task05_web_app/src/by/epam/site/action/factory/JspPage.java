@@ -1,5 +1,7 @@
 package by.epam.site.action.factory;
 
+import by.epam.site.action.command.MessageManager;
+
 import javax.servlet.http.HttpServletRequest;
 import java.util.Base64;
 import java.util.Calendar;
@@ -42,15 +44,18 @@ public class JspPage {
     }
 
     public void getModel(final JspPage jspPage,
-                       final String encode,
-                       final HttpServletRequest request) {
-        if (encode == null) {
+                            final String encode,
+                            final HttpServletRequest request) {
+        if (encode == null || encode.length() > 10) {
             request.getSession().setAttribute("model", false);
         } else {
             int encodedSeconds = Integer.parseInt(jspPage.decode(encode));
             Calendar calendar = Calendar.getInstance();
             int secondsNow = calendar.get(Calendar.SECOND);
             if (encodedSeconds + 10 > secondsNow) {
+                String text = String.valueOf(
+                        request.getSession().getAttribute("modelTextInfo"));
+                request.getSession().setAttribute("modelText", text);
                 request.getSession().setAttribute("model", true);
             } else {
                 request.getSession().setAttribute("model", false);

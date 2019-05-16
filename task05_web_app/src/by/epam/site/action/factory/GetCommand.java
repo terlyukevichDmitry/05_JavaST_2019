@@ -1,9 +1,6 @@
 package by.epam.site.action.factory;
 
-import by.epam.site.action.admin.AcceptOrderCommand;
-import by.epam.site.action.admin.CreateQuestDirection;
-import by.epam.site.action.admin.PersonShowAction;
-import by.epam.site.action.admin.UserProfileDirection;
+import by.epam.site.action.admin.*;
 import by.epam.site.action.command.*;
 import by.epam.site.action.command.commandaction.*;
 import by.epam.site.action.command.direction.*;
@@ -52,6 +49,16 @@ public enum GetCommand {
     SHOW_USERS("/showUsers") {
         {
             this.command = new PersonShowAction();
+        }
+    },
+    SEARCH_BY_ID("/searchById") {
+        {
+            this.command = new ShowPersonByParameterCommand();
+        }
+    },
+    SEARCH_BY_CLIENT_ROLE("/searchByClientRole") {
+        {
+            this.command = new ShowPersonByParameterCommand();
         }
     },
     QUEST_PLACES_PATH("/quests") {

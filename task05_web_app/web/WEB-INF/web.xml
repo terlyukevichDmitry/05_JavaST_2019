@@ -87,6 +87,9 @@
         <url-pattern>/changePhoto</url-pattern>
         <url-pattern>/removeQuest</url-pattern>
         <url-pattern>/questInformation</url-pattern>
+        <url-pattern>/createPlaceQuest</url-pattern>
+        <url-pattern>/searchById</url-pattern>
+        <url-pattern>/searchByClientRole</url-pattern>
 
     </servlet-mapping>
 
@@ -135,6 +138,9 @@
         <url-pattern>/changePhoto</url-pattern>
         <url-pattern>/removeQuest</url-pattern>
         <url-pattern>/questInformation</url-pattern>
+        <url-pattern>/createPlaceQuest</url-pattern>
+        <url-pattern>/searchById</url-pattern>
+        <url-pattern>/searchByClientRole</url-pattern>
 
     </filter-mapping>
     <filter>
@@ -172,6 +178,8 @@
         <url-pattern>/changePhoto</url-pattern>
         <url-pattern>/removeQuest</url-pattern>
         <url-pattern>/questInformation</url-pattern>
-
+        <url-pattern>/createPlaceQuest</url-pattern>
+        <url-pattern>/searchById</url-pattern>
+        <url-pattern>/searchByClientRole</url-pattern>
     </filter-mapping>
 </web-app>

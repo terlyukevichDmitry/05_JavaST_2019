@@ -72,6 +72,16 @@ public enum PostCommand {
             this.command = new AddReviewCommand();
         }
     },
+    SEARCH_BY_ID("/searchById") {
+        {
+            this.command = new SearchByIdCommand();
+        }
+    },
+    SEARCH_BY_CLIENT_ROLE("/searchByClientRole") {
+        {
+            this.command = new SearchByClientRoleCommand();
+        }
+    },
     REMOVE_REVIEW("/removeReview") {
         {
             this.command = new RemoveReviewCommand();
@@ -80,6 +90,12 @@ public enum PostCommand {
     CREATE_QUEST("/createNewQuest") {
         {
             this.command = new CreateQuestCommand();
+        }
+    },
+
+    CREATE_PLACE("/createPlaceQuest") {
+        {
+            this.command = new CreateNewQuestPlaceCommand();
         }
     },
     CHANGE_PHOTO("/changePhoto") {

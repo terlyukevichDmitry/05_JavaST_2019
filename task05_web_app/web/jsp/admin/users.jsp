@@ -95,7 +95,26 @@
         </div>
     </div>
 </div>
-
+<br><br>
+<div style="display: flex;  justify-content: space-around;">
+<c:url value="/searchById" var="searchByIdURL"/>
+<form action="${searchByIdURL}" method="post" class="form-inline">
+    <div class="form-group mb-2">
+        <label class="sr-only">Find by ID</label>
+    </div>
+    <div class="form-group mx-sm-3 mb-2">
+        <label for="inputText" class="sr-only">ID</label>
+        <input type="text" name="searchId" class="form-control" id="inputText" placeholder="Only number" pattern="^[ 0-9]+$">
+    </div>
+    <button type="submit" class="btn btn-primary mb-2">Search</button>
+</form>
+<c:url value="showUsers" var="showUsersURL"/>
+    <a href="${showUsersURL}"><button type="submit" class="btn btn-primary mb-2">Select all</button></a>
+    <c:url value="/searchByClientRole" var="searchByRoleURL"/>
+    <form action="${searchByRoleURL}" method="post">
+    <button type="submit" class="btn btn-primary mb-2">Select client</button>
+    </form>
+</div>
 <table class="table table-bordered table-inverse">
     <thead>
     <tr>

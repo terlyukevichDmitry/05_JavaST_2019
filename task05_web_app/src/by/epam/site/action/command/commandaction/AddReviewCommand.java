@@ -1,6 +1,7 @@
 package by.epam.site.action.command.commandaction;
 
 import by.epam.site.action.command.ActionCommand;
+import by.epam.site.action.command.MessageManager;
 import by.epam.site.action.factory.JspPage;
 import by.epam.site.dao.daoimpl.SqlTransactionFactoryImpl;
 import by.epam.site.entity.Client;
@@ -51,6 +52,8 @@ public class AddReviewCommand implements ActionCommand {
                 String.valueOf(calendar.get(Calendar.SECOND)));
         factory.close();
         jspPage.setPage("/questInformation?message=" + encoded);
+        request.getSession().setAttribute("modelTextInfo",
+                MessageManager.getProperty("addedAction"));
         return jspPage;
     }
 }

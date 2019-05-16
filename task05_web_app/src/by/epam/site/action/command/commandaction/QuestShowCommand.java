@@ -2,6 +2,7 @@ package by.epam.site.action.command.commandaction;
 
 import by.epam.site.action.command.ActionCommand;
 import by.epam.site.action.command.ConfigurationManager;
+import by.epam.site.action.command.MessageManager;
 import by.epam.site.action.factory.JspPage;
 import by.epam.site.dao.daoimpl.QuestPlaceDAOImpl;
 import by.epam.site.dao.daoimpl.SqlTransactionFactoryImpl;

@@ -32,7 +32,7 @@
                 <h4 class="modal-title">Modal Window Header</h4>
             </div>
             <div class="modal-body">
-                Action done. Please continue do something else.
+                ${modelText} Please continue do something else.
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -130,7 +130,7 @@
             <c:url value="/bookQuest" var="bookQuestURL"/>
             <br><br>
             <form action="${bookQuestURL}" method="post">
-                <input type="hidden" name="getId" value="${elem.getId()}">
+                <input type="hidden" name="getId" value="${elem.id}">
                 <td><input type="submit" value="Book a quest" class="btn btn-info"></td>
             </form><br>
         </c:if>
@@ -138,7 +138,7 @@
             <c:url value="/removeQuest" var="removeQuestURL"/>
             <br><br>
             <form action="${removeQuestURL}" method="post">
-                <input type="hidden" name="idRemoveQuest" value="${elem.getId()}">
+                <input type="hidden" name="idRemoveQuest" value="${elem.id}">
                 <td><input type="submit" value="Remove quest" class="btn btn-danger"></td>
             </form>
         </c:if>

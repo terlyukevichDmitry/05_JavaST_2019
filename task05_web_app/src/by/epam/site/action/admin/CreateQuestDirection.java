@@ -2,6 +2,7 @@ package by.epam.site.action.admin;
 
 import by.epam.site.action.command.ActionCommand;
 import by.epam.site.action.command.ConfigurationManager;
+import by.epam.site.action.command.MessageManager;
 import by.epam.site.action.factory.JspPage;
 import by.epam.site.dao.daoimpl.SqlTransactionFactoryImpl;
 import by.epam.site.entity.QuestPlace;
@@ -24,6 +25,11 @@ public class CreateQuestDirection implements ActionCommand {
             ClassNotFoundException {
         JspPage jspPage = new JspPage();
         String encode = request.getParameter("message");
+        if (encode == null) {
+            request.getSession().setAttribute("crashMessage", "");
+            request.getSession().setAttribute(
+                    "incorrectDataForQuestPlace", "");
+        }
         jspPage.getModel(jspPage, encode, request);
         ServiceFactory factory
                 = new ServiceFactoryImpl(new SqlTransactionFactoryImpl());
@@ -32,24 +38,26 @@ public class CreateQuestDirection implements ActionCommand {
         request.getSession().setAttribute("questPlace", getPlaces(list));
         factory.close();
         jspPage.setPage(ConfigurationManager.getProperty("createQuest"));
+        request.getSession().setAttribute("modelTextInfo",
+                MessageManager.getProperty("createdQuest"));
         return jspPage;
     }
 
     private List<QuestPlace> getPlaces(final List<QuestPlace> list) {
         List<QuestPlace> places = new ArrayList<>();
-        boolean checker = false;
-        for (QuestPlace q : list) {
-            if (places != null) {
+        for (QuestPlace questPlace: list) {
+            boolean checker = false;
+            if (!places.isEmpty()) {
                 for (QuestPlace quest :places) {
-                    if (quest.getAddress().equals(q.getAddress())) {
+                    if (quest.getAddress().equals(questPlace.getAddress())) {
                         checker = true;
                     }
                 }
                 if(!checker) {
-                    places.add(q);
+                    places.add(questPlace);
                 }
             } else {
-                places.add(q);
+                places.add(questPlace);
             }
         }
         return places;

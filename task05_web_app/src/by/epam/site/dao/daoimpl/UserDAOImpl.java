@@ -36,6 +36,8 @@ public class UserDAOImpl extends AbstractDAOImpl implements UserDAO {
             + "`role` FROM `user` WHERE `id` = ?";
     private static final String DB_FIND_BY_LOGIN
             = "SELECT id FROM user WHERE login = ?";
+    private static final String DB_FIND_BY_ROLE
+            = "SELECT `id`, `login`, `password` FROM user WHERE `role` = ?";
 
     @Override
     public List<User> readAll()
@@ -194,6 +196,27 @@ public class UserDAOImpl extends AbstractDAOImpl implements UserDAO {
             LOGGER.error("It is impossible to turn off " +
                     "autocommiting for database connection", e);
             throw new ConstantException(e);
+        }
+    }
+
+    @Override
+    public List<User> readByRole(final Role role) throws ConstantException {
+        try(PreparedStatement statement
+                    = connection.prepareStatement(DB_FIND_BY_ROLE)) {
+            statement.setInt(1, role.getIdentity());
+            ResultSet resultSet = statement.executeQuery();
+            List<User> userList = new ArrayList<>();
+            while (resultSet.next()) {
+                User user = new User();
+                user.setId(resultSet.getInt("id"));
+                user.setLogin(resultSet.getString("login"));
+                user.setPassword(resultSet.getString("password"));
+                user.setRole(role);
+                userList.add(user);
+            }
+            return userList;
+        } catch (SQLException exception) {
+            throw new ConstantException(exception);
         }
     }
 }

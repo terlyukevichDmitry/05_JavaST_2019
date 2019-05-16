@@ -106,7 +106,7 @@ public class UsedQuestDAOImpl extends AbstractDAOImpl implements UsedQuestDAO {
             statement.setDate(1, date);
             statement.setInt(2, usedQuest.getClient().getId());
             statement.setInt(3,
-                    usedQuest.getQuestPlace().getQuest().getId());
+                    usedQuest.getQuestPlace().getId());
             statement.setBoolean(4, usedQuest.getControl());
             statement.executeUpdate();
             transaction.commit();
@@ -138,8 +138,13 @@ public class UsedQuestDAOImpl extends AbstractDAOImpl implements UsedQuestDAO {
             statement.setBoolean(4, usedQuest.getControl());
             statement.setInt(5, usedQuest.getId());
             statement.executeUpdate();
+            transaction.commit();
             return usedQuest;
         } catch (SQLException e) {
+            transaction.rollback();
+            LOGGER.error("There is no autoincremented "
+                    + "index after trying to add record into table "
+                    + "`used_quest`");
             throw new ConstantException(e);
         }
     }

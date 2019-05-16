@@ -39,9 +39,7 @@ public class UsedQuestServiceImpl extends ServiceImpl implements UsedQuestServic
             } else {
                 usedQuest.setId(dao.create(usedQuest, transaction));
             }
-            transaction.commit();
         } catch (SQLException | ClassNotFoundException e) {
-            transaction.rollback();
             LOGGER.error("There is no autoincremented "
                     + "index after trying to add record into table "
                     + "`used_quest`");
@@ -58,8 +56,6 @@ public class UsedQuestServiceImpl extends ServiceImpl implements UsedQuestServic
     public void initData(List<UsedQuest> usedQuests)
             throws ConstantException, SQLException, ClassNotFoundException {
         for (UsedQuest element : usedQuests) {
-            System.out.println("element.getQuestPlace().getId() =" + element.getQuestPlace().getId());
-            System.out.println("element.getClient().getId() = " + element.getClient().getId());
             ServiceFactory factory = new ServiceFactoryImpl(
                     new SqlTransactionFactoryImpl());
             QuestPlaceService service

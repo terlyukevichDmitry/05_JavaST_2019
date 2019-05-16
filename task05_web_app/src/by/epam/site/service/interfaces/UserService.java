@@ -1,5 +1,6 @@
 package by.epam.site.service.interfaces;
 
+import by.epam.site.entity.Role;
 import by.epam.site.entity.User;
 import by.epam.site.exception.ConstantException;
 
@@ -16,4 +17,5 @@ public interface UserService extends Service {
     void delete(Integer id) throws ClassNotFoundException, ConstantException;
     User findByLogin(String login) throws ConstantException;
     String mdFiveMethod(String st) throws ConstantException;
+    List<User> findByRole(Role role) throws ConstantException;
 }

@@ -12,6 +12,7 @@ public class ActionFactory {
                                              final HttpServletRequest request) {
         ActionCommand current = new EmptyCommand();
         String actionValue = String.valueOf(request.getAttribute("action"));
+        System.out.println(actionValue);
         action.setForward(actionValue);
         if (actionValue == null || actionValue.isEmpty()) {
             return current;

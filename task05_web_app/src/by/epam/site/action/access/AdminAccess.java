@@ -36,6 +36,9 @@ public class AdminAccess implements Access {
         stringList.add("/changePhoto");
         stringList.add("/removeQuest");
         stringList.add(("/questInformation"));
+        stringList.add("/createPlaceQuest");
+        stringList.add("/searchById");
+        stringList.add("/searchByClientRole");
     }
     @Override
     public boolean checkAccess(final String checkString) {

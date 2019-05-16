@@ -2,6 +2,7 @@ package by.epam.site.service.serviceimpl;
 
 import by.epam.site.dao.daoimpl.UserDAOImpl;
 import by.epam.site.dao.daointerfaces.UserDAO;
+import by.epam.site.entity.Role;
 import by.epam.site.entity.User;
 import by.epam.site.exception.ConstantException;
 import by.epam.site.service.interfaces.UserService;
@@ -70,6 +71,12 @@ public class UserServiceImpl extends ServiceImpl implements UserService {
     public User findByLogin(String login) throws ConstantException {
         UserDAO dao = transaction.createDaoImpl(UserDAO.class);
         return dao.read(login);
+    }
+
+    @Override
+    public List<User> findByRole(Role role) throws ConstantException {
+        UserDAO dao = transaction.createDaoImpl(UserDAO.class);
+        return dao.readByRole(role);
     }
 
     @Override

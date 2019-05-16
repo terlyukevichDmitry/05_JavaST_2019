@@ -84,7 +84,7 @@ public class ControllerServlet extends HttpServlet {
         } catch (ClassNotFoundException e) {
             LOGGER.warn("ClassNotFoundException exception");
         } catch (ServletException e) {
-            e.printStackTrace();
+            LOGGER.warn("ServletException exception");
         }
     }
 }

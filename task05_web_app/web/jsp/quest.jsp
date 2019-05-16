@@ -34,7 +34,7 @@
                     <h4 class="modal-title">Modal Window Header</h4>
                 </div>
                 <div class="modal-body">
-                    Action done. Please continue do something else.
+                    ${modelText} Please continue do something else.
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -167,52 +167,7 @@
 </c:forEach>
 </div>
 
-
-<%--&lt;%&ndash;@elvariable id="questPlaces" type="java.util.List"&ndash;%&gt;--%>
-<%--<c:forEach var="elem" items="${questPlaces}" varStatus="status">--%>
-<%--<div class="container">--%>
-    <%--<div class="row">--%>
-        <%--<div class="col-sm">--%>
-            <%--<c:url value="/questInformation" var="questInformationURL"/>--%>
-            <%--<form action="${questInformationURL}" method="get">--%>
-                <%--<input type="hidden" name="getQuestId" value="${elem.id}">--%>
-                <%--<input type="image" class="img-fluid rounded" width="75%" height="80%" src="${pageContext.request.contextPath}/${elem.image.filePath}" />--%>
-            <%--</form>--%>
-        <%--</div>--%>
-        <%--<div class="col-sm">--%>
-            <%--Quest name: <th><c:out value="${ elem.quest.title }"/> </th><br>--%>
-            <%--<c:if test="${!user.role.name.equals('administrator')}">--%>
-            <%--<c:url value="/bookQuest" var="bookQuestURL"/>--%>
-            <%--<form action="${bookQuestURL}" method="post">--%>
-                <%--<input type="hidden" name="getId" value="${elem.getId()}">--%>
-                <%--<td><input type="submit" value="Book a quest" class="btn btn-info"></td>--%>
-            <%--</form><br>--%>
-            <%--</c:if>--%>
-            <%--<c:if test="${user.role.name eq 'administrator'}">--%>
-                <%--<c:url value="/removeQuest" var="removeQuestURL"/>--%>
-                <%--<form action="${removeQuestURL}" method="post">--%>
-                    <%--<input type="hidden" name="idRemoveQuest" value="${elem.getId()}">--%>
-                    <%--<td><input type="submit" value="Remove quest" class="btn btn-danger"></td>--%>
-                <%--</form>--%>
-            <%--</c:if>--%>
-        <%--</div>--%>
-        <%--<div class="col-sm">--%>
-            <%--<c:url value="/addReview" var="addReviewURL"/>--%>
-            <%--<form action="${addReviewURL}" method="post">--%>
-                <%--<div class="md-form amber-textarea active-amber-textarea">--%>
-                    <%--<i class="fas fa-pencil-alt prefix"></i><label for="form22">&nbsp;&nbsp;Write review:</label>--%>
-                    <%--<textarea id="form22" name="review" class="md-textarea form-control" rows="3"></textarea>--%>
-                <%--</div>--%>
-                <%--<div class="form-group">--%>
-                <%--</div>--%>
-                <%--<input type="hidden" name="idQuestPlace" value="${elem.getId()}"/>--%>
-                <%--<input type="submit" class="btn btn-info" value="Send review">--%>
-            <%--</form>--%>
-        <%--</div>--%>
-    <%--</div>--%>
-<%--</div>--%>
-    <%--<hr>--%>
-<%--</c:forEach>--%>
+<br><br>
 
 <c:url value="/quests" var="questsURL"/>
 <nav aria-label="Статьи по Bootstrap 4">

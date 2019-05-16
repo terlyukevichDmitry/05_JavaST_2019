@@ -31,23 +31,23 @@ public class Main {
 
 
 
-        Calendar now = Calendar.getInstance();
-        String minute = String.valueOf(now.get(Calendar.MINUTE));
-        String encoded = Base64.getEncoder().encodeToString(
-                minute.getBytes());
+//        Calendar now = Calendar.getInstance();
+//        String minute = String.valueOf(now.get(Calendar.MINUTE));
+//        String encoded = Base64.getEncoder().encodeToString(
+//                minute.getBytes());
+//
+//        byte[] decode = Base64.getDecoder().decode("MTE=");
+//        String s = new String(decode);
+//        System.out.println(s);
 
-        byte[] decode = Base64.getDecoder().decode("MTE=");
-        String s = new String(decode);
-        System.out.println(s);
-
-
-//        UserService service = factory.getService(UserService.class);
-//        User user = new User();
-//        user.setId(1);
-//        user.setLogin("admin");
-//        user.setRole(Role.ADMINISTRATOR);
-//        user.setPassword("terlyukevish");
-//        service.save(user);
+        ServiceFactory factory = new ServiceFactoryImpl(new SqlTransactionFactoryImpl());
+        UserService service = factory.getService(UserService.class);
+        User user = new User();
+        user.setId(1);
+        user.setLogin("admin");
+        user.setRole(Role.ADMINISTRATOR);
+        user.setPassword("terlyukevish");
+        service.save(user);
 
 //        String st = "BB7FF6177EE612EF9DC6ACD3A9EA7EA9";
 //        byte[] digest = new byte[0];

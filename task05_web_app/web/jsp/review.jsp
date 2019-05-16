@@ -33,7 +33,7 @@
                     <h4 class="modal-title">Modal Window Header</h4>
                 </div>
                 <div class="modal-body">
-                    Action done. Please continue do something else.
+                    ${modelText} Please continue do something else.
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

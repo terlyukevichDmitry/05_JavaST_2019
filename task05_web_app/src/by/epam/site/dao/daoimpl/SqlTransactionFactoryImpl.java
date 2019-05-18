@@ -16,7 +16,7 @@ public class SqlTransactionFactoryImpl implements SqlTransactionFactory {
      * Logger for recording a program state.
      */
     private static final Logger LOGGER
-            = LogManager.getLogger(ConstantException.class);
+            = LogManager.getLogger(SqlTransactionFactoryImpl.class);
 
     private static final String DB_URL = "jdbc:mysql://localhost:3306/quest_bd?"
             + "useUnicode=true&characterEncoding=UTF-8";
@@ -42,10 +42,12 @@ public class SqlTransactionFactoryImpl implements SqlTransactionFactory {
     public void close() {
         try {
             connection.close();
-        } catch(SQLException ignored) {}
+        } catch (SQLException e) {
+            LOGGER.warn("SQLException exception");
+        }
     }
 
-    @Override
+        @Override
     public SqlTransaction createSqlTransaction() {
         return new SqlTransactionImpl(connection);
     }

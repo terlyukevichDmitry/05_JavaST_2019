@@ -1,11 +1,10 @@
 package by.epam.site.entity;
 
-import com.sun.istack.internal.NotNull;
 
 public class Quest extends Entity {
-    @NotNull private String title;
-    @NotNull private Integer level;
-    @NotNull private Integer maxPeople;
+    private String title;
+    private Integer level;
+    private Integer maxPeople;
 
     public String getTitle() {
         return title;

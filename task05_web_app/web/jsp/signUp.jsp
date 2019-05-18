@@ -75,7 +75,7 @@
             </div>
             <div class="block-op">
                 <input type="text" name="patronymic" placeholder="Patronymic" required><br><br><br>
-                <input type="tel" pattern="2-[0-9]{3}-[0-9]{3}" name="phone" placeholder="Phone number(2-xxx-xxx)" required><br><br><br>
+                <input type="tel" pattern="[0-9]{9}" name="phone" placeholder="Phone number(xxxxxxxxx)" required><br><br><br>
                 <input type="password" name="confirm" placeholder="Confirm Password" required>
             </div>
             <input type="submit" value="Sign Up" onclick="myFunction()"><br>

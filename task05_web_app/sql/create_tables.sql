@@ -2,7 +2,7 @@ USE `quest_bd`;
 
 CREATE TABLE IF NOT EXISTS `user` (
 	`id` INT(11) NOT NULL AUTO_INCREMENT,
-	`login` varchar(50) NOT NULL ,
+	`login` varchar(50) UNIQUE NOT NULL ,
 	`password` varchar(64) NOT NULL ,
 	/*
 	 * 0 - администратор (Role.ADMINISTRATOR)
@@ -19,7 +19,7 @@ CREATE TABLE IF NOT EXISTS `client` (
 	`surname` varchar(32) NOT NULL ,
 	`patronymic` varchar(64) NOT NULL,
 	`dateOfBirth` DATE NOT NULL,
-	`email` varchar(254) NOT NULL ,
+	`email` varchar(254) UNIQUE NOT NULL ,
 	`phone` varchar(25) NOT NULL ,
 	`imageAddress` VARCHAR(254) NOT NULL,
 	PRIMARY KEY (`id`)
@@ -27,7 +27,7 @@ CREATE TABLE IF NOT EXISTS `client` (
 
 CREATE TABLE IF NOT EXISTS `quest` (
 	`id` INT(11) NOT NULL AUTO_INCREMENT,
-	`title` varchar(255) NOT NULL ,
+	`title` varchar(255) UNIQUE NOT NULL ,
 	`level` INT(1) NOT NULL ,
 	`max_people` INT(1) NOT NULL ,
 	PRIMARY KEY (`id`)
@@ -66,6 +66,8 @@ CREATE TABLE IF NOT EXISTS `review` (
 	`client_id` INT(11) NOT NULL,
 	PRIMARY KEY (`id`)
 );
+
+-- login = admin/ -->
 
 ALTER TABLE `quest_place` ADD CONSTRAINT `quest_place_fk0` FOREIGN KEY (`image_id`) REFERENCES `image`(`id`);
 

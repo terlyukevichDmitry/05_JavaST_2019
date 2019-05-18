@@ -1,13 +1,12 @@
 package by.epam.site.entity;
 
-import com.sun.istack.internal.NotNull;
 
 public class QuestPlace extends Entity {
-    @NotNull private String name;
-    @NotNull private String address;
-    @NotNull private String phone;
-    @NotNull private Quest quest;
-    @NotNull private Image image;
+    private String name;
+    private String address;
+    String phone;
+    private Quest quest;
+    private Image image;
 
     public String getName() {
         return name;
@@ -58,5 +57,15 @@ public class QuestPlace extends Entity {
                 ", quest=" + quest +
                 ", image=" + image +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        return super.equals(object);
+    }
+
+    @Override
+    public int hashCode() {
+        return super.hashCode();
     }
 }

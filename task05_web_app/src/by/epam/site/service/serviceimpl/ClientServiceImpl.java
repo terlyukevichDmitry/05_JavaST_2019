@@ -4,7 +4,6 @@ import by.epam.site.dao.daointerfaces.ClientDAO;
 import by.epam.site.entity.Client;
 import by.epam.site.exception.ConstantException;
 import by.epam.site.service.interfaces.ClientService;
-import by.epam.site.servlet.ControllerServlet;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -21,7 +20,8 @@ public class ClientServiceImpl extends ServiceImpl implements ClientService {
 
 
     @Override
-    public List<Client> findAll() throws ConstantException, SQLException, ClassNotFoundException {
+    public List<Client> findAll() throws ConstantException,
+            SQLException, ClassNotFoundException {
         ClientDAO dao = transaction.createDaoImpl(ClientDAO.class);
         return dao.readAll();
     }

@@ -38,8 +38,6 @@ public class CreateQuestDirection implements ActionCommand {
         request.getSession().setAttribute("questPlace", getPlaces(list));
         factory.close();
         jspPage.setPage(ConfigurationManager.getProperty("createQuest"));
-        request.getSession().setAttribute("modelTextInfo",
-                MessageManager.getProperty("createdQuest"));
         return jspPage;
     }
 

@@ -1,7 +1,6 @@
 package by.epam.site.service.serviceimpl;
 
 import by.epam.site.dao.daointerfaces.ImageDAO;
-import by.epam.site.dao.daointerfaces.QuestDAO;
 import by.epam.site.entity.Image;
 import by.epam.site.exception.ConstantException;
 import by.epam.site.service.interfaces.ImageService;

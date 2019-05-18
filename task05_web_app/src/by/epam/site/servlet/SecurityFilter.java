@@ -24,6 +24,7 @@ public class SecurityFilter implements Filter {
                          final ServletResponse response,
                          final FilterChain chain)
             throws IOException, ServletException {
+
         HttpServletRequest httpRequest = (HttpServletRequest)request;
         HttpServletResponse httpResponse = (HttpServletResponse)response;
         String path = (String) request.getAttribute("action");

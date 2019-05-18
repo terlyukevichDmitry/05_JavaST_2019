@@ -1,6 +1,5 @@
 package by.epam.site.service.serviceimpl;
 
-import by.epam.site.dao.daoimpl.UserDAOImpl;
 import by.epam.site.dao.daointerfaces.UserDAO;
 import by.epam.site.entity.Role;
 import by.epam.site.entity.User;

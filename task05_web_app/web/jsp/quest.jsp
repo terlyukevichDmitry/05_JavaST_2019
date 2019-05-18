@@ -179,7 +179,7 @@
             <li class="page-item">
                 <c:choose>
                     <c:when test="${current_page eq i}">
-                        <a class="page-link" href="#">${i}</a>
+                        <a class="page-link">${i}</a>
                     </c:when>
                     <c:otherwise>
                         <a class="page-link" href="${questsURL}?page=${i}">${i}></a>

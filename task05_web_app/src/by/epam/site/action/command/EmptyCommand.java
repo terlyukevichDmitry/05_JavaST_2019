@@ -3,6 +3,7 @@ package by.epam.site.action.command;
 import by.epam.site.action.factory.GetCommand;
 import by.epam.site.action.factory.JspPage;
 import by.epam.site.exception.ConstantException;
+import by.epam.site.exception.IncorrectDataException;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -35,6 +36,8 @@ public class EmptyCommand implements ActionCommand {
         } catch (ServletException e) {
             e.printStackTrace();
         } catch (IOException e) {
+            e.printStackTrace();
+        } catch (IncorrectDataException e) {
             e.printStackTrace();
         }
         return jspPage;

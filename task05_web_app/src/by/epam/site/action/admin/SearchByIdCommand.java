@@ -1,7 +1,6 @@
 package by.epam.site.action.admin;
 
 import by.epam.site.action.command.ActionCommand;
-import by.epam.site.action.command.ConfigurationManager;
 import by.epam.site.action.command.MessageManager;
 import by.epam.site.action.factory.JspPage;
 import by.epam.site.dao.daoimpl.SqlTransactionFactoryImpl;
@@ -25,7 +24,15 @@ public class SearchByIdCommand implements ActionCommand {
             SQLException, ClassNotFoundException,
             ParseException, IOException, ServletException {
         JspPage jspPage = new JspPage();
-        int id = Integer.parseInt(request.getParameter("searchId"));
+        int id = 0;
+        if (request.getParameter("searchId") != null) {
+            id = Integer.parseInt(request.getParameter("searchId"));
+        } else {
+            String encode = jspPage.encode(
+                    MessageManager.getProperty("incorrectData"));
+            jspPage.setPage("/searchById?message=" + encode);
+            return jspPage;
+        }
 
         ServiceFactory factory
                 = new ServiceFactoryImpl(new SqlTransactionFactoryImpl());

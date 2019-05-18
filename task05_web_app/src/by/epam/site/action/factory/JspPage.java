@@ -1,7 +1,5 @@
 package by.epam.site.action.factory;
 
-import by.epam.site.action.command.MessageManager;
-
 import javax.servlet.http.HttpServletRequest;
 import java.util.Base64;
 import java.util.Calendar;
@@ -10,6 +8,7 @@ public class JspPage {
     private String page;
     private String tagName;
     private String messageManager;
+    private final String model = "model";
 
     public String getPage() {
         return page;
@@ -39,7 +38,7 @@ public class JspPage {
         return Base64.getEncoder().encodeToString(encodeMessage.getBytes());
     }
 
-    public String decode(final String encodedMessage) {
+    private String decode(final String encodedMessage) {
         return new String(Base64.getDecoder().decode(encodedMessage));
     }
 
@@ -47,7 +46,7 @@ public class JspPage {
                             final String encode,
                             final HttpServletRequest request) {
         if (encode == null || encode.length() > 10) {
-            request.getSession().setAttribute("model", false);
+            request.getSession().setAttribute(model, false);
         } else {
             int encodedSeconds = Integer.parseInt(jspPage.decode(encode));
             Calendar calendar = Calendar.getInstance();
@@ -56,9 +55,9 @@ public class JspPage {
                 String text = String.valueOf(
                         request.getSession().getAttribute("modelTextInfo"));
                 request.getSession().setAttribute("modelText", text);
-                request.getSession().setAttribute("model", true);
+                request.getSession().setAttribute(model, true);
             } else {
-                request.getSession().setAttribute("model", false);
+                request.getSession().setAttribute(model, false);
             }
         }
     }

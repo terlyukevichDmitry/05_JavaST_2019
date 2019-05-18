@@ -16,7 +16,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SearchByParameterCommand implements ActionCommand {
+public class SearchByNameCommand implements ActionCommand {
     @Override
     public JspPage execute(HttpServletRequest request)
             throws ConstantException, SQLException, ClassNotFoundException {

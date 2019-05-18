@@ -3,7 +3,6 @@ package by.epam.site.action.factory;
 import by.epam.site.action.admin.*;
 import by.epam.site.action.command.commandaction.*;
 import by.epam.site.action.command.*;
-import by.epam.site.action.command.direction.UserProfilePathCommand;
 
 public enum PostCommand {
 
@@ -29,7 +28,7 @@ public enum PostCommand {
     },
     SEARCH_BY_PARAMETER("/searchByParameter") {
         {
-            this.command = new SearchByParameterCommand();
+            this.command = new SearchByNameCommand();
         }
     },
     BOOK_QUEST("/bookQuest") {
@@ -100,7 +99,7 @@ public enum PostCommand {
 
     CREATE_PLACE("/createPlaceQuest") {
         {
-            this.command = new CreateNewQuestPlaceCommand();
+            this.command = new CreateQuestPlaceCommand();
         }
     },
     CHANGE_PHOTO("/changePhoto") {

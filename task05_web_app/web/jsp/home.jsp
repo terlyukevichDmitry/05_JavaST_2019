@@ -1,5 +1,6 @@
 <%@ taglib prefix="ctg" uri="customtags" %>
 <%@ taglib prefix="m" uri="customMenu" %>
+
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core_1_1" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <c:set var="url">${pageContext.request.requestURL}</c:set>
@@ -93,7 +94,7 @@
         <div class="header_slogan">
             <h1 class="h_slogan">Here you can find the best quests.</h1><br>
             <c:url value="/quests" var="questsURL"/>
-            <a href="${questsURL}" class="btn btn-warning btn-lg">Best Quests</a>
+            <a href="${questsURL}" class="btn btn-warning btn-lg">All Quests</a>
         </div>
     </div>
 </div>

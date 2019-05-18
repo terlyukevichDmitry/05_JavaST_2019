@@ -1,19 +1,16 @@
 package by.epam.site.entity;
 
-import com.sun.istack.internal.NotNull;
 
 import java.time.LocalDate;
-import java.util.Date;
 
 public class Client extends Entity {
-    @NotNull private String name;
-    @NotNull private String surname;
-    @NotNull private String patronymic;
-    @NotNull private LocalDate dateOfBirth;
-    @NotNull private String email;
-    @NotNull private String phone;
-    @NotNull private String filePath;
-
+    private String name;
+    private String surname;
+    private String patronymic;
+    private LocalDate dateOfBirth;
+    private String email;
+    private String phone;
+    private String filePath;
 
     public String getName() {
         return name;
@@ -82,5 +79,15 @@ public class Client extends Entity {
                 ", phone='" + phone + '\'' +
                 ", filePath='" + filePath + '\'' +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        return super.equals(object);
+    }
+
+    @Override
+    public int hashCode() {
+        return super.hashCode();
     }
 }

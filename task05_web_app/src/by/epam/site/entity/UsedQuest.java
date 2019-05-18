@@ -1,15 +1,12 @@
 package by.epam.site.entity;
 
-import com.sun.istack.internal.NotNull;
-
 import java.time.LocalDate;
-import java.util.Date;
 
 public class UsedQuest extends Entity {
-    @NotNull private LocalDate date;
-    @NotNull private Client client;
-    @NotNull private QuestPlace questPlace;
-    @NotNull private Boolean control;
+    private LocalDate date;
+    private Client client;
+    private QuestPlace questPlace;
+    private Boolean control;
 
     public LocalDate getDate() {
         return date;
@@ -51,5 +48,15 @@ public class UsedQuest extends Entity {
                 ", questPlace=" + questPlace +
                 ", control=" + control +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        return super.equals(object);
+    }
+
+    @Override
+    public int hashCode() {
+        return super.hashCode();
     }
 }

@@ -35,13 +35,11 @@ public class UriFilter implements Filter {
             }
             httpServletRequest.setAttribute("action", actionName);
             chain.doFilter(request, response);
-        } else {
         }
     }
 
     @Override
-    public void init(FilterConfig filterConfig) throws ServletException {
-
+    public void init(FilterConfig filterConfig) {
     }
 
     @Override

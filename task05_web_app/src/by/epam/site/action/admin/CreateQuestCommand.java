@@ -11,39 +11,44 @@ import by.epam.site.exception.ConstantException;
 
 import java.io.*;
 
+import by.epam.site.exception.IncorrectDataException;
 import by.epam.site.service.interfaces.ImageService;
 import by.epam.site.service.interfaces.QuestPlaceService;
 import by.epam.site.service.interfaces.QuestService;
 import by.epam.site.service.interfaces.ServiceFactory;
 import by.epam.site.service.serviceimpl.ServiceFactoryImpl;
+import by.epam.site.validation.ImageValidator;
+import by.epam.site.validation.QuestValidator;
+import by.epam.site.validation.Validator;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.Part;
-import java.nio.file.Paths;
 import java.sql.SQLException;
 import java.util.Calendar;
 import java.util.List;
-import java.util.Objects;
 
 public class CreateQuestCommand implements ActionCommand {
 
     @Override
     public JspPage execute(HttpServletRequest request)
             throws ConstantException, SQLException,
-            ClassNotFoundException, IOException, ServletException {
+            ClassNotFoundException, IOException,
+            ServletException, IncorrectDataException {
 
         JspPage jspPage = new JspPage();
-        int id = Integer.parseInt(request.getParameter("options"));
-        String title = request.getParameter("title");
+        String id = request.getParameter("options");
         ServiceFactory factory
                 = new ServiceFactoryImpl(new SqlTransactionFactoryImpl());
 
         QuestService service = factory.getService(QuestService.class);
         List<Quest> quests = service.findAll();
 
-        for (Quest quest :quests) {
-            if (quest.getTitle().trim().equalsIgnoreCase(title.trim())) {
+        Validator<Quest> questValidator = new QuestValidator();
+        Quest quest = questValidator.validate(request);
+
+        for (Quest element :quests) {
+            if (element.getTitle().trim().equalsIgnoreCase(
+                    quest.getTitle().trim())) {
                 request.getSession().setAttribute("crashMessage",
                         MessageManager.getProperty("equalsTitle"));
                 String encode= jspPage.encode(
@@ -53,10 +58,7 @@ public class CreateQuestCommand implements ActionCommand {
             }
         }
 
-        int level = Integer.parseInt(request.getParameter("level"));
-        int maxOfPeople
-                = Integer.parseInt(request.getParameter("maxOfPeople"));
-        if (maxOfPeople > 9) {
+        if (quest.getMaxPeople() > 9) {
             request.getSession().setAttribute(
                     "crashMessage",
                     MessageManager.getProperty("crashMessage"));
@@ -64,37 +66,45 @@ public class CreateQuestCommand implements ActionCommand {
                     MessageManager.getProperty("crashMessage"));
             jspPage.setPage("/createQuest?message=" + encode);
             return jspPage;
-        } else if (level > 5) {
+        } else if (quest.getLevel() > 5) {
             request.getSession().setAttribute(
                     "crashMessage",
                     MessageManager.getProperty("bigLevel"));
             String encode= jspPage.encode(
                     MessageManager.getProperty("bigLevel"));
+            jspPage.setPage("/createQuest?message=" + encode);
+            return jspPage;
+        } else if (id == null) {
+            request.getSession().setAttribute(
+                    "crashMessage",
+                    MessageManager.getProperty("chooseRadioButton"));
+            String encode= jspPage.encode(
+                    MessageManager.getProperty("chooseRadioButton"));
             jspPage.setPage("/createQuest?message=" + encode);
             return jspPage;
         }
-        Part part = request.getPart("fileLoader");
-        String fileName = transferTo(part);
 
-        Quest quest = new Quest();
-        quest.setTitle(title);
-        quest.setLevel(level);
-        quest.setMaxPeople(maxOfPeople);
         service.save(quest);
-        Quest questHelper = service.read(title);
+
+        Quest questHelper = service.read(quest.getTitle());
+
+        Validator<Image> imageValidator = new ImageValidator();
+        Image image = imageValidator.validate(request);
+        image.setId(questHelper.getId());
 
         ImageService imageService = factory.getService(ImageService.class);
-        Image image = new Image();
-        image.setId(questHelper.getId());
-        image.setFilePath("images/" + fileName);
         imageService.create(image);
 
         QuestPlaceService questPlaceService
                 = factory.getService(QuestPlaceService.class);
-        QuestPlace questPlace = questPlaceService.findById(id);
+
+        QuestPlace questPlace
+                = questPlaceService.findById(Integer.parseInt(id));
+
         questPlace.setId(null);
         questPlace.setQuest(questHelper);
         questPlace.setImage(image);
+
         questPlaceService.save(questPlace);
 
         Calendar calendar = Calendar.getInstance();
@@ -102,25 +112,9 @@ public class CreateQuestCommand implements ActionCommand {
                 String.valueOf(calendar.get(Calendar.SECOND)));
 
         jspPage.setPage("/createQuest?message=" + encode);
+        request.getSession().setAttribute("modelTextInfo",
+                MessageManager.getProperty("addedAction"));
         factory.close();
         return jspPage;
-    }
-
-    private String transferTo(final Part part) throws IOException {
-        String fileName= Paths.get(
-                part.getSubmittedFileName()).getFileName().toString();
-        String newFilePath = "C:\\05_JavaST_2019\\"
-                + "task05_web_app\\web\\images\\" + fileName;
-        InputStream inputStream = part.getInputStream();
-        OutputStream outputStream = new FileOutputStream(newFilePath);
-        Objects.requireNonNull(outputStream, "out");
-        byte[] buffer = new byte[8192];
-        int read;
-        while ((read = inputStream.read(buffer, 0, 8192)) >= 0) {
-            outputStream.write(buffer, 0, read);
-        }
-        inputStream.close();
-        outputStream.close();
-        return fileName;
     }
 }

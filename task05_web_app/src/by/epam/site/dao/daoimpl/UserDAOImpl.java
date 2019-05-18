@@ -56,7 +56,6 @@ public class UserDAOImpl extends AbstractDAOImpl implements UserDAO {
                         "role")));
                 userList.add(user);
             }
-            resultSet.close();
             return userList;
         } catch (SQLException exception) {
             throw new ConstantException(exception);

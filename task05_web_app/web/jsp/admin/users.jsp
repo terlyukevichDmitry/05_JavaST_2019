@@ -166,6 +166,29 @@
         </c:forEach>
     </tbody>
 </table>
+<c:url value="/showUsers" var="showUsersURL"/>
+<nav aria-label="Статьи по Bootstrap 4">
+    <ul class="pagination justify-content-center">
+        <c:if test="${current_page != 1}">
+            <li class="page-item"><a class="page-link" href="${showUsersURL}?page=${current_page - 1}">Previous</a></li>
+        </c:if>
+        <c:forEach begin="1" end="${num_of_pages}" var="i" step="1" varStatus="status">
+            <li class="page-item">
+                <c:choose>
+                    <c:when test="${current_page eq i}">
+                        <a class="page-link">${i}</a>
+                    </c:when>
+                    <c:otherwise>
+                        <a class="page-link" href="${showUsersURL}?page=${i}">${i}></a>
+                    </c:otherwise>
+                </c:choose>
+            </li>
+        </c:forEach>
+        <c:if test="${current_page lt num_of_pages}">
+            <li class="page-item"><a class="page-link" href="${showUsersURL}?page=${current_page + 1}">Next</a></li>
+        </c:if>
+    </ul>
+</nav>
 <br><br><br>
 <!-- Footer -->
 <footer class="page-footer font-small unique-color-dark">

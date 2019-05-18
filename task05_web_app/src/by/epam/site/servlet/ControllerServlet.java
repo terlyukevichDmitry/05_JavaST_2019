@@ -5,6 +5,7 @@ import by.epam.site.action.command.ActionCommand;
 import by.epam.site.action.command.ActionManager;
 import by.epam.site.action.factory.JspPage;
 import by.epam.site.exception.ConstantException;
+import by.epam.site.exception.IncorrectDataException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -29,13 +30,14 @@ public class ControllerServlet extends HttpServlet {
     protected void doGet(final HttpServletRequest request,
                          final HttpServletResponse response) {
         try {
+            response.setHeader("Pragma", "No-cache");
+            response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
+            response.setDateHeader("Expires", -1);
             request.setCharacterEncoding("UTF-8");
             response.setContentType("text/html;charset=UTF-8");
             ActionCommand actionCommand = new ActionManager().getPostCommand();
             JspPage jspPage = actionCommand.execute(request);
             if (jspPage.getPage().equals("/logout")) {
-                response.addHeader("Expires", "-1");
-                response.addHeader("Pragma", "no-cache");
                 response.sendRedirect(request.getContextPath()
                         + "/home");
             } else {
@@ -56,6 +58,8 @@ public class ControllerServlet extends HttpServlet {
             LOGGER.warn("IOException exception");
         } catch (ClassNotFoundException e) {
             LOGGER.warn("ClassNotFoundException exception");
+        } catch (IncorrectDataException e) {
+            e.printStackTrace();
         }
     }
 
@@ -63,6 +67,9 @@ public class ControllerServlet extends HttpServlet {
     protected void doPost(final HttpServletRequest request,
                           final HttpServletResponse response) {
         try {
+            response.setHeader("Pragma", "No-cache");
+            response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
+            response.setDateHeader("Expires", -1);
             request.setCharacterEncoding("UTF-8");
             response.setContentType("text/html;charset=UTF-8");
             Action action = new Action();
@@ -85,6 +92,8 @@ public class ControllerServlet extends HttpServlet {
             LOGGER.warn("ClassNotFoundException exception");
         } catch (ServletException e) {
             LOGGER.warn("ServletException exception");
+        } catch (IncorrectDataException e) {
+            e.printStackTrace();
         }
     }
 }

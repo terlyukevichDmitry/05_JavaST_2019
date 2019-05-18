@@ -1,17 +1,15 @@
 package by.epam.site.entity;
 
-import com.sun.istack.internal.NotNull;
 
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.Objects;
 
 public class Review extends Entity {
 
-    @NotNull private String message;
-    @NotNull private Client client;
-    @NotNull private LocalDate date;
-    @NotNull private QuestPlace questPlace;
+    private String message;
+    private Client client;
+    private LocalDate date;
+    private QuestPlace questPlace;
 
     public QuestPlace getQuestPlace() {
         return questPlace;

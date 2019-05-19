@@ -10,6 +10,7 @@ public class QuestValidator implements Validator<Quest> {
     private static final String PARAM_TITLE = "title";
     private static final String PARAM_LEVEL = "level";
     private static final String PARAM_PEOPLE = "maxOfPeople";
+    private static final String PARAM_DESCRIPTION = "description";
     private static final String REGEX = "\\d+";
 
     @Override
@@ -38,6 +39,13 @@ public class QuestValidator implements Validator<Quest> {
             quest.setMaxPeople(Integer.parseInt(maxOfPeople));
         } else {
             throw new IncorrectDataException(PARAM_PEOPLE, maxOfPeople);
+        }
+
+        String description = request.getParameter(PARAM_DESCRIPTION);
+        if(description != null && !description.isEmpty()) {
+            quest.setDescription(description);
+        } else {
+            throw new IncorrectDataException(PARAM_DESCRIPTION, description);
         }
 
         return quest;

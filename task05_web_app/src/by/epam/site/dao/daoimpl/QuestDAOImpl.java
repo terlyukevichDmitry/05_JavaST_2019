@@ -22,22 +22,25 @@ public class QuestDAOImpl extends AbstractDAOImpl implements QuestDAO {
             = LogManager.getLogger(QuestDAOImpl.class);
 
     private static final String DB_SELECT_ALL = "SELECT `id`, `title`, "
-            + "`level`, `max_people` FROM `quest`";
+            + "`level`, `max_people`, `description` FROM `quest`";
 
     private static final String DB_DELETE = "DELETE FROM `quest` WHERE `id`"
             + " = ?";
 
     private static final String DB_QUEST_CREATE = "INSERT INTO `quest` "
-            + "(`title`, `level`, `max_people`)"
-            + " VALUES (?, ?, ?)";
+            + "(`title`, `level`, `max_people`, `description`)"
+            + " VALUES (?, ?, ?, ?)";
 
     private static final String DB_QUEST_UPDATE = "UPDATE `quest` SET `title` "
-            + "= ?, `level` = ?, `max_people` = ? WHERE `id` = ?";
+            + "= ?, `level` = ?, `max_people` = ?, `description` = ?"
+            + " WHERE `id` = ?";
 
     private static final String DB_FIND_BY_ID
-            = "SELECT `title`, `level`, `max_people` FROM `quest` WHERE `id` = ?";
+            = "SELECT `title`, `level`, `max_people`, `description` "
+            + "FROM `quest` WHERE `id` = ?";
     private static final String DB_FIND_BY_TITLE
-            = "SELECT `id`, `level`, `max_people` FROM `quest` WHERE `title` = ?";
+            = "SELECT `id`, `level`, `max_people`, `description` "
+            + "FROM `quest` WHERE `title` = ?";
 
     @Override
     public List<Quest> readAll()
@@ -54,6 +57,8 @@ public class QuestDAOImpl extends AbstractDAOImpl implements QuestDAO {
                 quest.setTitle(resultSet.getString("title"));
                 quest.setLevel(resultSet.getInt("level"));
                 quest.setMaxPeople(resultSet.getInt("max_people"));
+                quest.setDescription(resultSet.getString(
+                        "description"));
                 quests.add(quest);
             }
             return quests;
@@ -84,6 +89,7 @@ public class QuestDAOImpl extends AbstractDAOImpl implements QuestDAO {
             statement.setString(1, quest.getTitle());
             statement.setInt(2, quest.getLevel());
             statement.setInt(3, quest.getMaxPeople());
+            statement.setString(4, quest.getDescription());
             statement.executeUpdate();
             transaction.commit();
             ResultSet resultSet = statement.getGeneratedKeys();
@@ -106,10 +112,11 @@ public class QuestDAOImpl extends AbstractDAOImpl implements QuestDAO {
         try (PreparedStatement statement
                      = connection.prepareStatement(DB_QUEST_UPDATE,
                      Statement.RETURN_GENERATED_KEYS)) {
-            statement.setInt(1, quest.getMaxPeople());
+            statement.setString(1, quest.getTitle());
             statement.setInt(2, quest.getLevel());
-            statement.setString(3, quest.getTitle());
-            statement.setInt(4, quest.getId());
+            statement.setInt(3, quest.getMaxPeople());
+            statement.setString(4, quest.getDescription());
+            statement.setInt(5, quest.getId());
             statement.executeUpdate();
             transaction.commit();
         } catch (SQLException e) {
@@ -130,6 +137,8 @@ public class QuestDAOImpl extends AbstractDAOImpl implements QuestDAO {
                 quest.setTitle(resultSet.getString("title"));
                 quest.setLevel(resultSet.getInt("level"));
                 quest.setMaxPeople(resultSet.getInt("max_people"));
+                quest.setDescription(resultSet.getString(
+                        "description"));
             }
         } catch(SQLException e) {
             LOGGER.error("It is impossible to turn off " +
@@ -151,6 +160,8 @@ public class QuestDAOImpl extends AbstractDAOImpl implements QuestDAO {
                 quest.setTitle(title);
                 quest.setLevel(resultSet.getInt("level"));
                 quest.setMaxPeople(resultSet.getInt("max_people"));
+                quest.setDescription(resultSet.getString(
+                        "description"));
             }
             return quest;
         } catch(SQLException e) {

@@ -14,6 +14,10 @@
         </taglib>
     </jsp-config>
 
+    <listener>
+        <listener-class>by.epam.site.servlet.CustomHttpSessionListener</listener-class>
+    </listener>
+
     <!--<security-constraint>-->
         <!--<web-resource-collection>-->
             <!--<web-resource-name>Servlet4Push</web-resource-name>-->
@@ -91,6 +95,8 @@
         <url-pattern>/searchById</url-pattern>
         <url-pattern>/searchByClientRole</url-pattern>
         <url-pattern>/doManager</url-pattern>
+        <url-pattern>/updateQuest</url-pattern>
+        <url-pattern>/updateQuestInfo</url-pattern>
 
     </servlet-mapping>
 
@@ -143,6 +149,8 @@
         <url-pattern>/searchById</url-pattern>
         <url-pattern>/searchByClientRole</url-pattern>
         <url-pattern>/doManager</url-pattern>
+        <url-pattern>/updateQuest</url-pattern>
+        <url-pattern>/updateQuestInfo</url-pattern>
 
     </filter-mapping>
     <filter>
@@ -184,5 +192,7 @@
         <url-pattern>/searchById</url-pattern>
         <url-pattern>/searchByClientRole</url-pattern>
         <url-pattern>/doManager</url-pattern>
+        <url-pattern>/updateQuest</url-pattern>
+        <url-pattern>/updateQuestInfo</url-pattern>
     </filter-mapping>
 </web-app>

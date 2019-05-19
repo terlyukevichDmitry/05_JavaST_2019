@@ -4,7 +4,7 @@ package by.epam.site.entity;
 public class QuestPlace extends Entity {
     private String name;
     private String address;
-    String phone;
+    private String phone;
     private Quest quest;
     private Image image;
 

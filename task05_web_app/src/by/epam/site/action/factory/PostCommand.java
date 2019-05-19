@@ -112,6 +112,11 @@ public enum PostCommand {
             this.command = new RemoveQuestCommand();
         }
     },
+    UPDATE_QUEST("/updateQuestInfo") {
+        {
+            this.command = new UpDateQuestCommand();
+        }
+    },
     SIGNUP("/signup") {
         {
             this.command = new CreatePersonCommand();

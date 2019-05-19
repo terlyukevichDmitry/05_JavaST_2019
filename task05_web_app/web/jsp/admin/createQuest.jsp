@@ -148,6 +148,10 @@
                                     <input type="text" name="title" class="form-control border-valid" placeholder="Enter quest title" required><br>
                                     <input type="number" name="level" class="form-control" placeholder="Enter level for quest" required><br>
                                     <input type="number" name="maxOfPeople" class="form-control" placeholder="Enter max number of people in this quest" required><br>
+                                    <div class="md-form amber-textarea active-amber-textarea">
+                                        <i class="fas fa-pencil-alt prefix"></i><label for="form22">&nbsp;&nbsp;Write description for this quest:</label>
+                                        <textarea id="form22" name="description" class="md-textarea form-control" rows="3"></textarea>
+                                    </div><br>
                                     <label for="exampleFormControlFile1">Input photo</label><br>
                                     <input name="fileLoader" accept=".jpg" type="file" class="btn btn-dark" id="exampleFormControlFile1" required><br><br>
                                     <button class="btn btn-success" type="submit">   Create quest   </button><br><br>

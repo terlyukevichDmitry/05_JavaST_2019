@@ -135,12 +135,19 @@
             </form><br>
         </c:if>
         <c:if test="${user.role.name eq 'administrator'}">
-            <c:url value="/removeQuest" var="removeQuestURL"/>
             <br><br>
+            <div style="display: flex;  justify-content: space-around;">
+            <c:url value="/removeQuest" var="removeQuestURL"/>
             <form action="${removeQuestURL}" method="post" onsubmit="return confirm('Confirm action')">
                 <input type="hidden" name="idRemoveQuest" value="${elem.id}">
                 <td><input type="submit" value="Remove quest" class="btn btn-danger"></td>
             </form>
+            <c:url value="/updateQuest" var="updateQuestURL"/>
+            <form action="${updateQuestURL}" method="get">
+                <input type="hidden" name="idUpdateQuest" value="${elem.id}">
+                <input type="submit" value="Update quest" class="btn btn-success">
+            </form>
+            </div>
         </c:if>
     </div>
     <div class="col-7">
@@ -165,13 +172,9 @@
     <h4>About quest:</h4>
     <table class="table table-th-block">
         <tbody>
-        <tr><td class="active">
-            You travel all over the World, investigating paranormal phenomena,
-            fight against evil creatures: demons and ghosts. Today you ended up
-            in Minsk, in that very room, whose history is shrouded in mystery and
-            darkness. Seventy years have already passed, and no one who entered
-            this room returned back ... You have only 66.6 minutes to unravel the
-            secrets that the room has in it and interrupt the disappearance of innocent people.
+        <tr><td class="active"><p>
+            ${elem.quest.description}
+        </p>
         </tbody>
     </table>
 </div>

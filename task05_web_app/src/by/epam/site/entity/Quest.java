@@ -5,6 +5,15 @@ public class Quest extends Entity {
     private String title;
     private Integer level;
     private Integer maxPeople;
+    private String description;
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
 
     public String getTitle() {
         return title;
@@ -46,6 +55,7 @@ public class Quest extends Entity {
                 "title='" + title + '\'' +
                 ", level=" + level +
                 ", maxPeople=" + maxPeople +
+                ", description='" + description + '\'' +
                 '}';
     }
 }

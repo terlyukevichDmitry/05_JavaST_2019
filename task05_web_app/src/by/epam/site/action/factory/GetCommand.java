@@ -96,6 +96,11 @@ public enum GetCommand {
             this.command = new CreateQuestDirection();
         }
     },
+    UPDATE_QUEST("/updateQuest") {
+        {
+            this.command = new UpDateQuestDirection();
+        }
+    },
     SIGNUP("/signup") {
         {
             this.command = new SignUpDirection();

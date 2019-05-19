@@ -30,6 +30,7 @@ CREATE TABLE IF NOT EXISTS `quest` (
 	`title` varchar(255) UNIQUE NOT NULL ,
 	`level` INT(1) NOT NULL ,
 	`max_people` INT(1) NOT NULL ,
+	`description` TEXT NOT NULL ,
 	PRIMARY KEY (`id`)
 );
 

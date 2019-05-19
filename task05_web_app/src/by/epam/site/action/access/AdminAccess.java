@@ -40,6 +40,8 @@ public class AdminAccess implements Access {
         stringList.add("/searchById");
         stringList.add("/searchByClientRole");
         stringList.add("/doManager");
+        stringList.add("/updateQuest");
+        stringList.add("/updateQuestInfo");
     }
     @Override
     public boolean checkAccess(final String checkString) {

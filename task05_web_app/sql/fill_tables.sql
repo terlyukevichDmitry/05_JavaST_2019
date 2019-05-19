@@ -12,11 +12,11 @@ VALUES
 			 (3, "Ivan", "Ivanov", "Ivanovich", "2001-09-10", "ivan@mail.ru", "+375337431986", "images/1.jpg");
 
 INSERT INTO `quest`
-		(`id`, `title`, `level`, `max_people`)
+		(`id`, `title`, `level`, `max_people`, `description`)
 VALUES
-			 (1, "first quest", 5, 9),
-			 (2, "second quest", 5, 3),
-			 (3, "third quest", 4, 5);
+			 (1, "first quest", 5, 9, "Today we are going to die!"),
+			 (2, "second quest", 5, 3, "In My Remains Linkin Park"),
+			 (3, "third quest", 4, 5, "We Don''t Have To Dance Andy Black");
 
 INSERT INTO `image`
 		(`id`, `imageAddress`)

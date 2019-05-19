@@ -42,6 +42,8 @@ public class AdminAccess implements Access {
         stringList.add("/doManager");
         stringList.add("/updateQuest");
         stringList.add("/updateQuestInfo");
+        stringList.add("/showOrders");
+        stringList.add("/orderUserProfile");
     }
     @Override
     public boolean checkAccess(final String checkString) {

@@ -59,6 +59,8 @@
                                 <%--<a href="${myQuestsURL}" class="dropdown-item">My quests</a>--%>
                                 <c:url value="/createQuest" var="createQuestURL"/>
                                 <a href="${createQuestURL}" class="dropdown-item">Create Quest</a>
+                                <c:url value="/showOrders" var="showOrdersURL"/>
+                                <a href="${showOrdersURL}" class="dropdown-item">Orders</a>
                                 <c:url value="/showUsers" var="searchUserURL"/>
                                 <a href="${searchUserURL}" class="dropdown-item">Users</a>
                                 <c:url value="/removeUser" var="removeUserURL"/>
@@ -94,7 +96,7 @@
         <div class="header_slogan">
             <h1 class="h_slogan">Here you can find the best quests.</h1><br>
             <c:url value="/quests" var="questsURL"/>
-            <a href="${questsURL}" class="btn btn-warning btn-lg">Best Quests</a>
+            <a href="${questsURL}" class="btn btn-warning btn-lg">All Quests</a>
         </div>
     </div>
 </div>

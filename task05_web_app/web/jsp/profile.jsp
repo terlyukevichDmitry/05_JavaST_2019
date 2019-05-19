@@ -69,6 +69,8 @@
                             <%--<a href="${myQuestsURL}" class="dropdown-item">My quests</a>--%>
                             <c:url value="/createQuest" var="createQuestURL"/>
                             <a href="${createQuestURL}" class="dropdown-item">Create Quest</a>
+                            <c:url value="/showOrders" var="showOrdersURL"/>
+                            <a href="${showOrdersURL}" class="dropdown-item">Orders</a>
                             <c:url value="/showUsers" var="searchUserURL"/>
                             <a href="${searchUserURL}" class="dropdown-item">Users</a>
                             <c:url value="/removeUser" var="removeUserURL"/>
@@ -104,7 +106,7 @@
         <div class="header_slogan" style="opacity: 0.8">
             <h1 class="h_slogan">Here you can find the best quests.</h1><br>
             <c:url value="/quests" var="questsURL"/>
-            <a href="${questsURL}" class="btn btn-warning btn-lg">Best Quests</a>
+            <a href="${questsURL}" class="btn btn-warning btn-lg">All Quests</a>
         </div>
     </div>
 </div>
@@ -130,6 +132,7 @@
                             <h3><c:out value="${ elem.name }"/> <c:out value="${ elem.surname }"/></h3>
                             <small class="label label-warning">Republic of Belarus</small>
                             <p>Put on a happy face!</p>
+                            <c:if test="${checker}">
                             <c:url value="/changePhoto" var="changePhotoURL"/>
                             <form action="${changePhotoURL}" method="post" enctype="multipart/form-data">
                             <div class="form-group">
@@ -137,6 +140,7 @@
                             </div>
                             <button class="btn btn-primary" type="submit">Change photo</button>
                             </form>
+                            </c:if>
                         </div>
                     </div>
                 </div>
@@ -146,8 +150,10 @@
                     <div class="panel-body">
                         <ul id="myTab" class="nav nav-pills">
                             <li class="active"><a href="#detail" data-toggle="tab">About Person</a></li>
+                            <c:if test="${checker}">
                             <li class=""><a href="#contact" data-toggle="tab">Change information about person</a></li>
                             <li class=""><a href="#data"  data-toggle="tab">Change password</a></li>
+                            </c:if>
                         </ul>
                         <div id="myTabContent" class="tab-content">
                             <hr>

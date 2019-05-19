@@ -17,7 +17,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UsedQuestServiceImpl extends ServiceImpl implements UsedQuestService {
+public class UsedQuestServiceImpl
+        extends ServiceImpl implements UsedQuestService {
 
     /**
      * Logger for recording a program state.
@@ -25,7 +26,8 @@ public class UsedQuestServiceImpl extends ServiceImpl implements UsedQuestServic
     private static final Logger LOGGER
             = LogManager.getLogger(UsedQuestServiceImpl.class);
     @Override
-    public List<UsedQuest> findAll() throws ConstantException, SQLException, ClassNotFoundException {
+    public List<UsedQuest> findAll()
+            throws ConstantException, SQLException, ClassNotFoundException {
         UsedQuestDAO dao = transaction.createDaoImpl(UsedQuestDAO.class);
         return dao.readAll();
     }
@@ -47,7 +49,8 @@ public class UsedQuestServiceImpl extends ServiceImpl implements UsedQuestServic
     }
 
     @Override
-    public void delete(Integer id) throws ClassNotFoundException, ConstantException {
+    public void delete(Integer id)
+            throws ClassNotFoundException, ConstantException {
         UsedQuestDAO dao = transaction.createDaoImpl(UsedQuestDAO.class);
         dao.delete(id);
     }
@@ -60,10 +63,18 @@ public class UsedQuestServiceImpl extends ServiceImpl implements UsedQuestServic
                     new SqlTransactionFactoryImpl());
             QuestPlaceService service
                     = factory.getService(QuestPlaceService.class);
-            element.setQuestPlace(service.findById(element.getQuestPlace().getId()));
+            element.setQuestPlace(
+                    service.findById(element.getQuestPlace().getId()));
             List<QuestPlace> questPlaces = new ArrayList<>();
             questPlaces.add(element.getQuestPlace());
             service.initData(questPlaces);
+            ServiceFactory serviceFactory = new ServiceFactoryImpl(new SqlTransactionFactoryImpl());
+            ClientService clientService = serviceFactory.getService(ClientService.class);
+            for (UsedQuest usedQuest :usedQuests) {
+                usedQuest.setClient(
+                        clientService.findById(usedQuest.getClient().getId()));
+            }
+            serviceFactory.close();
             factory.close();
         }
     }

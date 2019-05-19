@@ -56,6 +56,8 @@
                             <%--<a href="${myQuestsURL}" class="dropdown-item">My quests</a>--%>
                             <c:url value="/createQuest" var="createQuestURL"/>
                             <a href="${createQuestURL}" class="dropdown-item">Create Quest</a>
+                            <c:url value="/showOrders" var="showOrdersURL"/>
+                            <a href="${showOrdersURL}" class="dropdown-item">Orders</a>
                             <c:url value="/showUsers" var="searchUserURL"/>
                             <a href="${searchUserURL}" class="dropdown-item">Users</a>
                             <c:url value="/removeUser" var="removeUserURL"/>
@@ -91,7 +93,7 @@
         <div class="header_slogan">
             <h1 class="h_slogan">Here you can find the best quests.</h1><br>
             <c:url value="/quests" var="questsURL"/>
-            <a href="${questsURL}" class="btn btn-warning btn-lg">Best Quests</a>
+            <a href="${questsURL}" class="btn btn-warning btn-lg">All Quests</a>
         </div>
     </div>
 </div>
@@ -122,6 +124,7 @@
         <th><fmt:message key="login"/></th>
         <th><fmt:message key="password"/></th>
         <th><fmt:message key="role"/></th>
+        <th><fmt:message key="allOrders"/></th>
         <th><fmt:message key="removeUser"/></th>
         <th> </th>
     </tr>
@@ -130,16 +133,19 @@
         <%--@elvariable id="userList" type="java.util.List"--%>
         <c:forEach var="elem" items="${userList}" varStatus="status">
         <tr class="info">
-        <th><c:out value="${ elem.id }" />
+            <th><c:out value="${ elem.id }" /></th>
             <th>
-                <c:url value="/goToProfile" var="goToProfileURL"/>
-                    <form action="${goToProfileURL}" method="get">
-                        <input type="hidden" name="personId" value="${elem.id}">
-                        <input type="submit" value="${ elem.login }" class="btn btn-info">
-                    </form>
+                <c:out value="${ elem.login }"/>
             </th>
             <th><c:out value="${ elem.password }"/> </th>
             <th><c:out value="${ elem.role }"/> </th>
+            <th>
+                <c:url value="/goToProfile" var="goToProfileURL"/>
+                <form action="${goToProfileURL}" method="get">
+                    <input type="hidden" name="personId" value="${elem.id}">
+                    <input type="submit" value="Orders" class="btn btn-info">
+                </form>
+            </th>
             <c:if test="${!elem.role.name.equals('administrator')}">
             <th>
                 <c:url value="/removePerson" var="removePersonURL"/>

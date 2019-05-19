@@ -18,6 +18,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.Calendar;
+import java.util.List;
 
 public class BookQuestCommand implements ActionCommand {
     @Override
@@ -34,6 +35,18 @@ public class BookQuestCommand implements ActionCommand {
         UsedQuestService usedQuestService
                 = factory.getService(UsedQuestService.class);
 
+        if (checkOrders(usedQuestService, questPlace, user)) {
+            Calendar calendar = Calendar.getInstance();
+            String encoded = jspPage.encode(
+                    String.valueOf(calendar.get(Calendar.SECOND)));
+
+            request.getSession().setAttribute("modelTextInfo",
+                    MessageManager.getProperty("ordered"));
+
+            jspPage.setPage("/quests?message=" + encoded);
+        }
+
+
         UsedQuest usedQuest = new UsedQuest();
 
         usedQuest.setQuestPlace(questPlace);
@@ -41,12 +54,16 @@ public class BookQuestCommand implements ActionCommand {
         Client client = new Client();
         client.setId(user.getId());
 
+        ServiceFactory serviceFactory = new ServiceFactoryImpl(
+                new SqlTransactionFactoryImpl());
+        UsedQuestService service1
+                = serviceFactory.getService(UsedQuestService.class);
         usedQuest.setClient(client);
         usedQuest.setDate(LocalDate.now());
         usedQuest.setControl(true);
-        usedQuestService.save(usedQuest);
+        service1.save(usedQuest);
 
-        factory.close();
+        serviceFactory.close();
 
         Calendar calendar = Calendar.getInstance();
         String encoded = jspPage.encode(
@@ -57,5 +74,21 @@ public class BookQuestCommand implements ActionCommand {
 
         jspPage.setPage("/quests?message=" + encoded);
         return jspPage;
+    }
+
+    private Boolean checkOrders(final UsedQuestService usedQuestService,
+                                final QuestPlace questPlace,
+                                final User user)
+            throws ConstantException, SQLException,ClassNotFoundException {
+        List<UsedQuest> usedQuests = usedQuestService.findAll();
+        usedQuestService.initData(usedQuests);
+        for (UsedQuest usedQuest :usedQuests) {
+            if (usedQuest.getQuestPlace().getQuest().getId().equals(
+                    questPlace.getQuest().getId())
+                    && usedQuest.getClient().getId().equals(user.getId())) {
+                return true;
+            }
+        }
+        return false;
     }
 }

@@ -96,6 +96,16 @@ public enum GetCommand {
             this.command = new CreateQuestDirection();
         }
     },
+    ORDER_PROFILE("/orderUserProfile") {
+        {
+            this.command = new ShowUserOrderProfileCommand();
+        }
+    },
+    SHOW_ORDERS("/showOrders") {
+        {
+            this.command = new ShowAllOrdersCommand();
+        }
+    },
     UPDATE_QUEST("/updateQuest") {
         {
             this.command = new UpDateQuestDirection();

@@ -136,7 +136,7 @@ public class ClientDAOImpl extends AbstractDAOImpl implements ClientDAO {
     @Override
     public Client read(final Integer id) throws ConstantException {
         try(PreparedStatement statement
-                    = getConnection().prepareStatement(DB_FIND_BY_ID)) {
+                    = connection.prepareStatement(DB_FIND_BY_ID)) {
             statement.setInt(1, id);
             ResultSet resultSet = statement.executeQuery();
             Client client = null;

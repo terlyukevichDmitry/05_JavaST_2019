@@ -1,50 +1,27 @@
-<%@ taglib prefix="ctg" uri="customtags" %>
-<%@ taglib prefix="m" uri="customMenu" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core_1_1" %>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix="fmt"   uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<fmt:setBundle basename="messages" scope="session"/>
 <c:set var="url">${pageContext.request.requestURL}</c:set>
 <c:set var="ctx"
        value="${fn:substring(url, 0, fn:length(url) - fn:length(pageContext.request.requestURI))}${pageContext.request.contextPath}"/>
+
 <!DOCTYPE html>
-<html lang="en_US">
+<html>
 <head>
-    <title>JukeBox Quest</title>
-    <meta charset="utf-8">
+    <title>Parser result</title>
     <link rel="stylesheet" href="${ctx}/css/home/header.css" type="text/css"/>
     <link rel="stylesheet" href="${ctx}/css/home/base.css" type="text/css"/>
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
-          integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf"
-          crossorigin="anonymous">
-    <link rel="shortcut icon" href="images/image-icon.ico" type="image/x-icon">
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="css/style.css" type="text/css"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
 </head>
 <body>
-<c:if test="${model}">
-    <div id="myModalBox" class="modal fade">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title">Modal Window Header</h4>
-                </div>
-                <div class="modal-body">
-                        ${modelText}Please continue do something else.
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                </div>
-            </div>
-        </div>
-    </div>
-    <script>
-        $(document).ready(function() {
-            $("#myModalBox").modal('show');
-        });
-    </script>
-</c:if>
 <div class="header">
     <div class="header_texture"></div>
     <div class="header_mask">
@@ -119,55 +96,67 @@
             <a href="${questsURL}" class="btn btn-warning btn-lg">All Quests</a>
         </div>
     </div>
-</div><br><br>
+</div>
+<br><br>
 
-<%--@elvariable id="oldPlace" type="by.epam.site.entity.QuestPlace"--%>
-<c:set var="updateElem" value="${oldPlace}" />
-<div class="container">
-    <div class="col-lg-8 col-md-8 col-xs-12">
-        <div class="panel">
-            <div class="panel-body">
-                    <hr>
-                        <table class="table table-th-block">
-                            <c:url value="/updateQuestInfo" var="updateQuestInfoURL"/>
-                            <form action="${updateQuestInfoURL}" method="post" enctype="multipart/form-data">
-                                <h4>Change quest place information:</h4>
-                                <table class="table table-th-block">
-                                    <tbody>
-                                    <label>Change the quest address.</label><br>
-                                    <input type="text" name="addressName" class="form-control rounded" placeholder="New address" value="${updateElem.address}" required><br>
-                                    <label>Change address name</label>
-                                    <input type="text" name="placeName" class="form-control border-valid" value="${updateElem.name}" required><br>
-                                    <label>Change phone number in this place</label>
-                                    <input type="tel" name="phoneNumber" class="form-control border-valid" placeholder="xxxxxxxxx" pattern="[0-9]{9}" value="${updateElem.phone}" required>
-                                    <hr>
-
-                                    <h4>Change quest information:</h4>
-                                    <label>Change title</label>
-                                    <input type="text" name="title" class="form-control border-valid" placeholder="Enter quest title" value="${updateElem.quest.title}" required><br>
-                                    <label>Change level</label>
-                                    <input type="number" name="level" class="form-control" placeholder="Enter level for quest" value="${updateElem.quest.level}" required><br>
-                                    <label>Change max number of people</label>
-                                    <input type="number" name="maxOfPeople" class="form-control" placeholder="Enter max number of people in this quest" value="${updateElem.quest.maxPeople}" required><br>
-                                    <div class="md-form amber-textarea active-amber-textarea">
-                                        <i class="fas fa-pencil-alt prefix"></i><label for="form22">&nbsp;&nbsp;Write new description about this quest:</label>
-                                        <textarea id="form22" name="description" class="md-textarea form-control" rows="3">${updateElem.quest.description}</textarea>
-                                    </div><br>
-                                    <label for="exampleFormControlFile1">Change photo</label><br>
-                                    <input name="fileLoader" accept=".jpg" type="file" class="btn btn-dark" id="exampleFormControlFile1" required><br><br>
-                                    <input type="hidden" name="oldInfoId" value="${oldPlace.id}">
-                                    <button class="btn btn-success" type="submit">Update information</button><br><br>
-                                    <div style="color: #ff7b7b; font-size: 18px;">
-                                        ${crashMessage}
-                                    </div>
-                                    </tbody>
-                                </table>
+<div class="container" style="display: flex;  justify-content: space-around;">
+    <%--@elvariable id="orders" type="java.util.List"--%>
+    <c:forEach var="elem" items="${orders}" varStatus="status">
+        <div class="row">
+            <div class="col">
+                <div class="card" style="width: 18rem;">
+                        <img class="img-fluid rounded" width="286px" height="180px" src="${pageContext.request.contextPath}/${elem.questPlace.image.filePath}" />
+                    <div class="card-body">
+                        <div class="card-title">
+                            <c:url value="/orderUserProfile" var="orderUserProfileURL"/>
+                            <form action="${orderUserProfileURL}" method="get">
+                                <input type="hidden" name="clientId" value="${elem.client.id}">
+                                <button type="submit" class="btn btn-outline-info">${elem.client.name}&nbsp;${elem.client.surname}</button>
                             </form>
-                        </table>
+                        </div>
+                        <hr>
+                        <p class="card-text">
+                            <div style="font-weight: bold;">Date:</div> ${elem.date}<hr>
+                        <div style="font-weight: bold;">Address:</div> ${elem.questPlace.address}<hr>
+                            <div style="font-weight: bold;">Quest name:</div> ${elem.questPlace.quest.title}
+                        <c:if test="${user.role.name eq 'administrator'}">
+                            <c:url value="/removeOrder" var="removeOrderURL"/>
+                            <form action="${removeOrderURL}" method="post" onsubmit="return confirm('Confirm action')">
+                                <input type="hidden" name="idToRemove" value="${elem.getId()}">
+                                <td><input type="submit" value="Remove order" class="btn btn-danger"></td>
+                            </form>
+                        </c:if>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+    </c:forEach>
+</div>
+
+
+<c:url value="/showOrders" var="showOrdersURL"/>
+<nav aria-label="Статьи по Bootstrap 4">
+    <ul class="pagination justify-content-center">
+        <c:if test="${current_page != 1}">
+            <li class="page-item"><a class="page-link" href="${showOrdersURL}?page=${current_page - 1}">Previous</a></li>
+        </c:if>
+        <c:forEach begin="1" end="${num_of_pages}" var="i" step="1" varStatus="status">
+            <li class="page-item">
+                <c:choose>
+                    <c:when test="${current_page eq i}">
+                        <a class="page-link">${i}</a>
+                    </c:when>
+                    <c:otherwise>
+                        <a class="page-link" href="${showOrdersURL}?page=${i}">${i}></a>
+                    </c:otherwise>
+                </c:choose>
+            </li>
+        </c:forEach>
+        <c:if test="${current_page lt num_of_pages}">
+            <li class="page-item"><a class="page-link" href="${showOrdersURL}?page=${current_page + 1}">Next</a></li>
+        </c:if>
+    </ul>
+</nav>
 <br><br><br>
 <!-- Footer -->
 <footer class="page-footer font-small unique-color-dark">
@@ -195,6 +184,7 @@
                 <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
                 <p>Here you can order a quest. Lorem ipsum
                     dolor sit amet, consectetur adipisicing elit.</p>
+
             </div>
             <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4" style="margin-top: 10px;">
 
@@ -203,6 +193,7 @@
                 <p>Supernatural</p>
                 <p>Gravitation</p>
                 <p>Tower mage</p>
+
             </div>
             <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4" style="margin-top: 10px;">
                 <h6 class="text-uppercase font-weight-bold">Useful links</h6>

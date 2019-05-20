@@ -90,10 +90,9 @@ public class CreateQuestCommand implements ActionCommand {
 
         Validator<Image> imageValidator = new ImageValidator();
         Image image = imageValidator.validate(request);
-        image.setId(questHelper.getId());
 
         ImageService imageService = factory.getService(ImageService.class);
-        imageService.create(image);
+        imageService.save(image);
 
         QuestPlaceService questPlaceService
                 = factory.getService(QuestPlaceService.class);

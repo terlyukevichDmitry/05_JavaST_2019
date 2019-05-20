@@ -18,44 +18,6 @@
         <listener-class>by.epam.site.servlet.CustomHttpSessionListener</listener-class>
     </listener>
 
-    <!--<security-constraint>-->
-        <!--<web-resource-collection>-->
-            <!--<web-resource-name>Servlet4Push</web-resource-name>-->
-            <!--<url-pattern>/home</url-pattern>-->
-            <!--<url-pattern>/quests</url-pattern>-->
-            <!--<url-pattern>/removePath</url-pattern>-->
-            <!--<url-pattern>/logout</url-pattern>-->
-            <!--<url-pattern>/showUsers</url-pattern>-->
-            <!--<url-pattern>/searchByParameter</url-pattern>-->
-            <!--<url-pattern>/bookQuest</url-pattern>-->
-            <!--<url-pattern>/showQuests</url-pattern>-->
-            <!--<url-pattern>/profile</url-pattern>-->
-            <!--<url-pattern>/login</url-pattern>-->
-            <!--<url-pattern>/signup</url-pattern>-->
-            <!--<url-pattern>/removeUser</url-pattern>-->
-            <!--<url-pattern>/changeValue</url-pattern>-->
-            <!--<url-pattern>/changePassword</url-pattern>-->
-            <!--<url-pattern>/myQuests</url-pattern>-->
-            <!--<url-pattern>/removeOrder</url-pattern>-->
-            <!--<url-pattern>/goToProfile</url-pattern>-->
-            <!--<url-pattern>/removeOrderByAdmin</url-pattern>-->
-            <!--<url-pattern>/deny</url-pattern>-->
-            <!--<url-pattern>/acceptOrder</url-pattern>-->
-            <!--<url-pattern>/removePerson</url-pattern>-->
-            <!--<url-pattern>/addReview</url-pattern>-->
-            <!--<url-pattern>/review</url-pattern>-->
-            <!--<url-pattern>/removeReview</url-pattern>-->
-            <!--<url-pattern>/createQuest</url-pattern>-->
-            <!--<url-pattern>/createNewQuest</url-pattern>-->
-            <!--<http-method>GET</http-method>-->
-        <!--</web-resource-collection>-->
-
-        <!--<user-data-constraint>-->
-            <!--<transport-guarantee>CONFIDENTIAL</transport-guarantee>-->
-        <!--</user-data-constraint>-->
-
-    <!--</security-constraint>-->
-
     <servlet>
         <servlet-name>ControllerServlet</servlet-name>
         <servlet-class>by.epam.site.servlet.ControllerServlet</servlet-class>

@@ -40,6 +40,16 @@ public class Main {
 //        String s = new String(decode);
 //        System.out.println(s);
 
+
+
+
+
+
+
+
+
+
+
         ServiceFactory factory = new ServiceFactoryImpl(new SqlTransactionFactoryImpl());
         UserService service = factory.getService(UserService.class);
         User user = new User();

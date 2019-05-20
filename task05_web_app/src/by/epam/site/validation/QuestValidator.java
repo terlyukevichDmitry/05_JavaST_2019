@@ -30,7 +30,7 @@ public class QuestValidator implements Validator<Quest> {
         if(level != null && !level.isEmpty() && level.matches(REGEX)) {
             quest.setLevel(Integer.parseInt(level));
         } else {
-            throw new IncorrectDataException(PARAM_TITLE, level);
+            throw new IncorrectDataException(PARAM_LEVEL, level);
         }
 
         String maxOfPeople = request.getParameter(PARAM_PEOPLE);

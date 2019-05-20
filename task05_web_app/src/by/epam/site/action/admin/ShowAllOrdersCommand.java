@@ -6,24 +6,19 @@ import by.epam.site.action.factory.JspPage;
 import by.epam.site.dao.daoimpl.SqlTransactionFactoryImpl;
 import by.epam.site.entity.UsedQuest;
 import by.epam.site.exception.ConstantException;
-import by.epam.site.exception.IncorrectDataException;
 import by.epam.site.service.interfaces.ServiceFactory;
 import by.epam.site.service.interfaces.UsedQuestService;
 import by.epam.site.service.serviceimpl.ServiceFactoryImpl;
 
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
-import java.io.IOException;
 import java.sql.SQLException;
-import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class ShowAllOrdersCommand implements ActionCommand {
     @Override
     public JspPage execute(HttpServletRequest request) throws ConstantException,
-            SQLException, ClassNotFoundException, ParseException, IOException,
-            ServletException, IncorrectDataException {
+            SQLException, ClassNotFoundException {
         JspPage jspPage = new JspPage();
 
         String currentPage = request.getParameter("page");

@@ -90,8 +90,8 @@ public class QuestPlaceDAOImpl
             statement.setString(1, questPlace.getName());
             statement.setString(2, questPlace.getAddress());
             statement.setString(3, questPlace.getPhone());
-            statement.setInt(4, questPlace.getQuest().getId());
-            statement.setInt(5, questPlace.getImage().getId());
+            statement.setInt(4, questPlace.getImage().getId());
+            statement.setInt(5, questPlace.getQuest().getId());
             statement.executeUpdate();
             transaction.commit();
             ResultSet resultSet = statement.getGeneratedKeys();

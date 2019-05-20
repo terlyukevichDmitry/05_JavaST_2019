@@ -1,7 +1,6 @@
 package by.epam.site.validation;
 
 import by.epam.site.entity.Image;
-import by.epam.site.entity.Quest;
 import by.epam.site.exception.IncorrectDataException;
 
 import javax.servlet.ServletException;
@@ -24,7 +23,7 @@ public class ImageValidator implements Validator<Image> {
         Image image = new Image();
 
         Part part = request.getPart(PARAM_FILE_LOADER);
-        String fileName = transferTo(part);
+        String fileName = transferTo(part, request);
         if(fileName != null && !fileName.isEmpty()) {
             image.setFilePath("images/" + fileName);
         } else {
@@ -34,11 +33,21 @@ public class ImageValidator implements Validator<Image> {
         return image;
     }
 
-    private String transferTo(final Part part) throws IOException {
+    private String transferTo(final Part part,
+                              final HttpServletRequest request)
+            throws IOException {
         String fileName= Paths.get(
                 part.getSubmittedFileName()).getFileName().toString();
-        String newFilePath = "C:\\05_JavaST_2019\\"
-                + "task05_web_app\\web\\images\\" + fileName;
+        String absolutePath = request.getServletContext().getRealPath("");
+        String[] strings = absolutePath.split("\\\\");
+        StringBuilder builder = new StringBuilder();
+        for (int  i = 0; i < strings.length - 3; i++) {
+            builder.append(strings[i]);
+            builder.append("/");
+        }
+
+        String newFilePath = absolutePath + "images/" + fileName;
+
         InputStream inputStream = part.getInputStream();
         OutputStream outputStream = new FileOutputStream(newFilePath);
         Objects.requireNonNull(outputStream, "out");

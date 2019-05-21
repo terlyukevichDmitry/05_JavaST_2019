@@ -31,6 +31,7 @@ public class BookQuestCommand implements ActionCommand {
                 new SqlTransactionFactoryImpl());
         QuestPlaceService service
                 = factory.getService(QuestPlaceService.class);
+
         QuestPlace questPlace = service.findById(Integer.parseInt(id));
         UsedQuestService usedQuestService
                 = factory.getService(UsedQuestService.class);
@@ -44,6 +45,7 @@ public class BookQuestCommand implements ActionCommand {
                     MessageManager.getProperty("ordered"));
 
             jspPage.setPage("/quests?message=" + encoded);
+            return jspPage;
         }
 
 

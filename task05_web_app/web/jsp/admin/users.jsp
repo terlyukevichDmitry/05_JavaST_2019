@@ -6,20 +6,25 @@
 <c:set var="url">${pageContext.request.requestURL}</c:set>
 <c:set var="ctx"
        value="${fn:substring(url, 0, fn:length(url) - fn:length(pageContext.request.requestURI))}${pageContext.request.contextPath}"/>
+<c:set var="current" value="${param.language}" scope="session"/>
+<c:if test="${not empty current}">
+    <fmt:setLocale value="${current}" scope="session"/>
+</c:if>
 
+<fmt:setBundle basename="browser" scope="session"/>
 <!DOCTYPE html>
 <html>
 <head>
     <title>Parser result</title>
     <link rel="stylesheet" href="${ctx}/css/home/header.css" type="text/css"/>
     <link rel="stylesheet" href="${ctx}/css/home/base.css" type="text/css"/>
+
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="css/style.css" type="text/css"/>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+
 </head>
 <body>
 <div class="header">
@@ -37,63 +42,81 @@
             </div>
             <div class="header_menu">
                 <c:url value="/home" var="homeURL"/>
-                <a href="${homeURL}" class="menu_link"><i class="fas fa-home"></i> Home</a>
-                <a href="#" class="menu_link"><i class="fas fa-newspaper"></i> About</a>
-                <a href="#contact" class="menu_link"><i class="fas fa-phone"></i> Contact</a>
+                <a href="${homeURL}" class="menu_link"><i class="fas fa-home"></i> <fmt:message key="homeLabel"/></a>
+                <a href="#" class="menu_link"><i class="fas fa-newspaper"></i> <fmt:message key="aboutLabel"/></a>
+                <a href="#contact" class="menu_link"><i class="fas fa-phone"></i> <fmt:message key="contactLabel"/></a>
                 <c:url value="/review" var="reviewURL"/>
-                <a href="${reviewURL}" class="menu_link"><i class="fas fa-list"></i> Review</a>
+                <a href="${reviewURL}" class="menu_link"><i class="fas fa-list"></i> <fmt:message key="reviewLabel"/></a>
+            </div>
+
+            <div class="btn-group">
+                <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <fmt:message key="languageLabel"/>
+                </button>
+                <div class="dropdown-menu">
+                    <form class="dropdown-item">
+                        <input type="hidden" name="language" value="en_US">
+                        <input type="submit" class="dropdown-item" value="<fmt:message key="english"/>"/>
+                    </form>
+                    <form class="dropdown-item">
+                        <input type="hidden" name="language" value="ru_RU">
+                        <input type="submit" class="dropdown-item" value="<fmt:message key="russian"/>"/>
+                    </form>
+                    <form class="dropdown-item">
+                        <input type="hidden" name="language" value="be_BY">
+                        <input type="submit" class="dropdown-item" value="<fmt:message key="belarusian"/>"/>
+                    </form>
+                </div>
             </div>
             <c:choose>
                 <c:when test="${user.role.name.equals('administrator')}">
                     <div class="btn-group">
                         <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Action
+                            <fmt:message key="actionLable"/>
                         </button>
                         <div class="dropdown-menu">
                             <c:url value="/profile" var="profileURL"/>
-                            <a href="${profileURL}" class="dropdown-item">Profile</a>
-                            <%--<c:url value="/myQuests" var="myQuestsURL"/>--%>
-                            <%--<a href="${myQuestsURL}" class="dropdown-item">My quests</a>--%>
+                            <a href="${profileURL}" class="dropdown-item"><fmt:message key="prof"/></a>
                             <c:url value="/createQuest" var="createQuestURL"/>
-                            <a href="${createQuestURL}" class="dropdown-item">Create Quest</a>
+                            <a href="${createQuestURL}" class="dropdown-item"><fmt:message key="createQuestLabel"/></a>
                             <c:url value="/showOrders" var="showOrdersURL"/>
-                            <a href="${showOrdersURL}" class="dropdown-item">Orders</a>
-                            <c:url value="/showUsers" var="searchUserURL"/>
-                            <a href="${searchUserURL}" class="dropdown-item">Users</a>
+                            <a href="${showOrdersURL}" class="dropdown-item"><fmt:message key="ordersLabel"/></a>
+                            <c:url value="/showUsers" var="showUsersURL"/>
+                            <a href="${showUsersURL}" class="dropdown-item"><fmt:message key="usersLabel"/></a>
                             <c:url value="/removeUser" var="removeUserURL"/>
-                            <a href="${removeUserURL}" class="dropdown-item">Remove User</a>
+                            <a href="${removeUserURL}" class="dropdown-item"><fmt:message key="removeUserLabel"/></a>
                             <div class="dropdown-divider"></div>
                             <c:url value="/logout" var="logout"/>
-                            <a href="${logout}" class="dropdown-item">Log out</a>
+                            <a href="${logout}" class="dropdown-item"><fmt:message key="logOut"/></a>
                         </div>
                     </div>
                 </c:when>
                 <c:when test="${user.role.name.equals('client')}">
                     <div class="btn-group">
                         <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Action
+                            <fmt:message key="actionLable"/>
                         </button>
                         <div class="dropdown-menu">
                             <c:url value="/profile" var="profileURL"/>
-                            <a href="${profileURL}" class="dropdown-item">Profile</a>
+                            <a href="${profileURL}" class="dropdown-item"><fmt:message key="prof"/></a>
                             <c:url value="/myQuests" var="myQuestsURL"/>
-                            <a href="${myQuestsURL}" class="dropdown-item">My quests</a>
+                            <a href="${myQuestsURL}" class="dropdown-item"><fmt:message key="myQuest"/></a>
                             <div class="dropdown-divider"></div>
                             <c:url value="/logout" var="logout"/>
-                            <a href="${logout}" class="dropdown-item">Log out</a>
+                            <a href="${logout}" class="dropdown-item"><fmt:message key="logOut"/></a>
                         </div>
                     </div>
                 </c:when>
                 <c:otherwise>
                     <c:url value="/login" var="loginURL"/>
-                    <a href="${loginURL}" class="menu_link"><i class="fas fa-sign-in-alt"></i> Log in</a>
+                    <a href="${loginURL}" class="menu_link"><i class="fas fa-sign-in-alt"></i><fmt:message key="logIn"/></a>
                 </c:otherwise>
             </c:choose>
         </div>
         <div class="header_slogan">
-            <h1 class="h_slogan">Here you can find the best quests.</h1><br>
+            <h1 class="h_slogan"><fmt:message key="header"/></h1><br>
             <c:url value="/quests" var="questsURL"/>
-            <a href="${questsURL}" class="btn btn-warning btn-lg">All Quests</a>
+            <a href="${questsURL}" class="btn btn-warning btn-lg"><fmt:message key="allQuests"/></a>
         </div>
     </div>
 </div>
@@ -102,30 +125,31 @@
 <c:url value="/searchById" var="searchByIdURL"/>
 <form action="${searchByIdURL}" method="post" class="form-inline">
     <div class="form-group mb-2">
-        <label class="sr-only">Find by ID</label>
+        <label class="sr-only"><fmt:message key="findByIdLabel"/></label>
     </div>
     <div class="form-group mx-sm-3 mb-2">
         <label for="inputText" class="sr-only">ID</label>
-        <input type="text" name="searchId" class="form-control" id="inputText" placeholder="Only number" pattern="^[ 0-9]+$">
+        <input type="text" name="searchId" class="form-control" id="inputText" placeholder="<fmt:message key="onlyNumberLabel"/>" pattern="^[ 0-9]+$">
     </div>
-    <button type="submit" class="btn btn-primary mb-2">Search</button>
-</form>
+    <button type="submit" class="btn btn-primary mb-2"><fmt:message key="searchLabel"/></button>
+</form><br><br>
 <c:url value="showUsers" var="showUsersURL"/>
-    <a href="${showUsersURL}"><button type="submit" class="btn btn-primary mb-2">Select all</button></a>
+    <a href="${showUsersURL}"><button type="submit" class="btn btn-primary mb-2"><fmt:message key="selectAllLabel"/></button></a>
     <c:url value="/searchByClientRole" var="searchByRoleURL"/>
     <form action="${searchByRoleURL}" method="post">
-    <button type="submit" class="btn btn-primary mb-2">Select client</button>
+    <button type="submit" class="btn btn-primary mb-2"><fmt:message key="selectClientLabel"/></button>
     </form>
 </div>
 <table class="table table-bordered table-inverse">
+    <br><br>
     <thead>
     <tr>
-        <th><fmt:message key="id"/></th>
-        <th><fmt:message key="login"/></th>
-        <th><fmt:message key="password"/></th>
-        <th><fmt:message key="role"/></th>
-        <th><fmt:message key="allOrders"/></th>
-        <th><fmt:message key="removeUser"/></th>
+        <th><fmt:message key="idLabel"/></th>
+        <th><fmt:message key="loginLabel"/></th>
+        <th><fmt:message key="passwordLabel"/></th>
+        <th><fmt:message key="roleLabel"/></th>
+        <th><fmt:message key="allOrdersLabel"/></th>
+        <th><fmt:message key="removeUserLabel"/></th>
         <th> </th>
     </tr>
     </thead>
@@ -138,12 +162,12 @@
                 <c:out value="${ elem.login }"/>
             </th>
             <th><c:out value="${ elem.password }"/> </th>
-            <th><c:out value="${ elem.role }"/> </th>
+            <th><c:out value="${ elem.role.name }"/> </th>
             <th>
                 <c:url value="/goToProfile" var="goToProfileURL"/>
                 <form action="${goToProfileURL}" method="get">
                     <input type="hidden" name="personId" value="${elem.id}">
-                    <input type="submit" value="Orders" class="btn btn-info">
+                    <input type="submit" value="<fmt:message key="ordersLabel"/>" class="btn btn-info">
                 </form>
             </th>
             <c:if test="${!elem.role.name.equals('administrator')}">
@@ -151,7 +175,7 @@
                 <c:url value="/removePerson" var="removePersonURL"/>
                     <form action="${removePersonURL}" method="post" onsubmit="return confirm('Confirm action')">
                         <input type="hidden" name="idToRemovePerson" value="${elem.id}">
-                        <input type="submit" value="  Remove  " class="btn btn-danger">
+                        <input type="submit" value="<fmt:message key="removeUserLabel"/>" class="btn btn-danger">
                     </form>
             </th>
             </c:if>
@@ -160,13 +184,13 @@
                 <c:if test="${elem.role.name.equals('client')}">
                 <form action="${doManagerURL}" method="post">
                     <input type="hidden" name="idToAddManager" value="${elem.id}">
-                    <input type="submit" value="Change on Manager" class="btn btn-outline-success">
+                    <input type="submit" value="<fmt:message key="changeManagerLabel"/>" class="btn btn-outline-success">
                 </form>
                 </c:if>
                 <c:if test="${elem.role.name.equals('manager')}">
                     <form action="${doManagerURL}" method="post">
                         <input type="hidden" name="idToAddManager" value="${elem.id}">
-                        <input type="submit" value="Change on Client" class="btn btn-outline-success">
+                        <input type="submit" value="<fmt:message key="changeClientLabel"/>" class="btn btn-outline-success">
                     </form>
                 </c:if>
             </th>
@@ -178,7 +202,7 @@
 <nav aria-label="Статьи по Bootstrap 4">
     <ul class="pagination justify-content-center">
         <c:if test="${current_page != 1}">
-            <li class="page-item"><a class="page-link" href="${showUsersURL}?page=${current_page - 1}">Previous</a></li>
+            <li class="page-item"><a class="page-link" href="${showUsersURL}?page=${current_page - 1}"><fmt:message key="previousLabel"/></a></li>
         </c:if>
         <c:forEach begin="1" end="${num_of_pages}" var="i" step="1" varStatus="status">
             <li class="page-item">
@@ -193,7 +217,7 @@
             </li>
         </c:forEach>
         <c:if test="${current_page lt num_of_pages}">
-            <li class="page-item"><a class="page-link" href="${showUsersURL}?page=${current_page + 1}">Next</a></li>
+            <li class="page-item"><a class="page-link" href="${showUsersURL}?page=${current_page + 1}"><fmt:message key="nextLabel"/></a></li>
         </c:if>
     </ul>
 </nav>
@@ -206,7 +230,7 @@
             <div class="row py-2 d-flex align-items-center">
 
                 <div class="col-md-6 col-lg-5 text-center text-md-left mb-4 mb-md-0">
-                    <h6 class="mb-0">Get connected with us on social networks!</h6>
+                    <h6 class="mb-0"><fmt:message key="sotialNetworks"/></h6>
                 </div>
 
                 <div class="col-md-6 col-lg-7 text-center text-md-right">
@@ -222,13 +246,12 @@
             <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4" style="margin-top: 10px;">
                 <h6 class="text-uppercase font-weight-bold">JukeBox</h6>
                 <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
-                <p>Here you can order a quest. Lorem ipsum
-                    dolor sit amet, consectetur adipisicing elit.</p>
+                <p><fmt:message key="orderAQuestLabel"/></p>
 
             </div>
             <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4" style="margin-top: 10px;">
 
-                <h6 class="text-uppercase font-weight-bold">Type of quest</h6>
+                <h6 class="text-uppercase font-weight-bold"><fmt:message key="typeQuestLabel"/></h6>
                 <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
                 <p>Supernatural</p>
                 <p>Gravitation</p>
@@ -236,24 +259,24 @@
 
             </div>
             <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4" style="margin-top: 10px;">
-                <h6 class="text-uppercase font-weight-bold">Useful links</h6>
+                <h6 class="text-uppercase font-weight-bold"><fmt:message key="usefulLinksLabel"/></h6>
                 <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
                 <c:url value="/login" var="loginURL"/>
-                <p><a href="${loginURL}}">Your Account</a></p>
+                <p><a href="${loginURL}}"><fmt:message key="yourAccountLable"/></a></p>
                 <p><a href="https://e.mail.ru/messages/inbox/?back=1">Mail</a></p>
                 <p><a href="#">Help</a></p>
             </div>
             <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4" style="margin-top: 10px;" id="contact">
 
-                <h6 class="text-uppercase font-weight-bold">Contact</h6>
+                <h6 class="text-uppercase font-weight-bold"><fmt:message key="contactLabel"/></h6>
                 <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
-                <p><i class="fas fa-home mr-3"></i> Belarus, Minsk region, BY</p>
+                <p><i class="fas fa-home mr-3"></i> <fmt:message key="countryLabel"/>, <fmt:message key="cityLabel"/>, BY</p>
                 <p><i class="fas fa-envelope mr-3"></i> lanselot2000_@mail.ru</p>
                 <p><i class="fas fa-phone mr-3"></i> + 375 29 861 97 83</p>
             </div>
         </div>
     </div>
-    <div class="footer-copyright text-center py-3" style="background-color: #161c27; color: #998d7e">© 2018 Copyright:
+    <div class="footer-copyright text-center py-3" style="background-color: #161c27; color: #998d7e">© 2019 <fmt:message key="copyrightLabel"/>:
         <a href="https://mdbootstrap.com/education/bootstrap/" style="color: #f7f7f8"> JukeBox.com</a>
     </div>
 </footer>

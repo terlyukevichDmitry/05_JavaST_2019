@@ -2,9 +2,16 @@
 <%@ taglib prefix="m" uri="customMenu" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core_1_1" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <c:set var="url">${pageContext.request.requestURL}</c:set>
 <c:set var="ctx"
        value="${fn:substring(url, 0, fn:length(url) - fn:length(pageContext.request.requestURI))}${pageContext.request.contextPath}"/>
+<c:set var="current" value="${param.language}" scope="session"/>
+<c:if test="${not empty current}">
+    <fmt:setLocale value="${current}" scope="session"/>
+</c:if>
+
+<fmt:setBundle basename="browser" scope="session"/>
 <!DOCTYPE html>
 <html lang="en_US">
 <head>
@@ -40,63 +47,81 @@
             </div>
             <div class="header_menu">
                 <c:url value="/home" var="homeURL"/>
-                <a href="${homeURL}" class="menu_link"><i class="fas fa-home"></i> Home</a>
-                <a href="#" class="menu_link"><i class="fas fa-newspaper"></i> About</a>
-                <a href="#contact" class="menu_link"><i class="fas fa-phone"></i> Contact</a>
+                <a href="${homeURL}" class="menu_link"><i class="fas fa-home"></i> <fmt:message key="homeLabel"/></a>
+                <a href="#" class="menu_link"><i class="fas fa-newspaper"></i> <fmt:message key="aboutLabel"/></a>
+                <a href="#contact" class="menu_link"><i class="fas fa-phone"></i> <fmt:message key="contactLabel"/></a>
                 <c:url value="/review" var="reviewURL"/>
-                <a href="${reviewURL}" class="menu_link"><i class="fas fa-list"></i> Review</a>
+                <a href="${reviewURL}" class="menu_link"><i class="fas fa-list"></i> <fmt:message key="reviewLabel"/></a>
+            </div>
+
+            <div class="btn-group">
+                <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <fmt:message key="languageLabel"/>
+                </button>
+                <div class="dropdown-menu">
+                    <form action="#" class="dropdown-item">
+                        <input type="hidden" name="language" value="en_US">
+                        <input type="submit" class="dropdown-item" value="<fmt:message key="english"/>"/>
+                    </form>
+                    <form action="#" class="dropdown-item">
+                        <input type="hidden" name="language" value="ru_RU">
+                        <input type="submit" class="dropdown-item" value="<fmt:message key="russian"/>"/>
+                    </form>
+                    <form action="#" class="dropdown-item">
+                        <input type="hidden" name="language" value="be_BY">
+                        <input type="submit" class="dropdown-item" value="<fmt:message key="belarusian"/>"/>
+                    </form>
+                </div>
             </div>
             <c:choose>
                 <c:when test="${user.role.name.equals('administrator')}">
-                        <div class="btn-group">
-                            <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Action
-                            </button>
-                            <div class="dropdown-menu">
-                                <c:url value="/profile" var="profileURL"/>
-                                <a href="${profileURL}" class="dropdown-item">Profile</a>
-                                <%--<c:url value="/myQuests" var="myQuestsURL"/>--%>
-                                <%--<a href="${myQuestsURL}" class="dropdown-item">My quests</a>--%>
-                                <c:url value="/createQuest" var="createQuestURL"/>
-                                <a href="${createQuestURL}" class="dropdown-item">Create Quest</a>
-                                <c:url value="/showOrders" var="showOrdersURL"/>
-                                <a href="${showOrdersURL}" class="dropdown-item">Orders</a>
-                                <c:url value="/showUsers" var="searchUserURL"/>
-                                <a href="${searchUserURL}" class="dropdown-item">Users</a>
-                                <c:url value="/removeUser" var="removeUserURL"/>
-                                <a href="${removeUserURL}" class="dropdown-item">Remove User</a>
-                                <div class="dropdown-divider"></div>
-                                <c:url value="/logout" var="logout"/>
-                                <a href="${logout}" class="dropdown-item">Log out</a>
-                            </div>
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <fmt:message key="actionLable"/>
+                        </button>
+                        <div class="dropdown-menu">
+                            <c:url value="/profile" var="profileURL"/>
+                            <a href="${profileURL}" class="dropdown-item"><fmt:message key="prof"/></a>
+                            <c:url value="/createQuest" var="createQuestURL"/>
+                            <a href="${createQuestURL}" class="dropdown-item"><fmt:message key="createQuestLabel"/></a>
+                            <c:url value="/showOrders" var="showOrdersURL"/>
+                            <a href="${showOrdersURL}" class="dropdown-item"><fmt:message key="ordersLabel"/></a>
+                            <c:url value="/showUsers" var="showUsersURL"/>
+                            <a href="${showUsersURL}" class="dropdown-item"><fmt:message key="usersLabel"/></a>
+                            <c:url value="/removeUser" var="removeUserURL"/>
+                            <a href="${removeUserURL}" class="dropdown-item"><fmt:message key="removeUserLabel"/></a>
+                            <div class="dropdown-divider"></div>
+                            <c:url value="/logout" var="logout"/>
+                            <a href="${logout}" class="dropdown-item"><fmt:message key="logOut"/></a>
                         </div>
+                    </div>
                 </c:when>
                 <c:when test="${user.role.name.equals('client')}">
-                        <div class="btn-group">
-                            <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Action
-                            </button>
-                            <div class="dropdown-menu">
-                                <c:url value="/profile" var="profileURL"/>
-                                <a href="${profileURL}" class="dropdown-item">Profile</a>
-                                <c:url value="/myQuests" var="myQuestsURL"/>
-                                <a href="${myQuestsURL}" class="dropdown-item">My quests</a>
-                                <div class="dropdown-divider"></div>
-                                <c:url value="/logout" var="logout"/>
-                                <a href="${logout}" class="dropdown-item">Log out</a>
-                            </div>
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <fmt:message key="actionLable"/>
+                        </button>
+                        <div class="dropdown-menu">
+                            <c:url value="/profile" var="profileURL"/>
+                            <a href="${profileURL}" class="dropdown-item"><fmt:message key="prof"/></a>
+                            <c:url value="/myQuests" var="myQuestsURL"/>
+                            <a href="${myQuestsURL}" class="dropdown-item"><fmt:message key="myQuest"/></a>
+                            <div class="dropdown-divider"></div>
+                            <c:url value="/logout" var="logout"/>
+                            <a href="${logout}" class="dropdown-item"><fmt:message key="logOut"/></a>
                         </div>
+                    </div>
                 </c:when>
                 <c:otherwise>
                     <c:url value="/login" var="loginURL"/>
-                    <a href="${loginURL}" class="menu_link"><i class="fas fa-sign-in-alt"></i> Log in</a>
+                    <a href="${loginURL}" class="menu_link"><i class="fas fa-sign-in-alt"></i><fmt:message key="logIn"/></a>
                 </c:otherwise>
             </c:choose>
         </div>
         <div class="header_slogan">
-            <h1 class="h_slogan">Here you can find the best quests.</h1><br>
+            <h1 class="h_slogan"><fmt:message key="header"/></h1><br>
             <c:url value="/quests" var="questsURL"/>
-            <a href="${questsURL}" class="btn btn-warning btn-lg">All Quests</a>
+            <a href="${questsURL}" class="btn btn-warning btn-lg"><fmt:message key="allQuests"/></a>
         </div>
     </div>
 </div>
@@ -140,7 +165,7 @@
             <div class="row py-2 d-flex align-items-center">
 
                 <div class="col-md-6 col-lg-5 text-center text-md-left mb-4 mb-md-0">
-                    <h6 class="mb-0">Get connected with us on social networks!</h6>
+                    <h6 class="mb-0"><fmt:message key="sotialNetworks"/></h6>
                 </div>
 
                 <div class="col-md-6 col-lg-7 text-center text-md-right">
@@ -156,13 +181,12 @@
             <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4" style="margin-top: 10px;">
                 <h6 class="text-uppercase font-weight-bold">JukeBox</h6>
                 <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
-                <p>Here you can order a quest. Lorem ipsum
-                    dolor sit amet, consectetur adipisicing elit.</p>
+                <p><fmt:message key="orderAQuestLabel"/></p>
 
             </div>
             <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4" style="margin-top: 10px;">
 
-                <h6 class="text-uppercase font-weight-bold">Type of quest</h6>
+                <h6 class="text-uppercase font-weight-bold"><fmt:message key="typeQuestLabel"/></h6>
                 <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
                 <p>Supernatural</p>
                 <p>Gravitation</p>
@@ -170,24 +194,24 @@
 
             </div>
             <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4" style="margin-top: 10px;">
-                <h6 class="text-uppercase font-weight-bold">Useful links</h6>
+                <h6 class="text-uppercase font-weight-bold"><fmt:message key="usefulLinksLabel"/></h6>
                 <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
                 <c:url value="/login" var="loginURL"/>
-                <p><a href="${loginURL}}">Your Account</a></p>
+                <p><a href="${loginURL}}"><fmt:message key="yourAccountLable"/></a></p>
                 <p><a href="https://e.mail.ru/messages/inbox/?back=1">Mail</a></p>
                 <p><a href="#">Help</a></p>
             </div>
             <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4" style="margin-top: 10px;" id="contact">
 
-                <h6 class="text-uppercase font-weight-bold">Contact</h6>
+                <h6 class="text-uppercase font-weight-bold"><fmt:message key="contactLabel"/></h6>
                 <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
-                <p><i class="fas fa-home mr-3"></i> Belarus, Minsk region, BY</p>
+                <p><i class="fas fa-home mr-3"></i> <fmt:message key="countryLabel"/>, <fmt:message key="cityLabel"/>, BY</p>
                 <p><i class="fas fa-envelope mr-3"></i> lanselot2000_@mail.ru</p>
                 <p><i class="fas fa-phone mr-3"></i> + 375 29 861 97 83</p>
             </div>
         </div>
     </div>
-    <div class="footer-copyright text-center py-3" style="background-color: #161c27; color: #998d7e">© 2018 Copyright:
+    <div class="footer-copyright text-center py-3" style="background-color: #161c27; color: #998d7e">© 2019 <fmt:message key="copyrightLabel"/>:
         <a href="https://mdbootstrap.com/education/bootstrap/" style="color: #f7f7f8"> JukeBox.com</a>
     </div>
 </footer>

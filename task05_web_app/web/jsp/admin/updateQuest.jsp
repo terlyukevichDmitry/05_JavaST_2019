@@ -2,9 +2,16 @@
 <%@ taglib prefix="m" uri="customMenu" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core_1_1" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <c:set var="url">${pageContext.request.requestURL}</c:set>
 <c:set var="ctx"
        value="${fn:substring(url, 0, fn:length(url) - fn:length(pageContext.request.requestURI))}${pageContext.request.contextPath}"/>
+<c:set var="current" value="${param.language}" scope="session"/>
+<c:if test="${not empty current}">
+    <fmt:setLocale value="${current}" scope="session"/>
+</c:if>
+
+<fmt:setBundle basename="browser" scope="session"/>
 <!DOCTYPE html>
 <html lang="en_US">
 <head>
@@ -60,63 +67,81 @@
             </div>
             <div class="header_menu">
                 <c:url value="/home" var="homeURL"/>
-                <a href="${homeURL}" class="menu_link"><i class="fas fa-home"></i> Home</a>
-                <a href="#" class="menu_link"><i class="fas fa-newspaper"></i> About</a>
-                <a href="#contact" class="menu_link"><i class="fas fa-phone"></i> Contact</a>
+                <a href="${homeURL}" class="menu_link"><i class="fas fa-home"></i> <fmt:message key="homeLabel"/></a>
+                <a href="#" class="menu_link"><i class="fas fa-newspaper"></i> <fmt:message key="aboutLabel"/></a>
+                <a href="#contact" class="menu_link"><i class="fas fa-phone"></i> <fmt:message key="contactLabel"/></a>
                 <c:url value="/review" var="reviewURL"/>
-                <a href="${reviewURL}" class="menu_link"><i class="fas fa-list"></i> Review</a>
+                <a href="${reviewURL}" class="menu_link"><i class="fas fa-list"></i> <fmt:message key="reviewLabel"/></a>
+            </div>
+
+            <div class="btn-group">
+                <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <fmt:message key="languageLabel"/>
+                </button>
+                <div class="dropdown-menu">
+                    <form class="dropdown-item">
+                        <input type="hidden" name="language" value="en_US">
+                        <input type="submit" class="dropdown-item" value="<fmt:message key="english"/>"/>
+                    </form>
+                    <form class="dropdown-item">
+                        <input type="hidden" name="language" value="ru_RU">
+                        <input type="submit" class="dropdown-item" value="<fmt:message key="russian"/>"/>
+                    </form>
+                    <form class="dropdown-item">
+                        <input type="hidden" name="language" value="be_BY">
+                        <input type="submit" class="dropdown-item" value="<fmt:message key="belarusian"/>"/>
+                    </form>
+                </div>
             </div>
             <c:choose>
                 <c:when test="${user.role.name.equals('administrator')}">
                     <div class="btn-group">
                         <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Action
+                            <fmt:message key="actionLable"/>
                         </button>
                         <div class="dropdown-menu">
                             <c:url value="/profile" var="profileURL"/>
-                            <a href="${profileURL}" class="dropdown-item">Profile</a>
-                                <%--<c:url value="/myQuests" var="myQuestsURL"/>--%>
-                                <%--<a href="${myQuestsURL}" class="dropdown-item">My quests</a>--%>
+                            <a href="${profileURL}" class="dropdown-item"><fmt:message key="prof"/></a>
                             <c:url value="/createQuest" var="createQuestURL"/>
-                            <a href="${createQuestURL}" class="dropdown-item">Create Quest</a>
+                            <a href="${createQuestURL}" class="dropdown-item"><fmt:message key="createQuestLabel"/></a>
                             <c:url value="/showOrders" var="showOrdersURL"/>
-                            <a href="${showOrdersURL}" class="dropdown-item">Orders</a>
-                            <c:url value="/showUsers" var="searchUserURL"/>
-                            <a href="${searchUserURL}" class="dropdown-item">Users</a>
+                            <a href="${showOrdersURL}" class="dropdown-item"><fmt:message key="ordersLabel"/></a>
+                            <c:url value="/showUsers" var="showUsersURL"/>
+                            <a href="${showUsersURL}" class="dropdown-item"><fmt:message key="usersLabel"/></a>
                             <c:url value="/removeUser" var="removeUserURL"/>
-                            <a href="${removeUserURL}" class="dropdown-item">Remove User</a>
+                            <a href="${removeUserURL}" class="dropdown-item"><fmt:message key="removeUserLabel"/></a>
                             <div class="dropdown-divider"></div>
                             <c:url value="/logout" var="logout"/>
-                            <a href="${logout}" class="dropdown-item">Log out</a>
+                            <a href="${logout}" class="dropdown-item"><fmt:message key="logOut"/></a>
                         </div>
                     </div>
                 </c:when>
                 <c:when test="${user.role.name.equals('client')}">
                     <div class="btn-group">
                         <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Action
+                            <fmt:message key="actionLable"/>
                         </button>
                         <div class="dropdown-menu">
                             <c:url value="/profile" var="profileURL"/>
-                            <a href="${profileURL}" class="dropdown-item">Profile</a>
+                            <a href="${profileURL}" class="dropdown-item"><fmt:message key="prof"/></a>
                             <c:url value="/myQuests" var="myQuestsURL"/>
-                            <a href="${myQuestsURL}" class="dropdown-item">My quests</a>
+                            <a href="${myQuestsURL}" class="dropdown-item"><fmt:message key="myQuest"/></a>
                             <div class="dropdown-divider"></div>
                             <c:url value="/logout" var="logout"/>
-                            <a href="${logout}" class="dropdown-item">Log out</a>
+                            <a href="${logout}" class="dropdown-item"><fmt:message key="logOut"/></a>
                         </div>
                     </div>
                 </c:when>
                 <c:otherwise>
                     <c:url value="/login" var="loginURL"/>
-                    <a href="${loginURL}" class="menu_link"><i class="fas fa-sign-in-alt"></i> Log in</a>
+                    <a href="${loginURL}" class="menu_link"><i class="fas fa-sign-in-alt"></i><fmt:message key="logIn"/></a>
                 </c:otherwise>
             </c:choose>
         </div>
         <div class="header_slogan">
-            <h1 class="h_slogan">Here you can find the best quests.</h1><br>
+            <h1 class="h_slogan"><fmt:message key="header"/></h1><br>
             <c:url value="/quests" var="questsURL"/>
-            <a href="${questsURL}" class="btn btn-warning btn-lg">All Quests</a>
+            <a href="${questsURL}" class="btn btn-warning btn-lg"><fmt:message key="allQuests"/></a>
         </div>
     </div>
 </div><br><br>
@@ -131,32 +156,32 @@
                         <table class="table table-th-block">
                             <c:url value="/updateQuestInfo" var="updateQuestInfoURL"/>
                             <form action="${updateQuestInfoURL}" method="post" enctype="multipart/form-data">
-                                <h4>Change quest place information:</h4>
+                                <h4><fmt:message key="changeQuestPlaceInfoLabel"/>:</h4>
                                 <table class="table table-th-block">
                                     <tbody>
-                                    <label>Change the quest address.</label><br>
-                                    <input type="text" name="addressName" class="form-control rounded" placeholder="New address" value="${updateElem.address}" required><br>
-                                    <label>Change address name</label>
-                                    <input type="text" name="placeName" class="form-control border-valid" value="${updateElem.name}" required><br>
-                                    <label>Change phone number in this place</label>
+                                    <label><fmt:message key="changeQuestAddressLabel"/>:</label><br>
+                                    <input type="text" name="addressName" class="form-control rounded" placeholder="<fmt:message key="newAddressLabel"/>" value="${updateElem.address}" required><br>
+                                    <label><fmt:message key="changeNameLabel"/>:</label>
+                                    <input type="text" name="placeName" class="form-control border-valid" placeholder="<fmt:message key="newNameLabel"/>" value="${updateElem.name}" required><br>
+                                    <label><fmt:message key="changePhoneLabel"/>:</label>
                                     <input type="tel" name="phoneNumber" class="form-control border-valid" placeholder="xxxxxxxxx" pattern="[0-9]{9}" value="${updateElem.phone}" required>
                                     <hr>
 
-                                    <h4>Change quest information:</h4>
-                                    <label>Change title</label>
-                                    <input type="text" name="title" class="form-control border-valid" placeholder="Enter quest title" value="${updateElem.quest.title}" required><br>
-                                    <label>Change level</label>
-                                    <input type="number" name="level" class="form-control" placeholder="Enter level for quest" value="${updateElem.quest.level}" required><br>
-                                    <label>Change max number of people</label>
-                                    <input type="number" name="maxOfPeople" class="form-control" placeholder="Enter max number of people in this quest" value="${updateElem.quest.maxPeople}" required><br>
+                                    <h4><fmt:message key="changeQuestInfoLabel"/>:</h4>
+                                    <label><fmt:message key="changeTitleLabel"/>:</label>
+                                    <input type="text" name="title" class="form-control border-valid" placeholder="<fmt:message key="changeTitleLabel"/>" value="${updateElem.quest.title}" required><br>
+                                    <label><fmt:message key="changeLevelLabel"/>:</label>
+                                    <input type="number" name="level" class="form-control" placeholder="<fmt:message key="changeLevelLabel"/>" value="${updateElem.quest.level}" required><br>
+                                    <label><fmt:message key="changeMaxPeopleLabel"/>:</label>
+                                    <input type="number" name="maxOfPeople" class="form-control" placeholder="<fmt:message key="changeMaxPeopleLabel"/>" value="${updateElem.quest.maxPeople}" required><br>
                                     <div class="md-form amber-textarea active-amber-textarea">
-                                        <i class="fas fa-pencil-alt prefix"></i><label for="form22">&nbsp;&nbsp;Write new description about this quest:</label>
+                                        <i class="fas fa-pencil-alt prefix"></i><label for="form22">&nbsp;&nbsp;<fmt:message key="changeDesctiptionLabel"/>:</label>
                                         <textarea id="form22" name="description" class="md-textarea form-control" rows="3">${updateElem.quest.description}</textarea>
                                     </div><br>
-                                    <label for="exampleFormControlFile1">Change photo</label><br>
+                                    <label for="exampleFormControlFile1"><fmt:message key="changePhotoLabel"/></label><br>
                                     <input name="fileLoader" accept=".jpg" type="file" class="btn btn-dark" id="exampleFormControlFile1" required><br><br>
                                     <input type="hidden" name="oldInfoId" value="${oldPlace.id}">
-                                    <button class="btn btn-success" type="submit">Update information</button><br><br>
+                                    <button class="btn btn-success" type="submit"><fmt:message key="updateInfoLabel"/></button><br><br>
                                     <div style="color: #ff7b7b; font-size: 18px;">
                                         ${crashMessage}
                                     </div>
@@ -177,7 +202,7 @@
             <div class="row py-2 d-flex align-items-center">
 
                 <div class="col-md-6 col-lg-5 text-center text-md-left mb-4 mb-md-0">
-                    <h6 class="mb-0">Get connected with us on social networks!</h6>
+                    <h6 class="mb-0"><fmt:message key="sotialNetworks"/></h6>
                 </div>
 
                 <div class="col-md-6 col-lg-7 text-center text-md-right">
@@ -193,36 +218,37 @@
             <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4" style="margin-top: 10px;">
                 <h6 class="text-uppercase font-weight-bold">JukeBox</h6>
                 <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
-                <p>Here you can order a quest. Lorem ipsum
-                    dolor sit amet, consectetur adipisicing elit.</p>
+                <p><fmt:message key="orderAQuestLabel"/></p>
+
             </div>
             <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4" style="margin-top: 10px;">
 
-                <h6 class="text-uppercase font-weight-bold">Type of quest</h6>
+                <h6 class="text-uppercase font-weight-bold"><fmt:message key="typeQuestLabel"/></h6>
                 <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
                 <p>Supernatural</p>
                 <p>Gravitation</p>
                 <p>Tower mage</p>
+
             </div>
             <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4" style="margin-top: 10px;">
-                <h6 class="text-uppercase font-weight-bold">Useful links</h6>
+                <h6 class="text-uppercase font-weight-bold"><fmt:message key="usefulLinksLabel"/></h6>
                 <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
                 <c:url value="/login" var="loginURL"/>
-                <p><a href="${loginURL}}">Your Account</a></p>
+                <p><a href="${loginURL}}"><fmt:message key="yourAccountLable"/></a></p>
                 <p><a href="https://e.mail.ru/messages/inbox/?back=1">Mail</a></p>
                 <p><a href="#">Help</a></p>
             </div>
             <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4" style="margin-top: 10px;" id="contact">
 
-                <h6 class="text-uppercase font-weight-bold">Contact</h6>
+                <h6 class="text-uppercase font-weight-bold"><fmt:message key="contactLabel"/></h6>
                 <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
-                <p><i class="fas fa-home mr-3"></i> Belarus, Minsk region, BY</p>
+                <p><i class="fas fa-home mr-3"></i> <fmt:message key="countryLabel"/>, <fmt:message key="cityLabel"/>, BY</p>
                 <p><i class="fas fa-envelope mr-3"></i> lanselot2000_@mail.ru</p>
                 <p><i class="fas fa-phone mr-3"></i> + 375 29 861 97 83</p>
             </div>
         </div>
     </div>
-    <div class="footer-copyright text-center py-3" style="background-color: #161c27; color: #998d7e">© 2018 Copyright:
+    <div class="footer-copyright text-center py-3" style="background-color: #161c27; color: #998d7e">© 2019 <fmt:message key="copyrightLabel"/>:
         <a href="https://mdbootstrap.com/education/bootstrap/" style="color: #f7f7f8"> JukeBox.com</a>
     </div>
 </footer>

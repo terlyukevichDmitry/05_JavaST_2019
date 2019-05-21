@@ -30,6 +30,7 @@ public class ControllerServlet extends HttpServlet {
     protected void doGet(final HttpServletRequest request,
                          final HttpServletResponse response) {
         try {
+            System.out.println("GGGGGGGGEEEEEEEEETTTTTTTTTTTTTT");
             response.setHeader("Pragma", "No-cache");
             response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
             response.setDateHeader("Expires", -1);
@@ -67,6 +68,7 @@ public class ControllerServlet extends HttpServlet {
     protected void doPost(final HttpServletRequest request,
                           final HttpServletResponse response) {
         try {
+            System.out.println("PPPPPPPPOOOOOOOOOOSSSSSSSSTTTTTTTTTTT");
             response.setHeader("Pragma", "No-cache");
             response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
             response.setDateHeader("Expires", -1);

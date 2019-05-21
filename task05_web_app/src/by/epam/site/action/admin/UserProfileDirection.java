@@ -20,6 +20,13 @@ public class UserProfileDirection implements ActionCommand {
             throws ConstantException, SQLException, ClassNotFoundException {
         JspPage jspPage = new JspPage();
         String personId = request.getParameter("personId");
+        if (personId == null) {
+            personId = String.valueOf(request.getSession().getAttribute(
+                    "personIdInformation"));
+        } else {
+            request.getSession().setAttribute("personIdInformation",
+                    personId);
+        }
         ServiceFactory factory
                 = new ServiceFactoryImpl(new SqlTransactionFactoryImpl());
         UsedQuestService service = factory.getService(UsedQuestService.class);

@@ -31,6 +31,9 @@ public class PersonShowAction implements ActionCommand {
             currentPageInt = Integer.parseInt(currentPage);
         }
 
+        String encode = request.getParameter("message");
+        jspPage.getModel(jspPage, encode, request);
+
         ServiceFactory factory = new ServiceFactoryImpl(
                 new SqlTransactionFactoryImpl());
         UserService service = factory.getService(UserService.class);
@@ -40,9 +43,8 @@ public class PersonShowAction implements ActionCommand {
         List<User> list = findByBorder(
                 numberOfElement, currentPageInt, users);
         request.getSession().setAttribute("userList", list);
-        request.setAttribute("review", list);
-        request.setAttribute("num_of_pages", nOfPages);
-        request.setAttribute("current_page", currentPageInt);
+        request.getSession().setAttribute("num_of_pages", nOfPages);
+        request.getSession().setAttribute("current_page", currentPageInt);
         factory.close();
         jspPage.setPage(ConfigurationManager.getProperty("showUsers"));
         return jspPage;

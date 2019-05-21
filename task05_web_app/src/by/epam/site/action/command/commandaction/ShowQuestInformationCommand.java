@@ -22,7 +22,10 @@ public class ShowQuestInformationCommand implements ActionCommand {
         JspPage jspPage = new JspPage();
         String id = request.getParameter("getQuestId");
         if (id == null) {
-            id = String.valueOf(request.getSession().getAttribute("getQuestId"));
+            id = String.valueOf(
+                    request.getSession().getAttribute("getQuestId"));
+        } else {
+            request.getSession().setAttribute("getQuestId", id);
         }
         String encode = request.getParameter("message");
         jspPage.getModel(jspPage, encode, request);

@@ -6,6 +6,7 @@ import by.epam.site.action.command.MessageManager;
 import by.epam.site.action.factory.JspPage;
 import by.epam.site.dao.daoimpl.SqlTransactionFactoryImpl;
 import by.epam.site.entity.QuestPlace;
+import by.epam.site.entity.UsedQuest;
 import by.epam.site.exception.ConstantException;
 import by.epam.site.service.interfaces.QuestPlaceService;
 import by.epam.site.service.interfaces.ServiceFactory;
@@ -21,6 +22,14 @@ public class SearchByNameCommand implements ActionCommand {
     public JspPage execute(HttpServletRequest request)
             throws ConstantException, SQLException, ClassNotFoundException {
         JspPage jspPage = new JspPage();
+        String currentPage = request.getParameter("page");
+        int currentPageInt;
+        if (currentPage == null) {
+            currentPage = "1";
+            currentPageInt = Integer.parseInt(currentPage);
+        } else {
+            currentPageInt = Integer.parseInt(currentPage);
+        }
         ServiceFactory factory = new ServiceFactoryImpl(
                 new SqlTransactionFactoryImpl());
         QuestPlaceService service
@@ -30,8 +39,15 @@ public class SearchByNameCommand implements ActionCommand {
             List<QuestPlace> questPlaces = service.findAll();
             service.initData(questPlaces);
             questPlaces = findByParameter(questPlaces, title);
-            request.getSession().setAttribute(
-                    "questPlaces", questPlaces);
+            int numberOfElement = 3;
+            int nOfPages
+                    = (int)Math.ceil(questPlaces.size() * 1.0 / numberOfElement);
+            List<QuestPlace> list = findByBorder(
+                    numberOfElement, currentPageInt, questPlaces);
+
+            request.getSession().setAttribute("questPlaces", list);
+            request.getSession().setAttribute("num_of_pages", nOfPages);
+            request.getSession().setAttribute("current_page", currentPageInt);
             String encoded = jspPage.encode(
                     MessageManager.getProperty("searchByParameter"));
             jspPage.setPage("/searchByParameter?message=" + encoded);
@@ -64,5 +80,23 @@ public class SearchByNameCommand implements ActionCommand {
             }
         }
         return questPlaces;
+    }
+
+    private List<QuestPlace> findByBorder(final int numberOfElement,
+                                         final int currentPageInt,
+                                         final List<QuestPlace> questPlaces) {
+        int counter = currentPageInt * numberOfElement - numberOfElement;
+        List<QuestPlace> list = new ArrayList<>();
+        int mi = questPlaces.size() - counter;
+        int z = 0;
+        if (mi > numberOfElement) {
+            z = numberOfElement;
+        } else {
+            z = mi;
+        }
+        for (int i = counter; i < z + counter; i++) {
+            list.add(questPlaces.get(i));
+        }
+        return list;
     }
 }

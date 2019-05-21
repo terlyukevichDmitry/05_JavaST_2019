@@ -11,22 +11,26 @@ import by.epam.site.service.interfaces.UsedQuestService;
 import by.epam.site.service.serviceimpl.ServiceFactoryImpl;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Calendar;
 
 public class RemoveOrderCommand implements ActionCommand {
     @Override
     public JspPage execute(HttpServletRequest request)
-            throws ConstantException {
+            throws ConstantException, ClassNotFoundException {
         JspPage jspPage = new JspPage();
-        User user = (User) request.getSession().getAttribute("user");
         String id = request.getParameter("idToRemove");
         ServiceFactory factory = new ServiceFactoryImpl(
                 new SqlTransactionFactoryImpl());
         UsedQuestService usedQuestService
                 = factory.getService(UsedQuestService.class);
-        usedQuestService.delete(user.getId(), Integer.parseInt(id));
+        usedQuestService.delete(Integer.parseInt(id));
         factory.close();
-        String encoded = jspPage.encode("action completed");
-        jspPage.setPage("/home?message=" + encoded);
+        Calendar calendar = Calendar.getInstance();
+        String encoded = jspPage.encode(
+                String.valueOf(calendar.get(Calendar.SECOND)));
+        request.getSession().setAttribute("modelTextInfo",
+                MessageManager.getProperty("removeAction"));
+        jspPage.setPage("/showOrders?message=" + encoded);
         return jspPage;
     }
 }

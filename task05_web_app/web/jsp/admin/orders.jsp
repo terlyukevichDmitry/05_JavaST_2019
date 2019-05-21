@@ -18,15 +18,38 @@
     <title>Parser result</title>
     <link rel="stylesheet" href="${ctx}/css/home/header.css" type="text/css"/>
     <link rel="stylesheet" href="${ctx}/css/home/base.css" type="text/css"/>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+          integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf"
+          crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="css/style.css" type="text/css"/>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
 </head>
 <body>
+<c:if test="${model}">
+    <div id="myModalBox" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Modal Window Header</h4>
+                </div>
+                <div class="modal-body">
+                        ${modelText} Please continue do something else.
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        $(document).ready(function() {
+            $("#myModalBox").modal('show');
+        });
+    </script>
+</c:if>
 <div class="header">
     <div class="header_texture"></div>
     <div class="header_mask">
@@ -141,7 +164,7 @@
                         <p class="card-text">
                             <div style="font-weight: bold;"><fmt:message key="dateLabel"/>:</div> ${elem.date}<hr>
                         <div style="font-weight: bold;"><fmt:message key="addressLabel"/>:</div> ${elem.questPlace.address}<hr>
-                            <div style="font-weight: bold;"><fmt:message key="questNameLabel"/>:</div> ${elem.questPlace.quest.title}
+                            <div style="font-weight: bold;"><fmt:message key="questNameLabel"/>:</div> ${elem.questPlace.quest.title}<br><br>
                         <c:if test="${user.role.name eq 'administrator'}">
                             <c:url value="/removeOrder" var="removeOrderURL"/>
                             <form action="${removeOrderURL}" method="post" onsubmit="return confirm('Confirm action')">

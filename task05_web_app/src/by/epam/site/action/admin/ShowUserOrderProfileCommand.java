@@ -4,8 +4,6 @@ import by.epam.site.action.command.ActionCommand;
 import by.epam.site.action.command.ConfigurationManager;
 import by.epam.site.action.factory.JspPage;
 import by.epam.site.dao.daoimpl.SqlTransactionFactoryImpl;
-import by.epam.site.entity.Client;
-import by.epam.site.entity.User;
 import by.epam.site.exception.ConstantException;
 import by.epam.site.exception.IncorrectDataException;
 import by.epam.site.service.interfaces.ClientService;
@@ -20,13 +18,23 @@ import java.text.ParseException;
 
 public class ShowUserOrderProfileCommand implements ActionCommand {
     @Override
-    public JspPage execute(HttpServletRequest request) throws ConstantException, SQLException, ClassNotFoundException, ParseException, IOException, ServletException, IncorrectDataException {
+    public JspPage execute(HttpServletRequest request)
+            throws ConstantException, SQLException, ClassNotFoundException,
+            ParseException, IOException, ServletException,
+            IncorrectDataException {
         JspPage jspPage = new JspPage();
 
         ServiceFactory factory = new ServiceFactoryImpl(
                 new SqlTransactionFactoryImpl());
         ClientService service = factory.getService(ClientService.class);
         String clientId = request.getParameter("clientId");
+        if (clientId == null) {
+            clientId = String.valueOf(request.getSession().getAttribute(
+                    "clientIdInformation"));
+        } else {
+            request.getSession().setAttribute("clientIdInformation",
+                    clientId);
+        }
         String message = request.getParameter("message");
         if (message == null) {
             request.getSession().setAttribute("errorPassword", "");

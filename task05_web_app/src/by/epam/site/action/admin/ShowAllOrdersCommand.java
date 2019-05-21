@@ -36,6 +36,9 @@ public class ShowAllOrdersCommand implements ActionCommand {
         List<UsedQuest> usedQuests = service.findAll();
         service.initData(usedQuests);
 
+        String encode = request.getParameter("message");
+        jspPage.getModel(jspPage, encode, request);
+
         int numberOfElement = 3;
         int nOfPages
                 = (int)Math.ceil(usedQuests.size() * 1.0 / numberOfElement);

@@ -18,7 +18,9 @@
     <title>Parser result</title>
     <link rel="stylesheet" href="${ctx}/css/home/header.css" type="text/css"/>
     <link rel="stylesheet" href="${ctx}/css/home/base.css" type="text/css"/>
-
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+          integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf"
+          crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 
@@ -27,6 +29,28 @@
 
 </head>
 <body>
+<c:if test="${model}">
+    <div id="myModalBox" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Modal Window Header</h4>
+                </div>
+                <div class="modal-body">
+                        ${modelText} Please continue do something else.
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        $(document).ready(function() {
+            $("#myModalBox").modal('show');
+        });
+    </script>
+</c:if>
 <div class="header">
     <div class="header_texture"></div>
     <div class="header_mask">

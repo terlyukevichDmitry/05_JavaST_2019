@@ -1,6 +1,8 @@
 package by.epam.site.action.admin;
 
 import by.epam.site.action.command.ActionCommand;
+import by.epam.site.action.command.ConfigurationManager;
+import by.epam.site.action.command.MessageManager;
 import by.epam.site.action.factory.JspPage;
 import by.epam.site.dao.daoimpl.SqlTransactionFactoryImpl;
 import by.epam.site.entity.Review;
@@ -13,13 +15,13 @@ import by.epam.site.service.serviceimpl.ServiceFactoryImpl;
 import javax.servlet.http.HttpServletRequest;
 import javax.swing.*;
 import java.sql.SQLException;
+import java.util.Calendar;
 import java.util.List;
 
 public class RemovePersonCommand implements ActionCommand {
     @Override
     public JspPage execute(HttpServletRequest request)
             throws ConstantException, ClassNotFoundException, SQLException {
-        //10, 10, 33, 26
         JspPage jspPage = new JspPage();
         String removeId = request.getParameter("idToRemovePerson");
         ServiceFactory factory = new ServiceFactoryImpl(
@@ -47,9 +49,14 @@ public class RemovePersonCommand implements ActionCommand {
             ClientService clientService
                     = factory.getService(ClientService.class);
             clientService.delete(Integer.parseInt(removeId));
-            jspPage.setPage("/showUsers");
-        } else {
-            jspPage.setPage("/showUsers?a=nopeMotherFacker");
+            request.getSession().setAttribute("modelTextInfo",
+                    MessageManager.getProperty("removeAction"));
+            Calendar calendar = Calendar.getInstance();
+            String encoded = jspPage.encode(
+                    String.valueOf(calendar.get(Calendar.SECOND)));
+            jspPage.setPage(
+                    ConfigurationManager.getProperty("questPath"));
+            jspPage.setPage("/showUsers?message=" + encoded);
         }
         factory.close();
         return jspPage;

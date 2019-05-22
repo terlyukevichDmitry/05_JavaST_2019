@@ -13,9 +13,22 @@ import by.epam.site.service.serviceimpl.ServiceFactoryImpl;
 
 import javax.servlet.http.HttpServletRequest;
 
+/**
+ * This class we use to showing user profile.
+ * @author Dmitry Terlyukevish
+ * @version 1.0
+ */
 public class ProfileCommand implements ActionCommand {
+    /**
+     * Method in which we do action. In this class it is
+     * showing user profile.
+     * @param request object, that we use to take different parameters with
+     * information that essential for accept the result.
+     * @return jspPage object with page.
+     * @throws ConstantException for checking exception situations.
+     */
     @Override
-    public JspPage execute(HttpServletRequest request)
+    public JspPage execute(final HttpServletRequest request)
             throws ConstantException {
         JspPage jspPage = new JspPage();
 

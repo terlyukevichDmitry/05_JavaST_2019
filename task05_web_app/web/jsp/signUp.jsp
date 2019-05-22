@@ -27,19 +27,19 @@
     <form action="${signupURL}" method="post">
         <h2 style="color: #ffffff;"><fmt:message key="signUpLabel"/></h2>
         <div class="block-left">
-            <input type="text" name="name" placeholder="<fmt:message key="firstNameLabel"/>" required><br><br><br>
-            <input type="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" name="email" placeholder="<fmt:message key="emailLabel"/>" required><br><br><br>
-            <input type="text" name="login" placeholder="<fmt:message key="userNameLabel"/>" required>
+            <input type="text" maxlength="32" name="name" placeholder="<fmt:message key="firstNameLabel"/>" required><br><br><br>
+            <input type="email" maxlength="254" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" name="email" placeholder="<fmt:message key="emailLabel"/>" required><br><br><br>
+            <input type="text" maxlength="64" name="login" placeholder="<fmt:message key="userNameLabel"/>" required>
         </div>
         <div class="block-right">
-            <input type="text" name="surname" placeholder="<fmt:message key="secondNameLabel"/>" required><br><br><br>
+            <input type="text" maxlength="32" name="surname" placeholder="<fmt:message key="secondNameLabel"/>" required><br><br><br>
             <input type="date" name="dateOfBirth" placeholder="<fmt:message key="writeDateOfBirthLabel"/>" required><br><br><br>
-            <input type="password" name="password" placeholder="<fmt:message key="passwordLabel"/>" required>
+            <input type="password" maxlength="32" name="password" placeholder="<fmt:message key="passwordLabel"/>" required>
         </div>
         <div class="block-op">
-            <input type="text" name="patronymic" placeholder="<fmt:message key="patronymicLabel"/>" required><br><br><br>
-            <input type="tel" pattern="[0-9]{9}" name="phone" placeholder="<fmt:message key="writePhoneLabel"/>" required><br><br><br>
-            <input type="password" name="confirm" placeholder="<fmt:message key="confirmLabel"/>" required>
+            <input type="text" maxlength="32" name="patronymic" placeholder="<fmt:message key="patronymicLabel"/>" required><br><br><br>
+            <input type="tel" maxlength="9" pattern="[0-9]{9}" name="phone" placeholder="<fmt:message key="writePhoneLabel"/>" required><br><br><br>
+            <input type="password" maxlength="32" name="confirm" placeholder="<fmt:message key="confirmLabel"/>" required>
         </div><br><br>
         <input type="submit" value="<fmt:message key="signUpLabel"/>"><br>
         <div style="color:#60c9a8; font-size: 18px;">

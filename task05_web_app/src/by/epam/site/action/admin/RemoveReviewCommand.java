@@ -12,9 +12,23 @@ import by.epam.site.service.serviceimpl.ServiceFactoryImpl;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Calendar;
 
+/**
+ * This class we use for removing review.
+ * @author Dmitry Terlyukevish
+ * @version 1.0
+ */
 public class RemoveReviewCommand implements ActionCommand {
+    /**
+     * Method in which we do action. In this class it is removing review.
+     * This action has do only administrator.
+     * @param request object, that we use to take different parameters with
+     * information that essential for accept the result.
+     * @return jspPage object with page.
+     * @throws ConstantException for checking exception situations.
+     * @throws ClassNotFoundException for checking exception situations.
+     */
     @Override
-    public JspPage execute(HttpServletRequest request)
+    public JspPage execute(final HttpServletRequest request)
             throws ConstantException, ClassNotFoundException {
         JspPage jspPage = new JspPage();
         String idReview = request.getParameter("getReviewId");

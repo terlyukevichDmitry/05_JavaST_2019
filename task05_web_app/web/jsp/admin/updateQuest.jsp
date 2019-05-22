@@ -160,20 +160,20 @@
                                 <table class="table table-th-block">
                                     <tbody>
                                     <label><fmt:message key="changeQuestAddressLabel"/>:</label><br>
-                                    <input type="text" name="addressName" class="form-control rounded" placeholder="<fmt:message key="newAddressLabel"/>" value="${updateElem.address}" required><br>
+                                    <input type="text" maxlength="254" name="addressName" class="form-control rounded" placeholder="<fmt:message key="newAddressLabel"/>" value="${updateElem.address}" required><br>
                                     <label><fmt:message key="changeNameLabel"/>:</label>
-                                    <input type="text" name="placeName" class="form-control border-valid" placeholder="<fmt:message key="newNameLabel"/>" value="${updateElem.name}" required><br>
+                                    <input type="text" maxlength="32" name="placeName" class="form-control border-valid" placeholder="<fmt:message key="newNameLabel"/>" value="${updateElem.name}" required><br>
                                     <label><fmt:message key="changePhoneLabel"/>:</label>
-                                    <input type="tel" name="phoneNumber" class="form-control border-valid" placeholder="xxxxxxxxx" pattern="[0-9]{9}" value="${updateElem.phone}" required>
+                                    <input type="tel" maxlength="9" name="phoneNumber" class="form-control border-valid" placeholder="xxxxxxxxx" pattern="[0-9]{9}" value="${updateElem.phone}" required>
                                     <hr>
 
                                     <h4><fmt:message key="changeQuestInfoLabel"/>:</h4>
                                     <label><fmt:message key="changeTitleLabel"/>:</label>
-                                    <input type="text" name="title" class="form-control border-valid" placeholder="<fmt:message key="changeTitleLabel"/>" value="${updateElem.quest.title}" required><br>
+                                    <input type="text" maxlength="32" name="title" class="form-control border-valid" placeholder="<fmt:message key="changeTitleLabel"/>" value="${updateElem.quest.title}" required><br>
                                     <label><fmt:message key="changeLevelLabel"/>:</label>
-                                    <input type="number" name="level" class="form-control" placeholder="<fmt:message key="changeLevelLabel"/>" value="${updateElem.quest.level}" required><br>
+                                    <input type="number" maxlength="1" name="level" class="form-control" placeholder="<fmt:message key="changeLevelLabel"/>" value="${updateElem.quest.level}" required><br>
                                     <label><fmt:message key="changeMaxPeopleLabel"/>:</label>
-                                    <input type="number" name="maxOfPeople" class="form-control" placeholder="<fmt:message key="changeMaxPeopleLabel"/>" value="${updateElem.quest.maxPeople}" required><br>
+                                    <input type="number" maxlength="1" name="maxOfPeople" class="form-control" placeholder="<fmt:message key="changeMaxPeopleLabel"/>" value="${updateElem.quest.maxPeople}" required><br>
                                     <div class="md-form amber-textarea active-amber-textarea">
                                         <i class="fas fa-pencil-alt prefix"></i><label for="form22">&nbsp;&nbsp;<fmt:message key="changeDesctiptionLabel"/>:</label>
                                         <textarea id="form22" name="description" class="md-textarea form-control" rows="3">${updateElem.quest.description}</textarea>

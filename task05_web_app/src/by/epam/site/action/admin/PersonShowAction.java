@@ -15,10 +15,28 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This class we use for showing all users on web page.
+ * @author Dmitry Terlyukevish
+ * @version 1.0
+ */
 public class PersonShowAction implements ActionCommand {
-
+    /**
+     * Final value.
+     */
+    private final int four = 4;
+    /**
+     * Method in which we do action. In this class it is showing all users
+     * who created account on our site.
+     * @param request object, that we use to take different parameters with
+     * information that essential for accept the result.
+     * @return jspPage object with page.
+     * @throws ConstantException for checking exception situations.
+     * @throws SQLException for checking exception situations.
+     * @throws ClassNotFoundException for checking exception situations.
+     */
     @Override
-    public JspPage execute(HttpServletRequest request)
+    public JspPage execute(final HttpServletRequest request)
             throws ConstantException, SQLException, ClassNotFoundException {
         JspPage jspPage = new JspPage();
 
@@ -38,8 +56,8 @@ public class PersonShowAction implements ActionCommand {
                 new SqlTransactionFactoryImpl());
         UserService service = factory.getService(UserService.class);
         List<User> users = service.findAll();
-        int numberOfElement = 4;
-        int nOfPages = (int)Math.ceil(users.size() * 1.0 / numberOfElement);
+        int numberOfElement = four;
+        int nOfPages = (int) Math.ceil(users.size() * 1.0 / numberOfElement);
         List<User> list = findByBorder(
                 numberOfElement, currentPageInt, users);
         request.getSession().setAttribute("userList", list);
@@ -50,6 +68,14 @@ public class PersonShowAction implements ActionCommand {
         return jspPage;
     }
 
+    /**
+     * Method in which we find persons in different borders for pagination on
+     * web page.
+     * @param numberOfElement max number of person on page.
+     * @param currentPageInt number of page.
+     * @param reviews all review what we have in database.
+     * @return list with all users.
+     */
     private List<User> findByBorder(final int numberOfElement,
                                       final int currentPageInt,
                                       final List<User> reviews) {

@@ -16,7 +16,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UpDateQuestDirection implements ActionCommand {
+public class UpdateQuestDirection implements ActionCommand {
     @Override
     public JspPage execute(HttpServletRequest request) throws ConstantException,
             SQLException, ClassNotFoundException {
@@ -25,6 +25,8 @@ public class UpDateQuestDirection implements ActionCommand {
         if (id == null) {
             id = String.valueOf(
                     request.getSession().getAttribute("idUpdateQuest"));
+        } else {
+            request.getSession().setAttribute("idUpdateQuest", id);
         }
         String encode = request.getParameter("message");
         jspPage.getModel(jspPage, encode, request);

@@ -10,9 +10,6 @@ public class Action {
         actionFactory = new ActionFactory();
     }
 
-    public String getForward() {
-        return forward;
-    }
 
     public void setForward(String forward) {
         this.forward = forward;
@@ -20,10 +17,6 @@ public class Action {
 
     public ActionFactory getActionFactory() {
         return actionFactory;
-    }
-
-    public void setActionFactory(ActionFactory actionFactory) {
-        this.actionFactory = actionFactory;
     }
 
 }

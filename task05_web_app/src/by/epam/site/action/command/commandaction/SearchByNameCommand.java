@@ -6,7 +6,6 @@ import by.epam.site.action.command.MessageManager;
 import by.epam.site.action.factory.JspPage;
 import by.epam.site.dao.daoimpl.SqlTransactionFactoryImpl;
 import by.epam.site.entity.QuestPlace;
-import by.epam.site.entity.UsedQuest;
 import by.epam.site.exception.ConstantException;
 import by.epam.site.service.interfaces.QuestPlaceService;
 import by.epam.site.service.interfaces.ServiceFactory;
@@ -17,9 +16,26 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This class we use to searching user by username.
+ * @author Dmitry Terlyukevish
+ * @version 1.0
+ */
 public class SearchByNameCommand implements ActionCommand {
+    /**
+     * Final value.
+     */
+    private final int three = 3;
+    /**
+     * Method in which we do action. In this class it is
+     * searching user by username.
+     * @param request object, that we use to take different parameters with
+     * information that essential for accept the result.
+     * @return jspPage object with page.
+     * @throws ConstantException for checking exception situations.
+     */
     @Override
-    public JspPage execute(HttpServletRequest request)
+    public JspPage execute(final HttpServletRequest request)
             throws ConstantException, SQLException, ClassNotFoundException {
         JspPage jspPage = new JspPage();
         String currentPage = request.getParameter("page");
@@ -39,9 +55,10 @@ public class SearchByNameCommand implements ActionCommand {
             List<QuestPlace> questPlaces = service.findAll();
             service.initData(questPlaces);
             questPlaces = findByParameter(questPlaces, title);
-            int numberOfElement = 3;
+            int numberOfElement = three;
             int nOfPages
-                    = (int)Math.ceil(questPlaces.size() * 1.0 / numberOfElement);
+                    = (int) Math.ceil(questPlaces.size() * 1.0
+                    / numberOfElement);
             List<QuestPlace> list = findByBorder(
                     numberOfElement, currentPageInt, questPlaces);
 
@@ -59,6 +76,12 @@ public class SearchByNameCommand implements ActionCommand {
         return jspPage;
     }
 
+    /**
+     * Method in which we can find quest place by title.
+     * @param allQuests in our database.
+     * @param title quest name.
+     * @return list with quest places with this name.
+     */
     private List<QuestPlace> findByParameter(final List<QuestPlace> allQuests,
                                              final String title) {
         List<QuestPlace> questPlaces = new ArrayList<>();
@@ -81,7 +104,14 @@ public class SearchByNameCommand implements ActionCommand {
         }
         return questPlaces;
     }
-
+    /**
+     * Method in which we find persons in different borders for pagination on
+     * web page.
+     * @param numberOfElement max number of person on page.
+     * @param currentPageInt number of page.
+     * @param questPlaces all quest places which we have in database.
+     * @return list with all users.
+     */
     private List<QuestPlace> findByBorder(final int numberOfElement,
                                          final int currentPageInt,
                                          final List<QuestPlace> questPlaces) {

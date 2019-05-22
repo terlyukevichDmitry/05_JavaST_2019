@@ -2,8 +2,8 @@ USE `quest_bd`;
 
 CREATE TABLE IF NOT EXISTS `user` (
 	`id` INT(11) NOT NULL AUTO_INCREMENT,
-	`login` varchar(50) UNIQUE NOT NULL ,
-	`password` varchar(64) NOT NULL ,
+	`login` varchar(64) UNIQUE NOT NULL ,
+	`password` varchar(32) NOT NULL ,
 	/*
 	 * 0 - администратор (Role.ADMINISTRATOR)
 	 * 1 - менеджер (Role.Manager)
@@ -17,10 +17,10 @@ CREATE TABLE IF NOT EXISTS `client` (
 	`id` INT(11) NOT NULL AUTO_INCREMENT,
 	`name` varchar(32) NOT NULL ,
 	`surname` varchar(32) NOT NULL ,
-	`patronymic` varchar(64) NOT NULL,
+	`patronymic` varchar(32) NOT NULL,
 	`dateOfBirth` DATE NOT NULL,
 	`email` varchar(254) UNIQUE NOT NULL ,
-	`phone` varchar(25) NOT NULL ,
+	`phone` varchar(9) NOT NULL ,
 	`imageAddress` VARCHAR(254) NOT NULL,
 	PRIMARY KEY (`id`)
 );
@@ -43,7 +43,7 @@ CREATE TABLE IF NOT EXISTS `image` (
 CREATE TABLE IF NOT EXISTS `quest_place` (
 	`id` INT(11) NOT NULL AUTO_INCREMENT,
 	`name` varchar(32) NOT NULL ,
-	`phone` varchar(52) NOT NULL ,
+	`phone` varchar(9) NOT NULL ,
 	`address` varchar(254) NOT NULL ,
 	`image_id` INT(11) NOT NULL ,
 	`quest_id` INT(11) NOT NULL ,
@@ -61,14 +61,14 @@ CREATE TABLE IF NOT EXISTS `used_quest` (
 
 CREATE TABLE IF NOT EXISTS `review` (
 	`id` INT(11) NOT NULL AUTO_INCREMENT,
-	`message` varchar(222) NOT NULL ,
+	`message` varchar(254) NOT NULL ,
 	`date` DATE NOT NULL ,
 	`quest_place_id` INT(11) NOT NULL,
 	`client_id` INT(11) NOT NULL,
 	PRIMARY KEY (`id`)
 );
 
--- login = admin/ -->
+-- login = admin/ password=terlyukevish-->
 
 ALTER TABLE `quest_place` ADD CONSTRAINT `quest_place_fk0` FOREIGN KEY (`image_id`) REFERENCES `image`(`id`);
 

@@ -7,7 +7,19 @@ import by.epam.site.action.command.MessageManager;
 
 import javax.servlet.http.HttpServletRequest;
 
+/**
+ * This class we use to manipulate actions.
+ * @author Dmitry Terlyukevish
+ * @version 1.0
+ */
 public class ActionFactory {
+    /**
+     * Method to manipulate post actions.
+     * @param action object.
+     * @param request object, that we use to take different parameters with
+     * information that essential for accept the result.
+     * @return command action.
+     */
     public ActionCommand defineActionCommand(final Action action,
                                              final HttpServletRequest request) {
         ActionCommand current = new EmptyCommand();

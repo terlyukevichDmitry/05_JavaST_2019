@@ -15,9 +15,22 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This class we use to showing information about quest.
+ * @author Dmitry Terlyukevish
+ * @version 1.0
+ */
 public class ShowQuestInformationCommand implements ActionCommand {
+    /**
+     * Method in which we do action. In this class it is
+     * showing information about quest.
+     * @param request object, that we use to take different parameters with
+     * information that essential for accept the result.
+     * @return jspPage object with page.
+     * @throws ConstantException for checking exception situations.
+     */
     @Override
-    public JspPage execute(HttpServletRequest request)
+    public JspPage execute(final HttpServletRequest request)
             throws ConstantException, SQLException, ClassNotFoundException {
         JspPage jspPage = new JspPage();
         String id = request.getParameter("getQuestId");

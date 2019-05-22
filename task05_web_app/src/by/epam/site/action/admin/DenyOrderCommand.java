@@ -12,12 +12,27 @@ import by.epam.site.service.serviceimpl.ServiceFactoryImpl;
 import javax.servlet.http.HttpServletRequest;
 import java.sql.SQLException;
 
+/**
+ * This class we use for denying orders different users.
+ * @author Dmitry Terlyukevish
+ * @version 1.0
+ */
 public class DenyOrderCommand implements ActionCommand {
+    /**
+     * Method in which we do action. In this class it is denying orders.
+     * @param request object, that we use to take different parameters with
+     * information that essential for accept the result.
+     * @return jspPage object with page.
+     * @throws ConstantException for checking exception situations.
+     * @throws SQLException for checking exception situations.
+     * @throws ClassNotFoundException for checking exception situations.
+     */
     @Override
-    public JspPage execute(HttpServletRequest request)
+    public JspPage execute(final HttpServletRequest request)
             throws ConstantException, SQLException, ClassNotFoundException {
         JspPage jspPage = new JspPage();
-        String idPerson = (String)request.getSession().getAttribute("alloo");
+        String idPerson
+                = String.valueOf(request.getSession().getAttribute("alloo"));
         String id = request.getParameter("idToDeny");
         ServiceFactory factory = new ServiceFactoryImpl(
                 new SqlTransactionFactoryImpl());

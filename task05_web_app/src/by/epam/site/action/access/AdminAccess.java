@@ -3,9 +3,17 @@ package by.epam.site.action.access;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This class we use for getting access for administrator.
+ * (Only, What he can do on our site.)
+ * @author Dmitry Terlyukevish
+ * @version 1.0
+ */
 public class AdminAccess implements Access {
+    /**
+     * List with the next pages which available for administrator.
+     */
     private static List<String> stringList = new ArrayList<>();
-
     static {
         stringList.add("/home");
         stringList.add("/login");
@@ -45,6 +53,12 @@ public class AdminAccess implements Access {
         stringList.add("/showOrders");
         stringList.add("/orderUserProfile");
     }
+
+    /**
+     * Method for checking access for administrator.
+     * @param checkString name of page.
+     * @return result, available or not.
+     */
     @Override
     public boolean checkAccess(final String checkString) {
         for (String string : stringList) {

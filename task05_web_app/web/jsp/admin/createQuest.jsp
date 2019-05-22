@@ -172,9 +172,9 @@
                                             </label>
                                         </c:forEach>
                                     </div><br><br>
-                                    <input type="text" name="title" class="form-control border-valid" placeholder="<fmt:message key="questEnterLabel"/>" required><br>
-                                    <input type="number" name="level" class="form-control" placeholder="<fmt:message key="levelForQuestLabel"/>" required><br>
-                                    <input type="number" name="maxOfPeople" class="form-control" placeholder="<fmt:message key="maxNumberOfPeopleLabel"/>" required><br>
+                                    <input type="text" maxlength="255" name="title" class="form-control border-valid" placeholder="<fmt:message key="questEnterLabel"/>" required><br>
+                                    <input type="number" maxlength="1" name="level" class="form-control" placeholder="<fmt:message key="levelForQuestLabel"/>" required><br>
+                                    <input type="number" maxlength="1" name="maxOfPeople" class="form-control" placeholder="<fmt:message key="maxNumberOfPeopleLabel"/>" required><br>
                                     <div class="md-form amber-textarea active-amber-textarea">
                                         <i class="fas fa-pencil-alt prefix"></i><label for="form22">&nbsp;&nbsp;<fmt:message key="desctiptionLabel"/>:</label>
                                         <textarea id="form22" name="description" class="md-textarea form-control" rows="3"></textarea>
@@ -196,15 +196,15 @@
                             <h4><fmt:message key="newQuestPlaceLabel"/>:</h4>
                             <div class="form-group">
                                 <label><fmt:message key="questNamePlaceLabel"/>:</label>
-                                <input type="text" name="placeName" class="form-control rounded" placeholder="<fmt:message key="newNameLabel"/>" required>
+                                <input type="text" maxlength="32" name="placeName" class="form-control rounded" placeholder="<fmt:message key="newNameLabel"/>" required>
                             </div>
                             <div class="form-group">
                                 <label><fmt:message key="newAddressPlaceLabel"/></label>
-                                <input type="text" name="addressName" class="form-control rounded" placeholder="<fmt:message key="newAddressLabel"/>" required>
+                                <input type="text" maxlength="254" name="addressName" class="form-control rounded" placeholder="<fmt:message key="newAddressLabel"/>" required>
                             </div>
                             <div class="form-group">
                                 <label><fmt:message key="newPhoneNumberLabel"/></label>
-                                <input type="text" name="phoneNumber" class="form-control rounded" placeholder="<fmt:message key="newPhoneNumberLabel"/>" required>
+                                <input type="text" maxlength="9" name="phoneNumber" class="form-control rounded" placeholder="<fmt:message key="newPhoneNumberLabel"/>" required>
                             </div>
                             <div class="form-group">
                                 <input type="submit" class="btn btn-success" data-original-title="" title="" value="<fmt:message key="createPlaceLabel"/>">

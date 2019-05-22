@@ -10,8 +10,6 @@ import by.epam.site.entity.User;
 import by.epam.site.exception.ConstantException;
 import by.epam.site.exception.IncorrectDataException;
 import by.epam.site.service.interfaces.ClientService;
-import by.epam.site.service.interfaces.ImageService;
-import by.epam.site.service.interfaces.QuestService;
 import by.epam.site.service.interfaces.ServiceFactory;
 import by.epam.site.service.serviceimpl.ServiceFactoryImpl;
 import by.epam.site.validation.ImageValidator;
@@ -19,19 +17,28 @@ import by.epam.site.validation.Validator;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.Part;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.nio.file.Paths;
 import java.sql.SQLException;
 import java.util.Calendar;
-import java.util.Objects;
 
+/**
+ * This class we use for changing photo in person account.
+ * @author Dmitry Terlyukevish
+ * @version 1.0
+ */
 public class ChangePhotoCommand implements ActionCommand {
+    /**
+     * Method in which we do action. In this class it is
+     * changing photo in person account.
+     * @param request object, that we use to take different parameters with
+     * information that essential for accept the result.
+     * @return jspPage object with page.
+     * @throws ConstantException for checking exception situations.
+     * @throws SQLException for checking exception situations.
+     * @throws ClassNotFoundException for checking exception situations.
+     */
     @Override
-    public JspPage execute(HttpServletRequest request)
+    public JspPage execute(final HttpServletRequest request)
             throws ConstantException, SQLException, ClassNotFoundException,
             IOException, ServletException, IncorrectDataException {
         JspPage jspPage = new JspPage();

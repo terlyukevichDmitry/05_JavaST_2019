@@ -9,8 +9,6 @@ import by.epam.site.entity.Quest;
 import by.epam.site.entity.QuestPlace;
 import by.epam.site.exception.ConstantException;
 
-import java.io.*;
-
 import by.epam.site.exception.IncorrectDataException;
 import by.epam.site.service.interfaces.ImageService;
 import by.epam.site.service.interfaces.QuestPlaceService;
@@ -23,14 +21,38 @@ import by.epam.site.validation.Validator;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Calendar;
 import java.util.List;
 
+/**
+ * This class we use for create new quest.
+ * @author Dmitry Terlyukevish
+ * @version 1.0
+ */
 public class CreateQuestCommand implements ActionCommand {
 
+    /**
+     * Final value.
+     */
+    private final int nine = 9;
+    /**
+     * Final value.
+     */
+    private final int five = 5;
+
+    /**
+     * Method in which we do action. In this class  it is creating new quest.
+     * @param request object, that we use to take different parameters with
+     * information that essential for accept the result.
+     * @return jspPage object with page.
+     * @throws ConstantException for checking exception situations.
+     * @throws SQLException for checking exception situations.
+     * @throws ClassNotFoundException for checking exception situations.
+     */
     @Override
-    public JspPage execute(HttpServletRequest request)
+    public JspPage execute(final HttpServletRequest request)
             throws ConstantException, SQLException,
             ClassNotFoundException, IOException,
             ServletException, IncorrectDataException {
@@ -51,26 +73,26 @@ public class CreateQuestCommand implements ActionCommand {
                     quest.getTitle().trim())) {
                 request.getSession().setAttribute("crashMessage",
                         MessageManager.getProperty("equalsTitle"));
-                String encode= jspPage.encode(
+                String encode = jspPage.encode(
                         MessageManager.getProperty("equalsTitle"));
                 jspPage.setPage("/createQuest?message=" + encode);
                 return jspPage;
             }
         }
 
-        if (quest.getMaxPeople() > 9) {
+        if (quest.getMaxPeople() > nine) {
             request.getSession().setAttribute(
                     "crashMessage",
                     MessageManager.getProperty("crashMessage"));
-            String encode= jspPage.encode(
+            String encode = jspPage.encode(
                     MessageManager.getProperty("crashMessage"));
             jspPage.setPage("/createQuest?message=" + encode);
             return jspPage;
-        } else if (quest.getLevel() > 5) {
+        } else if (quest.getLevel() > five) {
             request.getSession().setAttribute(
                     "crashMessage",
                     MessageManager.getProperty("bigLevel"));
-            String encode= jspPage.encode(
+            String encode = jspPage.encode(
                     MessageManager.getProperty("bigLevel"));
             jspPage.setPage("/createQuest?message=" + encode);
             return jspPage;
@@ -78,7 +100,7 @@ public class CreateQuestCommand implements ActionCommand {
             request.getSession().setAttribute(
                     "crashMessage",
                     MessageManager.getProperty("chooseRadioButton"));
-            String encode= jspPage.encode(
+            String encode = jspPage.encode(
                     MessageManager.getProperty("chooseRadioButton"));
             jspPage.setPage("/createQuest?message=" + encode);
             return jspPage;

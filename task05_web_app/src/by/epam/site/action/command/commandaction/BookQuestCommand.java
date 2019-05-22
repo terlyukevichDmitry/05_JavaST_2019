@@ -20,9 +20,24 @@ import java.time.LocalDate;
 import java.util.Calendar;
 import java.util.List;
 
+/**
+ * This class we use to booking quest.
+ * @author Dmitry Terlyukevish
+ * @version 1.0
+ */
 public class BookQuestCommand implements ActionCommand {
+    /**
+     * Method in which we do action. In this class it is booking quest.
+     * @param request object, that we use to take different parameters with
+     * information that essential for accept the result.
+     * @return jspPage object with page.
+     * @throws ConstantException for checking exception situations.
+     * @throws SQLException for checking exception situations.
+     * @throws ClassNotFoundException for checking exception situations.
+     */
     @Override
-    public JspPage execute(HttpServletRequest request) throws ConstantException, SQLException, ClassNotFoundException {
+    public JspPage execute(final HttpServletRequest request)
+            throws ConstantException, SQLException, ClassNotFoundException {
         JspPage jspPage = new JspPage();
         String id = request.getParameter("getId");
         User user = (User) request.getSession().getAttribute("user");
@@ -78,10 +93,20 @@ public class BookQuestCommand implements ActionCommand {
         return jspPage;
     }
 
+    /**
+     * Method to check has user this order or not.
+     * @param usedQuestService service to find.
+     * @param questPlace quest place, where located quest.
+     * @param user object with access information.
+     * @return result, has whether order on this quest or not.
+     * @throws ConstantException for checking exception situations.
+     * @throws SQLException for checking exception situations.
+     * @throws ClassNotFoundException for checking exception situations.
+     */
     private Boolean checkOrders(final UsedQuestService usedQuestService,
                                 final QuestPlace questPlace,
                                 final User user)
-            throws ConstantException, SQLException,ClassNotFoundException {
+            throws ConstantException, SQLException, ClassNotFoundException {
         List<UsedQuest> usedQuests = usedQuestService.findAll();
         usedQuestService.initData(usedQuests);
         for (UsedQuest usedQuest :usedQuests) {

@@ -222,15 +222,15 @@
                                 <form action="${changeValueURL}" role="form" method="post">
                                     <div class="form-group">
                                         <label><fmt:message key="firstNameLabel"/></label>
-                                        <input type="text" name="changeName" class="form-control rounded" placeholder="<fmt:message key="newNameLabel"/>">
+                                        <input type="text" maxlength="32" name="changeName" class="form-control rounded" placeholder="<fmt:message key="newNameLabel"/>">
                                     </div>
                                     <div class="form-group">
                                         <label><fmt:message key="secondNameLabel"/></label>
-                                        <input type="text" name="changeSurname" class="form-control rounded" placeholder="<fmt:message key="newSurnameLabel"/>">
+                                        <input type="text" maxlength="32" name="changeSurname" class="form-control rounded" placeholder="<fmt:message key="newSurnameLabel"/>">
                                     </div>
                                     <div class="form-group">
                                         <label><fmt:message key="patronymicLabel"/></label>
-                                        <input type="text" name="changePatronymic" class="form-control rounded" placeholder="<fmt:message key="newPatronymicLabel"/>">
+                                        <input type="text" maxlength="32" name="changePatronymic" class="form-control rounded" placeholder="<fmt:message key="newPatronymicLabel"/>">
                                     </div>
                                     <div class="form-group">
                                         <label><fmt:message key="dateOfBirthLabel"/></label>
@@ -238,11 +238,11 @@
                                     </div>
                                     <div class="form-group">
                                         <label><fmt:message key="personEmailLabel"/></label>
-                                        <input type="email" name="changeEmail" class="form-control rounded" placeholder="<fmt:message key="newEmailLabel"/>">
+                                        <input type="email" maxlength="254" name="changeEmail" class="form-control rounded" placeholder="<fmt:message key="newEmailLabel"/>">
                                     </div>
                                     <div class="form-group">
                                         <label><fmt:message key="personPhoneLabel"/></label>
-                                        <input type="text" name="changePhoneNumber" class="form-control rounded" placeholder="<fmt:message key="newPhoneNumberLabel"/>">
+                                        <input type="text" maxlength="9" name="changePhoneNumber" class="form-control rounded" placeholder="<fmt:message key="newPhoneNumberLabel"/>">
                                     </div>
                                     <div class="form-group">
                                         <input type="submit" class="btn btn-success" data-original-title="" title="" value="<fmt:message key="changeLabel"/>">
@@ -258,15 +258,15 @@
                                 <form action="${changePasswordURL}" role="form" method="post">
                                     <div class="form-group">
                                         <label><fmt:message key="oldPasswordLabel"/></label>
-                                        <input type="password" name="oldPassword" class="form-control rounded" placeholder="<fmt:message key="writeNewNameLabel"/>" required>
+                                        <input type="password" maxlength="32" name="oldPassword" class="form-control rounded" placeholder="<fmt:message key="writeNewNameLabel"/>" required>
                                     </div>
                                     <div class="form-group">
                                         <label><fmt:message key="newPasswordLabel"/></label>
-                                        <input type="password" name="changePassword" class="form-control rounded" placeholder="<fmt:message key="writeNewPasswordLabel"/>" required>
+                                        <input type="password" maxlength="32" name="changePassword" class="form-control rounded" placeholder="<fmt:message key="writeNewPasswordLabel"/>" required>
                                     </div>
                                     <div class="form-group">
                                         <label><fmt:message key="confirmLabel"/></label>
-                                        <input type="password" name="changeConfirm" class="form-control rounded" placeholder="<fmt:message key="confirmLabel"/>" required>
+                                        <input type="password" maxlength="32" name="changeConfirm" class="form-control rounded" placeholder="<fmt:message key="confirmLabel"/>" required>
                                     </div>
                                     <div class="form-group">
                                         <input type="submit" class="btn btn-success" data-original-title="" title="" value="<fmt:message key="changeLabel"/>">

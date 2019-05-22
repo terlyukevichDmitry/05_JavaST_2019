@@ -15,9 +15,21 @@ import javax.servlet.http.HttpServletRequest;
 import java.sql.SQLException;
 import java.util.List;
 
+/**
+ * This class we use to get direction on user ordered quests page.
+ * @author Dmitry Terlyukevish
+ * @version 1.0
+ */
 public class MyQuestsDirection implements ActionCommand {
+    /**
+     * Method in which we do action. In this class it is
+     * getting direction on user ordered quests page.
+     * @param request object, that we use to take different parameters with
+     * information that essential for accept the result.
+     * @return jspPage object with page.
+     */
     @Override
-    public JspPage execute(HttpServletRequest request)
+    public JspPage execute(final HttpServletRequest request)
             throws ConstantException, SQLException, ClassNotFoundException {
         JspPage jspPage = new JspPage();
         User user = (User) request.getSession().getAttribute("user");

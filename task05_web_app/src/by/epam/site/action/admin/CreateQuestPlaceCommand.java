@@ -21,9 +21,23 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Calendar;
 
+/**
+ * This class we use for creating quest place.
+ * @author Dmitry Terlyukevish
+ * @version 1.0
+ */
 public class CreateQuestPlaceCommand implements ActionCommand {
+    /**
+     * Method in which we do action. In this class it is creating quest place.
+     * @param request object, that we use to take different parameters with
+     * information that essential for accept the result.
+     * @return jspPage object with page.
+     * @throws ConstantException for checking exception situations.
+     * @throws SQLException for checking exception situations.
+     * @throws ClassNotFoundException for checking exception situations.
+     */
     @Override
-    public JspPage execute(HttpServletRequest request)
+    public JspPage execute(final HttpServletRequest request)
             throws ConstantException, SQLException, ClassNotFoundException,
             ServletException, IncorrectDataException, IOException {
         JspPage jspPage = new JspPage();
@@ -41,8 +55,10 @@ public class CreateQuestPlaceCommand implements ActionCommand {
             jspPage.setPage("/createQuest?message=" + encode);
             return jspPage;
         } else {
-            ServiceFactory factory = new ServiceFactoryImpl(new SqlTransactionFactoryImpl());
-            QuestPlaceService service = factory.getService(QuestPlaceService.class);
+            ServiceFactory factory
+                    = new ServiceFactoryImpl(new SqlTransactionFactoryImpl());
+            QuestPlaceService service
+                    = factory.getService(QuestPlaceService.class);
 
             Image image = new Image();
             image.setId(1);

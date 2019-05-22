@@ -18,14 +18,29 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.Calendar;
 
+/**
+ * This class we use for adding new review.
+ * @author Dmitry Terlyukevish
+ * @version 1.0
+ */
 public class AddReviewCommand implements ActionCommand {
-
+    /**
+     * Method in which we do action. In this class it is adding new review.
+     * @param request object, that we use to take different parameters with
+     * information that essential for accept the result.
+     * @return jspPage object with page.
+     * @throws ConstantException for checking exception situations.
+     * @throws SQLException for checking exception situations.
+     * @throws ClassNotFoundException for checking exception situations.
+     */
     @Override
-    public JspPage execute(HttpServletRequest request) throws ConstantException, SQLException, ClassNotFoundException {
+    public JspPage execute(final HttpServletRequest request)
+            throws ConstantException, SQLException, ClassNotFoundException {
         JspPage jspPage = new JspPage();
         String reviewMessage = request.getParameter("review");
         String idQuestPlace = request.getParameter("idQuestPlace");
-        request.getSession().setAttribute("getQuestId", Integer.parseInt(idQuestPlace));
+        request.getSession().setAttribute(
+                "getQuestId", Integer.parseInt(idQuestPlace));
         User user = (User) request.getSession().getAttribute("user");
 
         ServiceFactory factory = new ServiceFactoryImpl(

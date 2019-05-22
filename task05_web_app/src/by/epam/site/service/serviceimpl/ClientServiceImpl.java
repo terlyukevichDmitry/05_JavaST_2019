@@ -27,7 +27,7 @@ public class ClientServiceImpl extends ServiceImpl implements ClientService {
     }
 
     @Override
-    public void save(Client client) throws ConstantException {
+    public void save(final Client client) {
         ClientDAO dao = transaction.createDaoImpl(ClientDAO.class);
         try {
             if (client.getId() != null) {
@@ -42,7 +42,7 @@ public class ClientServiceImpl extends ServiceImpl implements ClientService {
     }
 
     @Override
-    public void delete(Integer id) throws ClassNotFoundException, ConstantException {
+    public void delete(final Integer id) throws ClassNotFoundException, ConstantException {
         ClientDAO dao = transaction.createDaoImpl(ClientDAO.class);
         dao.delete(id);
     }

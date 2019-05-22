@@ -53,7 +53,7 @@ public class ClientValidator implements Validator<Client> {
 
         String phone = request.getParameter(PARAM_PHONE);
         if(phone != null && !phone.isEmpty() && phone.matches(REGEX)) {
-            client.setPhone(surname);
+            client.setPhone(phone);
         } else {
             throw new IncorrectDataException(PARAM_PHONE, phone);
         }

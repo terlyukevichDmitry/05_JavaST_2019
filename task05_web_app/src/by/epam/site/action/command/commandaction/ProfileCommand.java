@@ -19,6 +19,9 @@ public class ProfileCommand implements ActionCommand {
             throws ConstantException {
         JspPage jspPage = new JspPage();
 
+        String encode = request.getParameter("message");
+        jspPage.getModel(jspPage, encode, request);
+
         ServiceFactory factory = new ServiceFactoryImpl(
                 new SqlTransactionFactoryImpl());
         ClientService service = factory.getService(ClientService.class);
@@ -28,7 +31,6 @@ public class ProfileCommand implements ActionCommand {
             request.getSession().setAttribute("errorPassword", "");
             request.getSession().setAttribute("changedParameters", "");
         }
-        System.out.println(user.getId());
         Client client = service.findById(user.getId());
         if (client.getFilePath().equals("nope")) {
             client.setFilePath("images/noPerson.jpg");

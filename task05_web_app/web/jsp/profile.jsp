@@ -41,6 +41,28 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 </head>
 <body>
+<c:if test="${model}">
+    <div id="myModalBox" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Modal Window Header</h4>
+                </div>
+                <div class="modal-body">
+                        ${modelText} Please continue do something else.
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        $(document).ready(function() {
+            $("#myModalBox").modal('show');
+        });
+    </script>
+</c:if>
 <div class="header">
     <div class="header_texture"></div>
     <div class="header_mask">
@@ -160,7 +182,7 @@
                             <c:url value="/changePhoto" var="changePhotoURL"/>
                             <form action="${changePhotoURL}" method="post" enctype="multipart/form-data">
                             <div class="form-group">
-                                <input name="imgLoader" accept=".jpg" type="file" class="form-control-file" placeholder="<fmt:message key="inpueFileLabel"/>" id="exampleFormControlFile1" required>
+                                <input name="fileLoader" accept=".jpg" type="file" class="form-control-file" placeholder="<fmt:message key="inpueFileLabel"/>" id="exampleFormControlFile1" required>
                             </div>
                             <button class="btn btn-primary" type="submit"><fmt:message key="changePhotoLabel"/></button>
                             </form>

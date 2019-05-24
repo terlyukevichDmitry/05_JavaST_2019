@@ -42,7 +42,7 @@ public class RemoveOrderCommand implements ActionCommand {
                 String.valueOf(calendar.get(Calendar.SECOND)));
         request.getSession().setAttribute("modelTextInfo",
                 MessageManager.getProperty("removeAction"));
-        jspPage.setPage("/showOrders?message=" + encoded);
+        jspPage.setPage("/myQuests?message=" + encoded);
         return jspPage;
     }
 }

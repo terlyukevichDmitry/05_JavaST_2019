@@ -4,6 +4,7 @@ import by.epam.site.action.command.ActionCommand;
 import by.epam.site.action.command.MessageManager;
 import by.epam.site.action.factory.JspPage;
 import by.epam.site.dao.daoimpl.SqlTransactionFactoryImpl;
+import by.epam.site.entity.User;
 import by.epam.site.exception.ConstantException;
 import by.epam.site.service.interfaces.ServiceFactory;
 import by.epam.site.service.interfaces.UsedQuestService;
@@ -30,6 +31,7 @@ public class RemoveOrderCommand implements ActionCommand {
     public JspPage execute(final HttpServletRequest request)
             throws ConstantException, ClassNotFoundException {
         JspPage jspPage = new JspPage();
+        User user = (User) request.getSession().getAttribute("user");
         String id = request.getParameter("idToRemove");
         ServiceFactory factory = new ServiceFactoryImpl(
                 new SqlTransactionFactoryImpl());
@@ -42,7 +44,12 @@ public class RemoveOrderCommand implements ActionCommand {
                 String.valueOf(calendar.get(Calendar.SECOND)));
         request.getSession().setAttribute("modelTextInfo",
                 MessageManager.getProperty("removeAction"));
-        jspPage.setPage("/myQuests?message=" + encoded);
+        if (user.getRole().getName().equalsIgnoreCase(
+                "administrator")) {
+            jspPage.setPage("/showOrders?message=" + encoded);
+        } else {
+            jspPage.setPage("/myQuests?message=" + encoded);
+        }
         return jspPage;
     }
 }

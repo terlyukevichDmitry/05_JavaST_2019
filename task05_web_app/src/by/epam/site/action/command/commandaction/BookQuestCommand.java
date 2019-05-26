@@ -110,7 +110,8 @@ public class BookQuestCommand implements ActionCommand {
         List<UsedQuest> usedQuests = usedQuestService.findAll();
         usedQuestService.initData(usedQuests);
         for (UsedQuest usedQuest :usedQuests) {
-            if (usedQuest.getQuestPlace().getQuest().getId().equals(
+            if (questPlace.getId().equals(usedQuest.getQuestPlace().getId())
+                    && usedQuest.getQuestPlace().getQuest().getId().equals(
                     questPlace.getQuest().getId())
                     && usedQuest.getClient().getId().equals(user.getId())) {
                 return true;

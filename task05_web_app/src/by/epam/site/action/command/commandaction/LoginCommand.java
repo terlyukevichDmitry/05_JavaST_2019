@@ -44,7 +44,9 @@ public class LoginCommand implements ActionCommand {
         JspPage jspPage = new JspPage();
         String login = request.getParameter(PARAM_NAME_LOGIN);
         String password = request.getParameter(PARAM_NAME_PASSWORD);
-        if (login != null && password != null) {
+        User userAttribute
+                = (User) request.getSession().getAttribute("user");
+        if (userAttribute == null && login != null && password != null) {
             ServiceFactory factory = new ServiceFactoryImpl(
                     new SqlTransactionFactoryImpl());
             UserService service = factory.getService(UserService.class);
@@ -62,7 +64,14 @@ public class LoginCommand implements ActionCommand {
             }
             factory.close();
             return jspPage;
+        } else {
+            System.out.println("dfjkasdkjfasjdkfh jadhfjsadjkfhakjsd f");
+            String encoded = jspPage.encode(
+                    MessageManager.getProperty("activeSession"));
+            jspPage.setPage("/login?message=" + encoded);
+            request.getSession().setAttribute("errorLoginPassMessage",
+                    MessageManager.getProperty("activeSession"));
+            return jspPage;
         }
-        return null;
     }
 }

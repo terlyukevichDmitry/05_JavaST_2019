@@ -1,6 +1,8 @@
 package by.epam.site.action.admin;
 
 import by.epam.site.action.command.ActionCommand;
+import by.epam.site.action.command.ConfigurationManager;
+import by.epam.site.action.command.MessageManager;
 import by.epam.site.action.factory.JspPage;
 import by.epam.site.dao.daoimpl.SqlTransactionFactoryImpl;
 import by.epam.site.exception.ConstantException;
@@ -9,6 +11,7 @@ import by.epam.site.service.interfaces.UsedQuestService;
 import by.epam.site.service.serviceimpl.ServiceFactoryImpl;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Calendar;
 
 /**
  * This class we use for removing user orders. And this action has only
@@ -39,8 +42,15 @@ public class RemoveOrderByAdminCommand implements ActionCommand {
             usedQuestService.delete(
                     Integer.parseInt(idPerson), Integer.parseInt(id));
         }
+        request.getSession().setAttribute("modelTextInfo",
+                MessageManager.getProperty("removeAction"));
+        Calendar calendar = Calendar.getInstance();
+        String encoded = jspPage.encode(
+                String.valueOf(calendar.get(Calendar.SECOND)));
+        jspPage.setPage(
+                ConfigurationManager.getProperty("questPath"));
         factory.close();
-        jspPage.setPage("/showUsers");
+        jspPage.setPage("/showUsers?message=" + encoded);
         return jspPage;
     }
 }

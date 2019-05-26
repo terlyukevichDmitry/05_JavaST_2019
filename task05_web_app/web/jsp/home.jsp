@@ -19,17 +19,18 @@
 <head>
     <title>JukeBox Quest</title>
     <meta charset="utf-8">
+    <link rel="shortcut icon" href="images/smmNiFRJg98.jpg" type="image/png">
     <link rel="stylesheet" href="${ctx}/css/home/header.css" type="text/css"/>
     <link rel="stylesheet" href="${ctx}/css/home/base.css" type="text/css"/>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
           integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf"
           crossorigin="anonymous">
-    <link rel="shortcut icon" href="images/image-icon.ico" type="image/x-icon">
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
 </head>
 <body>
 
@@ -128,6 +129,72 @@
 </div>
 <br><br><br>
 
+
+<div class="container">
+    <div class="row">
+
+        <ul class="timeline">
+            <li>
+                <div class="timeline-badge"><i class="glyphicon glyphicon-check"></i></div>
+                <div class="timeline-panel">
+                    <div class="timeline-heading">
+                        <h3 class="timeline-title"><fmt:message key="who"/></h3>
+                    </div>
+                    <div class="timeline-body">
+                        <p>
+                            <fmt:message key="pOne"/><br>
+                            <fmt:message key="pAge"/><br>
+                            <small class="text-muted"><fmt:message key="pTwo"/></small>
+                        </p>
+                    </div>
+                </div>
+            </li>
+            <li class="timeline-inverted">
+                <div class="timeline-badge warning"><i class="glyphicon glyphicon-credit-card"></i></div>
+                <div class="timeline-panel">
+                    <div class="timeline-heading">
+                        <h3 class="timeline-title"><fmt:message key="how"/></h3>
+                    </div>
+                    <div class="timeline-body">
+                        <p>
+                            <fmt:message key="pThree"/><br>
+                            <small class="text-muted"><fmt:message key="pFourth"/></small>
+                        </p>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="timeline-badge danger"><i class="glyphicon glyphicon-credit-card"></i></div>
+                <div class="timeline-panel">
+                    <div class="timeline-heading">
+                        <h3 class="timeline-title"><fmt:message key="what"/></h3>
+                    </div>
+                    <div class="timeline-body">
+                        <p>
+                            <fmt:message key="pFifth"/><br>
+                            <small class="text-muted"><fmt:message key="pSixth"/> </small>
+                        </p>
+                    </div>
+                </div>
+            </li>
+            <li class="timeline-inverted success" >
+                <div class="timeline-panel">
+                    <div class="timeline-heading">
+                        <h3 class="timeline-title"><fmt:message key="will"/></h3>
+                    </div>
+                    <div class="timeline-body">
+                        <p>
+                            <fmt:message key="pEighth"/><br>
+                            <small class="text-muted"><fmt:message key="pSeventh"/></small>
+                        </p>
+                    </div>
+                </div>
+            </li>
+        </ul>
+
+    </div><!-- ./row -->
+</div>
+
 <!-- Footer -->
 <footer class="page-footer font-small unique-color-dark">
 
@@ -167,10 +234,7 @@
             <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4" style="margin-top: 10px;">
                 <h6 class="text-uppercase font-weight-bold"><fmt:message key="usefulLinksLabel"/></h6>
                 <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
-                <c:url value="/login" var="loginURL"/>
-                <p><a href="${loginURL}}"><fmt:message key="yourAccountLable"/></a></p>
                 <p><a href="https://e.mail.ru/messages/inbox/?back=1">Mail</a></p>
-                <p><a href="#">Help</a></p>
             </div>
             <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4" style="margin-top: 10px;" id="contact">
 

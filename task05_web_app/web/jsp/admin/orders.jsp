@@ -15,7 +15,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Parser result</title>
+    <title>JukeBox Quest</title>
+    <link rel="shortcut icon" href="images/smmNiFRJg98.jpg" type="image/png">
+
     <link rel="stylesheet" href="${ctx}/css/home/header.css" type="text/css"/>
     <link rel="stylesheet" href="${ctx}/css/home/base.css" type="text/css"/>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
@@ -243,10 +245,7 @@
             <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4" style="margin-top: 10px;">
                 <h6 class="text-uppercase font-weight-bold"><fmt:message key="usefulLinksLabel"/></h6>
                 <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
-                <c:url value="/login" var="loginURL"/>
-                <p><a href="${loginURL}}"><fmt:message key="yourAccountLable"/></a></p>
                 <p><a href="https://e.mail.ru/messages/inbox/?back=1">Mail</a></p>
-                <p><a href="#">Help</a></p>
             </div>
             <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4" style="margin-top: 10px;" id="contact">
 

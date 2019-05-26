@@ -36,6 +36,8 @@ public class ChangeAccessDirection implements ActionCommand {
             SQLException, ClassNotFoundException, ParseException, IOException,
             ServletException {
         JspPage jspPage = new JspPage();
+        String encode = request.getParameter("message");
+        jspPage.getModel(jspPage, encode, request);
         jspPage.setPage(ConfigurationManager.getProperty("showUsers"));
         return jspPage;
     }

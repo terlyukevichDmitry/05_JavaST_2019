@@ -91,14 +91,6 @@ public enum PostCommand {
         }
     },
     /**
-     * REMOVE_BY_ADMIN.
-     */
-    REMOVE_BY_ADMIN("/removeOrderByAdmin") {
-        {
-            this.command = new RemoveOrderByAdminCommand();
-        }
-    },
-    /**
      * REMOVE_PERSON.
      */
     REMOVE_PERSON("/removePerson") {
@@ -160,6 +152,14 @@ public enum PostCommand {
     CREATE_PLACE("/createPlaceQuest") {
         {
             this.command = new CreateQuestPlaceCommand();
+        }
+    },
+    /**
+     * REMOVE_BY_ADMIN.
+     */
+    REMOVE_BY_ADMIN("/removeOrderByAdmin") {
+        {
+            this.command = new RemoveOrderByAdminCommand();
         }
     },
     /**

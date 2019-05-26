@@ -15,11 +15,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>My super project!</title>
+    <title>JukeBox Quest</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <link rel="stylesheet" href="${ctx}/css/signup.css" type="text/css"/>
     <link href="https://fonts.googleapis.com/css?family=Play" rel="stylesheet"/>
-    <link rel="shortcut icon" href="images/image-icon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="images/smmNiFRJg98.jpg" type="image/png">
 </head>
 <body>
 <div class="signUp">

@@ -88,14 +88,11 @@ public class SearchByNameCommand implements ActionCommand {
         for (QuestPlace questPlace : allQuests) {
             char[] chars = title.toLowerCase().toCharArray();
             boolean checker = false;
-            for (int i = 0;
-                 i < questPlace.getQuest().getTitle().length(); i++) {
-                for (char aChar : chars) {
-                    if (questPlace.getQuest().getTitle().toLowerCase().charAt(i)
-                            == aChar) {
-                        checker = true;
-                        break;
-                    }
+            for (char aChar : chars) {
+                if (questPlace.getQuest().getTitle().toLowerCase().contains(
+                        "" + aChar)) {
+                    checker = true;
+                    break;
                 }
             }
             if (checker) {

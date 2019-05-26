@@ -80,7 +80,7 @@ public class CreateQuestCommand implements ActionCommand {
             }
         }
 
-        if (quest.getMaxPeople() > nine) {
+        if (quest.getMaxPeople() > nine || quest.getMaxPeople() == 0) {
             request.getSession().setAttribute(
                     "crashMessage",
                     MessageManager.getProperty("crashMessage"));
@@ -88,7 +88,7 @@ public class CreateQuestCommand implements ActionCommand {
                     MessageManager.getProperty("crashMessage"));
             jspPage.setPage("/createQuest?message=" + encode);
             return jspPage;
-        } else if (quest.getLevel() > five) {
+        } else if (quest.getLevel() > five || quest.getLevel() == 0) {
             request.getSession().setAttribute(
                     "crashMessage",
                     MessageManager.getProperty("bigLevel"));

@@ -1,6 +1,7 @@
 package by.epam.site.action.admin;
 
 import by.epam.site.action.command.ActionCommand;
+import by.epam.site.action.command.ConfigurationManager;
 import by.epam.site.action.command.MessageManager;
 import by.epam.site.action.factory.JspPage;
 import by.epam.site.dao.daoimpl.SqlTransactionFactoryImpl;
@@ -13,6 +14,7 @@ import by.epam.site.service.serviceimpl.ServiceFactoryImpl;
 
 import javax.servlet.http.HttpServletRequest;
 import java.sql.SQLException;
+import java.util.Calendar;
 
 /**
  * This class we use for changing person information.
@@ -46,8 +48,14 @@ public class ChangePersonAccessCommand implements ActionCommand {
             user.setRole(Role.MANAGER);
         }
         service.save(user);
-        String encode = jspPage.encode(MessageManager.getProperty("completed"));
-        jspPage.setPage("/doManager?message=" + encode);
+        Calendar calendar = Calendar.getInstance();
+        String encoded = jspPage.encode(
+                String.valueOf(calendar.get(Calendar.SECOND)));
+        jspPage.setPage(
+                ConfigurationManager.getProperty("questPath"));
+        request.getSession().setAttribute("modelTextInfo",
+                MessageManager.getProperty("completed"));
+        jspPage.setPage("/doManager?message=" + encoded);
         return jspPage;
     }
 }

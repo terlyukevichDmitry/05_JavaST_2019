@@ -30,7 +30,7 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
           integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf"
           crossorigin="anonymous">
-    <link rel="shortcut icon" href="images/image-icon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="images/smmNiFRJg98.jpg" type="image/png">
 
 </head>
 <body>
@@ -260,10 +260,7 @@
             <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4" style="margin-top: 10px;">
                 <h6 class="text-uppercase font-weight-bold"><fmt:message key="usefulLinksLabel"/></h6>
                 <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
-                <c:url value="/login" var="loginURL"/>
-                <p><a href="${loginURL}}"><fmt:message key="yourAccountLable"/></a></p>
                 <p><a href="https://e.mail.ru/messages/inbox/?back=1">Mail</a></p>
-                <p><a href="#">Help</a></p>
             </div>
             <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4" style="margin-top: 10px;" id="contact">
 

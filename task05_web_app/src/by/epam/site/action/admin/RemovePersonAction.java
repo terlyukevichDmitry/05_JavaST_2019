@@ -41,7 +41,7 @@ public class RemovePersonAction implements ActionCommand {
         JspPage jspPage = new JspPage();
         jspPage.setTagName("errorLoginPassMessage");
         String login = request.getParameter(PARAM_NAME_LOGIN);
-         if (login != null) {
+        if (login != null && !("admin").equals(login)) {
             ServiceFactory factory = new ServiceFactoryImpl(
                     new SqlTransactionFactoryImpl());
             UserService service = factory.getService(UserService.class);
@@ -57,16 +57,15 @@ public class RemovePersonAction implements ActionCommand {
                 jspPage.setPage("/removeUser");
                 factory.close();
                 return jspPage;
-            } else {
-                request.getSession().setAttribute("textMessage",
-                        MessageManager.getProperty("loginErrr"));
-                jspPage.setPage("/removeUser?a=b");
-                factory.close();
-                return jspPage;
             }
-        } else {
-             jspPage.setPage(ConfigurationManager.getProperty("removeUser"));
-             return jspPage;
-         }
+        }
+
+        String encoded = jspPage.encode(
+                MessageManager.getProperty("removeAdmin"));
+        request.getSession().setAttribute("textMessage",
+                MessageManager.getProperty("removeAdmin"));
+        jspPage.setPage("/removeUser?message=" + encoded);
+        jspPage.setPage(ConfigurationManager.getProperty("removeUser"));
+        return jspPage;
     }
 }

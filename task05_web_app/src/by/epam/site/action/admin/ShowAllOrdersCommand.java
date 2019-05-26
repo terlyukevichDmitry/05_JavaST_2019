@@ -55,6 +55,13 @@ public class ShowAllOrdersCommand implements ActionCommand {
         List<UsedQuest> usedQuests = service.findAll();
         service.initData(usedQuests);
 
+        List<UsedQuest> questArrayList = new ArrayList<>();
+        for (UsedQuest usedQuest: usedQuests) {
+            if (usedQuest.getControl().equals(true)) {
+                questArrayList.add(usedQuest);
+            }
+        }
+
         String encode = request.getParameter("message");
         jspPage.getModel(jspPage, encode, request);
 
@@ -62,7 +69,7 @@ public class ShowAllOrdersCommand implements ActionCommand {
         int nOfPages
                 = (int) Math.ceil(usedQuests.size() * 1.0 / numberOfElement);
         List<UsedQuest> list = findByBorder(
-                numberOfElement, currentPageInt, usedQuests);
+                numberOfElement, currentPageInt, questArrayList);
 
         request.getSession().setAttribute("orders", list);
         request.getSession().setAttribute("num_of_pages", nOfPages);

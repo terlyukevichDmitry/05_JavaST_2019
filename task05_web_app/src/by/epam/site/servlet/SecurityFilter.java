@@ -42,13 +42,10 @@ public class SecurityFilter implements Filter {
         if (controller.getAccess(user.getRole()).checkAccess(path)) {
             chain.doFilter(request, response);
         } else {
-            System.out.println(user.getRole().getName());
             String encoded = jspPage.encode(
                     MessageManager.getProperty("access"));
-            httpRequest.getSession().setAttribute("notAccess",
-                    MessageManager.getProperty("access"));
             httpResponse.sendRedirect(httpRequest.getContextPath()
-                    + "/login?message=" + encoded);
+                    + "/error?message=" + encoded);
         }
     }
 

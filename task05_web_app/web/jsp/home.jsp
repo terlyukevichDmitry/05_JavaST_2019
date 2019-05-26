@@ -135,7 +135,7 @@
 
         <ul class="timeline">
             <li>
-                <div class="timeline-badge"><i class="glyphicon glyphicon-check"></i></div>
+                <div class="timeline-badge success"><i class="glyphicon glyphicon-check"></i></div>
                 <div class="timeline-panel">
                     <div class="timeline-heading">
                         <h3 class="timeline-title"><fmt:message key="who"/></h3>

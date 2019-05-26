@@ -7,6 +7,9 @@ import by.epam.site.exception.ConstantException;
 import by.epam.site.service.interfaces.*;
 import by.epam.site.service.serviceimpl.ServiceFactoryImpl;
 
+import java.math.BigInteger;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.sql.*;
 import java.time.LocalDateTime;
 import java.util.*;
@@ -40,26 +43,16 @@ public class Main {
 //        String s = new String(decode);
 //        System.out.println(s);
 
+//        ServiceFactory factory = new ServiceFactoryImpl(new SqlTransactionFactoryImpl());
+//        UserService service = factory.getService(UserService.class);
+//        User user = new User();
+//        user.setId(2);
+//        user.setLogin("user1");
+//        user.setRole(Role.CLIENT);
+//        user.setPassword("1234");
+//        service.save(user);
 
-
-
-
-
-
-
-
-
-
-        ServiceFactory factory = new ServiceFactoryImpl(new SqlTransactionFactoryImpl());
-        UserService service = factory.getService(UserService.class);
-        User user = new User();
-        user.setId(1);
-        user.setLogin("admin");
-        user.setRole(Role.ADMINISTRATOR);
-        user.setPassword("terlyukevish");
-        service.save(user);
-
-//        String st = "BB7FF6177EE612EF9DC6ACD3A9EA7EA9";
+//        String st = "1234";
 //        byte[] digest = new byte[0];
 //        try {
 //            MessageDigest messageDigest = MessageDigest.getInstance("MD5");

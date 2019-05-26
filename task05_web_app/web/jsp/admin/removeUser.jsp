@@ -23,7 +23,7 @@
         <input type="text" name="login" placeholder="Username" required><br><br>
         <input type="reset" value="Reset"><br><br>
         <a><input type="submit" value="Remove"></a><br>
-        <div style="color:#60c9a8; font-size: 18px;">
+        <div style="color: #ff564f; font-size: 18px;">
             ${textMessage}
         </div>
         <br>

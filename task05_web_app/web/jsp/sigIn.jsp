@@ -33,9 +33,8 @@
             <div style="font-size: 18px; color: #60c9a8;">
                 ${signUpMessage}
             </div>
-            <div style="color:red; font-size: 18px;">
+            <div style="color: #ff564f; font-size: 18px;">
                 ${errorLoginPassMessage}
-                ${notAccess}
             </div>
             <br>
         </form>

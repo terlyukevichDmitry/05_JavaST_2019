@@ -45,7 +45,7 @@ public class SecurityFilter implements Filter {
             String encoded = jspPage.encode(
                     MessageManager.getProperty("access"));
             httpResponse.sendRedirect(httpRequest.getContextPath()
-                    + "/error?message=" + encoded);
+                    + "/login?message=" + encoded);
         }
     }
 

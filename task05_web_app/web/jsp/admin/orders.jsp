@@ -35,13 +35,13 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">Modal Window Header</h4>
+                    <h4 class="modal-title"> <fmt:message key="modelHeader"/></h4>
                 </div>
                 <div class="modal-body">
-                        ${modelText} Please continue do something else.
+                        ${modelText} <fmt:message key="doElseLabel"/>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal"><fmt:message key="closeLabel"/></button>
                 </div>
             </div>
         </div>
@@ -63,7 +63,7 @@
     <div class="container">
         <div class="header_navbar">
             <div class="header_logo">
-                <h1 class="logo_title">JukeBOX</h1>
+                <h1 class="logo_title"><fmt:message key="title"/></h1>
             </div>
             <div class="header_menu">
                 <c:url value="/home" var="homeURL"/>

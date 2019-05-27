@@ -32,26 +32,26 @@
 </head>
 <body>
 <c:if test="${model}">
-<div id="myModalBox" class="modal fade">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title">Modal Window Header</h4>
-            </div>
-            <div class="modal-body">
-                ${modelText} Please continue do something else.
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+    <div id="myModalBox" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title"> <fmt:message key="modelHeader"/></h4>
+                </div>
+                <div class="modal-body">
+                        ${modelText} <fmt:message key="doElseLabel"/>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal"><fmt:message key="closeLabel"/></button>
+                </div>
             </div>
         </div>
     </div>
-</div>
-<script>
-    $(document).ready(function() {
-        $("#myModalBox").modal('show');
-    });
-</script>
+    <script>
+        $(document).ready(function() {
+            $("#myModalBox").modal('show');
+        });
+    </script>
 </c:if>
 <div class="header">
     <div class="header_texture"></div>
@@ -64,7 +64,7 @@
     <div class="container">
         <div class="header_navbar">
             <div class="header_logo">
-                <h1 class="logo_title">JukeBOX</h1>
+                <h1 class="logo_title"><fmt:message key="title"/></h1>
             </div>
             <div class="header_menu">
                 <c:url value="/home" var="homeURL"/>

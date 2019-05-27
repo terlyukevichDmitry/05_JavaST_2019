@@ -45,7 +45,7 @@
     <div class="container">
         <div class="header_navbar">
             <div class="header_logo">
-                <h1 class="logo_title">JukeBOX</h1>
+                <h1 class="logo_title"><fmt:message key="title"/></h1>
             </div>
             <div class="header_menu">
                 <c:url value="/home" var="homeURL"/>

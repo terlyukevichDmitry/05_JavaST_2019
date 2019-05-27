@@ -28,7 +28,7 @@ public class QuestPlaceServiceImpl
     }
 
     @Override
-    public void save(QuestPlace questPlace) throws ConstantException {
+    public void save(QuestPlace questPlace) {
         QuestPlaceDAO dao = transaction.createDaoImpl(QuestPlaceDAO.class);
         try {
             if (questPlace.getId() != null) {

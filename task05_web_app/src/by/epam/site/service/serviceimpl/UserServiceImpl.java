@@ -86,7 +86,7 @@ public class UserServiceImpl extends ServiceImpl implements UserService {
     }
 
     @Override
-    public String mdFiveMethod(String st) throws ConstantException {
+    public String mdFiveMethod(final String st) throws ConstantException {
         byte[] digest = new byte[0];
         try {
             MessageDigest messageDigest = MessageDigest.getInstance("MD5");

@@ -27,7 +27,7 @@ public class QuestServiceImpl extends ServiceImpl implements QuestService {
     }
 
     @Override
-    public void read(Quest quest) throws ConstantException {
+    public void read(final Quest quest) throws ConstantException {
         QuestDAO dao = transaction.createDaoImpl(QuestDAO.class);
         dao.read(quest);
     }
@@ -42,9 +42,7 @@ public class QuestServiceImpl extends ServiceImpl implements QuestService {
             } else {
                 quest.setId(dao.create(quest, transaction));
             }
-            transaction.commit();
         } catch (SQLException | ClassNotFoundException e) {
-            transaction.rollback();
             LOGGER.error("It is impossible to turn off " +
                     "autocommiting for database connection", e);
         }

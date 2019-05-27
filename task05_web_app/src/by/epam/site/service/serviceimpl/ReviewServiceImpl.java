@@ -19,7 +19,8 @@ public class ReviewServiceImpl extends ServiceImpl implements ReviewService {
     }
 
     @Override
-    public void save(Review review) throws ConstantException, ClassNotFoundException, SQLException {
+    public void save(Review review)
+            throws ConstantException, ClassNotFoundException, SQLException {
         ReviewDAO dao = transaction.createDaoImpl(ReviewDAO.class);
         review.setId(dao.create(review, transaction));
     }
@@ -44,7 +45,8 @@ public class ReviewServiceImpl extends ServiceImpl implements ReviewService {
     }
 
     @Override
-    public void deleteByClientId(Integer clientId) throws ConstantException {
+    public void deleteByClientId(final Integer clientId)
+            throws ConstantException {
         ReviewDAO dao = transaction.createDaoImpl(ReviewDAO.class);
         dao.deleteByClientId(clientId);
     }

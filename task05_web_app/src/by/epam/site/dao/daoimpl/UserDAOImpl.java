@@ -71,6 +71,7 @@ public class UserDAOImpl extends AbstractDAOImpl implements UserDAO {
             statement.executeUpdate();
         } catch (SQLException e) {
             throw new ConstantException(e);
+
         }
     }
 

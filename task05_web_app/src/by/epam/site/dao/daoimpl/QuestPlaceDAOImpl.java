@@ -99,10 +99,14 @@ public class QuestPlaceDAOImpl
                 return resultSet.getInt(1);
             } else {
                 transaction.rollback();
+                LOGGER.error("It is impossible to turn off " +
+                        "autocommiting for database connection");
                 throw new ConstantException();
             }
         } catch (SQLException e) {
             transaction.rollback();
+            LOGGER.error("It is impossible to turn off " +
+                    "autocommiting for database connection", e);
             throw new ConstantException(e);
         }
     }
@@ -225,6 +229,8 @@ public class QuestPlaceDAOImpl
             }
             return questPlace;
         } catch (SQLException exception) {
+            LOGGER.error("It is impossible to turn off " +
+                    "autocommiting for database connection");
             throw new ConstantException(exception);
         }
     }

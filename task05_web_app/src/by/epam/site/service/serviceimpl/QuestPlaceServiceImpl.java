@@ -37,7 +37,6 @@ public class QuestPlaceServiceImpl
                 questPlace.setId(dao.create(questPlace, transaction));
             }
         } catch (ConstantException | SQLException | ClassNotFoundException e) {
-
             LOGGER.error("It is impossible to be turn off "
                     + "autocommiting for our database connection", e);
         }

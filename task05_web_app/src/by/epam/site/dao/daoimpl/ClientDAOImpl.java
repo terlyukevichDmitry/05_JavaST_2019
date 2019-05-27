@@ -16,12 +16,6 @@ import java.util.List;
 
 public class ClientDAOImpl extends AbstractDAOImpl implements ClientDAO {
 
-    /**
-     * Logger for recording a program state.
-     */
-    private static final Logger LOGGER
-            = LogManager.getLogger(ClientDAOImpl.class);
-
     private static final String DB_SELECT_ALL = "SELECT `id`, `name`, "
             + "`surname`, `patronymic`, `dateOfBirth`, `email`, "
             + "`phone`, `imageAddress` FROM `client`";
@@ -158,8 +152,6 @@ public class ClientDAOImpl extends AbstractDAOImpl implements ClientDAO {
             }
             return client;
         } catch(SQLException e) {
-            LOGGER.error("It is impossible to turn off " +
-                    "autocommiting for database connection", e);
             throw new ConstantException(e);
         }
     }

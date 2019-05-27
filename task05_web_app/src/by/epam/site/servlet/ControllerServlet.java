@@ -30,9 +30,9 @@ public class ControllerServlet extends HttpServlet {
     protected void doGet(final HttpServletRequest request,
                          final HttpServletResponse response) {
         try {
-            System.out.println("GGGGGGGGEEEEEEEEETTTTTTTTTTTTTT");
             response.setHeader("Pragma", "No-cache");
-            response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
+            response.setHeader("Cache-Control",
+                    "no-cache, no-store, must-revalidate");
             response.setDateHeader("Expires", -1);
             request.setCharacterEncoding("UTF-8");
             response.setContentType("text/html;charset=UTF-8");
@@ -60,7 +60,7 @@ public class ControllerServlet extends HttpServlet {
         } catch (ClassNotFoundException e) {
             LOGGER.warn("ClassNotFoundException exception");
         } catch (IncorrectDataException e) {
-            e.printStackTrace();
+            LOGGER.warn("IncorrectDataException exception");
         }
     }
 
@@ -68,9 +68,9 @@ public class ControllerServlet extends HttpServlet {
     protected void doPost(final HttpServletRequest request,
                           final HttpServletResponse response) {
         try {
-            System.out.println("PPPPPPPPOOOOOOOOOOSSSSSSSSTTTTTTTTTTT");
             response.setHeader("Pragma", "No-cache");
-            response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
+            response.setHeader("Cache-Control",
+                    "no-cache, no-store, must-revalidate");
             response.setDateHeader("Expires", -1);
             request.setCharacterEncoding("UTF-8");
             response.setContentType("text/html;charset=UTF-8");
@@ -95,7 +95,7 @@ public class ControllerServlet extends HttpServlet {
         } catch (ServletException e) {
             LOGGER.warn("ServletException exception");
         } catch (IncorrectDataException e) {
-            e.printStackTrace();
+            LOGGER.warn("IncorrectDataException exception");
         }
     }
 }

@@ -64,6 +64,7 @@ public class ReviewDAOImpl extends AbstractDAOImpl implements ReviewDAO {
             }
             return reviews;
         } catch (SQLException exception) {
+            LOGGER.error("SQLException", exception);
             throw new ConstantException(exception);
         }
     }
@@ -75,6 +76,8 @@ public class ReviewDAOImpl extends AbstractDAOImpl implements ReviewDAO {
             statement.setInt(1, id);
             statement.executeUpdate();
         } catch (SQLException e) {
+            LOGGER.error("It is impossible to turn off " +
+                    "autocommiting for database connection", e);
             throw new ConstantException(e);
         }
     }
@@ -141,6 +144,7 @@ public class ReviewDAOImpl extends AbstractDAOImpl implements ReviewDAO {
             statement.setInt(1, clientId);
             statement.executeUpdate();
         } catch (SQLException e) {
+            LOGGER.error("SQLException", e);
             throw new ConstantException(e);
         }
     }

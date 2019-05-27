@@ -3,11 +3,18 @@ package by.epam.site.service.serviceimpl;
 import by.epam.site.dao.transaction.SqlTransaction;
 import by.epam.site.dao.transaction.SqlTransactionFactory;
 import by.epam.site.service.interfaces.*;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class ServiceFactoryImpl implements ServiceFactory {
+    /**
+     * Logger for recording a program state.
+     */
+    private static final Logger LOGGER =
+            LogManager.getLogger(ServiceFactoryImpl.class);
 
     private static final Map<Class<? extends Service>, Class<?
             extends ServiceImpl>> serviceContainer = new ConcurrentHashMap<>();
@@ -40,9 +47,9 @@ public class ServiceFactoryImpl implements ServiceFactory {
                 service.setTransaction(transaction);
                 return (Type) service;
             } catch (InstantiationException e) {
-                e.printStackTrace();
+                LOGGER.error("InstantiationException", e);
             } catch (IllegalAccessException e) {
-                e.printStackTrace();
+                LOGGER.error("IllegalAccessException", e);
             }
         }
         return null;

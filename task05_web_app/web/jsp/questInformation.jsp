@@ -206,7 +206,7 @@
     </table>
 </div>
 <br><br><br>
-
+<div class="container">
 <div class="col-sm">
     <c:url value="/addReview" var="addReviewURL"/>
         <form action="${addReviewURL}" method="post">
@@ -220,6 +220,7 @@
             <input type="submit" class="btn btn-info" value="<fmt:message key="sendReviewLabel"/>">
         </form>
 </div>
+</div>\
 
 <br><br><br>
 

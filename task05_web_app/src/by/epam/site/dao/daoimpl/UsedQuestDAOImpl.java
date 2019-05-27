@@ -78,6 +78,7 @@ public class UsedQuestDAOImpl extends AbstractDAOImpl implements UsedQuestDAO {
             }
             return usedQuestList;
         } catch (SQLException exception) {
+            LOGGER.error("SqlException", exception);
             throw new ConstantException(exception);
         }
     }
@@ -90,6 +91,7 @@ public class UsedQuestDAOImpl extends AbstractDAOImpl implements UsedQuestDAO {
             statement.setInt(1, id);
             statement.executeUpdate();
         } catch (SQLException e) {
+            LOGGER.error("SQLException", e);
             throw new ConstantException(e);
         }
     }
@@ -115,10 +117,14 @@ public class UsedQuestDAOImpl extends AbstractDAOImpl implements UsedQuestDAO {
                 return resultSet.getInt(1);
             } else {
                 transaction.rollback();
+                LOGGER.error("It is impossible to turn off " +
+                        "autocommiting");
                 throw new ConstantException();
             }
         } catch (SQLException e) {
             transaction.rollback();
+            LOGGER.error("It is impossible to turn off " +
+                    "autocommiting for database connection", e);
             throw new ConstantException(e);
         }
     }
@@ -182,6 +188,7 @@ public class UsedQuestDAOImpl extends AbstractDAOImpl implements UsedQuestDAO {
             }
             return usedQuestList;
         } catch (SQLException exception) {
+            LOGGER.error("SQLException", exception);
             throw new ConstantException(exception);
         }
     }
@@ -245,6 +252,7 @@ public class UsedQuestDAOImpl extends AbstractDAOImpl implements UsedQuestDAO {
             }
             return usedQuest;
         } catch (SQLException exception) {
+            LOGGER.error("SQLException", exception);
             throw new ConstantException(exception);
         }
     }

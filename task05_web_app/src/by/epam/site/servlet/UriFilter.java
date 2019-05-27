@@ -15,13 +15,20 @@ public class UriFilter implements Filter {
             = LogManager.getLogger(UriFilter.class);
 
     @Override
-    public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
+    public void init(FilterConfig filterConfig) {
+    }
+
+    @Override
+    public void doFilter(final ServletRequest request, final ServletResponse
+            response, final FilterChain chain)
+            throws IOException, ServletException {
         if (request instanceof HttpServletRequest) {
             HttpServletRequest httpServletRequest
                     = (HttpServletRequest) request;
             String contextPath = httpServletRequest.getContextPath();
             String url = httpServletRequest.getRequestURI();
-            LOGGER.debug(String.format("Starting of processing of request for URI \"%s\"", url));
+            LOGGER.debug(String.format(
+                    "Starting of processing of request for URI \"%s\"", url));
             int beginAction = contextPath.length();
             int endAction = url.lastIndexOf('.');
             String actionName;
@@ -36,10 +43,6 @@ public class UriFilter implements Filter {
             httpServletRequest.setAttribute("action", actionName);
             chain.doFilter(request, response);
         }
-    }
-
-    @Override
-    public void init(FilterConfig filterConfig) {
     }
 
     @Override

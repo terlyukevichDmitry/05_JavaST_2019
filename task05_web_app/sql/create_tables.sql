@@ -68,8 +68,6 @@ CREATE TABLE IF NOT EXISTS `review` (
 	PRIMARY KEY (`id`)
 );
 
--- login = admin/ password=terlyukevish-->
-
 ALTER TABLE `quest_place` ADD CONSTRAINT `quest_place_fk0` FOREIGN KEY (`image_id`) REFERENCES `image`(`id`);
 
 ALTER TABLE `quest_place` ADD CONSTRAINT `quest_place_fk1` FOREIGN KEY (`quest_id`) REFERENCES `quest`(`id`);

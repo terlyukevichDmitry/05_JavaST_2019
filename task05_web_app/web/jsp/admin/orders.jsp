@@ -180,6 +180,7 @@
         </div>
     </c:forEach>
 </div>
+<br><br>
 
 
 <c:url value="/showOrders" var="showOrdersURL"/>

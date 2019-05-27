@@ -67,7 +67,8 @@ public class ShowAllOrdersCommand implements ActionCommand {
 
         int numberOfElement = three;
         int nOfPages
-                = (int) Math.ceil(usedQuests.size() * 1.0 / numberOfElement);
+                = (int) Math.ceil(questArrayList.size() * 1.0
+                / numberOfElement);
         List<UsedQuest> list = findByBorder(
                 numberOfElement, currentPageInt, questArrayList);
 

@@ -1,7 +1,7 @@
 INSERT INTO `user` (
 	`id`,`login`,`password`,`role`)
 VALUES
-			 (2, "user1", "HELLOGUYSHOWAREYOUTODAYAMANWHATA", 1),
+			 (2, "user1", "81DC9BDB52D04DC20036DBD8313ED055", 2),
 			 (3, "user2", "terlyukevish", 2),
 			 (4, "user3", "ssdfsdfsdf", 2),
 			 (5, "user4", "sdfcxvxreeKLJDFKLDKljksdfjlksjdf", 2);
